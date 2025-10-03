@@ -1,0 +1,24 @@
+=======
+package
+=======
+
+package my.other.package;
+
+---
+
+(source_file
+  (package_statement
+    (package_name)
+    (package_name)
+    (package_name)))
+
+=============
+empty package
+=============
+
+package;
+
+---
+
+(source_file (package_statement))
+

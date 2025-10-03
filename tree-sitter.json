@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "haxe",
+      "camelcase": "Haxe",
+      "title": "Haxe",
+      "scope": "source.haxe",
+      "file-types": [
+        "hx"
+      ],
+      "injection-regex": "^haxe$",
+      "class-name": "TreeSitterHaxe"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Haxe grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "tong",
+        "email": "tong@disktree.net",
+        "url": "https://disktree.net/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tong/tree-sitter-haxe"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

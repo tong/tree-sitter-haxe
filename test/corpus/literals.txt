@@ -1,0 +1,29 @@
+===============
+number literals
+===============
+
+1
+0x00
+1000
+1_000
+1_000_999
+0b00111
+
+---
+
+(source_file
+  (statement
+    (expression_statement
+      (number)))
+  (statement
+    (expression_statement
+      (number)))
+  (statement
+    (expression_statement
+      (number)))
+  (statement
+    (expression_statement
+      (number)))
+  (statement
+    (expression_statement
+      (number))))
