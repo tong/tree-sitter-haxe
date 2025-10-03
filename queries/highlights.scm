@@ -1,78 +1,111 @@
-; comments
+; Comments
+; --------
 (line_comment) @comment.line
 (block_comment) @comment.block
 
-; ((line_comment) @comment
-;   (#match? @comment "TODO|FIXME|XXX"))
-; ((block_comment) @comment
-;   (#match? @comment "TODO|FIXME|XXX"))
+; TODO/FIXME/XXX highlighting in comments
+((line_comment) @comment.line
+  (#match? @comment.line "(TODO|FIXME|XXX|HACK|NOTE)"))
+((block_comment) @comment.block
+  (#match? @comment.block "(TODO|FIXME|XXX|HACK|NOTE)"))
+
+; Identifiers
+; -----------
 (identifier) @variable
 
 ; MetaData
 ; --------
-(metadata) @tag
-(metadata name: (identifier) @type) @tag
+(metadata) @attribute
+(metadata name: (identifier) @attribute)
 
 ; Declarations
 ; ------------
-; (class_declaration name: (identifier) @type.definition)
-; (interface_declaration name: (identifier) @type.definition)
-; (typedef_declaration name: (identifier) @type.definition)
+(class_declaration name: (type_name) @type.definition)
+(interface_declaration name: (type_name) @type.definition)
+(abstract_declaration name: (type_name) @type.definition)
+(typedef_declaration name: (type_name) @type.definition)
+(enum_declaration name: (type_name) @type.definition)
 
 (function_declaration name: (identifier) @function)
-; (function_arg name: (identifier) @variable.parameter)
+(function_declaration name: (identifier) @constructor
+  (#eq? @constructor "new"))
 
-; Expressions
-; -----------
-; (call_expression name: (identifier) @variable.parameter)
+; Interface and abstract function signatures
+(interface_field_declaration 
+  name: (identifier) @function
+  parameters: (parameter_list))
+  
+(interface_field_declaration 
+  name: (identifier) @variable
+  type: (qualified_type))
 
+; Parameters
+(parameter name: (identifier) @variable.parameter)
+(enum_constructor_argument name: (identifier) @variable.parameter)
+
+; Function calls
+(call_expression function: (identifier) @function.call)
+(call_expression function: (field_expression property: (identifier) @function.call))
+
+; Constructor calls
+(new_expression (qualified_type (type_name) @constructor))
+
+; Field access
+(field_expression property: (identifier) @property)
+
+; Variables and assignments
+(variable_declaration name: (identifier) @variable)
+
+; Enum constructors
+(enum_constructor (type_name) @constructor)
 
 ; Literals
 ; --------
-; [(keyword) (null)] @keyword
-; (type) @type
+(number) @number
+(string_literal) @string
+(true) @boolean
+(false) @boolean
+(null) @constant.builtin
+
+; Array literals
+(array_literal) @punctuation.bracket
+
+; Modifiers
+; ---------
+(modifier) @keyword.modifier
+
+; Types
+; -----
 (type_name) @type
 (package_name) @module
-; (type (identifier) !built_in) @type
-; (type built_in: (identifier)) @type.builtin
-; [(integer) (float)] @number
-; (string) @string
-; (bool) @boolean
-; (operator) @operator
-; (escape_sequence) @punctuation
-(null) @constant.builtin
-; (access_identifiers "null" @keyword)
+(qualified_type (type_name) @type)
+
+; Built-in types (common Haxe types)
+((type_name) @type.builtin
+  (#match? @type.builtin "^(Int|Float|String|Bool|Void|Dynamic|Any)$"))
 
 ; Keywords
 ; --------
 [
   "abstract"
-  ; "as"
   "break"
   "case"
-  ; "cast"
   "catch"
   "class"
   "continue"
   "default"
-  ; "do"
-  ; "dynamic"
   "else"
   "enum"
   "extends"
   "extern"
-  ; "final"
   "for"
   "function"
   "if"
   "implements"
   "import"
-  "in"
+  "in" 
   "inline"
   "interface"
-  ; "macro"
-  ; "operator"
-  ; "overload"
   "override"
   "package"
   "private"
@@ -80,28 +113,39 @@
   "return"
   "static"
   "switch"
-  ; "this"
   "throw"
   "try"
   "typedef"
-  ; "untyped"
   "using"
   "var"
   "while"
 ] @keyword
 
-; (function_declaration name: "new" @constructor)
-; (call_expression
-;   "new" @keyword
-;   constructor: (type_name) @constructor
-; )
+; Special keywords
+"new" @keyword.operator
 
-; Tokens
-; ------
+; Operators
+; ---------
+[
+  "="
+  "=="
+  "!="
+  "<"
+  "<="
+  ">" 
+  ">="
+  "&&"
+  "||"
+  "!"
+  "+"
+  "-"
+  "*"
+  "/"
+  "..."
+] @operator
 
-(":") @punctuation.special
-; (pair [":" "=>"] @punctuation.special)
-
+; Punctuation
+; -----------
 [
   "("
   ")"
@@ -109,19 +153,14 @@
   "]"
   "{"
   "}"
-]  @punctuation.bracket
-;
+] @punctuation.bracket
+
 [
-;   ";"
-;   "?."
-;   "."
+  ";"
   ","
+  "."
+  ":"
 ] @punctuation.delimiter
 
-; Interpolation
-; -------------
-; (interpolation "$" @punctuation.special)
-; (interpolation
-;   "${" @punctuation.special
-;   "}" @punctuation.special
-; ) @embedded
+; Special punctuation  
+":" @punctuation.special
