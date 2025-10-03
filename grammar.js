@@ -136,6 +136,11 @@ module.exports = grammar({
     import_statement: $ => seq(
       'import',
       $.qualified_type,
+      optional(choice(
+        seq('.', '*'),
+        seq('as', $.type_name),
+        seq('in', $.identifier),
+      )),
       $._semicolon
     ),
 
@@ -149,9 +154,25 @@ module.exports = grammar({
       repeat($.modifier),
       'var',
       field('name', $.identifier),
+      optional($.property_accessor),
       field('type', optional(seq(':', $.qualified_type))),
       optional(seq('=', field('value', $.expression))),
       $._semicolon
+    ),
+
+    property_accessor: $ => seq(
+      '(',
+      field('getter', $.accessor_type),
+      field('setter', $.accessor_type),
+      ')'
+    ),
+
+    accessor_type: $ => choice(
+      $.identifier,
+      'default',
+      'null',
+      'never',
+      'dynamic'
     ),
 
     //== Expressions ===========================================================
@@ -171,6 +192,7 @@ module.exports = grammar({
     primary_expression: $ => choice(
       $.number,
       $.string_literal,
+      $.regex_literal,
       $.identifier,
       $.true,
       $.false,
@@ -506,7 +528,8 @@ module.exports = grammar({
       ),
       seq(
         '@',
-        field('name', $.identifier)
+        field('name', $.identifier),
+        optional(field('arguments', $.argument_list))
       )
     ),
     class_body: $ => seq(
@@ -547,33 +570,47 @@ module.exports = grammar({
 
     //== Primitives ============================================================
 
-    qualified_type: $ => prec.right(choice(
-      seq($.type_name, optional($.type_argument_list)),
-      seq($.package_name, '.', $.qualified_type)
+    // qualified_type: $ => prec.right(choice(
+    //   seq($.type_name, optional($.type_argument_list)),
+    //   seq($.package_name, '.', $.qualified_type)
+    // )),
+    qualified_type: $ => prec.right(seq(
+      $.type_name,
+      optional($.type_argument_list),
+      repeat(seq('.', $.type_name, optional($.type_argument_list)))
     )),
 
-    modifier: $ => choice(
+    modifier: _ => choice(
       'public',
       'private',
       'static',
       'override',
       'inline',
-      'extern'
+      'extern',
+      'final'
     ),
 
-    package_name: $ => $._camelCaseIdentifier,
-    type_name: $ => $._pascalCaseIdentifier,
+    package_name: $ => $._camel_case_identifier,
+    type_name: $ => $._pascal_case_identifier,
 
     number: _ => token(choice(
       seq(choice('0x', '0X'), /[\da-fA-F][\da-fA-F_]*/),
       seq(choice('0b', '0B'), /[01][01_]*/),
       seq(choice('0o', '0O'), /[0-7][0-7_]*/),
-      /\d[\d_]*/
+      /\d[\d_]*\.\d[\d_]*(e[+-]?\d+)?/,
+      /\d[\d_]*(e[+-]?\d+)?/
     )),
 
     string_literal: _ => token(choice(
       seq("'", repeat(choice(/[^'\\\n]+/, /\\./)), "'"),
       seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"')
+    )),
+
+    regex_literal: _ => token(seq(
+      '~/',
+      repeat(choice(/[^/\\\n]/, /\\./)),
+      '/',
+      /[gimsu]*/
     )),
 
     true: _ => 'true',
@@ -584,8 +621,8 @@ module.exports = grammar({
     block_comment: _ => token(seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')),
 
     identifier: _ => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    _camelCaseIdentifier: _ => /[a-z_][a-zA-Z0-9_]*/,
-    _pascalCaseIdentifier: _ => /[A-Z][a-zA-Z0-9_]*/,
+    _camel_case_identifier: _ => /[a-z_][a-zA-Z0-9_]*/,
+    _pascal_case_identifier: _ => /[A-Z][a-zA-Z0-9_]*/,
 
     _semicolon: _ => token(';'),
     // _semicolon: _ => token(';'),
