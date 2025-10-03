@@ -98,6 +98,7 @@
   "enum"
   "extends"
   "extern"
+  "final"
   "for"
   "function"
   "if"

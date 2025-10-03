@@ -6,9 +6,7 @@
       "camelcase": "Haxe",
       "title": "Haxe",
       "scope": "source.haxe",
-      "file-types": [
-        "hx"
-      ],
+      "file-types": ["hx"],
       "injection-regex": "^haxe$",
       "class-name": "TreeSitterHaxe",
       "highlights": "queries/highlights.scm",
