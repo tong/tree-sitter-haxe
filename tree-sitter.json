@@ -12,7 +12,9 @@
       "injection-regex": "^haxe$",
       "class-name": "TreeSitterHaxe",
       "highlights": "queries/highlights.scm",
-      "folds": "queries/folds.scm"
+      "folds": "queries/folds.scm",
+      "injections": "queries/injections.scm",
+      "tags": "queries/tags.scm"
     }
   ],
   "metadata": {
