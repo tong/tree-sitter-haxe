@@ -3,20 +3,12 @@
 
 module.exports = grammar({
   name: "haxe",
-
   externals: ($) => [],
-
   extras: ($) => [/\s/, $.line_comment, $.block_comment],
-
   supertypes: ($) => [$.expression, $.primary_expression],
-
   conflicts: ($) => [[$.array_access_expression, $.map_access_expression]],
-
   word: ($) => $.identifier,
-
   rules: {
-    //== General ===============================================================
-
     source_file: ($) => repeat(choice($.declaration, $.statement)),
 
     declaration: ($) =>
@@ -130,7 +122,7 @@ module.exports = grammar({
     variable_declaration: ($) =>
       seq(
         repeat($.metadata),
-        repeat($.modifier),
+        repeat($.access),
         choice("var", "final"),
         field("name", $.identifier),
         optional($.property_accessor),
@@ -393,7 +385,7 @@ module.exports = grammar({
     class_declaration: ($) =>
       seq(
         repeat($.metadata),
-        repeat($.modifier),
+        repeat($.access),
         "class",
         field("name", $.type_name),
         optional(field("type_parameters", $.type_parameter_list)),
@@ -410,7 +402,7 @@ module.exports = grammar({
     interface_declaration: ($) =>
       seq(
         repeat($.metadata),
-        repeat($.modifier),
+        repeat($.access),
         "interface",
         field("name", $.type_name),
         optional(field("extends", $.extends_clause)),
@@ -420,7 +412,7 @@ module.exports = grammar({
     abstract_declaration: ($) =>
       seq(
         repeat($.metadata),
-        repeat($.modifier),
+        repeat($.access),
         "abstract",
         field("name", $.type_name),
         optional(field("type_parameters", $.type_parameter_list)),
@@ -441,7 +433,7 @@ module.exports = grammar({
     typedef_declaration: ($) =>
       seq(
         repeat($.metadata),
-        repeat($.modifier),
+        repeat($.access),
         "typedef",
         field("name", $.type_name),
         optional(field("type_parameters", $.type_parameter_list)),
@@ -464,7 +456,7 @@ module.exports = grammar({
 
     interface_field_declaration: ($) =>
       seq(
-        repeat($.modifier),
+        repeat($.access),
         choice($._variable_signature, $._function_signature),
       ),
 
@@ -488,7 +480,7 @@ module.exports = grammar({
     enum_declaration: ($) =>
       seq(
         repeat($.metadata),
-        repeat($.modifier),
+        repeat($.access),
         "enum",
         field("name", $.type_name),
         optional(field("type_parameters", $.type_parameter_list)),
@@ -561,7 +553,7 @@ module.exports = grammar({
     function_declaration: ($) =>
       seq(
         repeat($.metadata),
-        repeat($.modifier),
+        repeat($.access),
         "function",
         field("name", $.identifier),
         optional(field("type_parameters", $.type_parameter_list)),
@@ -584,7 +576,7 @@ module.exports = grammar({
     //TODO: import statement error
     // qualified_type: $ => prec.right(choice(
     //   seq($.type_name, optional($.type_argument_list)),
-    //   seq($.package_name, '.', $.qualified_type)
+    //   seq($.package_name, ".", $.qualified_type)
     // )),
     qualified_type: ($) =>
       prec.right(
@@ -604,8 +596,19 @@ module.exports = grammar({
     //     ),
     //   ),
 
-    modifier: (_) =>
-      choice("public", "private", "static", "override", "inline", "extern"),
+    access: (_) =>
+      choice(
+        "abstract",
+        "dynamic",
+        "extern",
+        "final",
+        "inline",
+        "macro",
+        "override",
+        "private",
+        "public",
+        "static",
+      ),
 
     // package_path: ($) => prec.right(seq($.identifier, repeat(seq(".", $.identifier)))),
     package_name: ($) => $._camel_case_identifier,
@@ -645,6 +648,6 @@ module.exports = grammar({
     _pascal_case_identifier: (_) => /[A-Z][a-zA-Z0-9_]*/,
 
     _semicolon: (_) => token(";"),
-    // _semicolon: _ => token(';'),
+    // _semicolon: _ => token(";"),
   },
 });
