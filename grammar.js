@@ -9,7 +9,7 @@ module.exports = grammar({
   conflicts: ($) => [[$.array_access_expression, $.map_access_expression]],
   word: ($) => $.identifier,
   rules: {
-    source_file: ($) => repeat(choice($.declaration, $.statement)),
+    source_file: ($) => repeat(choice($.declaration, $._statement)),
 
     declaration: ($) =>
       choice(
@@ -23,7 +23,7 @@ module.exports = grammar({
 
     //== Statements ============================================================
 
-    statement: ($) =>
+    _statement: ($) =>
       choice(
         $.package_statement,
         $.import_statement,
@@ -46,8 +46,8 @@ module.exports = grammar({
         seq(
           "if",
           field("condition", $.parenthesized_expression),
-          field("consequence", $.statement),
-          optional(seq("else", field("alternative", $.statement))),
+          field("consequence", $._statement),
+          optional(seq("else", field("alternative", $._statement))),
         ),
       ),
 
@@ -55,7 +55,7 @@ module.exports = grammar({
       seq(
         "while",
         field("condition", $.parenthesized_expression),
-        field("body", $.statement),
+        field("body", $._statement),
       ),
 
     for_statement: ($) =>
@@ -66,16 +66,16 @@ module.exports = grammar({
         "in",
         field("iterable", $.expression),
         ")",
-        field("body", $.statement),
+        field("body", $._statement),
       ),
 
     return_statement: ($) =>
       seq("return", optional($.expression), $._semicolon),
 
-    block: ($) => seq("{", repeat($.statement), "}"),
+    block: ($) => seq("{", repeat($._statement), "}"),
 
     using_statement: ($) =>
-      seq("using", field("path", $.qualified_type), $._semicolon),
+      seq("using", field("path", $._qualified_type), $._semicolon),
 
     try_statement: ($) =>
       seq("try", field("body", $.block), repeat1($.catch_clause)),
@@ -106,12 +106,19 @@ module.exports = grammar({
     import_statement: ($) =>
       seq(
         "import",
-        $.qualified_type,
+        optional(repeat(seq($.package_name, "."))),
+        optional(repeat(seq($.type_name, "."))),
+        choice(
+          "*",
+          seq(
+            $.type_name,
+            optional(seq(".", alias($._camel_case_identifier, $.identifier))),
+          ),
+        ),
         optional(
-          choice(
-            seq(".", "*"),
-            seq("as", $.type_name),
-            seq("in", $.identifier),
+          seq(
+            choice("as", "in"),
+            choice($.type_name, alias($._camel_case_identifier, $.identifier)),
           ),
         ),
         $._semicolon,
@@ -125,8 +132,7 @@ module.exports = grammar({
         repeat($.access),
         choice("var", "final"),
         field("name", $.identifier),
-        optional($.property_accessor),
-        field("type", optional(seq(":", $.qualified_type))),
+        field("type", optional(seq(":", $._qualified_type))),
         optional(seq("=", field("value", $.expression))),
         $._semicolon,
       ),
@@ -219,7 +225,7 @@ module.exports = grammar({
         9,
         seq(
           "new",
-          field("class", $.qualified_type),
+          field("class", $._qualified_type),
           field("arguments", $.argument_list),
         ),
       ),
@@ -328,7 +334,7 @@ module.exports = grammar({
         ),
         optional(seq("when", field("guard", $.expression))),
         ":",
-        repeat($.statement),
+        repeat($._statement),
       ),
 
     case_pattern: ($) =>
@@ -337,7 +343,7 @@ module.exports = grammar({
         $.enum_constructor_pattern,
         $.object_pattern,
         $.array_pattern,
-        $.qualified_type,
+        $._qualified_type,
         // 'null',
         "_",
       ),
@@ -345,7 +351,7 @@ module.exports = grammar({
       prec(
         1,
         seq(
-          $.qualified_type,
+          $._qualified_type,
           optional(field("arguments", $.pattern_argument_list)),
         ),
       ),
@@ -381,7 +387,7 @@ module.exports = grammar({
       ),
 
     type_pattern: ($) =>
-      seq(field("name", $.identifier), ":", field("type", $.qualified_type)),
+      seq(field("name", $.identifier), ":", field("type", $._qualified_type)),
     class_declaration: ($) =>
       seq(
         repeat($.metadata),
@@ -394,10 +400,10 @@ module.exports = grammar({
         field("body", $.class_body),
       ),
 
-    extends_clause: ($) => seq("extends", $.qualified_type),
+    extends_clause: ($) => seq("extends", $._qualified_type),
 
     implements_clause: ($) =>
-      seq("implements", $.qualified_type, repeat(seq(",", $.qualified_type))),
+      seq("implements", $._qualified_type, repeat(seq(",", $._qualified_type))),
 
     interface_declaration: ($) =>
       seq(
@@ -422,11 +428,11 @@ module.exports = grammar({
         field("body", $.abstract_body),
       ),
 
-    abstract_underlying_type: ($) => seq("(", $.qualified_type, ")"),
+    abstract_underlying_type: ($) => seq("(", $._qualified_type, ")"),
 
-    abstract_from_clause: ($) => seq("from", $.qualified_type),
+    abstract_from_clause: ($) => seq("from", $._qualified_type),
 
-    abstract_to_clause: ($) => seq("to", $.qualified_type),
+    abstract_to_clause: ($) => seq("to", $._qualified_type),
 
     abstract_body: ($) => seq("{", repeat($.interface_field_declaration), "}"),
 
@@ -438,7 +444,7 @@ module.exports = grammar({
         field("name", $.type_name),
         optional(field("type_parameters", $.type_parameter_list)),
         "=",
-        field("type", choice($.qualified_type, $.structural_type)),
+        field("type", choice($._qualified_type, $.structural_type)),
         $._semicolon,
       ),
 
@@ -449,7 +455,7 @@ module.exports = grammar({
         optional("var"),
         field("name", $.identifier),
         ":",
-        field("type", $.qualified_type),
+        field("type", $._qualified_type),
         $._semicolon,
       ),
     interface_body: ($) => seq("{", repeat($.interface_field_declaration), "}"),
@@ -464,7 +470,7 @@ module.exports = grammar({
       seq(
         "var",
         field("name", $.identifier),
-        field("type", optional(seq(":", $.qualified_type))),
+        field("type", optional(seq(":", $._qualified_type))),
         $._semicolon,
       ),
 
@@ -473,7 +479,7 @@ module.exports = grammar({
         "function",
         field("name", $.identifier),
         field("parameters", $.parameter_list),
-        field("return_type", optional(seq(":", $.qualified_type))),
+        field("return_type", optional(seq(":", $._qualified_type))),
         $._semicolon,
       ),
 
@@ -520,14 +526,14 @@ module.exports = grammar({
       ),
 
     enum_constructor_argument: ($) =>
-      seq(field("name", $.identifier), ":", field("type", $.qualified_type)),
+      seq(field("name", $.identifier), ":", field("type", $._qualified_type)),
 
     type_parameter: ($) => $.type_name,
 
     type_parameter_list: ($) =>
       seq("<", $.type_parameter, repeat(seq(",", $.type_parameter)), ">"),
 
-    type_argument: ($) => $.qualified_type,
+    type_argument: ($) => $._qualified_type,
 
     type_argument_list: ($) =>
       seq("<", $.type_argument, repeat(seq(",", $.type_argument)), ">"),
@@ -558,7 +564,7 @@ module.exports = grammar({
         field("name", $.identifier),
         optional(field("type_parameters", $.type_parameter_list)),
         field("parameters", $.parameter_list),
-        field("return_type", optional(seq(":", $.qualified_type))),
+        field("return_type", optional(seq(":", $._qualified_type))),
         field("body", $.block),
       ),
 
@@ -568,7 +574,7 @@ module.exports = grammar({
     parameter: ($) =>
       seq(
         field("name", $.identifier),
-        field("type", optional(seq(":", $.qualified_type))),
+        field("type", optional(seq(":", $._qualified_type))),
       ),
 
     //== Primitives ============================================================
@@ -576,14 +582,13 @@ module.exports = grammar({
     //TODO: import statement error
     // qualified_type: $ => prec.right(choice(
     //   seq($.type_name, optional($.type_argument_list)),
-    //   seq($.package_name, ".", $.qualified_type)
+    //   seq($.package_name, '.', $._qualified_type)
     // )),
-    qualified_type: ($) =>
+    _qualified_type: ($) =>
       prec.right(
-        seq(
-          $.type_name,
-          optional($.type_argument_list),
-          repeat(seq(".", $.type_name, optional($.type_argument_list))),
+        choice(
+          seq($.type_name, optional($.type_argument_list)),
+          seq(choice($.package_name, $.type_name), ".", $._qualified_type),
         ),
       ),
     // qualified_type: ($) =>
@@ -592,8 +597,8 @@ module.exports = grammar({
     //       optional(seq($.package_path, ".")),
     //       $.type_name,
     //       optional($.type_argument_list),
-    //       repeat(seq(".", $.type_name, optional($.type_argument_list))),
-    //     ),
+    //       repeat(seq(".", $.type_name, optional($.type_argument_list)))
+    //     )
     //   ),
 
     access: (_) =>
@@ -648,6 +653,5 @@ module.exports = grammar({
     _pascal_case_identifier: (_) => /[A-Z][a-zA-Z0-9_]*/,
 
     _semicolon: (_) => token(";"),
-    // _semicolon: _ => token(";"),
   },
 });
