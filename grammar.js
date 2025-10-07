@@ -4,12 +4,15 @@
 module.exports = grammar({
   name: "haxe",
   externals: ($) => [],
-  extras: ($) => [/\s/, $.line_comment, $.block_comment],
+  extras: ($) => [/\s/, $.comment],
   supertypes: ($) => [$.expression, $.primary_expression],
   conflicts: ($) => [[$.array_access_expression, $.map_access_expression]],
   word: ($) => $.identifier,
   rules: {
     source_file: ($) => repeat(choice($.declaration, $._statement)),
+
+    // Usesd by tree-sitter-hxml to inject top level expressions: --macro App.some()
+    // eval_source: ($) => repeat(choice($.expression, $.expression_statement)), //, $.block)),
 
     declaration: ($) =>
       choice(
@@ -647,6 +650,7 @@ module.exports = grammar({
 
     line_comment: (_) => token(seq("//", /[^\n]*/)),
     block_comment: (_) => token(seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
+    comment: ($) => choice($.line_comment, $.block_comment),
 
     identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
     _camel_case_identifier: (_) => /[a-z_][a-zA-Z0-9_]*/,

@@ -1,13 +1,8 @@
 ; Comments
 ; --------
+(comment) @comment
 (line_comment) @comment.line
 (block_comment) @comment.block
-
-; TODO/FIXME/XXX highlighting in comments
-((line_comment) @comment.line
-  (#match? @comment.line "(TODO|FIXME|XXX|HACK|NOTE)"))
-((block_comment) @comment.block
-  (#match? @comment.block "(TODO|FIXME|XXX|HACK|NOTE)"))
 
 ; Identifiers
 ; -----------
@@ -36,8 +31,7 @@
   parameters: (parameter_list))
   
 (interface_field_declaration 
-  name: (identifier) @variable
-  type: (qualified_type))
+  name: (identifier) @variable)
 
 ; Parameters
 (parameter name: (identifier) @variable.parameter)
@@ -48,7 +42,7 @@
 (call_expression function: (field_expression property: (identifier) @function.call))
 
 ; Constructor calls
-(new_expression (qualified_type (type_name) @constructor))
+(new_expression class: (type_name) @constructor)
 
 ; Field access
 (field_expression property: (identifier) @property)
@@ -70,15 +64,14 @@
 ; Array literals
 (array_literal) @punctuation.bracket
 
-; Modifiers
+; Access modifiers
 ; ---------
-(modifier) @keyword.modifier
+(access) @keyword.access
 
 ; Types
 ; -----
 (type_name) @type
 (package_name) @module
-(qualified_type (type_name) @type)
 
 ; Built-in types (common Haxe types)
 ((type_name) @type.builtin
