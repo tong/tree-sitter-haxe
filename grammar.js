@@ -3,18 +3,20 @@
 
 module.exports = grammar({
   name: "haxe",
-  externals: ($) => [],
+  externals: ($) => [$._closing_brace_marker, $._closing_brace_unmarker],
   extras: ($) => [/\s/, $.comment],
   supertypes: ($) => [$.expression, $.primary_expression],
-  conflicts: ($) => [[$.array_access_expression, $.map_access_expression]],
+  conflicts: ($) => [
+    [$.array_access_expression, $.map_access_expression],
+    // [$.object_literal, $.block],
+    [$.object_literal, $.object_pattern],
+    [$.property, $.case_pattern],
+  ],
   word: ($) => $.identifier,
   rules: {
-    source_file: ($) => repeat(choice($.declaration, $._statement)),
+    source_file: ($) => repeat(choice($._declaration, $._statement)),
 
-    // Usesd by tree-sitter-hxml to inject top level expressions: --macro App.some()
-    // eval_source: ($) => repeat(choice($.expression, $.expression_statement)), //, $.block)),
-
-    declaration: ($) =>
+    _declaration: ($) =>
       choice(
         $.class_declaration,
         $.enum_declaration,
@@ -75,7 +77,8 @@ module.exports = grammar({
     return_statement: ($) =>
       seq("return", optional($.expression), $._semicolon),
 
-    block: ($) => seq("{", repeat($._statement), "}"),
+    block: ($) =>
+      seq(field("open", "{"), repeat($._statement), $._closing_brace),
 
     using_statement: ($) =>
       seq("using", field("path", $._qualified_type), $._semicolon),
@@ -127,7 +130,7 @@ module.exports = grammar({
         $._semicolon,
       ),
 
-    expression_statement: ($) => seq($.expression, $._semicolon),
+    expression_statement: ($) => seq($.expression, optional($._semicolon)),
 
     variable_declaration: ($) =>
       seq(
@@ -168,7 +171,8 @@ module.exports = grammar({
 
     primary_expression: ($) =>
       choice(
-        $.number,
+        $.integer,
+        $.float,
         $.string_literal,
         $.regex_literal,
         $.identifier,
@@ -178,9 +182,16 @@ module.exports = grammar({
         $.parenthesized_expression,
         $.array_literal,
         $.map_literal,
+        $.object_literal,
       ),
 
     parenthesized_expression: ($) => seq("(", $.expression, ")"),
+
+    object_literal: ($) =>
+      seq("{", optional(seq($.property, repeat(seq(",", $.property)))), "}"),
+
+    property: ($) =>
+      seq(field("key", $.identifier), ":", field("value", $.expression)),
 
     array_literal: ($) =>
       prec(
@@ -580,9 +591,9 @@ module.exports = grammar({
         field("type", optional(seq(":", $._qualified_type))),
       ),
 
-    //== Primitives ============================================================
+    //== primitives ============================================================
 
-    //TODO: import statement error
+    //todo: import statement error
     // qualified_type: $ => prec.right(choice(
     //   seq($.type_name, optional($.type_argument_list)),
     //   seq($.package_name, '.', $._qualified_type)
@@ -622,24 +633,54 @@ module.exports = grammar({
     package_name: ($) => $._camel_case_identifier,
     type_name: ($) => $._pascal_case_identifier,
 
-    number: (_) =>
+    integer: (_) =>
+      choice(
+        /\d[\d_]*/, // decimal
+        /0x[a-fa-f\d][a-fa-f\d_]*/, // hex
+        /0b[01][01_]*/, // binary
+        /0o[0-7][0-7_]*/, // octal
+      ),
+
+    float: (_) =>
       token(
         choice(
-          seq(choice("0x", "0X"), /[\da-fA-F][\da-fA-F_]*/),
-          seq(choice("0b", "0B"), /[01][01_]*/),
-          seq(choice("0o", "0O"), /[0-7][0-7_]*/),
-          /\d[\d_]*\.\d[\d_]*(e[+-]?\d+)?/,
-          /\d[\d_]*(e[+-]?\d+)?/,
+          /\d[\d_]*\.\d[\d_]*([ee][+-]?\d[\d_]*)?/, // decimal float with optional exponent
+          /\d[\d_]+[ee][+-]?\d[\d_]*/, // decimal integer with exponent
         ),
       ),
 
-    string_literal: (_) =>
-      token(
-        choice(
-          seq("'", repeat(choice(/[^'\\\n]+/, /\\./)), "'"),
-          seq('"', repeat(choice(/[^"\\\n]+/, /\\./)), '"'),
+    string_literal: ($) =>
+      choice(
+        seq(
+          "'",
+          repeat(
+            choice(
+              alias(token.immediate(prec(1, /[^'\\$]+/)), $.string_fragment),
+              $.escape_sequence,
+              $.interpolation,
+            ),
+          ),
+          "'",
+        ),
+        seq(
+          '"',
+          repeat(
+            choice(
+              alias(token.immediate(prec(1, /[^"\\$]+/)), $.string_fragment),
+              $.escape_sequence,
+              $.interpolation,
+            ),
+          ),
+          '"',
         ),
       ),
+
+    interpolation: ($) =>
+      seq("${", $.expression, $._closing_interpolation_brace),
+
+    _closing_interpolation_brace: ($) => seq($._closing_brace_unmarker, "}"),
+
+    escape_sequence: () => token.immediate(seq("\\", /./)),
 
     regex_literal: (_) =>
       token(seq("~/", repeat(choice(/[^/\\\n]/, /\\./)), "/", /[gimsu]*/)),
@@ -648,9 +689,11 @@ module.exports = grammar({
     false: (_) => "false",
     null: (_) => "null",
 
+    comment: ($) => choice($.line_comment, $.block_comment),
     line_comment: (_) => token(seq("//", /[^\n]*/)),
     block_comment: (_) => token(seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
-    comment: ($) => choice($.line_comment, $.block_comment),
+
+    _closing_brace: ($) => seq($._closing_brace_marker, "}"),
 
     identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
     _camel_case_identifier: (_) => /[a-z_][a-zA-Z0-9_]*/,
