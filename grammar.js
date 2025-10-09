@@ -19,6 +19,7 @@ module.exports = grammar({
   extras: ($) => [/\s/, $.comment],
   supertypes: ($) => [$.expression, $.primary_expression],
   conflicts: ($) => [
+    [$.metadata],
     [$.array_access_expression, $.map_access_expression],
     // [$.object_literal, $.block],
     [$.object_literal, $.object_pattern],
@@ -45,6 +46,8 @@ module.exports = grammar({
 
     _statement: ($) =>
       choice(
+        $._standalone_metadata,
+        $._preprocessor,
         $.package_statement,
         $.import_statement,
         $.expression_statement,
@@ -61,6 +64,24 @@ module.exports = grammar({
         $.throw_statement,
         $.block,
       ),
+
+    _standalone_metadata: ($) => prec(-1, $.metadata),
+
+    _preprocessor: ($) =>
+      choice(
+        $.preprocessor_if,
+        $.preprocessor_elseif,
+        $.preprocessor_else,
+        $.preprocessor_error,
+        $.preprocessor_end,
+      ),
+    preprocessor_if: ($) => seq("#", token.immediate("if"), $.expression),
+    preprocessor_elseif: ($) =>
+      seq("#", token.immediate("elseif"), $.expression),
+    preprocessor_error: ($) =>
+      seq("#", token.immediate("error"), $.string_literal),
+    preprocessor_else: (_) => seq("#", token.immediate("else")),
+    preprocessor_end: (_) => seq("#", token.immediate("end")),
 
     if_statement: ($) =>
       prec.right(
@@ -653,15 +674,11 @@ module.exports = grammar({
     metadata: ($) =>
       choice(
         seq(
-          "@:",
+          choice("@:", "@"),
           field("name", $.identifier),
-          optional(field("params", $.argument_list)),
+          field("params", $.argument_list),
         ),
-        seq(
-          "@",
-          field("name", $.identifier),
-          optional(field("params", $.argument_list)),
-        ),
+        seq(choice("@:", "@"), field("name", $.identifier)),
       ),
     class_body: ($) => seq("{", repeat($.field_declaration), "}"),
 
