@@ -1,16 +1,16 @@
-===================
-line comments
-===================
+============
+line comment
+============
 
 // This is a comment.
 
 ---
 
-(source_file (line_comment))
+(source_file (comment (line_comment)))
 
-===================
+=============
 block comment
-===================
+=============
 
 /*
   This is a comment.
@@ -22,6 +22,6 @@ block comment
 ---
 
 (source_file
-  (block_comment)
-  (block_comment)
-  (block_comment))
+  (comment (block_comment))
+  (comment (block_comment))
+  (comment (block_comment)))

@@ -1,0 +1,30 @@
+===================
+binary add operator
+===================
+
+1 + 2;
+
+---
+
+(source_file
+  (expression_statement
+    (binary_expression
+      left: (integer)
+      right: (integer))))
+
+
+===================
+binary operation
+===================
+
+1 + 2 * 3 % 2;
+
+(source_file
+  (expression_statement
+    (binary_expression
+      left: (integer)
+      right: (binary_expression
+        left: (binary_expression
+          left: (integer)
+          right: (integer))
+        right: (integer)))))

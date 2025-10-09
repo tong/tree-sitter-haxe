@@ -1,0 +1,93 @@
+===================
+preprocessor simple
+===================
+
+#if some
+#else
+#end
+
+---
+
+(source_file
+  (preprocessor_if
+    (identifier))
+  (preprocessor_else)
+  (preprocessor_end))
+
+=====================
+preprocessor advanced
+=====================
+
+#if !debug
+  trace("ok");
+#elseif (debug_level > 3)
+  trace(3);
+#elseif antoher
+  trace("debug level too low");
+#error "unsupported"
+#end
+
+---
+
+(source_file
+  (preprocessor_if
+    (unary_expression
+      argument: (identifier)))
+  (expression_statement
+    (call_expression
+      function: (identifier)
+      args: (argument_list
+        (string_literal
+          (string_fragment)))))
+  (preprocessor_elseif
+    (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (integer))))
+  (expression_statement
+    (call_expression
+      function: (identifier)
+      args: (argument_list
+        (integer))))
+  (preprocessor_elseif
+    (identifier))
+  (expression_statement
+    (call_expression
+      function: (identifier)
+      args: (argument_list
+        (string_literal
+          (string_fragment)))))
+  (preprocessor_error
+    (string_literal
+      (string_fragment)))
+  (preprocessor_end))
+
+========================
+preprocessor with macros
+========================
+
+#if !macro
+@:build(my.App.build())
+#end
+class A {}
+
+---
+
+(source_file
+  (preprocessor_if
+    (unary_expression
+      argument: (identifier)))
+  (metadata
+    name: (identifier)
+    params: (argument_list
+      (call_expression
+        function: (field_expression
+          object: (field_expression
+            object: (identifier)
+            property: (identifier))
+          property: (identifier))
+        args: (argument_list))))
+  (preprocessor_end)
+  (class_declaration
+    name: (type_name)
+    body: (class_body)))

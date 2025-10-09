@@ -1,0 +1,30 @@
+===================
+function call
+===================
+
+fn();
+
+---
+
+(source_file
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list))))
+
+===================
+arrow function
+===================
+
+() -> trace("some");
+() -> {}
+a -> {}
+(a,b) -> trace(a,b);
+
+---
+
+(source_file
+  (expression_statement
+    (arrow_function
+      parameters: (parameter_list)
+      body: (block))))

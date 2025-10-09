@@ -1,0 +1,51 @@
+========
+metadata
+========
+
+@:keep class A {}
+@any class A {}
+
+@a @b
+@c
+class A {}
+
+---
+
+(source_file
+  (class_declaration
+    (metadata
+      name: (identifier))
+    name: (type_name)
+    body: (class_body))
+  (class_declaration
+    (metadata
+      name: (identifier))
+    name: (type_name)
+    body: (class_body))
+  (class_declaration
+    (metadata
+      name: (identifier))
+    (metadata
+      name: (identifier))
+    (metadata
+      name: (identifier))
+    name: (type_name)
+    body: (class_body)))
+
+==============
+metadata param
+==============
+
+@:author("god") class A {}
+
+---
+
+(source_file
+  (class_declaration
+    (metadata
+      name: (identifier)
+      params: (argument_list
+        (string_literal
+          (string_fragment))))
+    name: (type_name)
+    body: (class_body)))

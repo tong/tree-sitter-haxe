@@ -1,0 +1,40 @@
+====================
+var declaration
+====================
+
+var x = 23;
+
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (integer)))
+
+====================
+final declaration
+====================
+
+final x = 23;
+
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (integer)))
+
+
+=====================
+interface declaration
+=====================
+
+interface Main {}
+
+---
+
+(source_file
+  (interface_declaration
+    name: (type_name)
+    body: (interface_body)))
+

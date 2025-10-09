@@ -1,0 +1,94 @@
+===========
+import type
+===========
+
+import App;
+
+---
+
+(source_file
+  (import_statement
+    (type_name)))
+
+===============
+import dot path
+===============
+
+import some.other.App;
+
+---
+
+(source_file
+  (import_statement
+    (package_name)
+    (package_name)
+    (type_name)))
+
+===================
+import class field
+===================
+
+import any.other.Some.field;
+
+---
+
+(source_file
+  (import_statement
+    (package_name)
+    (package_name)
+    (type_name)
+      (identifier)))
+
+====================
+import wildcard type
+====================
+
+import any.other.*;
+
+---
+
+(source_file
+  (import_statement
+    (package_name)
+    (package_name)))
+
+=====================
+import wildcard field
+=====================
+
+import any.other.Some.*;
+
+---
+
+(source_file
+  (import_statement
+    (package_name)
+    (package_name)
+    (type_name)))
+
+==============
+import type as
+==============
+
+import Type as Alias;
+
+---
+
+(source_file
+  (import_statement
+    (type_name)
+    (type_name)))
+
+===============
+import field as
+===============
+
+import Type.field as alias;
+
+---
+
+(source_file
+  (import_statement
+    (type_name)
+    (identifier)
+    (identifier)))

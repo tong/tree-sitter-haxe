@@ -1,6 +1,6 @@
-===============
-number literals
-===============
+================
+integer literals 
+================
 
 1
 0x00
@@ -12,18 +12,219 @@ number literals
 ---
 
 (source_file
-  (statement
-    (expression_statement
-      (number)))
-  (statement
-    (expression_statement
-      (number)))
-  (statement
-    (expression_statement
-      (number)))
-  (statement
-    (expression_statement
-      (number)))
-  (statement
-    (expression_statement
-      (number))))
+  (expression_statement
+    (integer))
+  (expression_statement
+    (integer))
+  (expression_statement
+    (integer))
+  (expression_statement
+    (integer))
+  (expression_statement
+    (integer))
+  (expression_statement
+    (integer)))
+
+==============
+float literals 
+==============
+
+1.0;
+1_000.5;
+1.0e-3;
+1_000.0e1_0;
+
+---
+
+(source_file
+  (expression_statement
+    (float))
+  (expression_statement
+    (float))
+  (expression_statement
+    (float))
+  (expression_statement
+    (float)))
+
+===============
+string literals
+===============
+
+"haxe";
+'haxe';
+
+---
+
+(source_file 
+  (expression_statement
+    (string_literal
+      (string_fragment)))
+  (expression_statement
+    (string_literal
+      (string_fragment))))
+
+=======================================
+strings containing comment-like content
+=======================================
+
+"//ok\n//what"
+
+---
+
+(source_file
+  (expression_statement
+    (string_literal
+      (string_fragment)
+      (escape_sequence)
+      (string_fragment))))
+
+=====================
+string quote escaping
+=====================
+
+"";
+'';
+"\"";
+"a\"b";
+'\'";
+'a\'b';
+"it's a tiny tiny world";
+'"hello"';
+
+---
+
+(source_file
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal)))
+
+
+
+=========================
+string line continuations
+=========================
+
+"hello
+world";
+
+'hello
+world';
+
+---
+
+(source_file 
+  (expression_statement
+    (string_literal
+      (string_fragment)))
+  (expression_statement
+    (string_literal
+      (string_fragment))))
+
+====================
+string interpolation
+====================
+
+'Some $user say';
+'My name is ${user.name} and i am';
+"1 + 2 = ${1 + 2}";
+'${"nested"}';
+
+---
+
+(source_file
+  (expression_statement
+        (string_literal
+          (string_fragment)
+          (interpolation
+            (identifier))
+          (string_fragment)))
+  (expression_statement
+    (string_literal
+      (string_fragment)
+      (interpolation
+        (field_expression
+          (identifier)
+          (identifier))) 
+      (_closing_interpolation_brace)))
+  (expression_statement
+    (string_literal
+      (string_fragment)
+      (interpolation
+        (binary_expression
+          (number)
+          (number))) 
+      (_closing_interpolation_brace)))
+  (expression_statement
+    (string_literal
+      (interpolation
+        (string_literal
+          (string_fragment))
+        (_closing_interpolation_brace)))))
+
+=====
+array
+=====
+
+[];
+[ "item1" ];
+[ "item1", ];
+[ "item1", item2 ];
+[ , item2 ];
+[ item2 = 5 ];
+
+---
+
+(source_file
+  (expression_statement
+    (array_literal))
+  (expression_statement
+    (array_literal
+      (string_literal
+        (string_fragment))))
+  (expression_statement
+    (array_literal
+      (string_literal
+        (string_fragment))
+      (ERROR)))
+  (expression_statement
+    (array_literal
+      (string_literal
+        (string_fragment))
+      (identifier)))
+  (expression_statement
+    (array_literal
+      (ERROR)
+      (identifier)))
+  (expression_statement
+    (array_literal
+      (binary_expression
+        (identifier)
+        (integer)))))
+
+==============
+object literal
+==============
+
+{ test: 23 };
+
+---
+
+(source_file
+  (expression_statement
+    (object_literal
+      (property
+        key: (identifier)
+        value: (integer)))))

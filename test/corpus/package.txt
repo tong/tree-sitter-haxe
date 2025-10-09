@@ -1,19 +1,5 @@
-=======
-package
-=======
-
-package my.other.package;
-
----
-
-(source_file
-  (package_statement
-    (package_name)
-    (package_name)
-    (package_name)))
-
 =============
-empty package
+package empty
 =============
 
 package;
@@ -21,4 +7,18 @@ package;
 ---
 
 (source_file (package_statement))
+
+=============
+package parts
+=============
+
+package my.other.package;
+
+---
+
+(source_file
+  (package_statement
+      (package_name)
+      (package_name)
+      (package_name)))
 

@@ -1,0 +1,23 @@
+==========
+using type
+==========
+
+using Type;
+
+---
+
+(source_file (using_statement (type_name)))
+
+===============
+using type path
+===============
+
+using some.any.Type;
+
+---
+
+(source_file
+  (using_statement
+    (package_name)
+    (package_name)
+    (type_name)))
