@@ -27,4 +27,28 @@ a -> {}
   (expression_statement
     (arrow_function
       parameters: (parameter_list)
-      body: (block))))
+      body: (call_expression
+        function: (identifier)
+        args: (argument_list
+          (string_literal
+            (string_fragment))))))
+  (expression_statement
+    (arrow_function
+      parameters: (parameter_list)
+      body: (object_literal)))
+  (expression_statement
+    (arrow_function
+      parameters: (identifier)
+      body: (call_expression
+        function: (object_literal)
+        args: (argument_list
+          (identifier)
+          (identifier)))))
+  (expression_statement
+    (arrow_function
+      parameters: (identifier)
+      body: (call_expression
+        function: (object_literal)
+        args: (argument_list
+          (identifier)
+          (identifier)))))

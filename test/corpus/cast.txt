@@ -1,0 +1,26 @@
+===============
+cast expression
+===============
+
+cast a;
+
+---
+
+(source_file
+  (expression_statement
+    (cast_expression
+      value: (identifier))))
+
+==================
+cast to expression
+==================
+
+cast(a, String);
+
+---
+
+(source_file
+  (expression_statement
+    (cast_expression
+      (identifier)
+      type: (type_name))))

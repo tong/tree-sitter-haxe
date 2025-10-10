@@ -633,22 +633,18 @@ export default grammar({
     cast_expression: ($) =>
       prec.right(
         PREC.CAST,
-        seq(
-          alias("cast", $.cast_keyword),
-          choice($.cast_arguments, field("value", $.expression)),
+        choice(
+          seq(
+            token("cast"),
+            "(",
+            $.expression,
+            optional(seq(",", field("type", $._qualified_type))),
+            ")",
+          ),
+          seq($._cast_keyword, field("value", $.expression)),
         ),
       ),
-
-    cast_arguments: ($) =>
-      prec(
-        2,
-        seq(
-          "(",
-          field("value", $.expression),
-          optional(seq(",", field("type", $._qualified_type))),
-          ")",
-        ),
-      ),
+    _cast_keyword: (_) => token("cast"),
 
     field_expression: ($) =>
       prec.left(
