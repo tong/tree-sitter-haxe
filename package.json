@@ -10,6 +10,7 @@
     "url": "https://disktree.net/"
   },
   "main": "bindings/node",
+  "type": "module",
   "types": "bindings/node",
   "keywords": [
     "incremental",

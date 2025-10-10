@@ -13,7 +13,7 @@ const PREC = {
   PRIMARY: 20,
 };
 
-module.exports = grammar({
+export default grammar({
   name: "haxe",
   externals: ($) => [$._closing_brace_marker, $._closing_brace_unmarker],
   extras: ($) => [/\s/, $.comment],
@@ -22,11 +22,11 @@ module.exports = grammar({
     [$.metadata],
     [$.array_access_expression, $.map_access_expression],
     // [$.object_literal, $.block],
-    [$.object_literal, $.object_pattern],
+    // [$.object_literal, $.object_pattern],
     [$.property, $.case_pattern],
     // [$.cast_arguments, $.parenthesized_expression],
-    [$.cast_expression, $.parenthesized_expression],
-    [$.cast_expression, $.binary_expression],
+    // [$.cast_expression, $.parenthesized_expression],
+    // [$.cast_expression, $.binary_expression],
   ],
   word: ($) => $.identifier,
   rules: {
@@ -546,6 +546,7 @@ module.exports = grammar({
       seq(
         repeat($.metadata),
         repeat($.access),
+        optional("enum"),
         "abstract",
         field("name", $.type_name),
         optional(field("type_parameters", $.type_parameter_list)),
@@ -561,7 +562,7 @@ module.exports = grammar({
 
     abstract_to_clause: ($) => seq("to", $._qualified_type),
 
-    abstract_body: ($) => seq("{", repeat($.interface_field_declaration), "}"),
+    abstract_body: ($) => seq("{", repeat($.field_declaration), "}"),
 
     typedef_declaration: ($) =>
       seq(
@@ -689,7 +690,7 @@ module.exports = grammar({
       seq(
         repeat($.metadata),
         repeat($.access),
-        "function",
+        alias("function", $.keyword_function),
         field("name", $.identifier),
         optional(field("type_parameters", $.type_parameter_list)),
         field("parameters", $.parameter_list),
