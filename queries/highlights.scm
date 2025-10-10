@@ -1,7 +1,9 @@
 ; Comments
 ; --------
 (comment) @comment
+
 (line_comment) @comment.line
+
 (block_comment) @comment.block
 
 ; Identifiers
@@ -11,54 +13,92 @@
 ; MetaData
 ; --------
 (metadata) @attribute
-(metadata name: (identifier) @attribute)
+
+(metadata
+  name: (identifier) @attribute.name)
+
+(metadata
+  params: (argument_list) @punctuation)
 
 ; Declarations
 ; ------------
-(class_declaration name: (type_name) @type.definition)
-(interface_declaration name: (type_name) @type.definition)
-(abstract_declaration name: (type_name) @type.definition)
-(typedef_declaration name: (type_name) @type.definition)
-(enum_declaration name: (type_name) @type.definition)
+(class_declaration
+  name: (type_name) @type.definition)
 
-(function_declaration name: (identifier) @function)
-(function_declaration name: (identifier) @constructor
+(interface_declaration
+  name: (type_name) @type.definition)
+
+(abstract_declaration
+  name: (type_name) @type.definition)
+
+(typedef_declaration
+  name: (type_name) @type.definition)
+
+(enum_declaration
+  name: (type_name) @type.definition)
+
+(function_declaration
+  name: (identifier) @function)
+
+(function_declaration
+  name: (identifier) @constructor
   (#eq? @constructor "new"))
 
+(keyword_function) @keyword.function
+
 ; Interface and abstract function signatures
-(interface_field_declaration 
+(interface_field_declaration
   name: (identifier) @function
   parameters: (parameter_list))
-  
-(interface_field_declaration 
+
+(interface_field_declaration
   name: (identifier) @variable)
 
 ; Parameters
-(parameter name: (identifier) @variable.parameter)
-(enum_constructor_argument name: (identifier) @variable.parameter)
+(parameter
+  name: (identifier) @variable.parameter)
+
+(enum_constructor_argument
+  name: (identifier) @variable.parameter)
 
 ; Function calls
-(call_expression function: (identifier) @function.call)
-(call_expression function: (field_expression property: (identifier) @function.call))
+(call_expression
+  function: (identifier) @function.call)
+
+(call_expression
+  function: (field_expression
+    property: (identifier) @function.call))
 
 ; Constructor calls
-(new_expression class: (type_name) @constructor)
+(new_expression
+  class: (type_name) @constructor)
 
 ; Field access
-(field_expression property: (identifier) @property)
+(field_expression
+  property: (identifier) @property)
+
+"final" @keyword.modifier ; in case final is used as var replacement
 
 ; Variables and assignments
-(variable_declaration name: (identifier) @variable)
+(variable_declaration
+  name: (identifier) @variable)
 
 ; Enum constructors
-(enum_constructor (type_name) @constructor)
+(enum_constructor
+  (type_name) @constructor)
 
 ; Literals
 ; --------
-(number) @number
+(integer) @number.int
+
+(float) @number.float
+
 (string_literal) @string
+
 (true) @boolean
+
 (false) @boolean
+
 (null) @constant.builtin
 
 ; Array literals
@@ -71,6 +111,7 @@
 ; Types
 ; -----
 (type_name) @type
+
 (package_name) @module
 
 ; Built-in types (common Haxe types)
@@ -97,7 +138,7 @@
   "if"
   "implements"
   "import"
-  "in" 
+  "in"
   "inline"
   "interface"
   "override"
@@ -126,7 +167,7 @@
   "!="
   "<"
   "<="
-  ">" 
+  ">"
   ">="
   "&&"
   "||"
@@ -156,5 +197,5 @@
   ":"
 ] @punctuation.delimiter
 
-; Special punctuation  
+; Special punctuation
 ":" @punctuation.special
