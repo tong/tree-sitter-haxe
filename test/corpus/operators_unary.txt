@@ -1,0 +1,72 @@
+=======================
+unary postfix increment
+=======================
+
+x++;
+x--;
+
+---
+
+(source_file
+  (expression_statement
+    (update_expression
+      argument: (identifier)))
+  (expression_statement
+    (update_expression
+      argument: (identifier))))
+
+=======================
+unary prefix increment
+=======================
+
+++x;
+--x;
+
+---
+
+(source_file
+  (expression_statement
+    (unary_expression
+      argument: (identifier)))
+  (expression_statement
+    (unary_expression
+      argument: (identifier))))
+
+======================
+logical not unop unary
+======================
+
+!x;
+
+---
+
+(source_file
+  (expression_statement
+    (unary_expression
+      argument: (identifier))))
+
+===================
+negative unop unary
+===================
+
+-x;
+
+---
+
+(source_file
+  (expression_statement
+    (unary_expression
+      (identifier))))
+
+===================
+negative bitwise unop unary
+===================
+
+~x;
+
+---
+
+(source_file
+  (expression_statement
+    (unary_expression
+      argument: (identifier))))

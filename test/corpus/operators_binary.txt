@@ -28,3 +28,65 @@ binary operation
           left: (integer)
           right: (integer))
         right: (integer)))))
+
+====================================
+binary string concatenation operator
+====================================
+
+"a" + "b";
+
+---
+
+(source_file
+  (expression_statement
+    (binary_expression
+      left: (string_literal
+        (string_fragment))
+      right: (string_literal
+        (string_fragment)))))
+
+============================================
+binary string and int concatenation operator
+============================================
+
+"a" + 1;
+
+---
+
+(source_file
+  (expression_statement
+    (binary_expression
+      left: (string_literal
+        (string_fragment))
+      right: (integer))))
+
+============================================
+binary int and string concatenation operator
+============================================
+
+1 + "a";
+
+---
+
+(source_file
+  (expression_statement
+    (binary_expression
+      left: (integer)
+      right: (string_literal
+        (string_fragment)))))
+
+===============================================
+binary string and is int concatenation operator
+===============================================
+
+"a" += "b";
+
+---
+
+(source_file
+  (expression_statement
+    (binary_expression
+      left: (string_literal
+        (string_fragment))
+      right: (string_literal
+        (string_fragment)))))

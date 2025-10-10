@@ -1,6 +1,6 @@
-================
+===============================================================================
 integer literals 
-================
+===============================================================================
 
 1
 0x00
@@ -25,9 +25,9 @@ integer literals
   (expression_statement
     (integer)))
 
-==============
+===============================================================================
 float literals 
-==============
+===============================================================================
 
 1.0;
 1_000.5;
@@ -46,9 +46,46 @@ float literals
   (expression_statement
     (float)))
 
-===============
+===============================================================================
+bool literals
+===============================================================================
+
+true
+false
+
+---
+
+(source_file 
+  (expression_statement
+    (true))
+  (expression_statement
+    (false)))
+
+===============================================================================
+regular expression literals
+===============================================================================
+
+~/haxe/gi;
+
+---
+
+(source_file 
+  (expression_statement
+    (regex_literal)))
+
+===============================================================================
+null literals
+===============================================================================
+
+null;
+
+---
+
+(source_file (expression_statement (null)))
+
+===============================================================================
 string literals
-===============
+===============================================================================
 
 "haxe";
 'haxe';
@@ -63,9 +100,9 @@ string literals
     (string_literal
       (string_fragment))))
 
-=======================================
-strings containing comment-like content
-=======================================
+===============================================================================
+strings containing comment-like content literals
+===============================================================================
 
 "//ok\n//what"
 
@@ -78,9 +115,9 @@ strings containing comment-like content
       (escape_sequence)
       (string_fragment))))
 
-=====================
-string quote escaping
-=====================
+===============================================================================
+string quote escaping literals
+===============================================================================
 
 "";
 '';
@@ -111,11 +148,9 @@ string quote escaping
   (expression_statement
     (string_literal)))
 
-
-
-=========================
-string line continuations
-=========================
+===============================================================================
+string line continuations literals
+===============================================================================
 
 "hello
 world";
@@ -133,9 +168,9 @@ world';
     (string_literal
       (string_fragment))))
 
-====================
-string interpolation
-====================
+===============================================================================
+string interpolation literals
+===============================================================================
 
 'Some $user say';
 'My name is ${user.name} and i am';
@@ -146,37 +181,31 @@ string interpolation
 
 (source_file
   (expression_statement
-        (string_literal
-          (string_fragment)
-          (interpolation
-            (identifier))
-          (string_fragment)))
+    (string_literal
+      (string_fragment)
+      (interpolation
+        (identifier))
+      (string_fragment)))
   (expression_statement
     (string_literal
       (string_fragment)
       (interpolation
         (field_expression
-          (identifier)
-          (identifier))) 
-      (_closing_interpolation_brace)))
+          object: (identifier)
+          property: (identifier)))
+      (string_fragment)))
   (expression_statement
     (string_literal
-      (string_fragment)
-      (interpolation
-        (binary_expression
-          (number)
-          (number))) 
-      (_closing_interpolation_brace)))
+      (string_fragment)))
   (expression_statement
     (string_literal
       (interpolation
         (string_literal
-          (string_fragment))
-        (_closing_interpolation_brace)))))
+          (string_fragment))))))
 
-=====
-array
-=====
+===============================================================================
+array literals
+===============================================================================
 
 [];
 [ "item1" ];
@@ -214,9 +243,9 @@ array
         (identifier)
         (integer)))))
 
-==============
-object literal
-==============
+===============================================================================
+object literals
+===============================================================================
 
 { test: 23 };
 

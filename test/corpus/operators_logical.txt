@@ -1,0 +1,29 @@
+===================
+logical or operator
+===================
+
+var x = true || false;
+
+---
+
+(source_file
+  (variable_declaration
+    name: (identifier)
+    value: (binary_expression
+      left: (true)
+      right: (false))))
+
+====================
+logical and operator
+====================
+
+var x = true && false;
+
+---
+
+(source_file
+  (variable_declaration
+    name: (identifier)
+    value: (binary_expression
+      left: (true)
+      right: (false))))
