@@ -26,13 +26,16 @@ export default grammar({
   conflicts: ($) => [
     [$.metadata],
     [$.array_access_expression, $.map_access_expression],
+    [$.enum_constructor_pattern, $.case_pattern],
     // [$.object_literal, $.block],
-    // [$.object_literal, $.object_pattern],
-    [$.property, $.case_pattern],
+
     // [$.cast_arguments, $.parenthesized_expression],
     // [$.cast_expression, $.parenthesized_expression],
     // [$.cast_expression, $.binary_expression],
   ],
+  inline: ($) => [$._statement, $.expression],
+  precedences: ($) => [[$.object_pattern, $.object_literal]],
+  precedences: ($) => [[$.object_pattern, $.object_literal]],
   word: ($) => $.identifier,
   rules: {
     source_file: ($) => repeat(choice($._declaration, $._statement)),
@@ -452,7 +455,11 @@ export default grammar({
       ),
 
     switch_expression: ($) =>
-      seq("switch", field("value", $.expression), field("body", $.switch_body)),
+      seq(
+        "switch",
+        field("condition", $.parenthesized_expression),
+        field("body", $.switch_body),
+      ),
 
     switch_body: ($) =>
       seq("{", repeat($.case_statement), $._closing_interpolation_brace),
@@ -473,14 +480,17 @@ export default grammar({
       ),
 
     case_pattern: ($) =>
-      choice(
-        $.expression,
-        $.enum_constructor_pattern,
-        $.object_pattern,
-        $.array_pattern,
-        $._qualified_type,
-        // 'null',
-        "_",
+      prec(
+        1,
+        choice(
+          $.object_pattern,
+          $.array_pattern,
+          $.enum_constructor_pattern,
+          $.expression,
+          $._qualified_type,
+          // 'null',
+          "_",
+        ),
       ),
     enum_constructor_pattern: ($) =>
       prec(
