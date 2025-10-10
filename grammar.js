@@ -218,6 +218,7 @@ export default grammar({
         $.map_access_expression,
         $.switch_expression,
         $.arrow_function,
+        $.update_expression,
       ),
 
     primary_expression: ($) =>
@@ -342,11 +343,8 @@ export default grammar({
 
     unary_expression: ($) =>
       prec.right(
-        8,
-        seq(
-          field("operator", choice("!", "-")),
-          field("argument", $.expression),
-        ),
+        PREC.UNARY,
+        seq(choice("!", "-", "++", "--", "~"), field("argument", $.expression)),
       ),
 
     binary_expression: ($) =>
@@ -440,6 +438,12 @@ export default grammar({
           ":",
           field("alternative", $.expression),
         ),
+      ),
+
+    update_expression: ($) =>
+      prec.left(
+        PREC.UNARY,
+        seq(field("argument", $.expression), choice("++", "--")),
       ),
 
     switch_expression: ($) =>
