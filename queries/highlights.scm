@@ -16,6 +16,22 @@
 (metadata
   params: (argument_list) @punctuation)
 
+; Property Accessors
+; ------------------
+(property_accessor) @attribute
+(property_accessor
+  get: (access_identifier) @keyword.modifier)
+(property_accessor
+  set: (access_identifier) @keyword.modifier)
+
+; Highlight common accessor patterns specially
+(property_accessor
+  get: (access_identifier) @constant.builtin
+  (#match? @constant.builtin "^(default|null|never|dynamic)$"))
+(property_accessor
+  set: (access_identifier) @constant.builtin
+  (#match? @constant.builtin "^(default|null|never|dynamic)$"))
+
 ; Declarations
 ; ------------
 (class_declaration
