@@ -5,8 +5,13 @@ const PREC = {
   ASSIGN: 0,
   LOGICAL_OR: 1,
   LOGICAL_AND: 2,
-  ADD: 3,
-  MULT: 4,
+  SPREAD: 3,
+  RELATIONAL: 4,
+  BITWISE: 5,
+  SHIFT: 6,
+  ADD: 7,
+  MULT: 8,
+  MOD: 9,
   CALL: 10,
   CAST: 12,
   UNARY: 13,
@@ -350,7 +355,7 @@ export default grammar({
     binary_expression: ($) =>
       choice(
         prec.right(
-          0,
+          PREC.ASSIGN,
           seq(
             field("left", $.expression),
             choice(
@@ -371,19 +376,19 @@ export default grammar({
           ),
         ),
         prec.left(
-          1,
+          PREC.LOGICAL_OR,
           seq(field("left", $.expression), "||", field("right", $.expression)),
         ),
         prec.left(
-          2,
+          PREC.LOGICAL_AND,
           seq(field("left", $.expression), "&&", field("right", $.expression)),
         ),
         prec.left(
-          3,
+          PREC.SPREAD,
           seq(field("left", $.expression), "...", field("right", $.expression)),
         ),
         prec.left(
-          4,
+          PREC.RELATIONAL,
           seq(
             field("left", $.expression),
             choice("==", "!=", "<", ">", "<=", ">="),
@@ -391,7 +396,7 @@ export default grammar({
           ),
         ),
         prec.left(
-          5,
+          PREC.BITWISE,
           seq(
             field("left", $.expression),
             choice("&", "|", "^"),
@@ -399,7 +404,7 @@ export default grammar({
           ),
         ),
         prec.left(
-          6,
+          PREC.SHIFT,
           seq(
             field("left", $.expression),
             choice("<<", ">>", ">>>"),
@@ -407,7 +412,7 @@ export default grammar({
           ),
         ),
         prec.left(
-          7,
+          PREC.ADD,
           seq(
             field("left", $.expression),
             choice("+", "-"),
@@ -415,7 +420,7 @@ export default grammar({
           ),
         ),
         prec.left(
-          8,
+          PREC.MULT,
           seq(
             field("left", $.expression),
             choice("*", "/"),
@@ -423,7 +428,7 @@ export default grammar({
           ),
         ),
         prec.left(
-          9,
+          PREC.MOD,
           seq(field("left", $.expression), "%", field("right", $.expression)),
         ),
       ),
