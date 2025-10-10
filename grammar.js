@@ -234,7 +234,7 @@ export default grammar({
     _statement: ($) =>
       choice(
         $._standalone_metadata,
-        $._preprocessor,
+        $._conditional,
         $.block,
         $.break_statement,
         $.continue_statement,
@@ -371,23 +371,23 @@ export default grammar({
         field("body", $._statement),
       ),
 
-    //== Preprocessor =========================================================
+    //== Conditional compilation  =============================================
 
-    _preprocessor: ($) =>
+    _conditional: ($) =>
       choice(
-        $.preprocessor_if,
-        $.preprocessor_elseif,
-        $.preprocessor_else,
-        $.preprocessor_error,
-        $.preprocessor_end,
+        $.conditional_if,
+        $.conditional_elseif,
+        $.conditional_else,
+        $.conditional_error,
+        $.conditional_end,
       ),
-    preprocessor_else: (_) => seq("#", token.immediate("else")),
-    preprocessor_elseif: ($) =>
+    conditional_else: (_) => seq("#", token.immediate("else")),
+    conditional_elseif: ($) =>
       seq("#", token.immediate("elseif"), $.expression),
-    preprocessor_end: (_) => seq("#", token.immediate("end")),
-    preprocessor_error: ($) =>
+    conditional_end: (_) => seq("#", token.immediate("end")),
+    conditional_error: ($) =>
       seq("#", token.immediate("error"), $.string_literal),
-    preprocessor_if: ($) => seq("#", token.immediate("if"), $.expression),
+    conditional_if: ($) => seq("#", token.immediate("if"), $.expression),
 
     //== Expressions ==========================================================
 

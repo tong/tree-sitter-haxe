@@ -1,5 +1,5 @@
 ===================
-preprocessor simple
+conditional simple
 ===================
 
 #if some
@@ -9,13 +9,13 @@ preprocessor simple
 ---
 
 (source_file
-  (preprocessor_if
+  (conditional_if
     (identifier))
-  (preprocessor_else)
-  (preprocessor_end))
+  (conditional_else)
+  (conditional_end))
 
 =====================
-preprocessor advanced
+conditional advanced
 =====================
 
 #if !debug
@@ -30,7 +30,7 @@ preprocessor advanced
 ---
 
 (source_file
-  (preprocessor_if
+  (conditional_if
     (unary_expression
       argument: (identifier)))
   (expression_statement
@@ -39,7 +39,7 @@ preprocessor advanced
       args: (argument_list
         (string_literal
           (string_fragment)))))
-  (preprocessor_elseif
+  (conditional_elseif
     (parenthesized_expression
       (binary_expression
         left: (identifier)
@@ -49,7 +49,7 @@ preprocessor advanced
       function: (identifier)
       args: (argument_list
         (integer))))
-  (preprocessor_elseif
+  (conditional_elseif
     (identifier))
   (expression_statement
     (call_expression
@@ -57,13 +57,13 @@ preprocessor advanced
       args: (argument_list
         (string_literal
           (string_fragment)))))
-  (preprocessor_error
+  (conditional_error
     (string_literal
       (string_fragment)))
-  (preprocessor_end))
+  (conditional_end))
 
 ========================
-preprocessor with macros
+conditional with macros
 ========================
 
 #if !macro
@@ -74,7 +74,7 @@ class A {}
 ---
 
 (source_file
-  (preprocessor_if
+  (conditional_if
     (unary_expression
       argument: (identifier)))
   (metadata
@@ -87,7 +87,7 @@ class A {}
             property: (identifier))
           property: (identifier))
         args: (argument_list))))
-  (preprocessor_end)
+  (conditional_end)
   (class_declaration
     name: (type_name)
     body: (class_body)))
