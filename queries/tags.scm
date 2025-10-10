@@ -47,11 +47,10 @@
   name: (identifier) @name) @definition.variable
 
 ; Interface variable definitions
-(interface_body
-  (interface_field_declaration
-    name: (identifier) @name
-    type: (qualified_type))) @definition.variable
-
+; (interface_body
+;   (interface_field_declaration
+;     name: (identifier) @name
+;     type: (qualified_type))) @definition.variable
 ; Parameter definitions
 (parameter
   name: (identifier) @name) @definition.parameter
@@ -65,9 +64,9 @@
   property: (identifier) @name) @reference.field
 
 ; Type references
-(qualified_type
-  (type_name) @name) @reference.type
-
+; (qualified_type
+;   (type_name) @name) @reference.type
 ; Package names
 (package_statement
   (package_name) @name) @definition.module
+
