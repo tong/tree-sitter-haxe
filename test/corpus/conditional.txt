@@ -37,7 +37,7 @@ conditional advanced
     (call_expression
       function: (identifier)
       args: (argument_list
-        (string_literal
+        (string
           (string_fragment)))))
   (conditional_elseif
     (parenthesized_expression
@@ -55,10 +55,10 @@ conditional advanced
     (call_expression
       function: (identifier)
       args: (argument_list
-        (string_literal
+        (string
           (string_fragment)))))
   (conditional_error
-    (string_literal
+    (string
       (string_fragment)))
   (conditional_end))
 

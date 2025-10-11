@@ -71,7 +71,7 @@ regular expression literals
 
 (source_file 
   (expression_statement
-    (regex_literal)))
+    (regex)))
 
 ===============================================================================
 null literals
@@ -94,10 +94,10 @@ string literals
 
 (source_file 
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (string_fragment))))
 
 ===============================================================================
@@ -110,7 +110,7 @@ strings containing comment-like content literals
 
 (source_file
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)
       (escape_sequence)
       (string_fragment))))
@@ -132,30 +132,30 @@ string quote escaping literals
 
 (source_file
   (expression_statement
-    (string_literal))
+    (string))
   (expression_statement
-    (string_literal))
+    (string))
   (expression_statement
-    (string_literal
+    (string
       (escape_sequence)))
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)
       (escape_sequence)
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)
       (escape_sequence)
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (escape_sequence)
       (string_fragment)
       (escape_sequence))))
@@ -174,10 +174,10 @@ world';
 
 (source_file 
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (string_fragment))))
 
 ===============================================================================
@@ -193,13 +193,13 @@ string interpolation literals
 
 (source_file
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)
       (interpolation
         (identifier))
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)
       (interpolation
         (field_expression
@@ -207,12 +207,12 @@ string interpolation literals
           property: (identifier)))
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (string_fragment)))
   (expression_statement
-    (string_literal
+    (string
       (interpolation
-        (string_literal
+        (string
           (string_fragment))))))
 
 ===============================================================================
@@ -230,27 +230,27 @@ array literals
 
 (source_file
   (expression_statement
-    (array_literal))
+    (array))
   (expression_statement
-    (array_literal
-      (string_literal
+    (array
+      (string
         (string_fragment))))
   (expression_statement
-    (array_literal
-      (string_literal
+    (array
+      (string
         (string_fragment))
       (ERROR)))
   (expression_statement
-    (array_literal
-      (string_literal
+    (array
+      (string
         (string_fragment))
       (identifier)))
   (expression_statement
-    (array_literal
+    (array
       (ERROR)
       (identifier)))
   (expression_statement
-    (array_literal
+    (array
       (binary_expression
         (identifier)
         (integer)))))
@@ -265,7 +265,7 @@ object literals
 
 (source_file
   (expression_statement
-    (object_literal
+    (object
       (property
         key: (identifier)
         value: (integer)))))

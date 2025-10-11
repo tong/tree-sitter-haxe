@@ -40,9 +40,9 @@ binary string concatenation operator
 (source_file
   (expression_statement
     (binary_expression
-      left: (string_literal
+      left: (string
         (string_fragment))
-      right: (string_literal
+      right: (string
         (string_fragment)))))
 
 ============================================
@@ -56,7 +56,7 @@ binary string and int concatenation operator
 (source_file
   (expression_statement
     (binary_expression
-      left: (string_literal
+      left: (string
         (string_fragment))
       right: (integer))))
 
@@ -72,7 +72,7 @@ binary int and string concatenation operator
   (expression_statement
     (binary_expression
       left: (integer)
-      right: (string_literal
+      right: (string
         (string_fragment)))))
 
 ===============================================
@@ -86,7 +86,7 @@ binary string and is int concatenation operator
 (source_file
   (expression_statement
     (binary_expression
-      left: (string_literal
+      left: (string
         (string_fragment))
-      right: (string_literal
+      right: (string
         (string_fragment)))))

@@ -45,7 +45,7 @@ metadata param
     (metadata
       name: (identifier)
       params: (argument_list
-        (string_literal
+        (string
           (string_fragment))))
     name: (type_name)
     body: (class_body)))

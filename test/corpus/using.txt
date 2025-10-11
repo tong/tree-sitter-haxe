@@ -6,7 +6,10 @@ using Type;
 
 ---
 
-(source_file (using_statement (type_name)))
+(source_file
+  (using_statement
+    path: (type_specifier
+      (type_name))))
 
 ===============
 using type path

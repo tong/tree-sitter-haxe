@@ -95,13 +95,17 @@
 ; --------
 (integer) @number.int
 (float) @number.float
-(string_literal) @string
+(string) @string
+(string_fragment) @string
+(escape_sequence) @string.escape
+(interpolation) @embedded
+(regex) @string.regex
 (true) @boolean
 (false) @boolean
 (null) @constant.builtin
-
-; Array literals
-(array_literal) @punctuation.bracket
+(array) @punctuation.bracket
+(map) @punctuation.bracket
+(object) @punctuation.bracket
 
 ; Access modifiers
 ; ---------
@@ -157,7 +161,10 @@
 
 ; Special keywords
 "new" @keyword.operator
-(cast_keyword) @keyword.operator
+"untyped" @keyword.operator
+; (cast_keyword) @keyword.operator
+(type_trace_expression
+  "$type" @keyword.debug)
 
 ; Operators
 ; ---------
@@ -221,116 +228,6 @@
   ":"
 ] @punctuation.delimiter
 
-; Special punctuation
-":" @punctuation.special
-(string_literal) @string
-
-(true) @boolean
-
-(false) @boolean
-
-(null) @constant.builtin
-
-; Array literals
-(array_literal) @punctuation.bracket
-
-; Access modifiers
-; ---------
-(access) @keyword.access
-
-; Types
-; -----
-(type_name) @type
-
-(package_name) @module
-
-; Built-in types (common Haxe types)
-((type_name) @type.builtin
-  (#match? @type.builtin "^(Int|Float|String|Bool|Void|Dynamic|Any)$"))
-
-; Keywords
-; --------
-[
-  "abstract"
-  "break"
-  "case"
-  "catch"
-  "class"
-  "continue"
-  "default"
-  "else"
-  "enum"
-  "extends"
-  "extern"
-  "final"
-  "for"
-  "function"
-  "if"
-  "implements"
-  "import"
-  "in"
-  "inline"
-  "interface"
-  "override"
-  "package"
-  "private"
-  "public"
-  "return"
-  "static"
-  "switch"
-  "throw"
-  "try"
-  "typedef"
-  "using"
-  "var"
-  "while"
-] @keyword
-
-; Special keywords
-"new" @keyword.operator
-
-; Operators
-; ---------
-[
-  "="
-  "=="
-  "!="
-  "<"
-  "<="
-  ">"
-  ">="
-  "&&"
-  "||"
-  "!"
-  "+"
-  "-"
-  "*"
-  "/"
-  "..."
-] @operator
-
-; Punctuation
-; -----------
-[
-  "("
-  ")"
-  "["
-  "]"
-  "{"
-  "}"
-] @punctuation.bracket
-
-[
-  ";"
-  ","
-  "."
-  ":"
-] @punctuation.delimiter
-
-; Special punctuation
-":" @punctuation.special
-
-
 ; Conditional compilation
 ; ------------
 [
@@ -347,5 +244,4 @@
 (conditional_end) @keyword.directive
 (conditional_error) @keyword.directive
 
-;"#" @punctuation.special
 "#" @keyword.directive

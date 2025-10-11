@@ -23,4 +23,5 @@ cast(a, String);
   (expression_statement
     (cast_expression
       (identifier)
-      type: (type_name))))
+      type: (type_specifier
+        (type_name)))))

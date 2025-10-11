@@ -11,9 +11,9 @@
   body: (enum_body) @fold)
 
 (function_declaration
-  body: (block) @fold)
+  body: (block_statement) @fold)
 
-(block) @fold
+(block_statement) @fold
 
 (switch_expression
   body: (switch_body) @fold)
@@ -21,12 +21,12 @@
 (try_statement) @fold
 
 (catch_clause
-  body: (block) @fold)
+  body: (block_statement) @fold)
 
 (block_comment) @fold
 
-(array_literal) @fold
+(array) @fold
 
-(map_literal) @fold
+(map) @fold
 
 (structural_type) @fold
