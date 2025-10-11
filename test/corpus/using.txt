@@ -8,8 +8,9 @@ using Type;
 
 (source_file
   (using_statement
-    path: (type_specifier
-      (type_name))))
+    path: (qualified_type_path
+      (type_specifier
+        (type_name)))))
 
 ===============
 using type path
@@ -21,6 +22,8 @@ using some.any.Type;
 
 (source_file
   (using_statement
-    (package_name)
-    (package_name)
-    (type_name)))
+    path: (qualified_type_path
+      (package_name)
+      (package_name)
+      (type_specifier
+        (type_name)))))

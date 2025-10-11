@@ -27,6 +27,7 @@ export default grammar({
     [$.metadata],
     [$.array_access_expression, $.map_access_expression],
     [$.enum_constructor_pattern, $.case_pattern],
+    [$.switch_expression, $.parenthesized_expression],
   ],
   inline: ($) => [$._statement, $.expression],
   precedences: ($) => [[$.object_pattern, $.object]],
@@ -119,7 +120,7 @@ export default grammar({
           field("name", $.identifier),
           optional(field("type_parameters", $.type_parameter_list)),
           field("parameters", $.parameter_list),
-          field("return_type", optional(seq(":", $._qualified_type))),
+          optional(field("return_type", seq(":", $._qualified_type))),
           field("body", $.block_statement),
         ),
       ),
@@ -153,7 +154,7 @@ export default grammar({
       seq(
         "var",
         field("name", $.identifier),
-        field("type", optional(seq(":", $._qualified_type))),
+        optional(field("type", seq(":", $._qualified_type))),
         $._semicolon,
       ),
 
@@ -192,7 +193,7 @@ export default grammar({
         1,
         seq(
           field("name", $.identifier),
-          field("type", optional(seq(":", $._qualified_type))),
+          optional(field("type", seq(":", $._qualified_type))),
         ),
       ),
 
@@ -236,8 +237,7 @@ export default grammar({
         $.while_statement,
       ),
 
-    block_statement: ($) =>
-      seq(field("open", "{"), repeat($._statement), $._closing_brace),
+    block_statement: ($) => seq("{", repeat($._statement), $._closing_brace),
 
     break_statement: ($) => seq("break", $._semicolon),
     continue_statement: ($) => seq("continue", $._semicolon),
@@ -322,7 +322,11 @@ export default grammar({
       ),
 
     using_statement: ($) =>
-      seq("using", field("path", $._qualified_type), $._semicolon),
+      seq(
+        "using",
+        field("path", alias($._qualified_type, $.qualified_type_path)),
+        $._semicolon,
+      ),
 
     variable_declaration: ($) =>
       seq(
@@ -331,7 +335,7 @@ export default grammar({
         choice("var", "final"),
         field("name", $.identifier),
         optional($.property_accessor),
-        field("type", optional(seq(":", $._qualified_type))),
+        optional(field("type", seq(":", $._qualified_type))),
         optional(seq("=", field("value", $.expression))),
         $._semicolon,
       ),
@@ -371,22 +375,6 @@ export default grammar({
     conditional_end: (_) => seq("#", token.immediate("end")),
     conditional_error: ($) => seq("#", token.immediate("error"), $.string),
     conditional_if: ($) => seq("#", token.immediate("if"), $.expression),
-
-    //== Literals  ============================================================
-
-    _literal: ($) =>
-      choice(
-        $.array,
-        $.true,
-        $.false,
-        $.float,
-        $.integer,
-        $.map,
-        $.null,
-        $.object,
-        $.regex,
-        $.string,
-      ),
 
     //== Expressions ==========================================================
 
@@ -437,8 +425,7 @@ export default grammar({
         /0o[0-7][0-7_]*/,
       ),
 
-    map: ($) =>
-      seq("[", seq($.key_value_pair, repeat(seq(",", $.key_value_pair))), "]"),
+    map: ($) => seq("[", commaSep1($.key_value_pair), "]"),
 
     key_value_pair: ($) =>
       seq(field("key", $.expression), "=>", field("value", $.expression)),
@@ -702,10 +689,12 @@ export default grammar({
     //== Switch & Pattern Matching ============================================
 
     switch_expression: ($) =>
-      seq(
-        "switch",
-        field("condition", $.parenthesized_expression),
-        field("body", $.switch_body),
+      prec.right(
+        seq(
+          "switch",
+          choice($.identifier, $.parenthesized_expression),
+          field("body", $.switch_body),
+        ),
       ),
 
     switch_body: ($) =>
@@ -781,6 +770,22 @@ export default grammar({
     type_pattern: ($) =>
       seq(field("name", $.identifier), ":", field("type", $._qualified_type)),
 
+    //== Literals  ============================================================
+
+    _literal: ($) =>
+      choice(
+        $.array,
+        $.false,
+        $.float,
+        $.integer,
+        $.map,
+        $.null,
+        $.object,
+        $.regex,
+        $.string,
+        $.true,
+      ),
+
     //== Types ================================================================
 
     _qualified_type: ($) =>
@@ -841,7 +846,8 @@ export default grammar({
 });
 
 /**
- * @param {Rule} rule
+ * Creates a comma-separated list with at least one element
+ * @param {Rule} rule - The rule to repeat
  * @returns {Rule}
  */
 function commaSep1(rule) {
