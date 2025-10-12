@@ -1,0 +1,17 @@
+========================
+null coalescing operator
+========================
+
+this.x = x ?? 0;
+
+---
+
+(source_file
+  (expression_statement
+    (binary_expression
+      left: (field_expression
+        object: (identifier)
+        property: (identifier))
+      right: (binary_expression
+        left: (identifier)
+        right: (integer)))))

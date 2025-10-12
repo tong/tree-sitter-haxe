@@ -3,18 +3,19 @@
 
 const PREC = {
   ASSIGN: 0,
-  LOGICAL_OR: 1,
-  LOGICAL_AND: 2,
-  SPREAD: 3,
-  RELATIONAL: 4,
-  BITWISE: 5,
-  SHIFT: 6,
-  ADD: 7,
-  MULT: 8,
-  MOD: 9,
-  CALL: 10,
-  CAST: 12,
-  UNARY: 13,
+  NULL_COALESCING: 1,
+  LOGICAL_OR: 2,
+  LOGICAL_AND: 3,
+  SPREAD: 4,
+  RELATIONAL: 5,
+  BITWISE: 6,
+  SHIFT: 7,
+  ADD: 8,
+  MULT: 9,
+  MOD: 10,
+  CALL: 11,
+  CAST: 13,
+  UNARY: 14,
   PRIMARY: 20,
 };
 
@@ -543,6 +544,10 @@ export default grammar({
             ),
             field("right", $.expression),
           ),
+        ),
+        prec.left(
+          PREC.NULL_COALESCING,
+          seq(field("left", $.expression), "??", field("right", $.expression)),
         ),
         prec.left(
           PREC.LOGICAL_OR,
