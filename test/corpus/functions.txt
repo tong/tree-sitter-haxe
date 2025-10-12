@@ -101,3 +101,19 @@ a -> {};
         args: (argument_list
           (identifier)
           (identifier))))))
+
+===================================
+function with return statement body
+===================================
+
+function test() return 23;
+
+---
+
+(source_file
+  (function_declaration
+    (keyword_function)
+    name: (identifier)
+    parameters: (parameter_list)
+    body: (return_statement
+      (integer))))

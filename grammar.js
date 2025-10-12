@@ -25,6 +25,7 @@ export default grammar({
   extras: ($) => [/\s/, $.comment],
   supertypes: ($) => [$.expression, $.primary_expression],
   conflicts: ($) => [
+    [$.array, $.map],
     [$.metadata],
     [$.array_access_expression, $.map_access_expression],
     [$.enum_constructor_pattern, $.case_pattern],
@@ -121,8 +122,8 @@ export default grammar({
           field("name", $.identifier),
           optional(field("type_parameters", $.type_parameter_list)),
           field("parameters", $.parameter_list),
-          optional(field("return_type", seq(":", $._qualified_type))),
-          field("body", $.block_statement),
+          optional(seq(":", field("return_type", $._qualified_type))),
+          field("body", choice($.block_statement, $.return_statement)),
         ),
       ),
 
@@ -155,7 +156,7 @@ export default grammar({
       seq(
         "var",
         field("name", $.identifier),
-        optional(field("type", seq(":", $._qualified_type))),
+        optional(seq(":", field("type", $._qualified_type))),
         $._semicolon,
       ),
 
@@ -173,6 +174,7 @@ export default grammar({
     structural_type: ($) => seq("{", repeat($.structural_field), "}"),
     structural_field: ($) =>
       seq(
+        optional($.optional),
         optional("var"),
         field("name", $.identifier),
         ":",
@@ -195,7 +197,7 @@ export default grammar({
         seq(
           optional($.optional),
           field("name", $.identifier),
-          optional(field("type", seq(":", $._qualified_type))),
+          optional(seq(":", field("type", $._qualified_type))),
           optional(seq("=", field("value", $.expression)))
         ),
       ),
@@ -338,7 +340,7 @@ export default grammar({
         choice("var", "final"),
         field("name", $.identifier),
         optional($.property_accessor),
-        optional(field("type", seq(":", $._qualified_type))),
+        optional(seq(":", field("type", $._qualified_type))),
         optional(seq("=", field("value", $.expression))),
         $._semicolon,
       ),
@@ -403,7 +405,30 @@ export default grammar({
     primary_expression: ($) =>
       choice($._literal, $.identifier, $.parenthesized_expression),
 
-    array: ($) => prec(-1, seq("[", optional(commaSep1($.expression)), "]")),
+    array: ($) => choice(
+        prec(-1, seq("[", optional(commaSep1($.expression)), "]")),
+        seq(
+            "[",
+            choice(
+                seq(
+                    "for",
+                    "(",
+                    field("iterator", $.identifier),
+                    "in",
+                    field("iterable", $.expression),
+                    ")",
+                    optional(seq("if", field("condition", $.parenthesized_expression))),
+                    field("result", $.expression)
+                ),
+                seq(
+                    "while",
+                    field("condition", $.parenthesized_expression),
+                    field("result", $.expression)
+                )
+            ),
+            "]"
+        )
+    ),
 
     true: (_) => "true",
     false: (_) => "false",
@@ -428,7 +453,30 @@ export default grammar({
         /0o[0-7][0-7_]*/,
       ),
 
-    map: ($) => seq("[", commaSep1($.key_value_pair), "]"),
+    map: ($) => choice(
+        seq("[", commaSep1($.key_value_pair), "]"),
+        seq(
+            "[",
+            choice(
+                seq(
+                    "for",
+                    "(",
+                    field("iterator", $.identifier),
+                    "in",
+                    field("iterable", $.expression),
+                    ")",
+                    optional(seq("if", field("condition", $.parenthesized_expression))),
+                    field("result", $.key_value_pair)
+                ),
+                seq(
+                    "while",
+                    field("condition", $.parenthesized_expression),
+                    field("result", $.key_value_pair)
+                )
+            ),
+            "]"
+        )
+    ),
 
     key_value_pair: ($) =>
       seq(field("key", $.expression), "=>", field("value", $.expression)),
@@ -496,7 +544,7 @@ export default grammar({
         optional(field("type_parameters", $.type_parameter_list)),
         field("parameters", $.parameter_list),
         field("return_type", optional(seq(":", $._qualified_type))),
-        field("body", $.block_statement),
+        field("body", choice($.block_statement, $.return_statement)),
       ),
 
     //   Compound Expressions --------------------------------------------------
@@ -803,6 +851,11 @@ export default grammar({
           seq(choice($.package_name, $.type_name), ".", $._qualified_type),
         ),
         prec.left(1, seq($._qualified_type, "&", $._qualified_type)),
+        alias(prec.right(0, seq(
+            field("from", $._qualified_type),
+            "->",
+            field("to", $._qualified_type)
+        )), $.function_type)
       ),
 
     type_specifier: ($) =>
