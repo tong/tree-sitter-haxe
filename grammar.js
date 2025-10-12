@@ -192,8 +192,10 @@ export default grammar({
       prec(
         1,
         seq(
+          optional($.optional),
           field("name", $.identifier),
           optional(field("type", seq(":", $._qualified_type))),
+          optional(seq("=", field("value", $.expression)))
         ),
       ),
 
@@ -833,6 +835,8 @@ export default grammar({
       ),
 
     //== Utilities & Tokens ===================================================
+
+    optional: (_) => "?",
 
     _camel_case_identifier: (_) => /[a-z_][a-zA-Z0-9_]*/,
     _closing_brace: ($) => seq($._closing_brace_marker, "}"),

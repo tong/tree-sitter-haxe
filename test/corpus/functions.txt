@@ -1,6 +1,6 @@
-===================
+=============
 function call
-===================
+=============
 
 fn();
 
@@ -12,13 +12,62 @@ fn();
       (identifier)
       (argument_list))))
 
+===========================
+optional function arguments
+===========================
+
+function test(?a,b,?c) {}
+
+---
+
+(source_file
+    (function_declaration
+      (keyword_function)
+      (identifier)
+      (parameter_list
+        (parameter
+          (optional)
+          (identifier))
+        (parameter
+          (identifier))
+        (parameter
+          (optional)
+          (identifier)))
+      (block_statement)))
+
+===========================
+default function arguments
+===========================
+
+function test(a="test", b=23, ?c=11) {}
+
+---
+
+(source_file
+  (function_declaration
+    (keyword_function)
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        name: (identifier)
+        value: (string
+          (string_fragment)))
+      (parameter
+        name: (identifier)
+        value: (integer))
+      (parameter
+        (optional)
+        name: (identifier)
+        value: (integer)))
+    body: (block_statement)))
+
 ===================
 arrow function
 ===================
 
 () -> trace("some");
-() -> {}
-a -> {}
+() -> {};
+a -> {};
 (a,b) -> trace(a,b);
 
 ---
@@ -30,25 +79,25 @@ a -> {}
       body: (call_expression
         function: (identifier)
         args: (argument_list
-          (string_literal
+          (string
             (string_fragment))))))
   (expression_statement
     (arrow_function
       parameters: (parameter_list)
-      body: (object_literal)))
+      body: (object)))
   (expression_statement
     (arrow_function
       parameters: (identifier)
-      body: (call_expression
-        function: (object_literal)
-        args: (argument_list
-          (identifier)
-          (identifier)))))
+      body: (object)))
   (expression_statement
     (arrow_function
-      parameters: (identifier)
+      parameters: (parameter_list
+        (parameter
+          name: (identifier))
+        (parameter
+          name: (identifier)))
       body: (call_expression
-        function: (object_literal)
+        function: (identifier)
         args: (argument_list
           (identifier)
-          (identifier)))))
+          (identifier))))))
