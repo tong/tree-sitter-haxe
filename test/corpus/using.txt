@@ -6,11 +6,10 @@ using Type;
 
 ---
 
-(source_file
-  (using_statement
-    path: (qualified_type_path
-      (type_specifier
-        (type_name)))))
+(module
+  (using_stmt
+    (type_path
+      (type_name))))
 
 ===============
 using type path
@@ -20,10 +19,10 @@ using some.any.Type;
 
 ---
 
-(source_file
-  (using_statement
-    path: (qualified_type_path
-      (package_name)
-      (package_name)
-      (type_specifier
-        (type_name)))))
+(module
+  (using_stmt
+    (type_path
+      package: (package_path
+        (pack)
+        (pack))
+      (type_name))))

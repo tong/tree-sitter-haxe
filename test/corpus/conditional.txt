@@ -8,11 +8,11 @@ conditional simple
 
 ---
 
-(source_file
-  (conditional_if
-    (identifier))
-  (conditional_else)
-  (conditional_end))
+(module
+  (conditional
+    condition: (identifier)
+    (conditional_else)
+    (conditional_end)))
 
 =====================
 conditional advanced
@@ -29,38 +29,33 @@ conditional advanced
 
 ---
 
-(source_file
-  (conditional_if
-    (unary_expression
-      argument: (identifier)))
-  (expression_statement
-    (call_expression
+(module
+  (conditional
+    condition: (identifier)
+    consequence: (call_expr
       function: (identifier)
-      args: (argument_list
+      arguments: (arg_list
         (string
-          (string_fragment)))))
-  (conditional_elseif
-    (parenthesized_expression
-      (binary_expression
+          (fragment))))
+    (conditional_elseif
+      condition: (binop
         left: (identifier)
-        right: (integer))))
-  (expression_statement
-    (call_expression
-      function: (identifier)
-      args: (argument_list
-        (integer))))
-  (conditional_elseif
-    (identifier))
-  (expression_statement
-    (call_expression
-      function: (identifier)
-      args: (argument_list
-        (string
-          (string_fragment)))))
-  (conditional_error
-    (string
-      (string_fragment)))
-  (conditional_end))
+        right: (int))
+      (call_expr
+        function: (identifier)
+        arguments: (arg_list
+          (int))))
+    (conditional_elseif
+      condition: (identifier)
+      (call_expr
+        function: (identifier)
+        arguments: (arg_list
+          (string
+            (fragment)))))
+    (conditional_error
+      (string
+        (fragment)))
+    (conditional_end)))
 
 ========================
 conditional with macros
@@ -73,21 +68,20 @@ class A {}
 
 ---
 
-(source_file
-  (conditional_if
-    (unary_expression
-      argument: (identifier)))
-  (metadata
+(module
+  (conditional
+    condition: (identifier)
+    consequence: (metadata
+      name: (identifier)
+      args: (metadata_args
+        (call_expr
+          function: (member_expr
+            object: (member_expr
+              object: (identifier)
+              field: (identifier))
+            field: (identifier))
+          arguments: (arg_list))))
+    (conditional_end))
+  (class_decl
     name: (identifier)
-    params: (argument_list
-      (call_expression
-        function: (field_expression
-          object: (field_expression
-            object: (identifier)
-            property: (identifier))
-          property: (identifier))
-        args: (argument_list))))
-  (conditional_end)
-  (class_declaration
-    name: (type_name)
-    body: (class_body)))
+    (class_body)))

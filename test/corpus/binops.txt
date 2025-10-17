@@ -1,0 +1,114 @@
+===================
+binop add operator
+===================
+
+1 + 2;
+
+---
+
+(module
+  (binop
+    left: (int)
+    right: (int)))
+
+
+===================
+binop operation
+===================
+
+1 + 2 * 3 % 2;
+
+---
+
+(module
+  (binop
+    left: (int)
+    right: (binop
+      left: (binop
+        left: (int)
+        right: (int))
+      right: (int))))
+
+====================================
+binop string concatenation operator
+====================================
+
+"a" + "b";
+
+---
+
+(module
+  (binop
+    left: (string
+      (fragment))
+    right: (string
+      (fragment))))
+
+============================================
+binop string and int concatenation operator
+============================================
+
+"a" + 1;
+
+---
+
+(module
+  (binop
+    left: (string
+      (fragment))
+    right: (int)))
+
+============================================
+binop int and string concatenation operator
+============================================
+
+1 + "a";
+
+---
+
+(module
+  (binop
+    left: (int)
+    right: (string
+      (fragment))))
+
+===============================================
+binop string and is int concatenation operator
+===============================================
+
+"a" += "b";
+
+---
+
+(module
+  (assignment_expr
+    left: (string
+      (fragment))
+    right: (string
+      (fragment))))
+
+===================
+logical or operator
+===================
+
+true || false;
+
+---
+
+(module
+  (binop
+    left: (true)
+    right: (false)))
+
+====================
+logical and operator
+====================
+
+true && false;
+
+---
+
+(module
+  (binop
+    left: (true)
+    right: (false)))

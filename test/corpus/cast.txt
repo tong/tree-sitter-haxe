@@ -6,22 +6,20 @@ cast a;
 
 ---
 
-(source_file
-  (expression_statement
-    (cast_expression
-      value: (identifier))))
+(module
+  (cast_expr
+    (identifier)))
 
 ==================
-cast to expression
+cast expression to
 ==================
 
 cast(a, String);
 
 ---
 
-(source_file
-  (expression_statement
-    (cast_expression
-      (identifier)
-      type: (type_specifier
-        (type_name)))))
+(module
+  (cast_expr
+    expression: (identifier)
+    type: (type_path
+      (type_name))))

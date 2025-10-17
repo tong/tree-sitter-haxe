@@ -1,0 +1,115 @@
+======================
+array comprehension: for
+======================
+
+[for (i in 0...10) i * i];
+
+---
+
+(module
+  (array
+    iterator: (identifier)
+    iterable: (range
+      (int)
+      (int))
+    result: (binop
+      left: (identifier)
+      right: (identifier))))
+
+============================
+array comprehension: for if
+============================
+
+[for (i in 0...10) if (i % 2 == 0) i];
+
+---
+
+(module
+  (array
+    iterator: (identifier)
+    iterable: (range
+      (int)
+      (int))
+    condition: (binop
+      left: (binop
+        left: (identifier)
+        right: (int))
+      right: (int))
+    result: (identifier)))
+
+=========================
+array comprehension: while
+=========================
+
+[while (i < 10) i++];
+
+---
+
+(module
+  (array
+    condition: (binop
+      left: (identifier)
+      right: (int))
+    result: (unop
+      operand: (identifier))))
+
+======================
+map comprehension: for
+======================
+
+[for (i in 0...5) i => 'number ${i}'];
+
+---
+
+(module
+  (map
+    iterator: (identifier)
+    iterable: (range
+      (int)
+      (int))
+    key: (identifier)
+    value: (string
+      (fragment)
+      (interpolation
+        (identifier)))))
+
+=========================
+map comprehension: for if
+=========================
+
+[for (i in 0...5) if (i % 2 == 0) i => i * i];
+
+---
+
+(module
+  (map
+    iterator: (identifier)
+    iterable: (range
+      (int)
+      (int))
+    condition: (binop
+      left: (binop
+        left: (identifier)
+        right: (int))
+      right: (int))
+    key: (identifier)
+    value: (binop
+      left: (identifier)
+      right: (identifier))))
+
+========================
+map comprehension: while
+========================
+
+[while (i < 5) i++ => i];
+
+---
+
+(module
+  (map
+    condition: (binop
+      left: (identifier)
+      right: (int))
+    key: (unop
+      operand: (identifier))
+    value: (identifier)))

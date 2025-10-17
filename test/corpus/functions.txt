@@ -6,60 +6,57 @@ fn();
 
 ---
 
-(source_file
-  (expression_statement
-    (call_expression
-      (identifier)
-      (argument_list))))
+(module
+  (call_expr
+    (identifier)
+    (arg_list)))
 
 ===========================
-optional function arguments
+optional function arguments declaration
 ===========================
 
 function test(?a,b,?c) {}
 
 ---
 
-(source_file
-    (function_declaration
-      (keyword_function)
-      (identifier)
-      (parameter_list
-        (parameter
-          (optional)
-          (identifier))
-        (parameter
-          (identifier))
-        (parameter
-          (optional)
-          (identifier)))
-      (block_statement)))
+(module
+  (function_decl
+    name: (identifier)
+    (param_list
+      (param
+        (optional)
+        name: (identifier))
+      (param
+        name: (identifier))
+      (param
+        (optional)
+        name: (identifier)))
+    (block)))
 
-===========================
-default function arguments
-===========================
+======================================
+default function arguments declaration
+======================================
 
 function test(a="test", b=23, ?c=11) {}
 
 ---
 
-(source_file
-  (function_declaration
-    (keyword_function)
+(module
+  (function_decl
     name: (identifier)
-    parameters: (parameter_list
-      (parameter
+    (param_list
+      (param
         name: (identifier)
         value: (string
-          (string_fragment)))
-      (parameter
+          (fragment)))
+      (param
         name: (identifier)
-        value: (integer))
-      (parameter
+        value: (int))
+      (param
         (optional)
         name: (identifier)
-        value: (integer)))
-    body: (block_statement)))
+        value: (int)))
+    (block)))
 
 ===================
 arrow function
@@ -72,35 +69,29 @@ a -> {};
 
 ---
 
-(source_file
-  (expression_statement
-    (arrow_function
-      parameters: (parameter_list)
-      body: (call_expression
-        function: (identifier)
-        args: (argument_list
-          (string
-            (string_fragment))))))
-  (expression_statement
-    (arrow_function
-      parameters: (parameter_list)
-      body: (object)))
-  (expression_statement
-    (arrow_function
-      parameters: (identifier)
-      body: (object)))
-  (expression_statement
-    (arrow_function
-      parameters: (parameter_list
-        (parameter
-          name: (identifier))
-        (parameter
-          name: (identifier)))
-      body: (call_expression
-        function: (identifier)
-        args: (argument_list
-          (identifier)
-          (identifier))))))
+(module
+  (arrow_function_expr
+    body: (call_expr
+      function: (identifier)
+      arguments: (arg_list
+        (string
+          (fragment)))))
+  (arrow_function_expr
+    body: (object))
+  (arrow_function_expr
+    params: (identifier)
+    body: (object))
+  (arrow_function_expr
+    params: (param_list
+      (param
+        name: (identifier))
+      (param
+        name: (identifier)))
+    body: (call_expr
+      function: (identifier)
+      arguments: (arg_list
+        (identifier)
+        (identifier)))))
 
 ===================================
 function with return statement body
@@ -110,10 +101,8 @@ function test() return 23;
 
 ---
 
-(source_file
-  (function_declaration
-    (keyword_function)
-    name: (identifier)
-    parameters: (parameter_list)
-    body: (return_statement
-      (integer))))
+(module
+  (function_decl
+    name: (identifier))
+  (return_expr
+    (int)))

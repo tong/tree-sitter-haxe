@@ -1,0 +1,179 @@
+================
+switch statement
+================
+
+switch(a) {
+    case 0:
+    case 1:
+}
+
+---
+
+(module
+  (switch_stmt
+    (identifier)
+    (switch_case
+      pattern: (pattern
+        (literal
+          (int))))
+    (switch_case
+      pattern: (pattern
+        (literal
+          (int))))))
+
+===============================================
+switch statement with unparentesized expression
+===============================================
+
+switch a {
+    case 0:
+    case 1:
+}
+
+---
+
+(module
+  (switch_stmt
+    (identifier)
+    (switch_case
+      pattern: (pattern
+        (literal
+          (int))))
+    (switch_case
+      pattern: (pattern
+        (literal
+          (int))))))
+
+====================
+switch enum matching
+====================
+
+switch (myTree) {
+  case Leaf(_): "0";
+  case Node(_, Leaf(_)): "1";
+  case Node(_, Node(Leaf("bar"), _)): "2";
+  case _: "3";
+}
+
+---
+
+(module
+  (switch_stmt
+    (identifier)
+    (switch_case
+      pattern: (pattern
+        (call_pattern
+          (identifier)
+          (pattern)))
+      (string
+        (fragment)))
+    (switch_case
+      pattern: (pattern
+        (call_pattern
+          (identifier)
+          (pattern)
+          (pattern
+            (call_pattern
+              (identifier)
+              (pattern)))))
+      (string
+        (fragment)))
+    (switch_case
+      pattern: (pattern
+        (call_pattern
+          (identifier)
+          (pattern)
+          (pattern
+            (call_pattern
+              (identifier)
+              (pattern
+                (call_pattern
+                  (identifier)
+                  (pattern
+                    (literal
+                      (string
+                        (fragment))))))
+              (pattern)))))
+      (string
+        (fragment)))
+    (switch_case
+      pattern: (pattern)
+      (string
+        (fragment)))))
+
+==========================================
+switch variable capture
+==========================================
+
+switch (myTree) {
+  case Node(leafNode = Leaf("foo"), _): leafNode;
+  case x: x;
+}
+
+---
+
+(module
+  (switch_stmt
+    (identifier)
+    (switch_case
+      pattern: (pattern
+        (call_pattern
+          (identifier)
+          (identifier)
+          (pattern
+            (call_pattern
+              (identifier)
+              (pattern
+                (literal
+                  (string
+                    (fragment))))))
+          (pattern)))
+      (identifier))
+    (switch_case
+      pattern: (pattern
+        (identifier))
+      (identifier))))
+
+
+==========================================
+switch structure matching
+==========================================
+
+switch (myStructure) {
+    case {name: "haxe", rating: "poor"}:
+      throw false;
+    case {rating: "awesome", name: n}:
+      n;
+    case _:
+      "no awesome language found";
+  }
+
+---
+
+(module
+  (switch_stmt
+    (identifier)
+    (switch_case
+      pattern: (pattern
+        (object_pattern
+          key: (identifier)
+          value: (string
+            (fragment))
+          key: (identifier)
+          value: (string
+            (fragment))))
+      (throw_stmt
+        (false)))
+    (switch_case
+      pattern: (pattern
+        (object_pattern
+          key: (identifier)
+          value: (string
+            (fragment))
+          key: (identifier)
+          value: (identifier)))
+      (identifier))
+    (switch_case
+      pattern: (pattern)
+      (string
+        (fragment)))))

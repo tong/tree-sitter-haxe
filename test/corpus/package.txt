@@ -1,12 +1,12 @@
 =============
-package empty
+empty package
 =============
 
 package;
 
 ---
 
-(source_file (package_statement))
+(module (package_stmt))
 
 =============
 package parts
@@ -16,9 +16,9 @@ package my.other.package;
 
 ---
 
-(source_file
-  (package_statement
-      (package_name)
-      (package_name)
-      (package_name)))
-
+(module
+  (package_stmt
+    (package_path
+      (pack)
+      (pack)
+      (pack))))

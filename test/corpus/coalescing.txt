@@ -1,0 +1,12 @@
+========================
+null coalescing operator
+========================
+
+x ?? 0;
+
+---
+
+(module
+  (binop
+    left: (identifier)
+    right: (int)))

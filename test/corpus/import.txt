@@ -6,9 +6,10 @@ import App;
 
 ---
 
-(source_file
-  (import_statement
-    (type_name)))
+(module
+  (import_stmt
+    (type_path
+      (type_name))))
 
 ===============
 import dot path
@@ -18,11 +19,13 @@ import some.other.App;
 
 ---
 
-(source_file
-  (import_statement
-    (package_name)
-    (package_name)
-    (type_name)))
+(module
+  (import_stmt
+    (type_path
+      package: (package_path
+        (pack)
+        (pack))
+      (type_name))))
 
 ===================
 import class field
@@ -32,12 +35,14 @@ import any.other.Some.field;
 
 ---
 
-(source_file
-  (import_statement
-    (package_name)
-    (package_name)
-    (type_name)
-      (identifier)))
+(module
+  (import_stmt
+    (type_path
+      package: (package_path
+        (pack)
+        (pack))
+      (type_name)
+      sub: (identifier))))
 
 ====================
 import wildcard type
@@ -47,10 +52,12 @@ import any.other.*;
 
 ---
 
-(source_file
-  (import_statement
-    (package_name)
-    (package_name)))
+(module
+  (import_stmt
+    (package_path
+      (pack)
+      (pack))
+    (wildcard)))
 
 =====================
 import wildcard field
@@ -60,11 +67,14 @@ import any.other.Some.*;
 
 ---
 
-(source_file
-  (import_statement
-    (package_name)
-    (package_name)
-    (type_name)))
+(module
+  (import_stmt
+    (type_path
+      package: (package_path
+        (pack)
+        (pack))
+      (type_name))
+    (wildcard)))
 
 ==============
 import type as
@@ -74,10 +84,11 @@ import Type as Alias;
 
 ---
 
-(source_file
-  (import_statement
-    (type_name)
-    (type_name)))
+(module
+  (import_stmt
+    (type_path
+      (type_name))
+    as: (identifier)))
 
 ===============
 import field as
@@ -87,8 +98,9 @@ import Type.field as alias;
 
 ---
 
-(source_file
-  (import_statement
-    (type_name)
-    (identifier)
-    (identifier)))
+(module
+  (import_stmt
+    (type_path
+      (type_name)
+      sub: (identifier))
+    as: (identifier)))

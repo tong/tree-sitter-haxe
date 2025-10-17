@@ -4,129 +4,30 @@
 (line_comment) @comment.line
 (block_comment) @comment.block
 
-; Identifiers
-; -----------
-(identifier) @variable
+; Conditional Compilation
+; -----------------------
+; (([
+;   (conditional)
+;   (conditional_elseif)
+;   (conditional_else)
+;   (conditional_error)
+;   (conditional_end)
+; ]) @keyword.directive)
 
-; MetaData
-; --------
-(metadata) @attribute
-(metadata
-  name: (identifier) @attribute.name)
-(metadata
-  params: (argument_list) @punctuation)
-
-; Property Accessors
-; ------------------
-(property_accessor) @attribute
-(property_accessor
-  get: (access_identifier) @keyword.modifier)
-(property_accessor
-  set: (access_identifier) @keyword.modifier)
-
-; Highlight common accessor patterns specially
-(property_accessor
-  get: (access_identifier) @constant.builtin
-  (#match? @constant.builtin "^(default|null|never|dynamic)$"))
-(property_accessor
-  set: (access_identifier) @constant.builtin
-  (#match? @constant.builtin "^(default|null|never|dynamic)$"))
-
-; Declarations
-; ------------
-(class_declaration
-  name: (type_name) @type.definition)
-(interface_declaration
-  name: (type_name) @type.definition)
-(abstract_declaration
-  name: (type_name) @type.definition)
-(typedef_declaration
-  name: (type_name) @type.definition)
-(enum_declaration
-  name: (type_name) @type.definition)
-
-(function_declaration
-  name: (identifier) @function)
-(function_declaration
-  name: (identifier) @constructor
-  (#eq? @constructor "new"))
-
-(keyword_function) @keyword.function
-
-; Interface and abstract function signatures
-(interface_field_declaration
-  name: (identifier) @function
-  parameters: (parameter_list))
-(interface_field_declaration
-  name: (identifier) @variable)
-
-; Parameters
-(parameter
-  name: (identifier) @variable.parameter)
-(enum_constructor_argument
-  name: (identifier) @variable.parameter)
-
-; Function calls
-(call_expression
-  function: (identifier) @function.call)
-(call_expression
-  function: (field_expression
-    property: (identifier) @function.call))
-
-; Constructor calls
-(new_expression
-  class: (type_name) @constructor)
-
-; Field access
-(field_expression
-  property: (identifier) @property)
-
-"final" @keyword.modifier ; in case final is used as var replacement
-
-; Variables and assignments
-(variable_declaration
-  name: (identifier) @variable)
-
-; Enum constructors
-(enum_constructor
-  (type_name) @constructor)
-
-; Literals
-; --------
-(integer) @number.int
-(float) @number.float
-(string) @string
-(string_fragment) @string
-(escape_sequence) @string.escape
-(interpolation) @embedded
-(regex) @string.regex
-(true) @boolean
-(false) @boolean
-(null) @constant.builtin
-(array) @punctuation.bracket
-(map) @punctuation.bracket
-(object) @punctuation.bracket
-
-; Access modifiers
-; ---------
-(access) @keyword.access
-
-; Types
-; -----
-(type_name) @type
-(package_name) @module
-
-; Built-in types (common Haxe types)
-((type_name) @type.builtin
-  (#match? @type.builtin "^(Int|Float|String|Bool|Void|Dynamic|Any)$"))
+(conditional) @keyword.directive
+(conditional_elseif) @keyword.directive
+(conditional_else) @keyword.directive
+(conditional_error) @keyword.directive
+(conditional_end) @keyword.directive
 
 ; Keywords
 ; --------
+; Keywords that are defined as string literals in the grammar
 [
   "abstract"
   "break"
   "case"
-  "catch"
+  "cast"
   "class"
   "continue"
   "default"
@@ -134,37 +35,58 @@
   "else"
   "enum"
   "extends"
-  "extern"
-  "final"
   "for"
   "function"
   "if"
   "implements"
   "import"
-  "in"
-  "inline"
   "interface"
-  "override"
+  "macro"
+  "new"
   "package"
-  "private"
-  "public"
   "return"
-  "static"
   "switch"
   "throw"
   "try"
   "typedef"
+  "untyped"
   "using"
   "var"
   "while"
 ] @keyword
 
-; Special keywords
-"new" @keyword.operator
-"untyped" @keyword.operator
-; (cast_keyword) @keyword.operator
-(type_trace_expression
-  "$type" @keyword.debug)
+; Modifier keywords that are aliased nodes in the grammar
+[
+  (abstract)
+  (extern)
+  (final)
+  (inline)
+  (override)
+  (private)
+  (public)
+  (static)
+] @keyword
+
+(optional) @keyword
+(wildcard) @keyword
+
+; Punctuation
+; -----------
+[
+  "{"
+  "}"
+  "["
+  "]"
+  "("
+  ")"
+] @punctuation.bracket
+
+[
+  ","
+  ";"
+  ":"
+  "..."
+] @punctuation.delimiter
 
 ; Operators
 ; ---------
@@ -183,7 +105,6 @@
   "-"
   "*"
   "/"
-  "..."
   "?"
   "++"
   "--"
@@ -205,43 +126,97 @@
   "^="
   "<<="
   ">>="
-  ">>>="
-  "=>"
-  "->"
 ] @operator
 
-; Punctuation
-; -----------
 [
-  "("
-  ")"
-  "["
-  "]"
-  "{"
-  "}"
-] @punctuation.bracket
+  "->"
+  "=>"
+  "in"
+] @keyword.operator
 
-[
-  ";"
-  ","
-  "."
-  ":"
-] @punctuation.delimiter
+; Literals
+; --------
+(int) @number
+(float) @float
+(string) @string
+(fragment) @string
+(escape_sequence) @string.escape
+(interpolation) @string.special
+(true) @boolean
+(false) @boolean
+(null) @constant.builtin
+(regexp) @string.regex
 
-; Conditional compilation
-; ------------
-[
-  "if"
-  "elseif" 
-  "else"
-  "end"
-  "error"
-] @keyword.directive (#has-parent? conditional_if conditional_elseif conditional_else conditional_end conditional_error)
+; Functions
+; ---------
+(function_decl name: (identifier) @function)
+(call_expr function: (identifier) @function.call)
+(call_expr function: (member_expr field: (identifier) @function.call))
 
-(conditional_if) @keyword.directive
-(conditional_elseif) @keyword.directive
-(conditional_else) @keyword.directive
-(conditional_end) @keyword.directive
-(conditional_error) @keyword.directive
+; Types
+; -----
+(class_decl name: (identifier) @type)
+(interface_decl name: (identifier) @type)
+(enum_decl name: (identifier) @type)
+(abstract_decl name: (identifier) @type)
+(typedef_decl name: (identifier) @type)
 
-"#" @keyword.directive
+(type_path (identifier) @type)
+(cast_expr type: (type_path) @type)
+(new_expr type: (type_path) @type)
+
+(for_stmt (identifier) @variable)
+
+(switch_case pattern: (identifier) @constant)
+(switch_case pattern: (_) @constant)
+
+(return_stmt "return") @keyword
+(throw_stmt "throw") @keyword
+(catch_clause (identifier) @variable.exception)
+
+; (type_param name: (type_name) @type)
+
+(enum_item name: (identifier) @constant)
+(enum_param name: (identifier) @variable.parameter)
+
+; Properties & Variables
+; --------------------
+(var_decl name: (identifier) @variable.local)
+(param name: (identifier) @variable.parameter)
+(member_expr field: (identifier) @property)
+(object_field key: (identifier) @property)
+(object_field key: (string) @property)
+
+; Identifiers (fallback)
+; ----------------------
+(identifier) @variable
+
+; Property Accessors
+; ------------------
+(property_accessor) @attribute
+(property_accessor
+  get: (property_access_identifier) @keyword.modifier)
+(property_accessor
+  set: (property_access_identifier) @keyword.modifier)
+
+; Highlight common accessor patterns specially
+(property_accessor
+  get: (property_access_identifier) @constant.builtin
+  (#match? @constant.builtin "^(default|null|never|dynamic)$"))
+(property_accessor
+  set: (property_access_identifier) @constant.builtin
+  (#match? @constant.builtin "^(default|null|never|dynamic)$"))
+
+; Metadata / Annotations
+; ----------------------
+(metadata name: (identifier) @attribute)
+(metadata "@" @attribute)
+(metadata ":" @attribute)
+
+; Macro refication
+; ----------------
+(macro_expr
+  body: (macro_splice) @macro)
+(macro_expr body: (int) @number)
+(macro_expr body: (binop) @operator)
+

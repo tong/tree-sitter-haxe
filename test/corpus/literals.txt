@@ -1,29 +1,46 @@
 ===============================================================================
-integer literals 
+bool literals
 ===============================================================================
 
-1
-0x00
-1000
-1_000
-1_000_999
-0b00111
+true;
+false;
 
 ---
 
-(source_file
-  (expression_statement
-    (integer))
-  (expression_statement
-    (integer))
-  (expression_statement
-    (integer))
-  (expression_statement
-    (integer))
-  (expression_statement
-    (integer))
-  (expression_statement
-    (integer)))
+(module
+  (true)
+  (false))
+
+===============================================================================
+null literals
+===============================================================================
+
+null;
+
+---
+
+(module (null))
+
+===============================================================================
+int literals 
+===============================================================================
+
+1;
+0x00;
+1000;
+1_000;
+1_000_999;
+0b00111;
+
+---
+
+(module
+  (int)
+  (int)
+  (int)
+  (int)
+  (int)
+  (int))
 
 ===============================================================================
 float literals 
@@ -36,52 +53,11 @@ float literals
 
 ---
 
-(source_file
-  (expression_statement
-    (float))
-  (expression_statement
-    (float))
-  (expression_statement
-    (float))
-  (expression_statement
-    (float)))
-
-===============================================================================
-bool literals
-===============================================================================
-
-true
-false
-
----
-
-(source_file 
-  (expression_statement
-    (true))
-  (expression_statement
-    (false)))
-
-===============================================================================
-regular expression literals
-===============================================================================
-
-~/haxe/gi;
-
----
-
-(source_file 
-  (expression_statement
-    (regex)))
-
-===============================================================================
-null literals
-===============================================================================
-
-null;
-
----
-
-(source_file (expression_statement (null)))
+(module
+  (float)
+  (float)
+  (float)
+  (float))
 
 ===============================================================================
 string literals
@@ -92,31 +68,28 @@ string literals
 
 ---
 
-(source_file 
-  (expression_statement
-    (string
-      (string_fragment)))
-  (expression_statement
-    (string
-      (string_fragment))))
+(module
+  (string
+    (fragment))
+  (string
+    (fragment)))
 
 ===============================================================================
 strings containing comment-like content literals
 ===============================================================================
 
-"//ok\n//what"
+"//ok\n//what";
 
 ---
 
-(source_file
-  (expression_statement
-    (string
-      (string_fragment)
-      (escape_sequence)
-      (string_fragment))))
+(module
+  (string
+    (fragment)
+    (escape_sequence)
+    (fragment)))
 
 ===============================================================================
-string quote escaping literals
+string escape sequence
 ===============================================================================
 
 "";
@@ -130,35 +103,27 @@ string quote escaping literals
 
 ---
 
-(source_file
-  (expression_statement
-    (string))
-  (expression_statement
-    (string))
-  (expression_statement
-    (string
-      (escape_sequence)))
-  (expression_statement
-    (string
-      (string_fragment)
-      (escape_sequence)
-      (string_fragment)))
-  (expression_statement
-    (string
-      (string_fragment)
-      (escape_sequence)
-      (string_fragment)))
-  (expression_statement
-    (string
-      (string_fragment)))
-  (expression_statement
-    (string
-      (string_fragment)))
-  (expression_statement
-    (string
-      (escape_sequence)
-      (string_fragment)
-      (escape_sequence))))
+(module
+  (string)
+  (string)
+  (string
+    (escape_sequence))
+  (string
+    (fragment)
+    (escape_sequence)
+    (fragment))
+  (string
+    (fragment)
+    (escape_sequence)
+    (fragment))
+  (string
+    (fragment))
+  (string
+    (fragment))
+  (string
+    (escape_sequence)
+    (fragment)
+    (escape_sequence)))
 
 ===============================================================================
 string line continuations literals
@@ -167,18 +132,28 @@ string line continuations literals
 "hello
 world";
 
+"hello
+
+world";
+
 'hello
+world';
+
+'hello
+
 world';
 
 ---
 
-(source_file 
-  (expression_statement
-    (string
-      (string_fragment)))
-  (expression_statement
-    (string
-      (string_fragment))))
+(module
+  (string
+    (fragment))
+  (string
+    (fragment))
+  (string
+    (fragment))
+  (string
+    (fragment)))
 
 ===============================================================================
 string interpolation literals
@@ -186,86 +161,114 @@ string interpolation literals
 
 'Some $user say';
 'My name is ${user.name} and i am';
-"1 + 2 = ${1 + 2}";
+'1 + 2 = ${1 + 2}';
 '${"nested"}';
 
 ---
 
-(source_file
-  (expression_statement
-    (string
-      (string_fragment)
-      (interpolation
-        (identifier))
-      (string_fragment)))
-  (expression_statement
-    (string
-      (string_fragment)
-      (interpolation
-        (field_expression
-          object: (identifier)
-          property: (identifier)))
-      (string_fragment)))
-  (expression_statement
-    (string
-      (string_fragment)))
-  (expression_statement
-    (string
-      (interpolation
-        (string
-          (string_fragment))))))
+(module
+  (string
+    (fragment)
+    (interpolation
+      (identifier))
+    (fragment))
+  (string
+    (fragment)
+    (interpolation
+      (member_expr
+        object: (identifier)
+        field: (identifier)))
+    (fragment))
+  (string
+    (fragment)
+    (interpolation
+      (binop
+        left: (int)
+        right: (int))))
+  (string
+    (interpolation
+      (string
+        (fragment)))))
+
+===============================================================================
+regular expression literals
+===============================================================================
+
+~/haxe/gi;
+
+---
+
+(module
+  (regexp))
 
 ===============================================================================
 array literals
 ===============================================================================
 
 [];
-[ "item1" ];
-[ "item1", ];
-[ "item1", item2 ];
-[ , item2 ];
-[ item2 = 5 ];
+[1, 2, 3];
+["a", "b"];
 
 ---
 
-(source_file
-  (expression_statement
-    (array))
-  (expression_statement
-    (array
-      (string
-        (string_fragment))))
-  (expression_statement
-    (array
-      (string
-        (string_fragment))
-      (ERROR)))
-  (expression_statement
-    (array
-      (string
-        (string_fragment))
-      (identifier)))
-  (expression_statement
-    (array
-      (ERROR)
-      (identifier)))
-  (expression_statement
-    (array
-      (binary_expression
-        (identifier)
-        (integer)))))
+(module
+  (array)
+  (array
+    (int)
+    (int)
+    (int))
+  (array
+    (string
+      (fragment))
+    (string
+      (fragment))))
+
+===============================================================================
+map literals
+===============================================================================
+
+["a" => 1, "b" => 2];
+[new Key() => value];
+
+---
+
+(module
+  (map
+    (string
+      (fragment))
+    (int)
+    (string
+      (fragment))
+    (int))
+  (map
+    (new_expr
+      type: (type_path
+        (type_name))
+      args: (arg_list))
+    (identifier)))
 
 ===============================================================================
 object literals
 ===============================================================================
 
-{ test: 23 };
+{};
+{a: 1, b: 2};
+{"key": "value"};
 
 ---
 
-(source_file
-  (expression_statement
-    (object
-      (property
-        key: (identifier)
-        value: (integer)))))
+(module
+  (object)
+  (object
+    (object_field
+      key: (identifier)
+      value: (int))
+    (object_field
+      key: (identifier)
+      value: (int)))
+  (object
+    (object_field
+      key: (string
+        (fragment))
+      value: (string
+        (fragment)))))

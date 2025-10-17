@@ -1,29 +1,65 @@
-====================
-var declaration
-====================
+=========================
+abstract declaration
+=========================
 
-var x = 23;
-
----
-
-(source_file
-  (variable_declaration
-    (identifier)
-    (integer)))
-
-====================
-final declaration
-====================
-
-final x = 23;
+abstract MyAbstract(Int) from Int to Int {
+}
 
 ---
 
-(source_file
-  (variable_declaration
-    (identifier)
-    (integer)))
+(module
+  (abstract_decl
+    name: (identifier)
+    underlying_type: (type_path
+      (type_name))
+    from_type: (type_path
+      (type_name))
+    to_type: (type_path
+      (type_name))
+    (block)))
 
+=========================
+abstract enum declaration
+=========================
+
+enum abstract Layer(Int) {}
+
+---
+
+(module
+  (abstract_decl
+    (abstract_enum_modifier)
+    name: (identifier)
+    underlying_type: (type_path
+      (type_name))
+    (block)))
+
+=================
+class declaration
+=================
+
+class A {}
+
+---
+
+(module
+  (class_decl
+    (identifier)
+    (class_body)))
+
+======================
+class access modifiers
+======================
+
+private class A {}
+
+---
+
+(module
+  (class_decl
+    (private)
+    (identifier)
+      (class_body)))
 
 =====================
 interface declaration
@@ -33,8 +69,139 @@ interface Main {}
 
 ---
 
-(source_file
-  (interface_declaration
-    name: (type_name)
-    body: (interface_body)))
+(module
+  (interface_decl
+    (identifier)
+    (block)))
+
+
+=============================
+enum declaration field params
+=============================
+
+enum Rgb {
+  r(v:Int);
+  g(?v:Int);
+  b(v);
+}
+
+---
+
+(module
+  (enum_decl
+    name: (identifier)
+    (enum_body
+      (enum_item
+        name: (identifier)
+        (enum_param
+          name: (identifier)
+          (type_path
+            (type_name))))
+      (enum_item
+        name: (identifier)
+        (enum_param
+          name: (identifier)
+          (type_path
+            (type_name))))
+      (enum_item
+        name: (identifier)
+        (enum_param
+          name: (identifier))))))
+
+===================
+typedef declaration
+===================
+
+typedef A = {}
+
+---
+
+(module
+  (typedef_decl
+    (identifier)
+    (typedef_block)))
+
+
+=========================
+typedef declaration alias
+=========================
+
+typedef A = B;
+
+---
+
+(module
+  (typedef_decl
+    (identifier)
+    (identifier)))
+
+==========================
+typedef declaration extend
+==========================
+
+typedef A = {
+	> B,
+	> C,
+    x : Int
+}
+
+---
+
+(module
+  (typedef_decl
+    name: (identifier)
+    (typedef_block
+      extends: (type_path
+        (type_name))
+      extends: (type_path
+        (type_name))
+      (identifier)
+      (type_path
+        (type_name)))))
+
+==========================
+typedef declaration fields
+==========================
+
+typedef A = {
+  var a:Int;
+  var b:Int;
+}
+
+---
+
+(module
+  (typedef_decl
+    name: (identifier)
+    (typedef_block
+      (var_decl
+        name: (identifier)
+        type: (type_path
+          (type_name)))
+      (var_decl
+        name: (identifier)
+        type: (type_path
+          (type_name))))))
+
+=============================
+typedef declaration anon fields
+=============================
+
+typedef A = {
+  a:Int,
+  b:Int
+}
+
+---
+
+(module
+  (typedef_decl
+    name: (identifier)
+    (typedef_block
+      (identifier)
+      (type_path
+        (type_name))
+      (identifier)
+      (type_path
+        (type_name)))))
 

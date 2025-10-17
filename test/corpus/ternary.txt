@@ -1,0 +1,15 @@
+================
+ternop operator
+================
+
+(x != null) ? x : 0;
+
+---
+
+(module
+  (ternop
+    condition: (binop
+      left: (identifier)
+      right: (null))
+    consequence: (identifier)
+    alternative: (int)))

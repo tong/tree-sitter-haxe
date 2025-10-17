@@ -11,26 +11,26 @@ class A {}
 
 ---
 
-(source_file
-  (class_declaration
+(module
+  (class_decl
     (metadata
       name: (identifier))
-    name: (type_name)
-    body: (class_body))
-  (class_declaration
+    name: (identifier)
+    (class_body))
+  (class_decl
     (metadata
       name: (identifier))
-    name: (type_name)
-    body: (class_body))
-  (class_declaration
+    name: (identifier)
+    (class_body))
+  (class_decl
     (metadata
       name: (identifier))
     (metadata
       name: (identifier))
     (metadata
       name: (identifier))
-    name: (type_name)
-    body: (class_body)))
+    name: (identifier)
+    (class_body)))
 
 ==============
 metadata param
@@ -40,12 +40,12 @@ metadata param
 
 ---
 
-(source_file
-  (class_declaration
+(module
+  (class_decl
     (metadata
       name: (identifier)
-      params: (argument_list
+      args: (metadata_args
         (string
-          (string_fragment))))
-    name: (type_name)
-    body: (class_body)))
+          (fragment))))
+    name: (identifier)
+    (class_body)))

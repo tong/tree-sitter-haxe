@@ -1,0 +1,65 @@
+======================
+unop postfix increment
+======================
+
+x++;
+x--;
+
+---
+
+(module
+  (unop
+    operand: (identifier))
+  (unop
+    operand: (identifier)))
+
+=====================
+unop prefix increment
+=====================
+
+++x;
+--x;
+
+---
+
+(module
+  (unop
+    operand: (identifier))
+  (unop
+    operand: (identifier)))
+
+================
+unop logical not
+================
+
+!x;
+
+---
+
+(module
+  (unop
+    (identifier)))
+
+=============
+unop negative
+=============
+
+-x;
+
+---
+
+(module
+  (unop
+    (identifier)))
+
+=====================
+unop negative bitwise
+=====================
+
+~x;
+
+---
+
+(module
+  (unop
+    (identifier)))

@@ -6,7 +6,7 @@ line comment
 
 ---
 
-(source_file (comment (line_comment)))
+(module (comment (line_comment)))
 
 =============
 block comment
@@ -21,7 +21,7 @@ block comment
 
 ---
 
-(source_file
+(module
   (comment (block_comment))
   (comment (block_comment))
   (comment (block_comment)))
