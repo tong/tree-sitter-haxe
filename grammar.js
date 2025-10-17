@@ -566,15 +566,9 @@ export default grammar({
         ),
       ),
 
-    switch_stmt: ($) =>
-      seq(
-        "switch",
-        $._expression,
-        "{",
-        repeat($.switch_case),
-        optional($.switch_default),
-        "}",
-      ),
+    switch_stmt: ($) => seq("switch", $._expression, $.switch_block),
+    switch_block: ($) =>
+      seq("{", repeat($.switch_case), optional($.switch_default), "}"),
     switch_case: ($) =>
       seq(
         "case",
@@ -624,10 +618,17 @@ export default grammar({
         $._semicolon,
       ),
 
-    try_stmt: ($) => seq("try", $.block, repeat1($.catch_clause)),
-
+    try_stmt: ($) => seq("try", $.try_block, repeat($.catch_clause)),
+    try_block: ($) => choice($.block, $.expression),
     catch_clause: ($) =>
-      seq("catch", "(", $.identifier, ":", $.type_path, ")", $.block),
+      seq(
+        "catch",
+        "(",
+        $.identifier,
+        optional(seq(":", $.type_path)),
+        ")",
+        field("block", $.block),
+      ),
 
     block: ($) => seq("{", repeat($._statement), "}"),
 
@@ -758,10 +759,10 @@ export default grammar({
         "typedef",
         field("name", $.identifier),
         "=",
-        choice($.identifier, $.typedef_block),
+        choice($.identifier, $.typedef_body),
         optional($._semicolon),
       ),
-    typedef_block: ($) =>
+    typedef_body: ($) =>
       seq(
         "{",
         repeat(

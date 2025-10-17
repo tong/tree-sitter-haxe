@@ -28,6 +28,7 @@
   "break"
   "case"
   "cast"
+  "catch"
   "class"
   "continue"
   "default"

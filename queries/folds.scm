@@ -1,32 +1,36 @@
-; (class_declaration
-;   body: (class_body) @fold)
-;
-; (interface_declaration
-;   body: (interface_body) @fold)
-;
-; (abstract_declaration
-;   body: (abstract_body) @fold)
-;
-; (enum_declaration
-;   body: (enum_body) @fold)
-;
-; (function_declaration
-;   body: (block_statement) @fold)
-;
-; (block_statement) @fold
-;
-; (switch_expression
-;   body: (switch_body) @fold)
-;
-; (try_statement) @fold
-;
-; (catch_clause
-;   body: (block_statement) @fold)
-;
-; (block_comment) @fold
-;
-; (array) @fold
-;
-; (map) @fold
-;
-; (structural_type) @fold
+(block_comment) @fold
+
+(block) @fold
+
+(abstract_decl
+  (block) @fold)
+
+(class_decl
+  (class_body) @fold)
+
+(interface_decl
+  (block) @fold)
+
+(enum_decl
+  (enum_body) @fold)
+
+(typedef_decl
+  (typedef_body) @fold)
+
+(function_decl
+  (block) @fold)
+
+(switch_stmt
+  (switch_block) @fold)
+(switch_case) @fold 
+
+(try_stmt
+  (try_block) @fold)
+(catch_clause) @fold
+
+(array) @fold
+(map) @fold
+(object) @fold
+
+(conditional) @fold
+
