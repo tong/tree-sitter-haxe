@@ -648,7 +648,7 @@ export default grammar({
           $.type_path,
           seq($.package_path, ".", $.wildcard),
           seq($.type_path, ".", $.wildcard),
-          seq($.type_path, "as", field("as", $.identifier)),
+          seq($.type_path, choice("as", "in"), field("as", $.identifier)),
         ),
         $._semicolon,
       ),

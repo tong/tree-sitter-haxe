@@ -104,3 +104,18 @@ import Type.field as alias;
       (type_name)
       sub: (identifier))
     as: (identifier)))
+
+===============
+import field in
+===============
+
+import Type.field in alias;
+
+---
+
+(module
+  (import_stmt
+    (type_path
+      (type_name)
+      sub: (identifier))
+    as: (identifier)))
