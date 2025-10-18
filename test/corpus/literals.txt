@@ -208,6 +208,10 @@ array literals
 [];
 [1, 2, 3];
 ["a", "b"];
+[
+    "trailing",
+    "comma",
+];
 
 ---
 
@@ -221,6 +225,11 @@ array literals
     (string
       (fragment))
     (string
+      (fragment)))
+  (array
+    (string
+      (fragment))
+    (string
       (fragment))))
 
 ===============================================================================
@@ -229,6 +238,9 @@ map literals
 
 ["a" => 1, "b" => 2];
 [new Key() => value];
+[
+    "trailing" => "comma",
+];
 
 ---
 
@@ -245,7 +257,12 @@ map literals
       type: (type_path
         (type_name))
       args: (arg_list))
-    (identifier)))
+    (identifier))
+  (map
+    (string
+      (fragment))
+    (string
+      (fragment))))
 
 ===============================================================================
 object literals

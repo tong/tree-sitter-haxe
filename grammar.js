@@ -453,7 +453,7 @@ export default grammar({
     array: ($) =>
       prec.right(
         choice(
-          seq("[", optional(commaSep1($._expression)), "]"),
+          seq("[", optional(commaSep1($._expression)), optional(","), "]"),
           seq(
             "[",
             "for",
@@ -481,7 +481,7 @@ export default grammar({
     map: ($) =>
       prec.right(
         choice(
-          seq("[", commaSep1(seq($._expression, "=>", $._expression)), "]"),
+          seq("[", commaSep1(seq($._expression, "=>", $._expression)), optional(","), "]"),
           seq(
             "[",
             "for",
