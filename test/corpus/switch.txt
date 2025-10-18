@@ -177,3 +177,32 @@ switch (myStructure) {
       pattern: (pattern)
       (string
         (fragment)))))
+
+=====================
+switch array matching
+=====================
+
+switch [a, b] {
+    case [Some(_), _]: 1;
+    case _: 0;
+}
+
+---
+
+(module
+  (switch_stmt
+    (array
+      (identifier)
+      (identifier))
+    (switch_case
+      pattern: (pattern
+        (array_pattern
+          (pattern
+            (call_pattern
+              (identifier)
+              (pattern)))
+          (pattern)))
+      (int))
+    (switch_case
+      pattern: (pattern)
+      (int))))

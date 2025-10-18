@@ -69,6 +69,7 @@ export default grammar({
     [$._expression, $.pattern],
     [$._expression, $._pattern_arg],
     [$.arg_list, $.call_pattern],
+    [$.array, $.array_pattern],
     [$.package_path],
     [$.return_stmt, $.return_expr],
     [$.return_expr],
@@ -632,12 +633,24 @@ export default grammar({
     block: ($) => seq("{", repeat($._statement), "}"),
 
     pattern: ($) =>
-      choice("_", $.identifier, $.literal, $.call_pattern, $.object_pattern),
+      choice("_", $.identifier, $.literal, $.call_pattern, $.object_pattern, $.array_pattern),
 
     _pattern_arg: ($) => choice($.pattern, seq($.identifier, "=", $.pattern)),
 
     call_pattern: ($) =>
       seq($.identifier, "(", optional(commaSep($._pattern_arg)), ")"),
+
+    array_pattern: ($) =>
+      seq(
+        "[",
+        optional(
+          seq(
+            commaSep($.pattern),
+            optional(","),
+          ),
+        ),
+        "]"
+      ),
 
     package_stmt: ($) => seq("package", optional($.package_path), $._semicolon),
 
