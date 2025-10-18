@@ -52,3 +52,36 @@ a[f()];
     (call_expr
       (identifier)
       (arg_list))))
+
+========
+for loop
+========
+
+for (i in 0...10) sum += i;
+
+---
+
+(module
+  (for_stmt
+    element: (identifier)
+    iterable: (range
+      (int)
+      (int))
+    (assignment_expr
+      left: (identifier)
+      right: (identifier))))
+  
+=============================
+for loop, key-value iteration
+=============================
+
+for (key => value in collection) key;
+
+---
+
+(module
+  (for_stmt
+    key: (identifier)
+    value: (identifier)
+    iterable: (identifier)
+    (identifier)))

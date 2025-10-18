@@ -613,7 +613,26 @@ export default grammar({
       ),
 
     for_stmt: ($) =>
-      seq("for", "(", $.identifier, "in", $._expression, ")", $._statement),
+      seq(
+        "for",
+        "(",
+        choice(
+          seq(
+            field("key", $.identifier),
+            "=>",
+            field("value", $.identifier),
+            "in", 
+            field("iterable", $._expression)
+          ),
+          seq(
+            field("element", $.identifier),
+            "in", 
+            field("iterable", $._expression)
+          )
+        ),
+        ")",
+        $._statement
+      ),
 
     while_stmt: ($) => seq("while", "(", $._expression, ")", $._statement),
     do_stmt: ($) =>
