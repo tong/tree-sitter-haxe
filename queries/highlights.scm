@@ -35,6 +35,7 @@
   "else"
   "enum"
   "extends"
+  "final"
   "for"
   "function"
   "if"

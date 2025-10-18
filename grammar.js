@@ -713,7 +713,7 @@ export default grammar({
     var_decl: ($) =>
       seq(
         optional($._prefix),
-        "var",
+        choice("var", "final"),
         field("name", $.identifier),
         optional($.property_accessor), //TODO: move to class_var_decl, interface_var_decl
         optional(seq(":", field("type", $.type_path))),
