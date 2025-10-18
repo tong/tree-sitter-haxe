@@ -672,6 +672,7 @@ export default grammar({
         optional($.abstract_enum_modifier),
         "abstract",
         field("name", $.identifier),
+        optional($.type_decl_params),
         optional(seq("(", field("underlying_type", $.type_path), ")")),
         optional(seq("from", field("from_type", $.type_path))),
         optional(seq("to", field("to_type", $.type_path))),
@@ -684,7 +685,7 @@ export default grammar({
         optional($._prefix),
         "class",
         field("name", $.identifier),
-        optional($.type_params),
+        optional($.type_decl_params),
         optional($.class_extends),
         repeat($.class_implements),
         $.class_body,
@@ -735,6 +736,7 @@ export default grammar({
         optional($._prefix),
         "enum",
         field("name", $.identifier),
+        optional($.type_decl_params),
         optional($.enum_body),
       ),
     enum_body: ($) =>
@@ -757,6 +759,7 @@ export default grammar({
         optional($._prefix),
         "typedef",
         field("name", $.identifier),
+        optional($.type_decl_params),
         "=",
         choice($.identifier, $.typedef_block),
         optional($._semicolon),
@@ -783,6 +786,7 @@ export default grammar({
         optional($._prefix),
         "interface",
         field("name", $.identifier),
+        optional($.type_decl_params),
         optional($.block),
       ),
 
@@ -791,7 +795,7 @@ export default grammar({
         optional($._prefix),
         "function",
         field("name", $.identifier),
-        optional($.type_params),
+        optional($.type_decl_params),
         "(",
         optional($.param_list),
         ")",
@@ -854,8 +858,9 @@ export default grammar({
         repeat(seq(".", field("sub", $.identifier))),
       ),
 
-    type_params: ($) => seq("<", commaSep1($.type_param), ">"),
-    type_param: ($) =>
+    type_params: ($) => seq("<", commaSep1($.type_path), ">"),
+    type_decl_params: ($) => seq("<", commaSep1($.type_decl_param), ">"),
+    type_decl_param: ($) =>
       seq(
         $.type_name,
         choice(

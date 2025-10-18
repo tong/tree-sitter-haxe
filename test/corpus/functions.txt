@@ -58,6 +58,26 @@ function test(a="test", b=23, ?c=11) {}
         value: (int)))
     (block)))
 
+========================================
+constrained generic function declaration
+========================================
+
+function test<T:Float>():T {}
+
+---
+
+(module
+  (function_decl
+    name: (identifier)
+    (type_decl_params
+      (type_decl_param
+        (type_name)
+        constraint: (type_path
+          (type_name))))
+    (type_path
+      (type_name))
+    (block)))
+
 ===================
 arrow function
 ===================
