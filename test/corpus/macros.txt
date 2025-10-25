@@ -7,13 +7,28 @@ macro 1 + 2;
 ---
 
 (module
-  (macro_expr
-    body: (binop
-      left: (int)
-      right: (int))))
+  (EMacro
+    (EBinop
+      left: (EConst
+        (Int))
+      right: (EConst
+        (Int)))))
 
 ===============================================================================
-macro splice literals
+macro constant expression reification
+===============================================================================
+
+macro 42;
+
+---
+
+(module
+  (EMacro
+    (EConst
+      (Int))))
+
+===============================================================================
+macro expression value reification
 ===============================================================================
 
 macro $v{someExpr};
@@ -21,6 +36,23 @@ macro $v{someExpr};
 ---
 
 (module
-  (macro_expr
-    body: (macro_splice
+  (EMacro
+    (EMacroInterpolation
       (identifier))))
+
+
+===============================================================================
+macro compile‐time value refication
+===============================================================================
+
+macro $v{v} * 2;
+
+---
+
+(module
+  (EMacro
+    (EBinop
+      left: (EMacroInterpolation
+        (identifier))
+      right: (EConst
+        (Int)))))

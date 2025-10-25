@@ -7,42 +7,72 @@ import App;
 ---
 
 (module
-  (import_stmt
-    (type_path
-      (type_name))))
+  (import
+    module: (type_name)))
 
-===============
-import dot path
-===============
+===================
+import package path
+===================
 
 import some.other.App;
 
 ---
 
 (module
-  (import_stmt
-    (type_path
-      package: (package_path
-        (pack)
-        (pack))
-      (type_name))))
+  (import
+    path: (package_name)
+    path: (package_name)
+    module: (type_name)))
 
-===================
-import class field
-===================
+============
+import field
+============
 
 import any.other.Some.field;
 
 ---
 
 (module
-  (import_stmt
-    (type_path
-      package: (package_path
-        (pack)
-        (pack))
-      (type_name)
-      sub: (identifier))))
+  (import
+    path: (package_name)
+    path: (package_name)
+    module: (type_name)
+    sub: (identifier)))
+
+================
+import sub field
+================
+
+import some.other.Another.field.extra.subaru;
+
+---
+
+(module
+  (import
+    path: (package_name)
+    path: (package_name)
+    module: (type_name)
+    sub: (identifier)
+    sub: (identifier)
+    sub: (identifier)))
+
+=========================
+import sub field wildcard
+=========================
+
+import some.other.Another.field.extra.subaru.*;
+
+---
+
+(module
+  (import
+    path: (package_name)
+    path: (package_name)
+    module: (type_name)
+    sub: (identifier)
+    sub: (identifier)
+    sub: (identifier)
+    (wildcard)))
 
 ====================
 import wildcard type
@@ -53,10 +83,9 @@ import any.other.*;
 ---
 
 (module
-  (import_stmt
-    (package_path
-      (pack)
-      (pack))
+  (import
+    path: (package_name)
+    path: (package_name)
     (wildcard)))
 
 =====================
@@ -68,39 +97,68 @@ import any.other.Some.*;
 ---
 
 (module
-  (import_stmt
-    (type_path
-      package: (package_path
-        (pack)
-        (pack))
-      (type_name))
+  (import
+    path: (package_name)
+    path: (package_name)
+    module: (type_name)
     (wildcard)))
 
-==============
-import type as
-==============
+===================
+import type as type
+===================
 
-import Type as Alias;
-
----
-
-(module
-  (import_stmt
-    (type_path
-      (type_name))
-    as: (identifier)))
-
-===============
-import field as
-===============
-
-import Type.field as alias;
+import some.Type as Alias;
 
 ---
 
 (module
-  (import_stmt
-    (type_path
-      (type_name)
-      sub: (identifier))
-    as: (identifier)))
+  (import
+    path: (package_name)
+    module: (type_name)
+    alias: (identifier)))
+
+====================
+import type as field
+====================
+
+import some.Type as alias;
+
+---
+
+(module
+  (import
+    path: (package_name)
+    module: (type_name)
+    alias: (identifier)))
+
+====================
+import field as field
+====================
+
+import some.Type.field as alias;
+
+---
+
+(module
+  (import
+    path: (package_name)
+    module: (type_name)
+    sub: (identifier)
+    alias: (identifier)))
+
+===============
+import sub field as
+===============
+
+import some.Type.any.other.field as alias;
+
+---
+
+(module
+  (import
+    path: (package_name)
+    module: (type_name)
+    sub: (identifier)
+    sub: (identifier)
+    sub: (identifier)
+    alias: (identifier)))

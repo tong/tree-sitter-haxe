@@ -1,0 +1,47 @@
+========
+metadata
+========
+
+@:keep class A {}
+@any class A {}
+
+@a @b
+@c
+class A {}
+
+---
+
+(module
+  meta: (MetaDataEntry
+    name: (identifier))
+  (ClassType
+    name: (type_name))
+  meta: (MetaDataEntry
+    name: (identifier))
+  (ClassType
+    name: (type_name))
+  meta: (MetaDataEntry
+    name: (identifier))
+  meta: (MetaDataEntry
+    name: (identifier))
+  meta: (MetaDataEntry
+    name: (identifier))
+  (ClassType
+    name: (type_name)))
+
+==============
+metadata param
+==============
+
+@:author("god") class A {}
+
+---
+
+(module
+  meta: (MetaDataEntry
+    name: (identifier)
+    params: (EConst
+      (String
+        (fragment))))
+  (ClassType
+    name: (type_name)))

@@ -7,14 +7,19 @@ array comprehension: for
 ---
 
 (module
-  (array
-    iterator: (identifier)
-    iterable: (range
-      (int)
-      (int))
-    result: (binop
-      left: (identifier)
-      right: (identifier))))
+  (EArrayDecl
+    (EFor
+      var: (identifier)
+      iterable: (EBinop
+        left: (EConst
+          (Int))
+        right: (EConst
+          (Int)))
+      body: (EBinop
+        left: (EConst
+          (identifier))
+        right: (EConst
+          (identifier))))))
 
 ============================
 array comprehension: for if
@@ -25,17 +30,25 @@ array comprehension: for if
 ---
 
 (module
-  (array
-    iterator: (identifier)
-    iterable: (range
-      (int)
-      (int))
-    condition: (binop
-      left: (binop
-        left: (identifier)
-        right: (int))
-      right: (int))
-    result: (identifier)))
+  (EArrayDecl
+    (EFor
+      var: (identifier)
+      iterable: (EBinop
+        left: (EConst
+          (Int))
+        right: (EConst
+          (Int)))
+      body: (EIf
+        condition: (EBinop
+          left: (EBinop
+            left: (EConst
+              (identifier))
+            right: (EConst
+              (Int)))
+          right: (EConst
+            (Int)))
+        consequence: (EConst
+          (identifier))))))
 
 =========================
 array comprehension: while
@@ -46,12 +59,16 @@ array comprehension: while
 ---
 
 (module
-  (array
-    condition: (binop
-      left: (identifier)
-      right: (int))
-    result: (unop
-      operand: (identifier))))
+  (EArrayDecl
+    (EWhile
+      condition: (EBinop
+        left: (EConst
+          (identifier))
+        right: (EConst
+          (Int)))
+      body: (EUnop
+        operand: (EConst
+          (identifier))))))
 
 ======================
 map comprehension: for
@@ -62,16 +79,22 @@ map comprehension: for
 ---
 
 (module
-  (map
-    iterator: (identifier)
-    iterable: (range
-      (int)
-      (int))
-    key: (identifier)
-    value: (string
-      (fragment)
-      (interpolation
-        (identifier)))))
+  (EArrayDecl
+    (EFor
+      var: (identifier)
+      iterable: (EBinop
+        left: (EConst
+          (Int))
+        right: (EConst
+          (Int)))
+      key: (EConst
+        (identifier))
+      value: (EConst
+        (String
+          (fragment)
+          (interpolation
+            (EConst
+              (identifier))))))))
 
 =========================
 map comprehension: for if
@@ -82,20 +105,30 @@ map comprehension: for if
 ---
 
 (module
-  (map
-    iterator: (identifier)
-    iterable: (range
-      (int)
-      (int))
-    condition: (binop
-      left: (binop
-        left: (identifier)
-        right: (int))
-      right: (int))
-    key: (identifier)
-    value: (binop
-      left: (identifier)
-      right: (identifier))))
+  (EArrayDecl
+    (EFor
+      var: (identifier)
+      iterable: (EBinop
+        left: (EConst
+          (Int))
+        right: (EConst
+          (Int)))
+      body: (EIf
+        condition: (EBinop
+          left: (EBinop
+            left: (EConst
+              (identifier))
+            right: (EConst
+              (Int)))
+          right: (EConst
+            (Int)))
+        key: (EConst
+          (identifier))
+        value: (EBinop
+          left: (EConst
+            (identifier))
+          right: (EConst
+            (identifier)))))))
 
 ========================
 map comprehension: while
@@ -106,10 +139,15 @@ map comprehension: while
 ---
 
 (module
-  (map
-    condition: (binop
-      left: (identifier)
-      right: (int))
-    key: (unop
-      operand: (identifier))
-    value: (identifier)))
+  (EArrayDecl
+    (EWhile
+      condition: (EBinop
+        left: (EConst
+          (identifier))
+        right: (EConst
+          (Int)))
+      key: (EUnop
+        operand: (EConst
+          (identifier)))
+      value: (EConst
+        (identifier)))))

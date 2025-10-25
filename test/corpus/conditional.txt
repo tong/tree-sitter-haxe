@@ -1,8 +1,19 @@
-===================
-conditional simple
-===================
+=======================
+conditional compilation
+=======================
 
-#if some
+#if debug
+#elseif !other
+#elseif another
+#elseif (debug_level > 3)
+#elseif 0 == 0
+#elseif 0 != 0
+#elseif 0 > 0
+#elseif 0 < 0
+#elseif 0 <= 0
+#elseif 0 >= 0
+#elseif (a && b)
+#elseif (a || b) && ( c > d || (e!=f))
 #else
 #end
 
@@ -10,56 +21,92 @@ conditional simple
 
 (module
   (conditional
-    condition: (identifier)
+    (compile_condition
+      (identifier))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (identifier))))
+    (conditional_elseif
+      (compile_condition
+        (identifier)))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (compile_condition
+            (identifier))
+          (compile_condition
+            (Int)))))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (Int))
+        (compile_condition
+          (Int))))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (Int))
+        (compile_condition
+          (Int))))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (Int))
+        (compile_condition
+          (Int))))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (Int))
+        (compile_condition
+          (Int))))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (Int))
+        (compile_condition
+          (Int))))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (Int))
+        (compile_condition
+          (Int))))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (compile_condition
+            (identifier))
+          (compile_condition
+            (identifier)))))
+    (conditional_elseif
+      (compile_condition
+        (compile_condition
+          (compile_condition
+            (compile_condition
+              (identifier))
+            (compile_condition
+              (identifier))))
+        (compile_condition
+          (compile_condition
+            (compile_condition
+              (compile_condition
+                (identifier))
+              (compile_condition
+                (identifier)))
+            (compile_condition
+              (compile_condition
+                (compile_condition
+                  (identifier))
+                (compile_condition
+                  (identifier))))))))
     (conditional_else)
     (conditional_end)))
 
-=====================
-conditional advanced
-=====================
-
-#if !debug
-  trace("ok");
-#elseif (debug_level > 3)
-  trace(3);
-#elseif antoher
-  trace("debug level too low");
-#error "unsupported"
-#end
-
----
-
-(module
-  (conditional
-    condition: (identifier)
-    consequence: (call_expr
-      function: (identifier)
-      arguments: (arg_list
-        (string
-          (fragment))))
-    (conditional_elseif
-      condition: (binop
-        left: (identifier)
-        right: (int))
-      (call_expr
-        function: (identifier)
-        arguments: (arg_list
-          (int))))
-    (conditional_elseif
-      condition: (identifier)
-      (call_expr
-        function: (identifier)
-        arguments: (arg_list
-          (string
-            (fragment)))))
-    (conditional_error
-      (string
-        (fragment)))
-    (conditional_end)))
-
-========================
-conditional with macros
-========================
+===================================
+conditional compilation with macros
+===================================
 
 #if !macro
 @:build(my.App.build())
@@ -70,18 +117,18 @@ class A {}
 
 (module
   (conditional
-    condition: (identifier)
-    consequence: (metadata
+    (compile_condition
+      (compile_condition
+        (identifier)))
+    (MetaDataEntry
       name: (identifier)
-      args: (metadata_args
-        (call_expr
-          function: (member_expr
-            object: (member_expr
-              object: (identifier)
-              field: (identifier))
-            field: (identifier))
-          arguments: (arg_list))))
+      params: (ECall
+        callee: (EField
+          object: (EField
+            object: (EConst
+              (identifier))
+            name: (identifier))
+          name: (identifier))))
     (conditional_end))
-  (class_decl
-    name: (identifier)
-    (class_body)))
+  (ClassType
+    name: (type_name)))

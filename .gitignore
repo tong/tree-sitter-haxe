@@ -47,3 +47,5 @@ zig-out/
 *.tar.gz
 *.tgz
 *.zip
+
+*grammar.[0-9].js

@@ -1,0 +1,229 @@
+===================
+boolean expressions
+===================
+
+true;
+false;
+
+---
+
+(module
+  (EConst
+    (true))
+  (EConst
+    (false)))
+
+
+===============================================================================
+int literals 
+===============================================================================
+
+1;
+0x00;
+1000;
+1_000;
+1_000_999;
+0b00111;
+
+---
+
+(module
+  (EConst
+    (Int))
+  (EConst
+    (Int))
+  (EConst
+    (Int))
+  (EConst
+    (Int))
+  (EConst
+    (Int))
+  (EConst
+    (Int)))
+
+===============================================================================
+float literals 
+===============================================================================
+
+1.0;
+1_000.5;
+1.0e-3;
+1_000.0e1_0;
+
+---
+
+(module
+  (EConst
+    (Float))
+  (EConst
+    (Float))
+  (EConst
+    (Float))
+  (EConst
+    (Float)))
+
+===============
+string literals
+===============
+ 
+"haxe";
+'haxe';
+
+---
+
+(module
+  (EConst
+    (String
+      (fragment)))
+  (EConst
+    (String
+      (fragment))))
+
+===============================================================================
+strings containing comment-like content literals
+===============================================================================
+
+"//ok\n//what";
+
+---
+
+(module
+  (EConst
+    (String
+      (fragment)
+      (escape_sequence)
+      (fragment))))
+
+===============================================================================
+string escape sequence
+===============================================================================
+
+"";
+'';
+"\"";
+"a\"b";
+'a\'b';
+"it's a tiny tiny world";
+'"hello"';
+'\'hello\'';
+
+---
+
+(module
+  (EConst
+    (String))
+  (EConst
+    (String))
+  (EConst
+    (String
+      (escape_sequence)))
+  (EConst
+    (String
+      (fragment)
+      (escape_sequence)
+      (fragment)))
+  (EConst
+    (String
+      (fragment)
+      (escape_sequence)
+      (fragment)))
+  (EConst
+    (String
+      (fragment)))
+  (EConst
+    (String
+      (fragment)))
+  (EConst
+    (String
+      (escape_sequence)
+      (fragment)
+      (escape_sequence))))
+
+===============================================================================
+string line continuations literals
+===============================================================================
+
+"hello
+world";
+
+"hello
+
+world";
+
+'hello
+world';
+
+'hello
+
+world';
+
+---
+
+(module
+  (EConst
+    (String
+      (fragment)))
+  (EConst
+    (String
+      (fragment)))
+  (EConst
+    (String
+      (fragment)))
+  (EConst
+    (String
+      (fragment))))
+
+===============================================================================
+string interpolation literals
+===============================================================================
+
+'Some $user say';
+'My name is ${user.name} and i am';
+'1 + 2 = ${1 + 2}';
+'${"nested"}';
+
+---
+
+(module
+  (EConst
+    (String
+      (fragment)
+      (interpolation
+        (identifier))
+      (fragment)))
+  (EConst
+    (String
+      (fragment)
+      (interpolation
+        (EField
+          object: (EConst
+            (identifier))
+          name: (identifier)))
+      (fragment)))
+  (EConst
+    (String
+      (fragment)
+      (interpolation
+        (EBinop
+          left: (EConst
+            (Int))
+          right: (EConst
+            (Int))))))
+  (EConst
+    (String
+      (interpolation
+        (EConst
+          (String
+            (fragment)))))))
+
+===============================================================================
+regular expression literals
+===============================================================================
+
+~/haxe/gi;
+
+---
+
+(module
+  (EConst
+  (Regexp)))

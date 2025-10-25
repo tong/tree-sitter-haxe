@@ -1,0 +1,20 @@
+================
+ternop operator
+================
+
+(x != null) ? x : 0;
+
+---
+
+(module
+  (ETernary
+    cond: (EParenthesis
+      (EBinop
+        left: (EConst
+          (identifier))
+        right: (EConst
+          (null))))
+    if: (EConst
+      (identifier))
+    else: (EConst
+      (Int))))

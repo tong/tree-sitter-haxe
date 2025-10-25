@@ -7,8 +7,9 @@ cast a;
 ---
 
 (module
-  (cast_expr
-    (identifier)))
+  (ECast
+    (EConst
+      (identifier))))
 
 ==================
 cast expression to
@@ -19,7 +20,9 @@ cast(a, String);
 ---
 
 (module
-  (cast_expr
-    expression: (identifier)
-    type: (type_path
-      (type_name))))
+  (ECast
+    expr: (EConst
+      (identifier))
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))))

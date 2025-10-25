@@ -7,9 +7,8 @@ using Type;
 ---
 
 (module
-  (using_stmt
-    (type_path
-      (type_name))))
+  (using
+    (type_name)))
 
 ===============
 using type path
@@ -20,9 +19,20 @@ using some.any.Type;
 ---
 
 (module
-  (using_stmt
-    (type_path
-      package: (package_path
-        (pack)
-        (pack))
-      (type_name))))
+  (using
+    (package_name)
+    (package_name)
+    (type_name)))
+
+==============
+using sub type
+==============
+
+using Main.IntExtender;
+
+---
+
+(module
+  (using
+    (type_name)
+    (type_name)))

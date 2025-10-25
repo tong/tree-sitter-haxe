@@ -1,95 +1,182 @@
-; Comments
-; --------
+; Comments --------------------------------------------------------------------
+
 (comment) @comment
 (line_comment) @comment.line
 (block_comment) @comment.block
 
-; Conditional Compilation
-; -----------------------
-; (([
-;   (conditional)
-;   (conditional_elseif)
-;   (conditional_else)
-;   (conditional_error)
-;   (conditional_end)
-; ]) @keyword.directive)
+; Conditional Compilation -----------------------------------------------------
 
-(conditional) @keyword.directive
-(conditional_elseif) @keyword.directive
-(conditional_else) @keyword.directive
-(conditional_error) @keyword.directive
-(conditional_end) @keyword.directive
+;(conditional) @keyword.directive
+(conditional) @macro
 
-; Keywords
-; --------
-; Keywords that are defined as string literals in the grammar
+; Module ----------------------------------------------------------------------
+
+(module) @module
+(package "package" @keyword)
+(import "import" @keyword)
+(using "using" @keyword)
+
+; --------------------------
+
+(MetaDataEntry) @attribute.preproc
+(MetaDataEntry "@" @attribute)
+(MetaDataEntry ":" @attribute)
+(MetaDataEntry name: (identifier) @attribute)
+(MetaDataEntry "(" @attribute.parameter)
+(MetaDataEntry params: (_) @attribute.parameter)
+(MetaDataEntry ")" @attribute.parameter)
+
+; Type declarations -----------------------------------------------------------
+
 [
-  "abstract"
-  "break"
+  (AbstractType name: (type_name))
+  (ClassType name: (type_name))
+  (DefType name: (type_name))
+  (EnumType name: (type_name))
+ ] @type.definition
+
+(TAnonymous) @type.builtin
+(AnonymousField
+  name: (identifier) @variable.member
+  type: (ComplexType) @type)
+
+(TypePath
+  pack: (package_name) @namespace
+  name: (type_name) @type
+  sub: (identifier) @type)
+
+; (_type_params "<" @punctuation.bracket)
+; (_type_params ">" @punctuation.bracket)
+(TypeParameter name: (type_name) @type.parameter)
+(TypeParameter ":" @operator)
+(TypeParameter "=" @operator)
+
+; Fields ----------------------------------------------------------------------
+
+(ClassVar
+  name: (identifier) @variable.member
+  type: (ComplexType) @type
+  (EConst)? @constant)
+
+(property_accessor
+  get: (property_access (get) @keyword)
+  set: (property_access (set) @keyword))
+
+; Functions -------------------------------------------------------------------
+
+(ClassMethod
+  (public)? @storage.modifier
+  (private)? @storage.modifier
+  "macro" @preproc ;
+  name: (identifier) @function.method
+  args: (FunctionArg
+    name: (identifier) @variable.parameter
+    type: (ComplexType (TypePath name: (type_name) @type)))
+  type: (ComplexType (TypePath name: (type_name) @type))
+  body: (EBlock)? @block)
+
+(DefType "extern" @storage.modifier)
+(EnumType "extern" @storage.modifier)
+
+(FunctionArg
+  name: (identifier) @variable.parameter
+  type: (ComplexType (TypePath name: (type_name) @type)))
+
+(EFunction
+  name: (identifier) @function
+  type: (ComplexType (TypePath name: (type_name) @type)))
+
+; Expressions -----------------------------------------------------------------
+
+(EConst (Int) @number)
+(EConst (Float) @float)
+(EConst (String (fragment) @string))
+(EConst (String (escape_sequence) @string.escape))
+(EConst (String (interpolation) @string.special))
+(EConst (Regexp) @string.regex)
+
+(EConst (true) @boolean)
+(EConst (false) @boolean)
+(EConst (identifier) @constant)
+
+(EField
+  object: (EConst (identifier) @variable)
+  name: (identifier) @property)
+
+(ECall
+  callee: (identifier) @function.call
+  args: (_)? @argument)
+
+(EBinop) @operator
+(EIf) @conditional
+(EReturn) @keyword.return
+(ECast) @cast
+(ETernary) @conditional.ternary
+(EBlock) @block
+(EVars) @declaration
+
+(ENew) @keyword
+(EMeta) @attribute
+(EMacro (macro) @preproc.block)
+
+; Keywords --------------------------------------------------------------------
+
+[
+  (public)
+  (private)
+  "static"
+  "inline"
+  "dynamic"
+  "override"
+  "final" 
+] @storage.modifier
+
+(super) @variable.builtin
+(this) @variable.builtin
+
+[
+  (macro)
+  (EMacro (macro))
+] @preproc
+
+[
   "case"
-  "cast"
+  "catch"
   "class"
-  "continue"
   "default"
   "do"
   "else"
-  "enum"
   "extends"
+  "extern"
   "for"
   "function"
   "if"
   "implements"
-  "import"
-  "interface"
-  "macro"
+  "in"
+  "inline"
   "new"
-  "package"
-  "return"
+  "static"
   "switch"
   "throw"
   "try"
-  "typedef"
   "untyped"
-  "using"
   "var"
   "while"
 ] @keyword
 
-; Modifier keywords that are aliased nodes in the grammar
 [
-  (abstract)
-  (extern)
-  (final)
-  (inline)
-  (override)
-  (private)
-  (public)
-  (static)
-] @keyword
+ "abstract"
+ "class"
+ "interface"
+ "enum"
+ "typedef"
+ "var"
+] @keyword.declaration
 
-(optional) @keyword
-(wildcard) @keyword
+["{" "}" "[" "]" "(" ")" ] @punctuation.bracket
+["," ";" ":" "..."] @punctuation.delimiter
+["?" "??"] @punctuation.special
 
-; Punctuation
-; -----------
-[
-  "{"
-  "}"
-  "["
-  "]"
-  "("
-  ")"
-] @punctuation.bracket
-
-[
-  ","
-  ";"
-  ":"
-  "..."
-] @punctuation.delimiter
-
-; Operators
-; ---------
 [
   "="
   "=="
@@ -128,95 +215,13 @@
   ">>="
 ] @operator
 
-[
+ [
   "->"
   "=>"
   "in"
-] @keyword.operator
+  ; "is"
+ ] @keyword.operator
 
-; Literals
-; --------
-(int) @number
-(float) @float
-(string) @string
-(fragment) @string
-(escape_sequence) @string.escape
-(interpolation) @string.special
-(true) @boolean
-(false) @boolean
-(null) @constant.builtin
-(regexp) @string.regex
 
-; Functions
-; ---------
-(function_decl name: (identifier) @function)
-(call_expr function: (identifier) @function.call)
-(call_expr function: (member_expr field: (identifier) @function.call))
-
-; Types
-; -----
-(class_decl name: (identifier) @type)
-(interface_decl name: (identifier) @type)
-(enum_decl name: (identifier) @type)
-(abstract_decl name: (identifier) @type)
-(typedef_decl name: (identifier) @type)
-
-(type_path (identifier) @type)
-(cast_expr type: (type_path) @type)
-(new_expr type: (type_path) @type)
-
-(for_stmt (identifier) @variable)
-
-(switch_case pattern: (identifier) @constant)
-(switch_case pattern: (_) @constant)
-
-(return_stmt "return") @keyword
-(throw_stmt "throw") @keyword
-(catch_clause (identifier) @variable.exception)
-
-; (type_param name: (type_name) @type)
-
-(enum_item name: (identifier) @constant)
-(enum_param name: (identifier) @variable.parameter)
-
-; Properties & Variables
-; --------------------
-(var_decl name: (identifier) @variable.local)
-(param name: (identifier) @variable.parameter)
-(member_expr field: (identifier) @property)
-(object_field key: (identifier) @property)
-(object_field key: (string) @property)
-
-; Identifiers (fallback)
-; ----------------------
 (identifier) @variable
-
-; Property Accessors
-; ------------------
-(property_accessor) @attribute
-(property_accessor
-  get: (property_access_identifier) @keyword.modifier)
-(property_accessor
-  set: (property_access_identifier) @keyword.modifier)
-
-; Highlight common accessor patterns specially
-(property_accessor
-  get: (property_access_identifier) @constant.builtin
-  (#match? @constant.builtin "^(default|null|never|dynamic)$"))
-(property_accessor
-  set: (property_access_identifier) @constant.builtin
-  (#match? @constant.builtin "^(default|null|never|dynamic)$"))
-
-; Metadata / Annotations
-; ----------------------
-(metadata name: (identifier) @attribute)
-(metadata "@" @attribute)
-(metadata ":" @attribute)
-
-; Macro refication
-; ----------------
-(macro_expr
-  body: (macro_splice) @macro)
-(macro_expr body: (int) @number)
-(macro_expr body: (binop) @operator)
 

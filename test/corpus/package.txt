@@ -6,19 +6,18 @@ package;
 
 ---
 
-(module (package_stmt))
+(module (package))
 
 =============
 package parts
 =============
 
-package my.other.package;
+package my.other.pkg;
 
 ---
 
 (module
-  (package_stmt
-    (package_path
-      (pack)
-      (pack)
-      (pack))))
+  (package
+    (identifier)
+    (identifier)
+    (identifier)))

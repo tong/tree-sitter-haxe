@@ -1,0 +1,202 @@
+=========================
+abstract type declaration
+=========================
+
+abstract MyAbstract(Int) from Int to Int {}
+
+---
+
+(module
+  (AbstractType
+    name: (type_name)
+    type: (identifier)
+    from: (TypePath
+      name: (type_name))
+    to: (TypePath
+      name: (type_name))))
+
+==============================
+abstract enum type declaration
+==============================
+
+enum abstract Layer(Int) {
+    var a;
+    var b;
+}
+
+---
+
+(module
+  (AbstractType
+    name: (type_name)
+    type: (identifier)
+    (ClassVar
+      name: (identifier))
+    (ClassVar
+      name: (identifier))))
+
+=================
+class declaration
+=================
+
+private class A<T> {}
+
+---
+
+(module
+  (ClassType
+    (private)
+    name: (type_name)
+    (TypeParameter
+      name: (type_name))))
+
+=============================
+enum declaration field params
+=============================
+
+enum Color {
+  Red;
+  Green;
+  Blue;
+  Rgb(r:Int, g:Int, b:Int);
+}
+
+---
+
+(module
+  (EnumType
+    name: (type_name)
+    (EnumConstructor
+      name: (identifier))
+    (EnumConstructor
+      name: (identifier))
+    (EnumConstructor
+      name: (identifier))
+    (EnumConstructor
+      name: (identifier)
+      args: (FunctionArg
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name))))
+      args: (FunctionArg
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name))))
+      args: (FunctionArg
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name)))))))
+
+===================
+typedef declaration
+===================
+
+typedef A = {}
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TAnonymous))))
+
+
+=========================
+typedef declaration alias
+=========================
+
+typedef A = B;
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))))
+
+==========================
+typedef declaration extend
+==========================
+
+typedef A = {
+	> B,
+	> C,
+    x : Int
+}
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TAnonymous
+        extends: (TypePath
+          name: (type_name))
+        extends: (TypePath
+          name: (type_name))
+        (AnonymousField
+          name: (identifier)
+          type: (ComplexType
+            (TypePath
+              name: (type_name))))))))
+
+==========================
+typedef declaration fields
+==========================
+
+typedef A = {
+  var a:Int;
+  var b:Int;
+}
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TAnonymous
+        (AnonymousField
+          name: (identifier)
+          type: (ComplexType
+            (TypePath
+              name: (type_name))))
+        (AnonymousField
+          name: (identifier)
+          type: (ComplexType
+            (TypePath
+              name: (type_name))))))))
+
+=============================
+typedef declaration anon fields
+=============================
+
+typedef A = {
+  a:Int,
+  b:Int
+}
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TAnonymous
+        (AnonymousField
+          name: (identifier)
+          type: (ComplexType
+            (TypePath
+              name: (type_name))))
+        (AnonymousField
+          name: (identifier)
+          type: (ComplexType
+            (TypePath
+              name: (type_name))))))))

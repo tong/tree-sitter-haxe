@@ -1,0 +1,148 @@
+===================
+binop add operator
+===================
+
+1 + 2;
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (Int))
+    right: (EConst
+      (Int))))
+
+
+===================
+binop operation
+===================
+
+1 + 2 * 3 % 2;
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (Int))
+    right: (EBinop
+      left: (EBinop
+        left: (EConst
+          (Int))
+        right: (EConst
+          (Int)))
+      right: (EConst
+        (Int)))))
+
+====================================
+binop string concatenation operator
+====================================
+
+"a" + "b";
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (String
+        (fragment)))
+    right: (EConst
+      (String
+        (fragment)))))
+
+============================================
+binop string and int concatenation operator
+============================================
+
+"a" + 1;
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (String
+        (fragment)))
+    right: (EConst
+      (Int))))
+
+============================================
+binop int and string concatenation operator
+============================================
+
+1 + "a";
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (Int))
+    right: (EConst
+      (String
+        (fragment)))))
+
+===============================================
+binop string and is int concatenation operator
+===============================================
+
+"a" += "b";
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (String
+        (fragment)))
+    right: (EConst
+      (String
+        (fragment)))))
+
+===================
+binop logical or operator
+===================
+
+true || false;
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (true))
+    right: (EConst
+      (false))))
+
+====================
+binop logical and operator
+====================
+
+true && false;
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (true))
+    right: (EConst
+      (false))))
+
+=====================
+binop null coalescing
+=====================
+
+value ?? "fallback"
+
+---
+
+(module
+  (EBinop
+    left: (EConst
+      (identifier))
+    right: (EConst
+      (String
+        (fragment)))))
