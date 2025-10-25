@@ -722,7 +722,10 @@ export default grammar({
           optional(field("params", $._type_params)),
           $._function_args,
           optional(field("ret", $._type_annotation)),
-          field("body", seq($._Expr, optional($._semicolon))),
+          choice(
+            field("body", seq($._Expr, optional($._semicolon))),
+            $._semicolon,
+          ),
         ),
       ),
 
