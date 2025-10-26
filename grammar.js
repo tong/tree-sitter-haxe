@@ -117,10 +117,10 @@ export default grammar({
     [$.EVars, $.EBinop],
     [$.FunctionArg],
     [$.TypePath],
-    [$._primary_expr, $.EArrayDecl],
-    [$._primary_expr, $.ECall],
-    [$._primary_expr, $._expr_or_comp],
-    [$._primary_expr, $._function_body],
+    [$._expr_prim, $.EArrayDecl],
+    [$._expr_prim, $.ECall],
+    [$._expr_prim, $._expr_or_comp],
+    [$._expr_prim, $._function_body],
     [$._type_decl, $._conditional_body],
     [$.import],
   ],
@@ -130,7 +130,7 @@ export default grammar({
       seq(
         optional($.package),
         repeat(choice($.import, $.using)),
-        repeat(choice($._type_decl, $._expr_statement)),
+        repeat(choice($._type_decl, $._expr_stmt)),
       ),
 
     //////////////////////////////////////////////////////////////////////////
@@ -178,12 +178,11 @@ export default grammar({
 
     ///////////////////////////////////////////////////////////////////////////
 
-    _expr_statement: ($) => seq($._Expr, optional($._semicolon)),
+    _expr_stmt: ($) => seq($._Expr, optional($._semicolon)),
 
     _Expr: ($) => choice($.EBinop, $.ETernary, $.EUnop, $._expr_atom),
-    _expr_atom: ($) => choice($.ECall, $.EField, $.EArray, $._primary_expr),
-
-    _primary_expr: ($) =>
+    _expr_atom: ($) => choice($.ECall, $.EField, $.EArray, $._expr_prim),
+    _expr_prim: ($) =>
       choice(
         $.EConst,
         $.EParenthesis,
@@ -646,7 +645,7 @@ export default grammar({
         seq(
           "@",
           optional(token.immediate(":")),
-          field("name", $.identifier),
+          field("name", choice($.identifier, alias("macro", $.identifier))),
           optional(seq("(", field("params", commaSep($._Expr)), ")")),
         ),
       ),
