@@ -117,7 +117,6 @@
 
 (ENew) @keyword
 (EMeta) @attribute
-(EMacro (macro) @preproc.block)
 
 ; Keywords --------------------------------------------------------------------
 
@@ -135,9 +134,8 @@
 (this) @variable.builtin
 
 [
-  (macro)
-  (EMacro (macro))
-] @preproc
+  "macro"
+] @preproc.block
 
 [
   "case"
