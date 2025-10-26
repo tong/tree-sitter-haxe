@@ -110,6 +110,7 @@ export default grammar({
     [$.AbstractType, $.DefType, $.EnumType],
     [$.ClassVar, $.ClassMethod],
     [$.EBinop, $._expr_or_comp],
+    [$.EConst, $.EMacroInterpolation],
     [$.EConst, $.compile_condition],
     [$.FunctionArg, $.EConst, $.compile_condition],
     [$.FunctionArg, $.EConst],
@@ -208,6 +209,7 @@ export default grammar({
         $.EMacroInterpolation,
         $.EMacroExprInterpolation,
         $.type_trace,
+        $.wildcard_pattern,
       ),
 
     type_trace: ($) => prec(PREC.CALL + 1, seq("$type", $.EParenthesis)),
@@ -286,7 +288,7 @@ export default grammar({
         seq(
           choice(
             seq("(", ")"),
-            "_",
+            $.identifier,
             $.FunctionArg,
             seq($._function_args, optional($._type_annotation)),
           ),
@@ -504,7 +506,7 @@ export default grammar({
           ),
           optional(
             seq(
-              choice("default", seq("case", "_")),
+              choice("default", seq("case", $.wildcard_pattern)),
               ":",
               field("body", repeat(seq($._Expr, optional($._semicolon)))),
             ),
@@ -542,7 +544,7 @@ export default grammar({
     EMacro: ($) =>
       prec(PREC.MACRO, seq("macro", choice($._Expr, seq(":", $.ComplexType)))),
     EMacroInterpolation: ($) =>
-      seq("$", /[vseitabpmd]/, "{", $.identifier, "}"),
+      seq("$", /[vseitabpmd]/, "{", choice($.identifier, $._Expr), "}"),
     EMacroExprInterpolation: ($) => seq("${", $._Expr, "}"),
 
     // ------------------------------------------------------------------------
@@ -606,6 +608,14 @@ export default grammar({
             optional(choice("var", "final")),
             field("name", $.identifier),
             $._type_annotation,
+          ),
+          seq(
+            "function",
+            field("name", $.identifier),
+            optional(field("params", $._type_params)),
+            $._function_args,
+            optional(field("ret", $._type_annotation)),
+            // $._semicolon, // Functions in anonymous types are declarations, no body.
           ),
         ),
       ),
@@ -855,6 +865,7 @@ export default grammar({
 
     optional: (_) => "?",
     wildcard: (_) => "*",
+    wildcard_pattern: (_) => "_", // Added
     _semicolon: (_) => ";",
 
     comment: ($) => choice($.line_comment, $.block_comment),
