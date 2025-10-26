@@ -110,7 +110,6 @@ export default grammar({
     [$.AbstractType, $.DefType, $.EnumType],
     [$.ClassVar, $.ClassMethod],
     [$.EBinop, $._expr_or_comp],
-    [$.EConst, $.EMacroInterpolation],
     [$.EConst, $.FunctionArg, $.compile_condition],
     [$.EConst, $.FunctionArg],
     [$.EConst, $.compile_condition],
@@ -210,6 +209,7 @@ export default grammar({
         //
         $.EMacroInterpolation,
         $.EMacroExprInterpolation,
+        $.EMacroIdentifierInterpolation,
         //
         $.type_trace,
         $.wildcard_pattern,
@@ -571,10 +571,10 @@ export default grammar({
 
     TypePath: ($) =>
       seq(
-        optional(field("pack", dotSep($.package_name))),
+        repeat(seq(field("pack", $.package_name), ".")),
         field("name", $.type_name),
         optional(field("sub", prec.left(PREC.PRIMARY, seq(".", $.identifier)))),
-        optional(field("params", $._type_params)),
+        optional(field("params", $._type_arguments)),
       ),
 
     ComplexType: ($) =>
@@ -688,7 +688,7 @@ export default grammar({
         field("name", $.type_name),
         optional($._type_params),
         "(",
-        field("type", $.identifier),
+        field("type", $.ComplexType),
         ")",
         repeat(
           choice(
@@ -851,6 +851,7 @@ export default grammar({
       prec(PREC.TYPE_ANNOTATION, seq(":", field("type", $.ComplexType))),
 
     _type_params: ($) => seq("<", commaSep1($.TypeParameter), ">"),
+    _type_arguments: ($) => seq("<", commaSep($.ComplexType), ">"),
 
     _function_args: ($) =>
       seq("(", field("args", commaSep($.FunctionArg)), ")"),
