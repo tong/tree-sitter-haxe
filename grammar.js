@@ -207,8 +207,10 @@ export default grammar({
         $.ECheckType,
         $.EMeta,
         $.EMacro,
+        //
         $.EMacroInterpolation,
         $.EMacroExprInterpolation,
+        //
         $.type_trace,
         $.wildcard_pattern,
       ),
@@ -552,7 +554,8 @@ export default grammar({
       prec(PREC.MACRO, seq("macro", choice($._Expr, seq(":", $.ComplexType)))),
     EMacroInterpolation: ($) =>
       seq("$", /[vseitabpmd]/, "{", choice($.identifier, $._Expr), "}"),
-    EMacroExprInterpolation: ($) => seq("${", $._Expr, "}"),
+    EMacroExprInterpolation: ($) =>
+      choice(seq("${", $._Expr, "}"), seq("$", $.identifier)),
 
     // ------------------------------------------------------------------------
 
@@ -889,7 +892,7 @@ export default grammar({
           $.compile_condition,
           repeat($._conditional_body),
           repeat($.conditional_elseif),
-          optional(choice($.conditional_else, $.conditional_error)),
+          optional($.conditional_else),
           $.conditional_end,
         ),
       ),
@@ -926,6 +929,7 @@ export default grammar({
         seq($._Expr, optional($._semicolon)),
         $._type_decl,
         repeat1($.MetaDataEntry),
+        $.conditional_error,
       ),
     conditional_elseif: ($) =>
       seq("#elseif", $.compile_condition, repeat($._conditional_body)),
