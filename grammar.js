@@ -185,7 +185,7 @@ export default grammar({
     _expr_prim: ($) =>
       choice(
         $.EConst,
-        $.EParenthesis,
+        $._EParenthesis,
         $.EBlock,
         $.EObjectDecl,
         $.EArrayDecl,
@@ -221,7 +221,7 @@ export default grammar({
             "callee",
             choice(
               $.EField,
-              $.EParenthesis,
+              $._EParenthesis,
               $.identifier,
               $.EConst,
               $.ECall,
@@ -262,7 +262,7 @@ export default grammar({
         $.super,
         $.identifier,
       ),
-    EParenthesis: ($) => prec(PREC.PRIMARY, seq("(", $._Expr, ")")),
+    _EParenthesis: ($) => prec(PREC.PRIMARY, seq("(", $._Expr, ")")),
     ENew: ($) =>
       prec.left(PREC.CALL, seq("new", $.TypePath, "(", commaSep($._Expr), ")")),
     EFunction: ($) =>
@@ -492,7 +492,7 @@ export default grammar({
         PREC.PRIMARY,
         seq(
           "switch",
-          field("subject", choice($.EParenthesis, $._Expr)),
+          field("subject", choice($._EParenthesis, $._Expr)),
           "{",
           field(
             "cases",
@@ -556,7 +556,7 @@ export default grammar({
         seq("$v{", $._Expr, "}"),
       ),
 
-    type_trace: ($) => prec(PREC.CALL + 1, seq("$type", $.EParenthesis)),
+    type_trace: ($) => prec(PREC.CALL + 1, seq("$type", $._EParenthesis)),
 
     // ------------------------------------------------------------------------
 
