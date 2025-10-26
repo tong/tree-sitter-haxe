@@ -111,9 +111,10 @@ export default grammar({
     [$.ClassVar, $.ClassMethod],
     [$.EBinop, $._expr_or_comp],
     [$.EConst, $.EMacroInterpolation],
+    [$.EConst, $.FunctionArg, $.compile_condition],
+    [$.EConst, $.FunctionArg],
     [$.EConst, $.compile_condition],
-    [$.FunctionArg, $.EConst, $.compile_condition],
-    [$.FunctionArg, $.EConst],
+    [$.EVars, $.EBinop],
     [$.FunctionArg],
     [$.TypePath],
     [$._primary_expr, $.EArrayDecl],
@@ -303,10 +304,16 @@ export default grammar({
       prec.right(
         PREC.ASSIGN,
         seq(
-          // optional("static"),
           choice("var", "final"),
-          commaSep1(field("identifier", $.identifier)),
-          optional(seq("=", field("expr", prec(PREC.ASSIGN + 1, $._Expr)))),
+          commaSep1(
+            seq(
+              field("name", $.identifier),
+              optional(field("type", $._type_annotation)),
+              optional(
+                seq("=", field("value", prec(PREC.ASSIGN + 1, $._Expr))),
+              ),
+            ),
+          ),
         ),
       ),
     ETernary: ($) =>
