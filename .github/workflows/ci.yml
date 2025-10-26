@@ -8,6 +8,8 @@ on:
       - test/**
       - bindings/**
       - binding.gyp
+      - examples/**
+      - .github/workflows/**
   pull_request:
     paths:
       - grammar.js
@@ -15,6 +17,8 @@ on:
       - test/**
       - bindings/**
       - binding.gyp
+      - examples/**
+      - .github/workflows/**
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
