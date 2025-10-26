@@ -399,7 +399,6 @@ export default grammar({
         // seq("{ ", sep($._semicolon, $._Expr), $._semicolon, "}"),
         seq("{", repeat(seq($._expr_or_comp, optional($._semicolon))), "}"),
       ),
-
     EObjectDecl: ($) =>
       prec(
         PREC.OBJECT_DECL,
@@ -553,7 +552,18 @@ export default grammar({
     EMacro: ($) =>
       prec(PREC.MACRO, seq("macro", choice($._Expr, seq(":", $.ComplexType)))),
     EMacroInterpolation: ($) =>
-      seq("$", /[vseitabpmd]/, "{", choice($.identifier, $._Expr), "}"),
+      seq(
+        "$",
+        choice(
+          seq(choice("v", "s", "e", "d"), "{", $._Expr, "}"),
+          seq("i", "{", $.identifier, "}"),
+          seq("t", "{", $.ComplexType, "}"),
+          seq("a", "{", commaSep($._Expr), "}"),
+          seq("b", "{", repeat(seq($._Expr, optional($._semicolon))), "}"),
+          seq("p", "{", commaSep($.identifier), "}"),
+          seq("m", "{", repeat($.MetaDataEntry), "}"),
+        ),
+      ),
     EMacroExprInterpolation: ($) =>
       choice(seq("${", $._Expr, "}"), seq("$", $.identifier)),
 

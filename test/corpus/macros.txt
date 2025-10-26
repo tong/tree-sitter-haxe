@@ -1,4 +1,17 @@
 ===============================================================================
+macro constant expression
+===============================================================================
+
+macro 42;
+
+---
+
+(module
+  (EMacro
+    (EConst
+      (Int))))
+
+===============================================================================
 macro
 ===============================================================================
 
@@ -14,18 +27,6 @@ macro 1 + 2;
       right: (EConst
         (Int)))))
 
-===============================================================================
-macro constant expression reification
-===============================================================================
-
-macro 42;
-
----
-
-(module
-  (EMacro
-    (EConst
-      (Int))))
 
 ===============================================================================
 macro expression value reification
@@ -38,21 +39,66 @@ macro $v{someExpr};
 (module
   (EMacro
     (EMacroInterpolation
-      (identifier))))
+      (EConst
+        (identifier)))))
 
 
 ===============================================================================
 macro compile‐time value refication
 ===============================================================================
 
+macro { trace("hi"); }
+macro $v{myValue}
+macro $a{1, 2, 3}
+macro $b{ trace(1); trace(2); }
+macro $i{name}
+macro $p{x, y, z}
 macro $v{v} * 2;
 
 ---
 
 (module
   (EMacro
+    (EBlock
+      (ECall
+        callee: (identifier)
+        args: (EConst
+          (String
+            (fragment))))))
+  (EMacro
+    (EMacroInterpolation
+      (EConst
+        (identifier))))
+  (EMacro
+    (EMacroInterpolation
+      (EConst
+        (Int))
+      (EConst
+        (Int))
+      (EConst
+        (Int))))
+  (EMacro
+    (EMacroInterpolation
+      (ECall
+        callee: (identifier)
+        args: (EConst
+          (Int)))
+      (ECall
+        callee: (identifier)
+        args: (EConst
+          (Int)))))
+  (EMacro
+    (EMacroInterpolation
+      (identifier)))
+  (EMacro
+    (EMacroInterpolation
+      (identifier)
+      (identifier)
+      (identifier)))
+  (EMacro
     (EBinop
       left: (EMacroInterpolation
-        (identifier))
+        (EConst
+          (identifier)))
       right: (EConst
         (Int)))))
