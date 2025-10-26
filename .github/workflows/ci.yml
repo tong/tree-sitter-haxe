@@ -27,6 +27,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: tree-sitter/setup-action/cli@v2
+      - name: Generate and commit parser
+        run: |
+          tree-sitter generate
+          git add src/parser.c src/scanner.c || true
+          git commit -m "Update generated parser" || true
       - uses: tree-sitter/parser-test-action@v3
         with:
           test-go: true
