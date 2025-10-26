@@ -2,18 +2,29 @@
 abstract type declaration
 =========================
 
-abstract MyAbstract(Int) from Int to Int {}
+abstract MyAbstract<T:Int>(some.other.Some<String, T>) {}
 
 ---
 
 (module
   (AbstractType
     name: (type_name)
-    type: (identifier)
-    from: (TypePath
-      name: (type_name))
-    to: (TypePath
-      name: (type_name))))
+    (TypeParameter
+      name: (type_name)
+      constraint: (ComplexType
+        (TypePath
+          name: (type_name))))
+    type: (ComplexType
+      (TypePath
+        pack: (package_name)
+        pack: (package_name)
+        name: (type_name)
+        params: (ComplexType
+          (TypePath
+            name: (type_name)))
+        params: (ComplexType
+          (TypePath
+            name: (type_name)))))))
 
 ==============================
 abstract enum type declaration
@@ -29,7 +40,9 @@ enum abstract Layer(Int) {
 (module
   (AbstractType
     name: (type_name)
-    type: (identifier)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))
     (ClassVar
       name: (identifier))
     (ClassVar

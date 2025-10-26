@@ -1,1 +1,13 @@
-macro $v{someExpr};
+macro $e;
+macro $some;
+macro ${some};
+macro $e{some};
+macro { trace("hi"); };
+macro $v{myValue};
+macro $a{1, 2, 3};
+macro $b{ trace(1); trace(2); };
+macro $i{name};
+macro $p{x, y, z};
+macro $v{v} * 2;
+macro some.$field;
+macro some($any);

@@ -84,6 +84,7 @@ export default grammar({
       "in",
       "inline",
       "interface",
+      "macro",
       "new",
       "null",
       "override",
@@ -117,6 +118,7 @@ export default grammar({
     [$.FunctionArg],
     [$.TypePath],
     [$._primary_expr, $.EArrayDecl],
+    [$._primary_expr, $.ECall],
     [$._primary_expr, $._expr_or_comp],
     [$._primary_expr, $._function_body],
     [$._type_decl, $._conditional_body],
@@ -205,17 +207,12 @@ export default grammar({
         $.EUntyped,
         $.ECheckType,
         $.EMeta,
-        $.EMacro,
-        //
-        $.EMacroInterpolation,
-        $.EMacroExprInterpolation,
-        $.EMacroIdentifierInterpolation,
-        //
+        ///////////////////
+        $.macro,
+        $.reification,
         $.type_trace,
         $.wildcard_pattern,
       ),
-
-    type_trace: ($) => prec(PREC.CALL + 1, seq("$type", $.EParenthesis)),
 
     ECall: ($) =>
       prec.left(
@@ -235,7 +232,7 @@ export default grammar({
             ),
           ),
           "(",
-          field("args", commaSep($._Expr)),
+          field("args", commaSep(choice($.reification, $._Expr))),
           ")",
         ),
       ),
@@ -244,9 +241,8 @@ export default grammar({
         PREC.CALL,
         seq(
           field("object", $._Expr),
-          //field("operator", alias(choice(".", "?."), $.field_operator)),
           field("operator", choice(".", "?.")),
-          field("name", $.identifier),
+          field("name", seq(optional("$"), $.identifier)),
         ),
       ),
     EArray: ($) =>
@@ -395,8 +391,6 @@ export default grammar({
     EBlock: ($) =>
       prec(
         PREC.BLOCK,
-        //seq("{ ", sep($._semicolon, $._Expr), optional($._semicolon), "}"),
-        // seq("{ ", sep($._semicolon, $._Expr), $._semicolon, "}"),
         seq("{", repeat(seq($._expr_or_comp, optional($._semicolon))), "}"),
       ),
     EObjectDecl: ($) =>
@@ -549,23 +543,21 @@ export default grammar({
         //   field("expr", choice($._type_decl, $.EFunction, $.EVars)),
         // ),
       ),
-    EMacro: ($) =>
-      prec(PREC.MACRO, seq("macro", choice($._Expr, seq(":", $.ComplexType)))),
-    EMacroInterpolation: ($) =>
-      seq(
-        "$",
-        choice(
-          seq(choice("v", "s", "e", "d"), "{", $._Expr, "}"),
-          seq("i", "{", $.identifier, "}"),
-          seq("t", "{", $.ComplexType, "}"),
-          seq("a", "{", commaSep($._Expr), "}"),
-          seq("b", "{", repeat(seq($._Expr, optional($._semicolon))), "}"),
-          seq("p", "{", commaSep($.identifier), "}"),
-          seq("m", "{", repeat($.MetaDataEntry), "}"),
-        ),
+
+    macro: ($) => prec(PREC.MACRO, seq("macro", $._Expr)),
+    reification: ($) =>
+      choice(
+        seq("$", $.identifier),
+        seq("${", $._Expr, "}"),
+        seq("$e{", $._Expr, "}"),
+        seq("$a{", commaSep($._Expr), "}"),
+        seq("$b{", repeat(seq($._Expr, optional($._semicolon))), "}"),
+        seq("$i{", $.identifier, "}"),
+        seq("$p{", commaSep($.identifier), "}"),
+        seq("$v{", $._Expr, "}"),
       ),
-    EMacroExprInterpolation: ($) =>
-      choice(seq("${", $._Expr, "}"), seq("$", $.identifier)),
+
+    type_trace: ($) => prec(PREC.CALL + 1, seq("$type", $.EParenthesis)),
 
     // ------------------------------------------------------------------------
 
@@ -910,6 +902,7 @@ export default grammar({
     compile_condition: ($) =>
       choice(
         $.identifier,
+        alias("macro", $.identifier),
         $.Int,
         $.Float,
         $.String,

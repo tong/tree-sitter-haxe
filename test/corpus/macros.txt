@@ -7,7 +7,7 @@ macro 42;
 ---
 
 (module
-  (EMacro
+  (macro
     (EConst
       (Int))))
 
@@ -20,7 +20,7 @@ macro 1 + 2;
 ---
 
 (module
-  (EMacro
+  (macro
     (EBinop
       left: (EConst
         (Int))
@@ -37,8 +37,8 @@ macro $v{someExpr};
 ---
 
 (module
-  (EMacro
-    (EMacroInterpolation
+  (macro
+    (reification
       (EConst
         (identifier)))))
 
@@ -47,38 +47,38 @@ macro $v{someExpr};
 macro compile‐time value refication
 ===============================================================================
 
-macro { trace("hi"); }
-macro $v{myValue}
-macro $a{1, 2, 3}
-macro $b{ trace(1); trace(2); }
-macro $i{name}
-macro $p{x, y, z}
+macro { trace("hi"); };
+macro $v{myValue};
+macro $a{1, 2, 3};
+macro $b{ trace(1); trace(2); };
+macro $i{name};
+macro $p{x, y, z};
 macro $v{v} * 2;
 
 ---
 
 (module
-  (EMacro
+  (macro
     (EBlock
       (ECall
         callee: (identifier)
         args: (EConst
           (String
             (fragment))))))
-  (EMacro
-    (EMacroInterpolation
+  (macro
+    (reification
       (EConst
         (identifier))))
-  (EMacro
-    (EMacroInterpolation
+  (macro
+    (reification
       (EConst
         (Int))
       (EConst
         (Int))
       (EConst
         (Int))))
-  (EMacro
-    (EMacroInterpolation
+  (macro
+    (reification
       (ECall
         callee: (identifier)
         args: (EConst
@@ -87,17 +87,17 @@ macro $v{v} * 2;
         callee: (identifier)
         args: (EConst
           (Int)))))
-  (EMacro
-    (EMacroInterpolation
+  (macro
+    (reification
       (identifier)))
-  (EMacro
-    (EMacroInterpolation
+  (macro
+    (reification
       (identifier)
       (identifier)
       (identifier)))
-  (EMacro
+  (macro
     (EBinop
-      left: (EMacroInterpolation
+      left: (reification
         (EConst
           (identifier)))
       right: (EConst
