@@ -446,7 +446,10 @@ export default grammar({
         seq(
           "for",
           "(",
-          field("var", $.identifier),
+          choice(
+            seq(field("key", $.identifier), "=>", field("value", $.identifier)),
+            field("var", $.identifier),
+          ),
           "in",
           field("iterable", $._Expr),
           ")",
