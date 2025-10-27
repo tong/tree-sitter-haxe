@@ -4,28 +4,29 @@
 const PREC = {
   CONTROL: 0,
   ASSIGN: 1,
-  NULL_COALESCE: 2,
-  LOGICAL_OR: 3,
-  LOGICAL_AND: 4,
-  BIT_OR: 5,
-  BIT_XOR: 6,
-  BIT_AND: 7,
-  EQUALITY: 8,
-  COMPARE: 9,
-  IS: 10,
-  IN: 11,
-  SHIFT: 12,
-  ADD: 13,
-  MULTIPLY: 14,
-  RANGE: 15,
-  UNARY: 16,
-  PRIMARY: 18,
-  CALL: 19,
-  OBJECT_DECL: 20,
-  BLOCK: 25,
-  TYPE_ANNOTATION: 28,
-  TYPE_PARAMS: 30,
-  CONDITIONAL: 1000,
+  TERNARY: 2,
+  NULL_COALESCE: 3,
+  LOGICAL_OR: 4,
+  LOGICAL_AND: 5,
+  BIT_OR: 6,
+  BIT_XOR: 7,
+  BIT_AND: 8,
+  EQUALITY: 9,
+  COMPARE: 10,
+  IS: 11,
+  IN: 12,
+  SHIFT: 13,
+  ADD: 14,
+  MULTIPLY: 15,
+  RANGE: 16,
+  UNARY: 17,
+  PRIMARY: 19,
+  CALL: 20,
+  OBJECT_DECL: 21,
+  BLOCK: 26,
+  TYPE_ANNOTATION: 29,
+  TYPE_PARAMS: 31,
+  CONDITIONAL: 1001,
   MACRO: -1,
 };
 
@@ -110,27 +111,26 @@ export default grammar({
     [$.AbstractType, $.ClassType, $.DefType, $.EnumType],
     [$.AbstractType, $.DefType, $.EnumType],
     [$.ClassVar, $.ClassMethod],
-    [$.EBinop, $._expr_or_comp],
     [$.EConst, $.FunctionArg, $.compile_condition],
     [$.EConst, $.FunctionArg],
     [$.EConst, $.compile_condition],
-    [$.EVars, $.EBinop],
-    [$.FunctionArg],
+    [$.EVars, $.ETernary],
     [$.TypePath],
-    [$._expr_postfix, $.EArrayDecl],
-    [$._expr_postfix, $.ECall],
-    [$._expr_postfix, $._expr_or_comp],
-    [$._expr_postfix, $._function_body],
+    [$._expr_atom, $.ESwitch],
+    [$._expr_meta, $.ECall],
+    [$._expr_prim, $._expr_or_block],
+    [$._expr_stmt, $.EArrayDecl],
     [$._type_decl, $._conditional_body],
     [$.import],
   ],
   inline: ($) => [
-    $._expr_atom,
-    $._expr_block,
-    $._expr_meta,
-    $._expr_prim,
-    $._expr_stmt,
+    $._semicolon,
+    $._visibility,
+    $.optional,
+    $.rest,
+    // $.EConst,
   ],
+
   word: ($) => $.identifier,
   rules: {
     module: ($) =>
@@ -189,6 +189,8 @@ export default grammar({
 
     _Expr: ($) => choice($.ETernary, $.EBinop, $.EUnop, $._expr_postfix),
     _expr_postfix: ($) => choice($.ECall, $.EField, $.EArray, $._expr_prim),
+    _expr_prim: ($) =>
+      choice($._expr_atom, $._expr_stmt, $._expr_meta, $.EBlock),
     _expr_atom: ($) =>
       choice($.EConst, $._EParenthesis, $.EObjectDecl, $.EArrayDecl, $.ENew),
     _expr_stmt: ($) =>
@@ -216,11 +218,9 @@ export default grammar({
         $.macro,
         $.reification,
         $.type_trace,
-        $.wildcard_pattern,
+        // $.wildcard_pattern,
       ),
-    _expr_block: ($) => choice($.EBlock),
-    _expr_prim: ($) =>
-      choice($._expr_atom, $._expr_stmt, $._expr_meta, $._expr_block),
+    _expr_or_block: ($) => choice($._Expr, $.EBlock),
 
     ECall: ($) =>
       prec.left(
@@ -229,14 +229,11 @@ export default grammar({
           field(
             "callee",
             choice(
-              $.EField,
               $._EParenthesis,
+              $.ECall, //TODO: should not be required
+              $.EField,
               $.identifier,
-              $.EConst,
-              $.ECall,
-              $.EArray,
-              $.ENew,
-              $.EFunction,
+              $.super,
             ),
           ),
           "(",
@@ -286,7 +283,7 @@ export default grammar({
           optional(field("params", $._type_params)),
           $._function_args,
           optional(field("ret", $._type_annotation)),
-          field("body", $._function_body),
+          field("body", $._expr_or_block),
         ),
       ),
     EArrowFunction: ($) =>
@@ -296,16 +293,12 @@ export default grammar({
           choice(
             seq("(", ")"),
             $.identifier,
-            $.FunctionArg,
             seq($._function_args, optional($._type_annotation)),
           ),
           "->",
-          field("body", $._function_body),
+          field("body", $._expr_or_block),
         ),
       ),
-
-    _function_body: ($) => choice($._Expr, $.EBlock),
-
     EVars: ($) =>
       prec.right(
         PREC.ASSIGN,
@@ -324,7 +317,7 @@ export default grammar({
       ),
     ETernary: ($) =>
       prec.right(
-        PREC.NULL_COALESCE - 1,
+        PREC.TERNARY,
         seq(
           field("cond", $._Expr),
           "?",
@@ -396,11 +389,7 @@ export default grammar({
           seq(field("operand", $._Expr), field("operator", choice("++", "--"))),
         ),
       ),
-    EBlock: ($) =>
-      prec(
-        PREC.BLOCK,
-        seq("{", repeat(seq($._expr_or_comp, optional($._semicolon))), "}"),
-      ),
+    EBlock: ($) => prec(PREC.BLOCK, seq("{", repeat($._expr_statement), "}")),
     EObjectDecl: ($) =>
       prec(
         PREC.OBJECT_DECL,
@@ -453,7 +442,7 @@ export default grammar({
           "in",
           field("iterable", $._Expr),
           ")",
-          field("body", $._expr_or_comp),
+          field("body", $._expr_or_block),
         ),
       ),
     EIf: ($) =>
@@ -464,8 +453,16 @@ export default grammar({
           "(",
           field("condition", $._Expr),
           ")",
-          field("consequence", $._expr_or_comp),
-          optional(seq("else", field("alternative", $._expr_or_comp))),
+          seq(field("consequence", $._expr_or_block), optional($._semicolon)),
+          optional(
+            seq(
+              "else",
+              field(
+                "alternative",
+                seq($._expr_or_block, optional($._semicolon)),
+              ),
+            ),
+          ),
         ),
       ),
     EWhile: ($) =>
@@ -476,11 +473,11 @@ export default grammar({
             "(",
             field("condition", $._Expr),
             ")",
-            field("body", $._expr_or_comp),
+            field("body", $._expr_or_block),
           ),
           seq(
             "do",
-            field("body", $._expr_or_comp),
+            field("body", $._expr_or_block),
             "while",
             "(",
             field("condition", $._Expr),
@@ -488,20 +485,9 @@ export default grammar({
           ),
         ),
       ),
-    _expr_or_comp: ($) =>
-      choice(
-        $.EFor,
-        $.EIf,
-        $.EWhile,
-        prec(
-          PREC.ASSIGN + 1,
-          seq(field("key", $._Expr), "=>", field("value", $._Expr)),
-        ),
-        $._Expr,
-      ),
     ESwitch: ($) =>
       prec(
-        PREC.PRIMARY,
+        PREC.CONTROL,
         seq(
           "switch",
           field("subject", choice($._EParenthesis, $._Expr)),
@@ -509,19 +495,25 @@ export default grammar({
           field(
             "cases",
             repeat(
-              seq(
-                "case",
-                field("patterns", commaSep1($._Expr)),
-                ":",
-                field("body", repeat(seq($._Expr, optional($._semicolon)))),
+              choice(
+                field(
+                  "case",
+                  seq(
+                    "case",
+                    field("patterns", commaSep1($._Expr)),
+                    ":",
+                    field("body", repeat(seq($._Expr, optional($._semicolon)))),
+                  ),
+                ),
+                field(
+                  "default",
+                  seq(
+                    choice("default", seq("case", $.wildcard_pattern)),
+                    ":",
+                    field("body", repeat(seq($._Expr, optional($._semicolon)))),
+                  ),
+                ),
               ),
-            ),
-          ),
-          optional(
-            seq(
-              choice("default", seq("case", $.wildcard_pattern)),
-              ":",
-              field("body", repeat(seq($._Expr, optional($._semicolon)))),
             ),
           ),
           "}",
@@ -544,7 +536,11 @@ export default grammar({
           ),
         ),
       ),
-    ECheckType: ($) => seq("(", $._Expr, $._type_annotation, ")"),
+    ECheckType: ($) =>
+      prec.right(
+        PREC.TYPE_ANNOTATION,
+        seq("(", field("expr", $._Expr), $._type_annotation, ")"),
+      ),
     EMeta: ($) =>
       prec.right(
         PREC.PRIMARY,
@@ -733,6 +729,24 @@ export default grammar({
           $._semicolon,
         ),
       ),
+    property_accessor: ($) =>
+      seq(
+        "(",
+        field("get", $.property_access),
+        ",",
+        field("set", $.property_access),
+        ")",
+      ),
+    property_access: ($) =>
+      choice(
+        alias("default", $.default),
+        alias("get", $.get),
+        alias("set", $.set),
+        alias("dynamic", $.dynamic),
+        alias("never", $.never),
+        $.null,
+        $.identifier,
+      ),
     ClassMethod: ($) =>
       prec.right(
         PREC.ASSIGN,
@@ -859,25 +873,6 @@ export default grammar({
     _function_args: ($) =>
       seq("(", field("args", commaSep($.FunctionArg)), ")"),
 
-    property_accessor: ($) =>
-      seq(
-        "(",
-        field("get", $.property_access),
-        ",",
-        field("set", $.property_access),
-        ")",
-      ),
-    property_access: ($) =>
-      choice(
-        alias("default", $.default),
-        alias("get", $.get),
-        alias("set", $.set),
-        alias("dynamic", $.dynamic),
-        alias("never", $.never),
-        $.null,
-        $.identifier,
-      ),
-
     // ------------------------------------------------------------------------
 
     identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
@@ -889,7 +884,7 @@ export default grammar({
 
     optional: (_) => "?",
     wildcard: (_) => "*",
-    wildcard_pattern: (_) => "_", // Added
+    wildcard_pattern: (_) => "_",
     _semicolon: (_) => ";",
 
     comment: ($) => choice($.line_comment, $.block_comment),
