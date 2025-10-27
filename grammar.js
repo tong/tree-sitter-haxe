@@ -117,12 +117,19 @@ export default grammar({
     [$.EVars, $.EBinop],
     [$.FunctionArg],
     [$.TypePath],
-    [$._expr_prim, $.EArrayDecl],
-    [$._expr_prim, $.ECall],
-    [$._expr_prim, $._expr_or_comp],
-    [$._expr_prim, $._function_body],
+    [$._expr_postfix, $.EArrayDecl],
+    [$._expr_postfix, $.ECall],
+    [$._expr_postfix, $._expr_or_comp],
+    [$._expr_postfix, $._function_body],
     [$._type_decl, $._conditional_body],
     [$.import],
+  ],
+  inline: ($) => [
+    $._expr_atom,
+    $._expr_block,
+    $._expr_meta,
+    $._expr_prim,
+    $._expr_stmt,
   ],
   word: ($) => $.identifier,
   rules: {
@@ -130,7 +137,7 @@ export default grammar({
       seq(
         optional($.package),
         repeat(choice($.import, $.using)),
-        repeat(choice($._type_decl, $._expr_stmt)),
+        repeat(choice($._type_decl, $._expr_statement)),
       ),
 
     //////////////////////////////////////////////////////////////////////////
@@ -178,40 +185,42 @@ export default grammar({
 
     ///////////////////////////////////////////////////////////////////////////
 
-    _expr_stmt: ($) => seq($._Expr, optional($._semicolon)),
+    _expr_statement: ($) => seq($._Expr, optional($._semicolon)),
 
-    _Expr: ($) => choice($.EBinop, $.ETernary, $.EUnop, $._expr_atom),
-    _expr_atom: ($) => choice($.ECall, $.EField, $.EArray, $._expr_prim),
-    _expr_prim: ($) =>
+    _Expr: ($) => choice($.ETernary, $.EBinop, $.EUnop, $._expr_postfix),
+    _expr_postfix: ($) => choice($.ECall, $.EField, $.EArray, $._expr_prim),
+    _expr_atom: ($) =>
+      choice($.EConst, $._EParenthesis, $.EObjectDecl, $.EArrayDecl, $.ENew),
+    _expr_stmt: ($) =>
       choice(
-        $.EConst,
-        $._EParenthesis,
-        $.EBlock,
-        $.EObjectDecl,
-        $.EArrayDecl,
-        $.ENew,
-        $.EVars,
-        $.EFunction,
-        $.EArrowFunction,
-        $.EReturn,
         $.EBreak,
         $.EContinue,
-        $.EThrow,
         $.EFor,
         $.EIf,
-        $.EWhile,
+        $.EReturn,
         $.ESwitch,
+        $.EThrow,
         $.ETry,
+        $.EVars,
+        $.EWhile,
+      ),
+    _expr_meta: ($) =>
+      choice(
+        $.EArrowFunction,
         $.ECast,
-        $.EUntyped,
         $.ECheckType,
+        $.EFunction,
         $.EMeta,
-        ///////////////////
+        $.EUntyped,
+        //
         $.macro,
         $.reification,
         $.type_trace,
         $.wildcard_pattern,
       ),
+    _expr_block: ($) => choice($.EBlock),
+    _expr_prim: ($) =>
+      choice($._expr_atom, $._expr_stmt, $._expr_meta, $._expr_block),
 
     ECall: ($) =>
       prec.left(
