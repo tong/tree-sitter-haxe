@@ -87,14 +87,15 @@ map comprehension: for
           (Int))
         right: (EConst
           (Int)))
-      key: (EConst
-        (identifier))
-      value: (EConst
-        (String
-          (fragment)
-          (interpolation
-            (EConst
-              (identifier))))))))
+      body: (EBinop
+        left: (EConst
+          (identifier))
+        right: (EConst
+          (String
+            (fragment)
+            (interpolation
+              (EConst
+                (identifier)))))))))
 
 =========================
 map comprehension: for if
@@ -122,13 +123,14 @@ map comprehension: for if
               (Int)))
           right: (EConst
             (Int)))
-        key: (EConst
-          (identifier))
-        value: (EBinop
+        consequence: (EBinop
           left: (EConst
             (identifier))
-          right: (EConst
-            (identifier)))))))
+          right: (EBinop
+            left: (EConst
+              (identifier))
+            right: (EConst
+              (identifier))))))))
 
 ========================
 map comprehension: while
@@ -146,8 +148,9 @@ map comprehension: while
           (identifier))
         right: (EConst
           (Int)))
-      key: (EUnop
-        operand: (EConst
-          (identifier)))
-      value: (EConst
-        (identifier)))))
+      body: (EBinop
+        left: (EUnop
+          operand: (EConst
+            (identifier)))
+        right: (EConst
+          (identifier))))))
