@@ -125,8 +125,7 @@ class A {}
       params: (ECall
         callee: (EField
           object: (EField
-            object: (EConst
-              (identifier))
+            object: (identifier)
             name: (identifier))
           name: (identifier))))
     (conditional_end))

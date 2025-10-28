@@ -15,22 +15,16 @@ switch a {
 
 (module
   (ESwitch
-    subject: (EConst
-      (identifier))
+    subject: (identifier)
     cases: (cases
       (switch_case
-        patterns: (EConst
-          (Int))
-        body: (EConst
-          (Int)))
+        patterns: (Int)
+        body: (Int))
       (switch_case
-        patterns: (EConst
-          (Int))
-        body: (EConst
-          (Int))))
+        patterns: (Int)
+        body: (Int)))
     default: (switch_default
-      body: (EConst
-        (Int)))))
+      body: (Int))))
 
 ============================
 switch enum pattern matching
@@ -49,19 +43,16 @@ switch (myTree) {
 
 ---
 
-
 (module
   (ESwitch
-    subject: (EConst
-      (identifier))
+    subject: (identifier)
     cases: (cases
       (switch_case
         patterns: (ECall
           callee: (identifier)
           args: (wildcard_pattern))
-        body: (EConst
-          (String
-            (fragment))))
+        body: (String
+          (fragment)))
       (switch_case
         patterns: (ECall
           callee: (identifier)
@@ -69,9 +60,8 @@ switch (myTree) {
           args: (ECall
             callee: (identifier)
             args: (wildcard_pattern)))
-        body: (EConst
-          (String
-            (fragment))))
+        body: (String
+          (fragment)))
       (switch_case
         patterns: (ECall
           callee: (identifier)
@@ -80,56 +70,50 @@ switch (myTree) {
             callee: (identifier)
             args: (ECall
               callee: (identifier)
-              args: (EConst
-                (String
-                  (fragment))))
+              args: (String
+                (fragment)))
             args: (wildcard_pattern)))
-        body: (EConst
-          (String
-            (fragment)))))
+        body: (String
+          (fragment))))
     default: (switch_default
-      body: (EConst
-        (String
-          (fragment))))))
+      body: (String
+        (fragment)))))
 
 ================================
 switch variable pattern matching
 ================================
 
 switch (myTree) {
-  case Leaf(s): s;
-  case Node(Leaf(s), _): s;
-  case _: "none";
- }
+	case Leaf(s):
+		s;
+	case Node(Leaf(s), _):
+		s;
+	case _:
+		"none";
+}
 
 ---
 
 (module
   (ESwitch
-    subject: (EConst
-      (identifier))
+    subject: (identifier)
     cases: (cases
       (switch_case
         patterns: (ECall
           callee: (identifier)
-          args: (EConst
-            (identifier)))
-        body: (EConst
-          (identifier)))
+          args: (identifier))
+        body: (identifier))
       (switch_case
         patterns: (ECall
           callee: (identifier)
           args: (ECall
             callee: (identifier)
-            args: (EConst
-              (identifier)))
+            args: (identifier))
           args: (wildcard_pattern))
-        body: (EConst
-          (identifier))))
+        body: (identifier)))
     default: (switch_default
-      body: (EConst
-        (String
-          (fragment))))))
+      body: (String
+        (fragment)))))
 
 
 ================================
@@ -147,39 +131,32 @@ switch (myStructure) {
 
 ---
 
+
 (module
   (ESwitch
-    subject: (EConst
-      (identifier))
+    subject: (identifier)
     cases: (cases
       (switch_case
         patterns: (EObjectDecl
           name: (identifier)
-          value: (EConst
-            (String
-              (fragment)))
+          value: (String
+            (fragment))
           name: (identifier)
-          value: (EConst
-            (String
-              (fragment))))
+          value: (String
+            (fragment)))
         body: (EThrow
-          (EConst
-            (false))))
+          (false)))
       (switch_case
         patterns: (EObjectDecl
           name: (identifier)
-          value: (EConst
-            (String
-              (fragment)))
+          value: (String
+            (fragment))
           name: (identifier)
-          value: (EConst
-            (identifier)))
-        body: (EConst
-          (identifier))))
+          value: (identifier))
+        body: (identifier)))
     default: (switch_default
-      body: (EConst
-        (String
-          (fragment))))))
+      body: (String
+        (fragment)))))
 
 =============================
 switch array pattern matching
@@ -202,83 +179,85 @@ switch (myArray) {
 
 (module
   (ESwitch
-    subject: (EConst
-      (identifier))
+    subject: (identifier)
     cases: (cases
       (switch_case
         patterns: (EArrayDecl
-          (EConst
-            (Int))
+          (Int)
           (wildcard_pattern))
-        body: (EConst
-          (String
-            (fragment))))
+        body: (String
+          (fragment)))
       (switch_case
         patterns: (EArrayDecl
           (wildcard_pattern)
-          (EConst
-            (Int)))
-        body: (EConst
-          (String
-            (fragment))))
+          (Int))
+        body: (String
+          (fragment)))
       (switch_case
         patterns: (EArrayDecl)
-        body: (EConst
-          (String
-            (fragment))))
+        body: (String
+          (fragment)))
       (switch_case
         patterns: (EArrayDecl
           (wildcard_pattern)
           (wildcard_pattern)
           (wildcard_pattern))
-        body: (EConst
-          (String
-            (fragment)))))
+        body: (String
+          (fragment))))
     default: (switch_default
-      body: (EConst
-        (String
-          (fragment))))))
+      body: (String
+        (fragment)))))
 
 
 ==================
 switch or patterns
 ==================
 
-switch (7) {
-    case 4 | 1: "0";
-    case 6 | 7: "1";
-    case _: "2";
-  }
+switch (myArray) {
+	case [2, _]:
+		"0";
+	case [_, 6]:
+		"1";
+	case []:
+		"2";
+	case [_, _, _]:
+		"3";
+	case _:
+		"4";
+}
 
 ---
 
 (module
   (ESwitch
-    subject: (EConst
-      (Int))
+    subject: (identifier)
     cases: (cases
       (switch_case
-        patterns: (EBinop
-          left: (EConst
-            (Int))
-          right: (EConst
-            (Int)))
-        body: (EConst
-          (String
-            (fragment))))
+        patterns: (EArrayDecl
+          (Int)
+          (wildcard_pattern))
+        body: (String
+          (fragment)))
       (switch_case
-        patterns: (EBinop
-          left: (EConst
-            (Int))
-          right: (EConst
-            (Int)))
-        body: (EConst
-          (String
-            (fragment)))))
+        patterns: (EArrayDecl
+          (wildcard_pattern)
+          (Int))
+        body: (String
+          (fragment)))
+      (switch_case
+        patterns: (EArrayDecl)
+        body: (String
+          (fragment)))
+      (switch_case
+        patterns: (EArrayDecl
+          (wildcard_pattern)
+          (wildcard_pattern)
+          (wildcard_pattern))
+        body: (String
+          (fragment))))
     default: (switch_default
-      body: (EConst
-        (String
-          (fragment))))))
+      body: (String
+        (fragment)))))
 
 
 ===============================
@@ -296,45 +275,33 @@ switch [1, false, "foo"] {
 (module
   (ESwitch
     subject: (EArrayDecl
-      (EConst
-        (Int))
-      (EConst
-        (false))
-      (EConst
-        (String
-          (fragment))))
+      (Int)
+      (false)
+      (String
+        (fragment)))
     cases: (cases
       (switch_case
         patterns: (EArrayDecl
-          (EConst
-            (Int))
-          (EConst
-            (false))
-          (EConst
-            (String
-              (fragment))))
-        body: (EConst
+          (Int)
+          (false)
           (String
-            (fragment))))
+            (fragment)))
+        body: (String
+          (fragment)))
       (switch_case
         patterns: (EArrayDecl
           (wildcard_pattern)
-          (EConst
-            (true))
+          (true)
           (wildcard_pattern))
-        body: (EConst
-          (String
-            (fragment))))
+        body: (String
+          (fragment)))
       (switch_case
         patterns: (EArrayDecl
           (wildcard_pattern)
-          (EConst
-            (false))
+          (false)
           (wildcard_pattern))
-        body: (EConst
-          (String
-            (fragment)))))))
-
+        body: (String
+          (fragment))))))
 
 =================
 switch extractors
@@ -351,8 +318,7 @@ switch (e) {
 
 (module
   (ESwitch
-    subject: (EConst
-      (identifier))
+    subject: (identifier)
     cases: (cases
       (switch_case
         patterns: (ECall
@@ -362,11 +328,8 @@ switch (e) {
               callee: (EField
                 object: (wildcard_pattern)
                 name: (identifier)))
-            right: (EConst
-              (String
-                (fragment)))))
-        body: (EConst
-          (true))))
+            right: (String
+              (fragment))))
+        body: (true)))
     default: (switch_default
-      body: (EConst
-        (false)))))
+      body: (false))))

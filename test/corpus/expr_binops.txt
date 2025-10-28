@@ -8,10 +8,8 @@ binop add operator
 
 (module
   (EBinop
-    left: (EConst
-      (Int))
-    right: (EConst
-      (Int))))
+    left: (Int)
+    right: (Int)))
 
 
 ===================
@@ -24,16 +22,12 @@ binop operation
 
 (module
   (EBinop
-    left: (EConst
-      (Int))
+    left: (Int)
     right: (EBinop
       left: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
-      right: (EConst
-        (Int)))))
+        left: (Int)
+        right: (Int))
+      right: (Int))))
 
 ====================================
 binop string concatenation operator
@@ -45,12 +39,12 @@ binop string concatenation operator
 
 (module
   (EBinop
-    left: (EConst
+    left: 
       (String
-        (fragment)))
-    right: (EConst
+        (fragment))
+    right: 
       (String
-        (fragment)))))
+        (fragment))))
 
 ============================================
 binop string and int concatenation operator
@@ -62,11 +56,8 @@ binop string and int concatenation operator
 
 (module
   (EBinop
-    left: (EConst
-      (String
-        (fragment)))
-    right: (EConst
-      (Int))))
+    left: (String (fragment))
+    right: (Int)))
 
 ============================================
 binop int and string concatenation operator
@@ -78,11 +69,10 @@ binop int and string concatenation operator
 
 (module
   (EBinop
-    left: (EConst
-      (Int))
-    right: (EConst
+    left: (Int)
+    right: 
       (String
-        (fragment)))))
+        (fragment))))
 
 ===============================================
 binop string and is int concatenation operator
@@ -94,12 +84,12 @@ binop string and is int concatenation operator
 
 (module
   (EBinop
-    left: (EConst
+    left: 
       (String
-        (fragment)))
-    right: (EConst
+        (fragment))
+    right: 
       (String
-        (fragment)))))
+        (fragment))))
 
 ===================
 binop logical or operator
@@ -111,10 +101,8 @@ true || false;
 
 (module
   (EBinop
-    left: (EConst
-      (true))
-    right: (EConst
-      (false))))
+    left: (true)
+    right: (false)))
 
 ====================
 binop logical and operator
@@ -126,10 +114,8 @@ true && false;
 
 (module
   (EBinop
-    left: (EConst
-      (true))
-    right: (EConst
-      (false))))
+    left: (true)
+    right: (false)))
 
 =====================
 binop null coalescing
@@ -141,8 +127,7 @@ value ?? "fallback"
 
 (module
   (EBinop
-    left: (EConst
-      (identifier))
-    right: (EConst
+    left: (identifier)
+    right: 
       (String
-        (fragment)))))
+        (fragment))))

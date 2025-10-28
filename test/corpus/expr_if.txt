@@ -1,0 +1,33 @@
+========================
+expression if with block
+=======================
+
+if(true) {} else if(false) {} else {}
+
+---
+
+(module
+  (EIf
+    condition: (true)
+    consequence: (EBlock)
+    alternative: (EIf
+      condition: (false)
+      consequence: (EBlock)
+      alternative: (EBlock))))
+
+===========================
+expression if without block
+===========================
+
+if(true) some; else if(false) some; else some;
+
+---
+
+(module
+  (EIf
+    condition: (true)
+    consequence: (identifier)
+    alternative: (EIf
+      condition: (false)
+      consequence: (identifier)
+      alternative: (identifier))))

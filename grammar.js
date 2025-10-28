@@ -111,14 +111,13 @@ export default grammar({
     [$.AbstractType, $.ClassType, $.DefType, $.EnumType],
     [$.AbstractType, $.DefType, $.EnumType],
     [$.ClassVar, $.ClassMethod],
-    [$.EConst, $.FunctionArg, $.compile_condition],
-    [$.EConst, $.FunctionArg],
-    [$.EConst, $.compile_condition],
     [$.EVars, $.ETernary],
     [$.TypePath],
+    [$._EConst, $.FunctionArg, $.compile_condition],
+    [$._EConst, $.FunctionArg],
+    [$._EConst, $.compile_condition],
     [$._expr_atom, $.ESwitch],
     [$._expr_meta, $.ECall],
-    [$._expr_meta, $.switch_default],
     [$._expr_prim, $._expr_or_block],
     [$._expr_stmt, $.EArrayDecl],
     [$._type_decl, $._conditional_body],
@@ -194,7 +193,7 @@ export default grammar({
     _expr_prim: ($) =>
       choice($._expr_atom, $._expr_stmt, $._expr_meta, $.EBlock),
     _expr_atom: ($) =>
-      choice($.EConst, $._EParenthesis, $.EObjectDecl, $.EArrayDecl, $.ENew),
+      choice($._EConst, $._EParenthesis, $.EObjectDecl, $.EArrayDecl, $.ENew),
     _expr_stmt: ($) =>
       choice(
         $.EBreak,
@@ -257,7 +256,7 @@ export default grammar({
         PREC.CALL,
         seq(field("array", $._Expr), "[", field("index", $._Expr), "]"),
       ),
-    EConst: ($) =>
+    _EConst: ($) =>
       choice(
         $.Int,
         $.Float,

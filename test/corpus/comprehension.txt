@@ -11,15 +11,11 @@ array comprehension: for
     (EFor
       var: (identifier)
       iterable: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
+        left: (Int)
+        right: (Int))
       body: (EBinop
-        left: (EConst
-          (identifier))
-        right: (EConst
-          (identifier))))))
+        left: (identifier)
+        right: (identifier)))))
 
 ============================
 array comprehension: for if
@@ -34,21 +30,15 @@ array comprehension: for if
     (EFor
       var: (identifier)
       iterable: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
+        left: (Int)
+        right: (Int))
       body: (EIf
         condition: (EBinop
           left: (EBinop
-            left: (EConst
-              (identifier))
-            right: (EConst
-              (Int)))
-          right: (EConst
-            (Int)))
-        consequence: (EConst
-          (identifier))))))
+            left: (identifier)
+            right:  (Int))
+          right: (Int))
+        consequence: (identifier)))))
 
 =========================
 array comprehension: while
@@ -62,13 +52,10 @@ array comprehension: while
   (EArrayDecl
     (EWhile
       condition: (EBinop
-        left: (EConst
-          (identifier))
-        right: (EConst
-          (Int)))
+        left: (identifier)
+        right: (Int))
       body: (EUnop
-        operand: (EConst
-          (identifier))))))
+        operand: (identifier)))))
 
 ======================
 map comprehension: for
@@ -83,19 +70,14 @@ map comprehension: for
     (EFor
       var: (identifier)
       iterable: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
+        left: (Int)
+        right: (Int))
       body: (EBinop
-        left: (EConst
-          (identifier))
-        right: (EConst
-          (String
+        left: (identifier)
+        right: (String
             (fragment)
             (interpolation
-              (EConst
-                (identifier)))))))))
+              (identifier)))))))
 
 =========================
 map comprehension: for if
@@ -110,27 +92,19 @@ map comprehension: for if
     (EFor
       var: (identifier)
       iterable: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
+        left: (Int)
+        right: (Int))
       body: (EIf
         condition: (EBinop
           left: (EBinop
-            left: (EConst
-              (identifier))
-            right: (EConst
-              (Int)))
-          right: (EConst
-            (Int)))
+            left: (identifier)
+            right: (Int))
+          right: (Int))
         consequence: (EBinop
-          left: (EConst
-            (identifier))
+          left: (identifier)
           right: (EBinop
-            left: (EConst
-              (identifier))
-            right: (EConst
-              (identifier))))))))
+            left: (identifier)
+            right: (identifier)))))))
 
 ========================
 map comprehension: while
@@ -144,13 +118,9 @@ map comprehension: while
   (EArrayDecl
     (EWhile
       condition: (EBinop
-        left: (EConst
-          (identifier))
-        right: (EConst
-          (Int)))
+        left: (identifier)
+        right: (Int))
       body: (EBinop
         left: (EUnop
-          operand: (EConst
-            (identifier)))
-        right: (EConst
-          (identifier))))))
+          operand: (identifier))
+        right: (identifier)))))

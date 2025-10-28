@@ -3,24 +3,19 @@ var b = 3 - 4;
 var c = 5 * 6;
 var d = 7 / 8;
 var e = 9 % 2;
-
 var f = a << 1;
 var g = b >> 2;
 var h = c >>> 3;
-
 var i = d & 1;
 var j = e | 2;
 var k = f ^ 3;
-
 var l = true && false;
 var m = true || false;
-
 var n = 10 == 10;
 var o = 10 != 5;
 var p = 5 > 3;
 var q = 5 >= 5;
 var r = 3 < 4;
 var s = 3 <= 4;
-
-var t = 1 + 2 * 3; // precedence check
+var t = 1 + 2 * 3;
 var u = (1 + 2) * 3;
