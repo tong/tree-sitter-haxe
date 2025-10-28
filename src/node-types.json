@@ -165,10 +165,6 @@
         {
           "type": "MetaDataEntry",
           "named": true
-        },
-        {
-          "type": "optional",
-          "named": true
         }
       ]
     }
@@ -325,10 +321,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -631,10 +623,6 @@
         {
           "type": "type_trace",
           "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
         }
       ]
     }
@@ -920,10 +908,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -1058,10 +1042,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       }
@@ -1193,10 +1173,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -1351,10 +1327,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -1373,10 +1345,6 @@
       "multiple": false,
       "required": false,
       "types": [
-        {
-          "type": "FunctionArg",
-          "named": true
-        },
         {
           "type": "identifier",
           "named": true
@@ -1518,10 +1486,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -1803,10 +1767,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       }
@@ -1815,284 +1775,7 @@
   {
     "type": "EBlock",
     "named": true,
-    "fields": {
-      "key": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
@@ -2215,10 +1898,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -2368,10 +2047,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -2508,11 +2183,11 @@
             "named": true
           },
           {
-            "type": "type_trace",
+            "type": "super",
             "named": true
           },
           {
-            "type": "wildcard_pattern",
+            "type": "type_trace",
             "named": true
           }
         ]
@@ -2654,10 +2329,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -2677,6 +2348,140 @@
     "type": "ECheckType",
     "named": true,
     "fields": {
+      "expr": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EConst",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          }
+        ]
+      },
       "type": {
         "multiple": false,
         "required": true,
@@ -2687,136 +2492,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "EArray",
-          "named": true
-        },
-        {
-          "type": "EArrayDecl",
-          "named": true
-        },
-        {
-          "type": "EArrowFunction",
-          "named": true
-        },
-        {
-          "type": "EBinop",
-          "named": true
-        },
-        {
-          "type": "EBlock",
-          "named": true
-        },
-        {
-          "type": "EBreak",
-          "named": true
-        },
-        {
-          "type": "ECall",
-          "named": true
-        },
-        {
-          "type": "ECast",
-          "named": true
-        },
-        {
-          "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
-          "named": true
-        },
-        {
-          "type": "EContinue",
-          "named": true
-        },
-        {
-          "type": "EField",
-          "named": true
-        },
-        {
-          "type": "EFor",
-          "named": true
-        },
-        {
-          "type": "EFunction",
-          "named": true
-        },
-        {
-          "type": "EIf",
-          "named": true
-        },
-        {
-          "type": "EMeta",
-          "named": true
-        },
-        {
-          "type": "ENew",
-          "named": true
-        },
-        {
-          "type": "EObjectDecl",
-          "named": true
-        },
-        {
-          "type": "EReturn",
-          "named": true
-        },
-        {
-          "type": "ESwitch",
-          "named": true
-        },
-        {
-          "type": "ETernary",
-          "named": true
-        },
-        {
-          "type": "EThrow",
-          "named": true
-        },
-        {
-          "type": "ETry",
-          "named": true
-        },
-        {
-          "type": "EUnop",
-          "named": true
-        },
-        {
-          "type": "EUntyped",
-          "named": true
-        },
-        {
-          "type": "EVars",
-          "named": true
-        },
-        {
-          "type": "EWhile",
-          "named": true
-        },
-        {
-          "type": "macro",
-          "named": true
-        },
-        {
-          "type": "reification",
-          "named": true
-        },
-        {
-          "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3024,10 +2699,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -3061,10 +2732,6 @@
           },
           {
             "type": ")",
-            "named": false
-          },
-          {
-            "type": "=>",
             "named": false
           },
           {
@@ -3185,10 +2852,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -3324,292 +2987,32 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
       "key": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
+            "type": "identifier",
             "named": true
           }
         ]
       },
       "value": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
+            "type": "identifier",
             "named": true
           }
         ]
       },
       "var": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -3768,10 +3171,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -3850,7 +3249,7 @@
             "named": false
           },
           {
-            "type": "=>",
+            "type": ";",
             "named": false
           },
           {
@@ -3971,10 +3370,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -4110,10 +3505,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -4130,10 +3521,6 @@
             "named": false
           },
           {
-            "type": "=>",
-            "named": false
-          },
-          {
             "type": "EArray",
             "named": true
           },
@@ -4251,286 +3638,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
-          }
-        ]
-      },
-      "key": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -4671,10 +3778,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -4821,10 +3924,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -4979,10 +4078,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       }
@@ -5114,10 +4209,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -5262,10 +4353,20 @@
           {
             "type": "type_trace",
             "named": true
+          }
+        ]
+      },
+      "case": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
           },
           {
-            "type": "wildcard_pattern",
-            "named": true
+            "type": "case",
+            "named": false
           }
         ]
       },
@@ -5406,6 +4507,10 @@
             "named": false
           },
           {
+            "type": "default",
+            "named": false
+          },
+          {
             "type": "macro",
             "named": true
           },
@@ -5416,6 +4521,28 @@
           {
             "type": "type_trace",
             "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      },
+      "default": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "case",
+            "named": false
+          },
+          {
+            "type": "default",
+            "named": false
           },
           {
             "type": "wildcard_pattern",
@@ -5558,10 +4685,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -5696,23 +4819,9 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "wildcard_pattern",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -5850,10 +4959,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       },
@@ -5987,10 +5092,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -6126,10 +5227,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       }
@@ -6261,10 +5358,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -6404,10 +5497,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -6550,10 +5639,6 @@
         {
           "type": "type_trace",
           "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
         }
       ]
     }
@@ -6692,10 +5777,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -6858,10 +5939,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -7026,10 +6103,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       }
@@ -7049,10 +6122,6 @@
           },
           {
             "type": ")",
-            "named": false
-          },
-          {
-            "type": "=>",
             "named": false
           },
           {
@@ -7173,10 +6242,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -7312,286 +6377,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
-          }
-        ]
-      },
-      "key": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       }
@@ -7707,8 +6492,8 @@
         "required": false,
         "types": [
           {
-            "type": "rest",
-            "named": true
+            "type": "...",
+            "named": false
           }
         ]
       },
@@ -7857,10 +6642,6 @@
           {
             "type": "type_trace",
             "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
           }
         ]
       }
@@ -7871,10 +6652,6 @@
       "types": [
         {
           "type": "MetaDataEntry",
-          "named": true
-        },
-        {
-          "type": "optional",
           "named": true
         }
       ]
@@ -8033,10 +6810,6 @@
           },
           {
             "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -8425,10 +7198,6 @@
         {
           "type": "type_trace",
           "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
         }
       ]
     }
@@ -8594,10 +7363,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -8769,10 +7534,6 @@
         {
           "type": "type_trace",
           "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
         }
       ]
     }
@@ -8833,15 +7594,7 @@
             "named": false
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "package_name",
-            "named": true
-          },
-          {
-            "type": "type_name",
             "named": true
           }
         ]
@@ -9003,10 +7756,6 @@
         {
           "type": "type_trace",
           "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
         }
       ]
     }
@@ -9137,10 +7886,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -9313,18 +8058,9 @@
         {
           "type": "using",
           "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
         }
       ]
     }
-  },
-  {
-    "type": "optional",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "package",
@@ -9335,7 +8071,7 @@
       "required": false,
       "types": [
         {
-          "type": "identifier",
+          "type": "package_name",
           "named": true
         }
       ]
@@ -9542,18 +8278,9 @@
         {
           "type": "type_trace",
           "named": true
-        },
-        {
-          "type": "wildcard_pattern",
-          "named": true
         }
       ]
     }
-  },
-  {
-    "type": "rest",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "type_name",
@@ -9686,10 +8413,6 @@
         },
         {
           "type": "type_trace",
-          "named": true
-        },
-        {
-          "type": "wildcard_pattern",
           "named": true
         }
       ]
