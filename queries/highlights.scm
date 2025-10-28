@@ -1,9 +1,7 @@
-; Comments
 (comment) @comment
 (line_comment) @comment.line
 (block_comment) @comment.block
 
-; Conditional Compilation
 [
   (conditional)
   (conditional_elseif)
@@ -12,12 +10,12 @@
   (conditional_error)
 ] @keyword.directive
 
-; Punctuation
+(identifier) @variable
+
 ["{" "}" "[" "]" "(" ")"] @punctuation.bracket
 ["," ";" ":" "..."] @punctuation.delimiter
 ["?" "??"] @punctuation.special
 
-; Keywords
 [
   "break"
   "case"
@@ -72,7 +70,6 @@
 (super) @variable.builtin
 (this) @variable.builtin
 
-; Operators
 ["->" "=>"] @keyword.operator
 
 (EBinop op: _ @operator)
@@ -81,7 +78,6 @@
 (ETernary ":" @operator)
 (ComplexType "&" @operator)
 
-; Literals
 (Int) @number
 (Float) @number.float
 (String (fragment) @string)
@@ -93,41 +89,20 @@
 (false) @boolean
 (null) @constant.builtin
 
-; Module structure
 (package_name) @namespace
 
-; (import
-;   path: (package_name) @namespace
-;   (wildcard) @constant)
-; (import
-;   path: (package_name) @namespace
-;   module: (type_name) @type
-;   alias: (identifier) @type)
-
-; import some.where.Type;
-; (import
-;   path: (package_name) @namespace
-;   path: (package_name) @namespace
-;   module: (type_name) @module)
-; import some.where.*;
 (import
   path: (package_name) @namespace
   (wildcard) @constant)
-
-; import some.where.Type;
 (import
   path: (package_name) @namespace
   path: (package_name) @namespace
   module: (type_name) @module)
-
-; import some.where.Type as Alias;
 (import
   path: (package_name) @namespace
   path: (package_name) @namespace
   module: (type_name) @module
   alias: (identifier) @type)
-
-; import some.where.Type.field;
 (import
   path: (package_name) @namespace
   path: (package_name) @namespace
@@ -138,39 +113,19 @@
   path: (package_name) @namespace
   type: (type_name) @type)
 
-; Declarations
-(AbstractType name: (type_name) @type.definition)
-(ClassType name: (type_name) @type.definition)
-(DefType name: (type_name) @type.definition)
-(EnumType name: (type_name) @type.definition)
-(EnumConstructor name: (identifier) @constant)
+;---------------------------------------------------
 
-(ClassVar name: (identifier) @variable.member)
-(ClassMethod name: (identifier) @function.method)
-(ClassMethod
-  [":"] @punctuation.delimiter)
-(ClassMethod
-  type: (ComplexType
-    (TypePath
-      name: (type_name) @type)))
-(ClassMethod
-  args: (FunctionArg
-    type: (ComplexType
-      (TypePath
-        name: (type_name) @type))))
+(type_name) @type
 
-(EVars name: (identifier) @variable)
-(EFunction name: (identifier) @function)
+(ComplexType "->" @keyword.operator)
 
-; Types
 (TypePath
   pack: (package_name) @namespace
-  name: (type_name) @type.definition
+  name: (type_name) @type
   sub: (identifier) @property)
 
 (TypeParameter
   name: (type_name) @type.parameter)
-; constrained
 (TypeParameter
   name: (type_name) @type.parameter
   [":"] @punctuation.delimiter
@@ -178,63 +133,67 @@
     (TypePath
       name: (type_name) @type)))
 
-(AbstractType ["<" ">"] @punctuation.bracket)
-(ClassType ["<" ">"] @punctuation.bracket)
-(DefType ["<" ">"] @punctuation.bracket)
-(EnumType ["<" ">"] @punctuation.bracket)
+(FunctionArg
+  name: (identifier) @variable.parameter
+  "=" @punctuation.special)
 
-(ComplexType "->" @keyword.operator)
+[
+  (TypePath)
+  (TypeParameter)
+  (ComplexType)
+] ["<" ">"] @punctuation.bracket
+
+
+; Declarations ----------------------------------------------------------------
+
+[
+  (AbstractType)
+  (ClassType)
+  (EnumType)
+  (DefType)
+] @type.definition
+
+(ClassVar type: (ComplexType) @type)
+(ClassMethod
+  name: (identifier) @function.method)
+
+(EnumConstructor name: (identifier) @constant)
 
 (TAnonymous) @type.builtin
 (AnonymousField name: (identifier) @variable.member)
 
-(FunctionArg
-  type: (ComplexType
-    (TypePath
-      name: (type_name) @type)))
-(ClassVar type: (ComplexType) @type)
-(ClassMethod ret: (ComplexType) @type)
-(EFunction ret: (ComplexType) @type)
+; Expressions -----------------------------------------------------------------
 
-(DefType type: (ComplexType) @type)
-(AbstractType type: (ComplexType) @type)
-
+(EField name: (identifier) @property)
 (ECast type: (ComplexType) @type)
-(ENew (TypePath) @type)
-
-; (_type_arguments
-;   "<" @punctuation.bracket
-;   (type_name) @type.parameter
-;   ">" @punctuation.bracket)
-
-; Function calls
 (ECall callee: (identifier) @function.call)
 (ECall callee: (EField name: (identifier) @function.call))
-
-; Variables and properties
-(FunctionArg name: (identifier) @variable.parameter)
-(EField name: (identifier) @property)
-(EObjectDecl name: (identifier) @property)
-(EObjectDecl name: (String) @property)
 (EFor
   key: (identifier) @variable
   value: (identifier) @variable
   var: (identifier) @variable
 )
+(EFunction name: (identifier) @function)
+(ENew (TypePath) @type)
+(EObjectDecl name: (identifier) @property)
+(EObjectDecl name: (String) @property)
 (ETry (identifier) @variable)
+(EVars name: (identifier) @variable)
 
-; Metadata
-(MetaDataEntry) @attribute
-(MetaDataEntry "@" @attribute)
-(MetaDataEntry ":" @attribute)
-(MetaDataEntry name: (identifier) @attribute)
-(MetaDataEntry "(" @punctuation.bracket)
-(MetaDataEntry params: (_) @attribute.parameter)
-(MetaDataEntry ")" @punctuation.bracket)
+; Metadata --------------------------------------------------------------------
+
 (MetaDataEntry
-  (ECall callee: (EField name: (identifier) @function.call)))
+  [
+    "@" @attribute
+    ":" @attribute
+    name: (identifier) @attribute
+    params: (_) @attribute.parameter
+    "(" @punctuation.bracket
+    ")" @punctuation.bracket
+    (ECall callee: (EField name: (identifier) @function.call))
+  ])
 
 ; Fallback
 ; (type_name) @type
-(identifier) @variable
+; (identifier) @variable
 
