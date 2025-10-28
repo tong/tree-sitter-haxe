@@ -142,7 +142,7 @@ export default grammar({
 
     //////////////////////////////////////////////////////////////////////////
 
-    package: ($) => seq("package", dotSep($.identifier), $._semicolon),
+    package: ($) => seq("package", dotSep($.package_name), $._semicolon),
 
     import: ($) =>
       seq(
@@ -165,7 +165,7 @@ export default grammar({
               seq(
                 dotSep1($.package_name),
                 "as",
-                choice($.type_name, $.identifier),
+                field("alias", choice($.type_name, $.identifier)),
               ),
             ),
           ),

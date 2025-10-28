@@ -1,4 +1,4 @@
-import my.other.Type.Type;
+import my.other.Type.field;
 // <- keyword
 //     ^ namespace
-//                ^ module
+//                      ^ variable
