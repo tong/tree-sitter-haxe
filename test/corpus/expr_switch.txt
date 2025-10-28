@@ -1,0 +1,372 @@
+=================
+switch expression
+=================
+
+switch a {
+	case 0:
+		0;
+	case 1:
+		1;
+	default:
+		666;
+}
+
+---
+
+(module
+  (ESwitch
+    subject: (EConst
+      (identifier))
+    cases: (cases
+      (switch_case
+        patterns: (EConst
+          (Int))
+        body: (EConst
+          (Int)))
+      (switch_case
+        patterns: (EConst
+          (Int))
+        body: (EConst
+          (Int))))
+    default: (switch_default
+      body: (EConst
+        (Int)))))
+
+============================
+switch enum pattern matching
+============================
+
+switch (myTree) {
+	case Leaf(_):
+		"0";
+	case Node(_, Leaf(_)):
+		"1";
+	case Node(_, Node(Leaf("bar"), _)):
+		"2";
+	case _:
+		"3";
+}
+
+---
+
+
+(module
+  (ESwitch
+    subject: (EConst
+      (identifier))
+    cases: (cases
+      (switch_case
+        patterns: (ECall
+          callee: (identifier)
+          args: (wildcard_pattern))
+        body: (EConst
+          (String
+            (fragment))))
+      (switch_case
+        patterns: (ECall
+          callee: (identifier)
+          args: (wildcard_pattern)
+          args: (ECall
+            callee: (identifier)
+            args: (wildcard_pattern)))
+        body: (EConst
+          (String
+            (fragment))))
+      (switch_case
+        patterns: (ECall
+          callee: (identifier)
+          args: (wildcard_pattern)
+          args: (ECall
+            callee: (identifier)
+            args: (ECall
+              callee: (identifier)
+              args: (EConst
+                (String
+                  (fragment))))
+            args: (wildcard_pattern)))
+        body: (EConst
+          (String
+            (fragment)))))
+    default: (switch_default
+      body: (EConst
+        (String
+          (fragment))))))
+
+================================
+switch variable pattern matching
+================================
+
+switch (myTree) {
+  case Leaf(s): s;
+  case Node(Leaf(s), _): s;
+  case _: "none";
+ }
+
+---
+
+(module
+  (ESwitch
+    subject: (EConst
+      (identifier))
+    cases: (cases
+      (switch_case
+        patterns: (ECall
+          callee: (identifier)
+          args: (EConst
+            (identifier)))
+        body: (EConst
+          (identifier)))
+      (switch_case
+        patterns: (ECall
+          callee: (identifier)
+          args: (ECall
+            callee: (identifier)
+            args: (EConst
+              (identifier)))
+          args: (wildcard_pattern))
+        body: (EConst
+          (identifier))))
+    default: (switch_default
+      body: (EConst
+        (String
+          (fragment))))))
+
+
+================================
+switch strucure pattern matching
+================================
+
+switch (myStructure) {
+	case {name: "haxe", rating: "poor"}:
+		throw false;
+	case {rating: "awesome", name: n}:
+		n;
+	case _:
+		"no awesome language found";
+}
+
+---
+
+(module
+  (ESwitch
+    subject: (EConst
+      (identifier))
+    cases: (cases
+      (switch_case
+        patterns: (EObjectDecl
+          name: (identifier)
+          value: (EConst
+            (String
+              (fragment)))
+          name: (identifier)
+          value: (EConst
+            (String
+              (fragment))))
+        body: (EThrow
+          (EConst
+            (false))))
+      (switch_case
+        patterns: (EObjectDecl
+          name: (identifier)
+          value: (EConst
+            (String
+              (fragment)))
+          name: (identifier)
+          value: (EConst
+            (identifier)))
+        body: (EConst
+          (identifier))))
+    default: (switch_default
+      body: (EConst
+        (String
+          (fragment))))))
+
+=============================
+switch array pattern matching
+=============================
+
+switch (myArray) {
+	case [2, _]:
+		"0";
+	case [_, 6]:
+		"1";
+	case []:
+		"2";
+	case [_, _, _]:
+		"3";
+	case _:
+		"4";
+}
+
+---
+
+(module
+  (ESwitch
+    subject: (EConst
+      (identifier))
+    cases: (cases
+      (switch_case
+        patterns: (EArrayDecl
+          (EConst
+            (Int))
+          (wildcard_pattern))
+        body: (EConst
+          (String
+            (fragment))))
+      (switch_case
+        patterns: (EArrayDecl
+          (wildcard_pattern)
+          (EConst
+            (Int)))
+        body: (EConst
+          (String
+            (fragment))))
+      (switch_case
+        patterns: (EArrayDecl)
+        body: (EConst
+          (String
+            (fragment))))
+      (switch_case
+        patterns: (EArrayDecl
+          (wildcard_pattern)
+          (wildcard_pattern)
+          (wildcard_pattern))
+        body: (EConst
+          (String
+            (fragment)))))
+    default: (switch_default
+      body: (EConst
+        (String
+          (fragment))))))
+
+
+==================
+switch or patterns
+==================
+
+switch (7) {
+    case 4 | 1: "0";
+    case 6 | 7: "1";
+    case _: "2";
+  }
+
+---
+
+(module
+  (ESwitch
+    subject: (EConst
+      (Int))
+    cases: (cases
+      (switch_case
+        patterns: (EBinop
+          left: (EConst
+            (Int))
+          right: (EConst
+            (Int)))
+        body: (EConst
+          (String
+            (fragment))))
+      (switch_case
+        patterns: (EBinop
+          left: (EConst
+            (Int))
+          right: (EConst
+            (Int)))
+        body: (EConst
+          (String
+            (fragment)))))
+    default: (switch_default
+      body: (EConst
+        (String
+          (fragment))))))
+
+
+===============================
+switch match on multiple values
+===============================
+
+switch [1, false, "foo"] {
+    case [1, false, "bar"]: "0";
+    case [_, true, _]: "1";
+    case [_, false, _]: "2";
+}
+
+---
+
+(module
+  (ESwitch
+    subject: (EArrayDecl
+      (EConst
+        (Int))
+      (EConst
+        (false))
+      (EConst
+        (String
+          (fragment))))
+    cases: (cases
+      (switch_case
+        patterns: (EArrayDecl
+          (EConst
+            (Int))
+          (EConst
+            (false))
+          (EConst
+            (String
+              (fragment))))
+        body: (EConst
+          (String
+            (fragment))))
+      (switch_case
+        patterns: (EArrayDecl
+          (wildcard_pattern)
+          (EConst
+            (true))
+          (wildcard_pattern))
+        body: (EConst
+          (String
+            (fragment))))
+      (switch_case
+        patterns: (EArrayDecl
+          (wildcard_pattern)
+          (EConst
+            (false))
+          (wildcard_pattern))
+        body: (EConst
+          (String
+            (fragment)))))))
+
+
+=================
+switch extractors
+=================
+
+switch (e) {
+	case TString(_.toLowerCase() => "foo"):
+		true;
+	case _:
+		false;
+}
+
+---
+
+(module
+  (ESwitch
+    subject: (EConst
+      (identifier))
+    cases: (cases
+      (switch_case
+        patterns: (ECall
+          callee: (identifier)
+          args: (EBinop
+            left: (ECall
+              callee: (EField
+                object: (wildcard_pattern)
+                name: (identifier)))
+            right: (EConst
+              (String
+                (fragment)))))
+        body: (EConst
+          (true))))
+    default: (switch_default
+      body: (EConst
+        (false)))))

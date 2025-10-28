@@ -118,9 +118,11 @@ export default grammar({
     [$.TypePath],
     [$._expr_atom, $.ESwitch],
     [$._expr_meta, $.ECall],
+    [$._expr_meta, $.switch_default],
     [$._expr_prim, $._expr_or_block],
     [$._expr_stmt, $.EArrayDecl],
     [$._type_decl, $._conditional_body],
+    [$.cases],
     [$.import],
   ],
   inline: ($) => [
@@ -218,7 +220,7 @@ export default grammar({
         $.macro,
         $.reification,
         $.type_trace,
-        // $.wildcard_pattern,
+        $.wildcard_pattern,
       ),
     _expr_or_block: ($) => choice($._Expr, $.EBlock),
 
@@ -485,6 +487,7 @@ export default grammar({
           ),
         ),
       ),
+
     ESwitch: ($) =>
       prec(
         PREC.CONTROL,
@@ -492,31 +495,29 @@ export default grammar({
           "switch",
           field("subject", choice($._EParenthesis, $._Expr)),
           "{",
-          field(
-            "cases",
-            repeat(
-              choice(
-                field(
-                  "case",
-                  seq(
-                    "case",
-                    field("patterns", commaSep1($._Expr)),
-                    ":",
-                    field("body", repeat(seq($._Expr, optional($._semicolon)))),
-                  ),
-                ),
-                field(
-                  "default",
-                  seq(
-                    choice("default", seq("case", $.wildcard_pattern)),
-                    ":",
-                    field("body", repeat(seq($._Expr, optional($._semicolon)))),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          field("cases", $.cases),
+          optional(field("default", $.switch_default)),
           "}",
+        ),
+      ),
+    cases: ($) => repeat1($.switch_case),
+    switch_case: ($) =>
+      prec.dynamic(
+        -1,
+        seq(
+          "case",
+          field("patterns", commaSep1($._Expr)),
+          ":",
+          field("body", repeat(seq($._Expr, optional($._semicolon)))),
+        ),
+      ),
+    switch_default: ($) =>
+      prec.right(
+        1,
+        seq(
+          choice("default", seq("case", alias($.wildcard_pattern, ""))),
+          ":",
+          field("body", repeat(seq($._Expr, optional($._semicolon)))),
         ),
       ),
     ETry: ($) =>
