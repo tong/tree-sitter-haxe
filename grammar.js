@@ -347,7 +347,7 @@ export default grammar({
           assoc: "right",
         },
         { ops: ["=>"], prec: PREC.ASSIGN, assoc: "right" },
-        { ops: ["??"], prec: PREC.NULL_COALESCE },
+        { ops: ["??"], prec: PREC.NULL_COALESCE, assoc: "right" },
         { ops: ["||"], prec: PREC.LOGICAL_OR },
         { ops: ["&&"], prec: PREC.LOGICAL_AND },
         { ops: ["|"], prec: PREC.BIT_OR },
