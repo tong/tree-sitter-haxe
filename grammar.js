@@ -111,6 +111,8 @@ export default grammar({
     [$.AbstractType, $.ClassType, $.DefType, $.EnumType],
     [$.AbstractType, $.DefType, $.EnumType],
     [$.ClassVar, $.ClassMethod],
+    [$.ECall],
+    [$.EFunction],
     [$.EVars, $.ETernary],
     [$.TypePath],
     [$._EConst, $.FunctionArg, $.compile_condition],
@@ -227,6 +229,7 @@ export default grammar({
       prec.left(
         PREC.CALL,
         seq(
+          optional("inline"),
           field(
             "callee",
             choice(
