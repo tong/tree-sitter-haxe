@@ -18,6 +18,6 @@ package my.other.pkg;
 
 (module
   (package
-    (identifier)
-    (identifier)
-    (identifier)))
+    (package_name)
+    (package_name)
+    (package_name)))
