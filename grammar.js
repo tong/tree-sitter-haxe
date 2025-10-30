@@ -23,7 +23,7 @@ const PREC = {
   POSTFIX: 18,
   PRIMARY: 19,
   CALL: 20,
-  OBJECT_DECL: 21,
+  OBJECT_DECL: 27,
   BLOCK: 26,
   TYPE_ANNOTATION: 29,
   TYPE_PARAMS: 31,
@@ -421,9 +421,9 @@ export default grammar({
           "{",
           commaSep(
             seq(
-              field("name", choice($.identifier, $.String)),
+              choice($.identifier, $.String),
               ":",
-              field("value", $._Expr),
+              $._Expr,
             ),
           ),
           "}",
@@ -509,7 +509,7 @@ export default grammar({
       ),
     EIf: ($) =>
       prec.right(
-        PREC.CONTROL,
+        PREC.CONTROL + 1,
         seq(
           "if",
           "(",
