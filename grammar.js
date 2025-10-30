@@ -432,10 +432,15 @@ export default grammar({
     EArrayDecl: ($) =>
       seq(
         "[",
-        optional(choice(commaSep($._Expr), $.array_comprehension, $.EWhile)),
+        optional(
+          choice(
+            commaSep($._Expr),
+            alias($._comprehension_for, $.EFor),
+            $.EWhile,
+          ),
+        ),
         "]",
       ),
-    array_comprehension: ($) => alias($._comprehension_for, $.EFor),
     _comprehension_for: ($) =>
       seq(
         "for",
@@ -819,9 +824,9 @@ export default grammar({
             ),
           ),
           $._function_decl,
+          optional($._semicolon),
         ),
       ),
-
     DefType: ($) =>
       seq(
         optional(repeat1(choice($.visibility, "extern"))),
@@ -861,7 +866,7 @@ export default grammar({
         ),
         $._function_args,
         optional(field("ret", $._type_annotation)),
-        field("body", $._expr_or_block),
+        choice(field("body", $._expr_or_block), $._semicolon),
       ),
 
     _type_decl_signature: ($) =>
