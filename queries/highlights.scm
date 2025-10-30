@@ -2,19 +2,16 @@
 (line_comment) @comment.line
 (block_comment) @comment.block
 
-[
-  (conditional)
-  (conditional_elseif)
-  (conditional_else)
-  (conditional_end)
-  (conditional_error)
-] @keyword.directive
-
 (identifier) @variable
+(type_name) @type
+
+(wildcard_pattern) @constant.builtin
 
 ["{" "}" "[" "]" "(" ")"] @punctuation.bracket
+["<" ">"] @punctuation.bracket
 ["," ";" ":" "..."] @punctuation.delimiter
 ["?" "??"] @punctuation.special
+["->" "=>"] @keyword.operator
 
 [
   "break"
@@ -31,7 +28,6 @@
   "for"
   "if"
   "implements"
-  "import"
   "in"
   "new"
   "package"
@@ -39,7 +35,6 @@
   "throw"
   "try"
   "untyped"
-  "using"
   "var"
   "while"
 ] @keyword
@@ -57,8 +52,8 @@
 ["as"] @keyword.operator
 
 [
-  (public)
-  (private)
+  "public"
+  "private"
   "final"
   "inline"
   "override"
@@ -67,47 +62,35 @@
   "macro"
 ] @keyword.modifier
 
-(super) @variable.builtin
-(this) @variable.builtin
-
-["->" "=>"] @keyword.operator
-
-(EBinop op: _ @operator)
-(EUnop operator: _ @operator)
-(ETernary "?" @operator)
-(ETernary ":" @operator)
-(ComplexType "&" @operator)
+"macro" @macro
 
 (Int) @number
 (Float) @number.float
-(String (fragment) @string)
 (String (escape_sequence) @string.escape)
+(String (fragment) @string)
 (String (interpolation) @string.special)
 (Regexp) @string.regex
 
 (true) @boolean
 (false) @boolean
+
 (null) @constant.builtin
+(super) @variable.builtin
+(this) @variable.builtin
 
 (package_name) @namespace
 
+[
+ (import)
+ (using)
+] @keyword.import
+
 (import
-  path: (package_name) @namespace
-  (wildcard) @constant)
-(import
-  path: (package_name) @namespace
   path: (package_name) @namespace
   module: (type_name) @module)
-(import
-  path: (package_name) @namespace
-  path: (package_name) @namespace
-  module: (type_name) @module
-  alias: (identifier) @type)
-(import
-  path: (package_name) @namespace
-  path: (package_name) @namespace
-  module: (type_name) @module
-  sub: (identifier) @property)
+(import alias: (identifier) @type)
+(import sub: (identifier) @property)
+(import (wildcard) @constant)
 
 (using
   path: (package_name) @namespace
@@ -115,7 +98,6 @@
 
 ;---------------------------------------------------
 
-(type_name) @type
 
 (ComplexType "->" @keyword.operator)
 
@@ -133,16 +115,11 @@
     (TypePath
       name: (type_name) @type)))
 
-(FunctionArg
-  name: (identifier) @variable.parameter
-  "=" @punctuation.special)
+(FunctionArg name: (identifier) @variable.parameter)
+(FunctionArg "=" @punctuation.special)
 
-[
-  (TypePath)
-  (TypeParameter)
-  (ComplexType)
-] ["<" ">"] @punctuation.bracket
 
+(ComplexType "&" @operator)
 
 ; Declarations ----------------------------------------------------------------
 
@@ -154,8 +131,15 @@
 ] @type.definition
 
 (ClassVar type: (ComplexType) @type)
-(ClassMethod
+(ClassVar
+  (property_accessor
+    get: (property_access) @property
+    set: (property_access) @property))
+
+(ClassMethod 
+  "function" @keyword.function
   name: (identifier) @function.method)
+(ClassMethod "macro" name: (identifier) @function.macro)
 
 (EnumConstructor name: (identifier) @constant)
 
@@ -164,7 +148,13 @@
 
 ; Expressions -----------------------------------------------------------------
 
+(EBinop op: _ @operator)
+(EUnop op: _ @operator)
+(ETernary "?" @operator)
+(ETernary ":" @operator)
+
 (EField name: (identifier) @property)
+(EField "." @punctuation.delimiter)
 (ECast type: (ComplexType) @type)
 (ECall callee: (identifier) @function.call)
 (ECall callee: (EField name: (identifier) @function.call))
@@ -177,8 +167,15 @@
 (ENew (TypePath) @type)
 (EObjectDecl name: (identifier) @property)
 (EObjectDecl name: (String) @property)
-(ETry (identifier) @variable)
-(EVars name: (identifier) @variable)
+; (ETry (identifier) @variable)
+(ESwitch "switch" @keyword.control)
+(switch_case "case" @keyword.control)
+(switch_default "default" @keyword.control)
+(EThrow expr: (_) @keyword.exception)
+(EUntyped "untyped" @keyword.debug)
+(EVars
+  "final" @keyword
+  name: (identifier) @variable)
 
 ; Metadata --------------------------------------------------------------------
 
@@ -193,7 +190,13 @@
     (ECall callee: (EField name: (identifier) @function.call))
   ])
 
-; Fallback
-; (type_name) @type
-; (identifier) @variable
+(type_trace
+  "$type" @keyword.debug)
 
+[
+  (conditional)
+  (conditional_elseif)
+  (conditional_else)
+  (conditional_end)
+  (conditional_error)
+] @keyword.directive
