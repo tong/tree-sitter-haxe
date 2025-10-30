@@ -146,6 +146,7 @@ export default grammar({
     [$._EConst, $.compile_condition],
     [$._expr_atom, $.ESwitch],
     [$._expr_meta, $.ECall],
+    [$._expr_or_block, $._comprehension_body],
     [$._expr_prim, $._expr_or_block],
     [$._expr_stmt, $.EArrayDecl],
     [$._type_decl, $._conditional_body],
@@ -347,6 +348,7 @@ export default grammar({
       const BINOPS = [
         {
           ops: [
+            "=>",
             "=",
             "+=",
             "-=",
@@ -428,7 +430,39 @@ export default grammar({
         ),
       ),
     EArrayDecl: ($) =>
-      seq("[", optional(choice(commaSep($._Expr), $.EFor, $.EWhile)), "]"),
+      seq(
+        "[",
+        optional(choice(commaSep($._Expr), $.array_comprehension, $.EWhile)),
+        "]",
+      ),
+    array_comprehension: ($) => alias($._comprehension_for, $.EFor),
+    _comprehension_for: ($) =>
+      seq(
+        "for",
+        "(",
+        choice(
+          seq(field("key", $.identifier), "=>", field("value", $.identifier)),
+          field("var", $.identifier),
+        ),
+        "in",
+        field("iterable", $._Expr),
+        ")",
+        field("body", $._comprehension_body),
+      ),
+    _comprehension_if: ($) =>
+      seq(
+        "if",
+        "(",
+        field("condition", $._Expr),
+        ")",
+        field("consequence", $._comprehension_body),
+      ),
+    _comprehension_body: ($) =>
+      choice(
+        alias($._comprehension_for, $.EFor),
+        alias($._comprehension_if, $.EIf),
+        $._Expr,
+      ),
     EReturn: ($) => prec.right(PREC.CONTROL, seq("return", optional($._Expr))),
     EBreak: (_) => prec.right(PREC.CONTROL, "break"),
     EContinue: (_) => prec.right(PREC.CONTROL, "continue"),

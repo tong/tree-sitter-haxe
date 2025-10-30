@@ -1,48 +1,46 @@
-======================
-array comprehension: for
-======================
-
-[for (i in 0...10) i * i];
-
----
-
-(module
-  (EArrayDecl
-    (EFor
-      var: (identifier)
-      iterable: (EBinop
-        left: (Int)
-        right: (Int))
-      body: (EBinop
-        left: (identifier)
-        right: (identifier)))))
-
-============================
+===========================
 array comprehension: for if
-============================
+===========================
 
-[for (i in 0...10) if (i % 2 == 0) i];
+var a = [
+	for (a in 1...11)
+		for (b in 2...4)
+			if (a % b == 0)
+				a + "/" + b
+];
 
 ---
 
 (module
-  (EArrayDecl
-    (EFor
-      var: (identifier)
-      iterable: (EBinop
-        left: (Int)
-        right: (Int))
-      body: (EIf
-        condition: (EBinop
-          left: (EBinop
-            left: (identifier)
-            right:  (Int))
+  (EVars
+    name: (identifier)
+    value: (EArrayDecl
+      (EFor
+        var: (identifier)
+        iterable: (EBinop
+          left: (Int)
           right: (Int))
-        consequence: (identifier)))))
+        body: (EFor
+          var: (identifier)
+          iterable: (EBinop
+            left: (Int)
+            right: (Int))
+          body: (EIf
+            condition: (EBinop
+              left: (EBinop
+                left: (identifier)
+                right: (identifier))
+              right: (Int))
+            consequence: (EBinop
+              left: (EBinop
+                left: (identifier)
+                right: (String
+                  (fragment)))
+              right: (identifier))))))))
 
-=========================
+==========================
 array comprehension: while
-=========================
+==========================
 
 [while (i < 10) i++];
 
@@ -57,54 +55,40 @@ array comprehension: while
       body: (EUnop
         operand: (identifier)))))
 
-======================
-map comprehension: for
-======================
-
-[for (i in 0...5) i => 'number ${i}'];
-
----
-
-(module
-  (EArrayDecl
-    (EFor
-      var: (identifier)
-      iterable: (EBinop
-        left: (Int)
-        right: (Int))
-      body: (EBinop
-        left: (identifier)
-        right: (String
-            (fragment)
-            (interpolation
-              (identifier)))))))
-
 =========================
 map comprehension: for if
 =========================
 
-[for (i in 0...5) if (i % 2 == 0) i => i * i];
+var a = [
+  for (x in 0...5)
+    for (y in 0...5)
+      if (x != y)
+        x => y
+];
 
 ---
 
 (module
-  (EArrayDecl
-    (EFor
-      var: (identifier)
-      iterable: (EBinop
-        left: (Int)
-        right: (Int))
-      body: (EIf
-        condition: (EBinop
-          left: (EBinop
-            left: (identifier)
-            right: (Int))
+  (EVars
+    name: (identifier)
+    value: (EArrayDecl
+      (EFor
+        var: (identifier)
+        iterable: (EBinop
+          left: (Int)
           right: (Int))
-        consequence: (EBinop
-          left: (identifier)
-          right: (EBinop
-            left: (identifier)
-            right: (identifier)))))))
+        body: (EFor
+          var: (identifier)
+          iterable: (EBinop
+            left: (Int)
+            right: (Int))
+          body: (EIf
+            condition: (EBinop
+              left: (identifier)
+              right: (identifier))
+            consequence: (EBinop
+              left: (identifier)
+              right: (identifier))))))))
 
 ========================
 map comprehension: while
