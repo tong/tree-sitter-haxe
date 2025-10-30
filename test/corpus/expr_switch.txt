@@ -145,7 +145,7 @@ switch (myStructure) {
           value: (String
             (fragment)))
         body: (EThrow
-          (false)))
+          expr: (false)))
       (switch_case
         patterns: (EObjectDecl
           name: (identifier)

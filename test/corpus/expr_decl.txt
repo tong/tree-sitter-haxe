@@ -1,0 +1,25 @@
+==================
+object declaration (EObjectDecl)
+==================
+
+var x = { };
+var x = { a: 0 };
+var x = { "a": 0 };
+
+---
+
+(module
+  (EVars
+    (identifier)
+    (EObjectDecl))
+  (EVars
+    (identifier)
+    (EObjectDecl
+      (identifier)
+      (Int)))
+  (EVars
+    (identifier)
+    (EObjectDecl
+      (String
+        (fragment))
+      (Int))))

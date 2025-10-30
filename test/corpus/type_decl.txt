@@ -58,7 +58,6 @@ private class A<T> {}
 
 (module
   (ClassType
-    (private)
     name: (type_name)
     (TypeParameter
       name: (type_name))))
