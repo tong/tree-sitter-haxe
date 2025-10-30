@@ -1,0 +1,28 @@
+==============
+for expression
+==============
+
+for(e in b) {}
+
+---
+
+(module
+  (EFor
+    var: (identifier)
+    iterable: (identifier)
+    body: (EBlock)))
+
+==============
+for expression
+==============
+
+for(e in b) i++
+
+---
+
+(module
+  (EFor
+    var: (identifier)
+    iterable: (identifier)
+    body: (EUnop
+      operand: (identifier))))

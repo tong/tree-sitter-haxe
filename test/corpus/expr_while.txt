@@ -1,0 +1,38 @@
+================
+while expression
+================
+
+while(true) i;
+
+---
+
+(module
+  (EWhile
+    condition: (true)
+    body: (identifier)))
+
+================
+while expression
+================
+
+while(true) {}
+
+---
+
+(module
+  (EWhile
+    condition: (true)
+    body: (EBlock)))
+
+================
+do while expression
+================
+
+do {} while(true)
+
+---
+
+(module
+  (EWhile
+    body: (EBlock)
+    condition: (true)))

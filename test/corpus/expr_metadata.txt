@@ -40,8 +40,7 @@ metadata param
 (module
   meta: (MetaDataEntry
     name: (identifier)
-    params: (EConst
-      (String
-        (fragment))))
+    params: (String
+      (fragment)))
   (ClassType
     name: (type_name)))

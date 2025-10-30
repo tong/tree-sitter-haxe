@@ -1,58 +1,46 @@
-======================
-array comprehension: for
-======================
-
-[for (i in 0...10) i * i];
-
----
-
-(module
-  (EArrayDecl
-    (EFor
-      var: (identifier)
-      iterable: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
-      body: (EBinop
-        left: (EConst
-          (identifier))
-        right: (EConst
-          (identifier))))))
-
-============================
+===========================
 array comprehension: for if
-============================
+===========================
 
-[for (i in 0...10) if (i % 2 == 0) i];
+var a = [
+	for (a in 1...11)
+		for (b in 2...4)
+			if (a % b == 0)
+				a + "/" + b
+];
 
 ---
 
 (module
-  (EArrayDecl
-    (EFor
-      var: (identifier)
-      iterable: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
-      body: (EIf
-        condition: (EBinop
-          left: (EBinop
-            left: (EConst
-              (identifier))
-            right: (EConst
-              (Int)))
-          right: (EConst
-            (Int)))
-        consequence: (EConst
-          (identifier))))))
+  (EVars
+    name: (identifier)
+    value: (EArrayDecl
+      (EFor
+        var: (identifier)
+        iterable: (EBinop
+          left: (Int)
+          right: (Int))
+        body: (EFor
+          var: (identifier)
+          iterable: (EBinop
+            left: (Int)
+            right: (Int))
+          body: (EIf
+            condition: (EBinop
+              left: (EBinop
+                left: (identifier)
+                right: (identifier))
+              right: (Int))
+            consequence: (EBinop
+              left: (EBinop
+                left: (identifier)
+                right: (String
+                  (fragment)))
+              right: (identifier))))))))
 
-=========================
+==========================
 array comprehension: while
-=========================
+==========================
 
 [while (i < 10) i++];
 
@@ -62,75 +50,45 @@ array comprehension: while
   (EArrayDecl
     (EWhile
       condition: (EBinop
-        left: (EConst
-          (identifier))
-        right: (EConst
-          (Int)))
+        left: (identifier)
+        right: (Int))
       body: (EUnop
-        operand: (EConst
-          (identifier))))))
-
-======================
-map comprehension: for
-======================
-
-[for (i in 0...5) i => 'number ${i}'];
-
----
-
-(module
-  (EArrayDecl
-    (EFor
-      var: (identifier)
-      iterable: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
-      body: (EBinop
-        left: (EConst
-          (identifier))
-        right: (EConst
-          (String
-            (fragment)
-            (interpolation
-              (EConst
-                (identifier)))))))))
+        operand: (identifier)))))
 
 =========================
 map comprehension: for if
 =========================
 
-[for (i in 0...5) if (i % 2 == 0) i => i * i];
+var a = [
+  for (x in 0...5)
+    for (y in 0...5)
+      if (x != y)
+        x => y
+];
 
 ---
 
 (module
-  (EArrayDecl
-    (EFor
-      var: (identifier)
-      iterable: (EBinop
-        left: (EConst
-          (Int))
-        right: (EConst
-          (Int)))
-      body: (EIf
-        condition: (EBinop
-          left: (EBinop
-            left: (EConst
-              (identifier))
-            right: (EConst
-              (Int)))
-          right: (EConst
-            (Int)))
-        consequence: (EBinop
-          left: (EConst
-            (identifier))
-          right: (EBinop
-            left: (EConst
-              (identifier))
-            right: (EConst
-              (identifier))))))))
+  (EVars
+    name: (identifier)
+    value: (EArrayDecl
+      (EFor
+        var: (identifier)
+        iterable: (EBinop
+          left: (Int)
+          right: (Int))
+        body: (EFor
+          var: (identifier)
+          iterable: (EBinop
+            left: (Int)
+            right: (Int))
+          body: (EIf
+            condition: (EBinop
+              left: (identifier)
+              right: (identifier))
+            consequence: (EBinop
+              left: (identifier)
+              right: (identifier))))))))
 
 ========================
 map comprehension: while
@@ -144,13 +102,9 @@ map comprehension: while
   (EArrayDecl
     (EWhile
       condition: (EBinop
-        left: (EConst
-          (identifier))
-        right: (EConst
-          (Int)))
+        left: (identifier)
+        right: (Int))
       body: (EBinop
         left: (EUnop
-          operand: (EConst
-            (identifier)))
-        right: (EConst
-          (identifier))))))
+          operand: (identifier))
+        right: (identifier)))))

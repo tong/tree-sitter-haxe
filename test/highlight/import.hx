@@ -1,4 +1,4 @@
 import my.other.Type.field;
-// <- keyword
+// <- keyword.import
 //     ^ namespace
 //                      ^ variable

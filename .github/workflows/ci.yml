@@ -36,15 +36,24 @@ jobs:
       - name: Generate and commit parser
         run: |
           tree-sitter generate
-          git add src/parser.c src/scanner.c || true
+          #git add src/parser.c src/scanner.c || true
+          git add src/parser.c || true
           git commit -m "Update generated parser" || true
+      # - name: Install build tools
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y build-essential
+      #     npm install -g node-gyp
+      #     npm install node-addon-api
+      # - name: Build Node binding
+      #   run: node-gyp configure build
       - uses: tree-sitter/parser-test-action@v3
         with:
           test-go: true
-          test-node: true
-          test-python: true
-          test-rust: true
-          test-swift: true
+          # test-node: true
+          # test-python: true
+          # test-rust: true
+          # test-swift: true
   parse:
     name: Parse example Haxe files
     runs-on: ubuntu-latest

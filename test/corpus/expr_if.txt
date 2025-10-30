@@ -1,0 +1,61 @@
+=============
+if with block
+=============
+
+if(true) {} 
+
+---
+
+(module
+  (EIf
+    condition: (true)
+    consequence: (EBlock)))
+
+
+=============
+if without block
+=============
+
+if(true) some; 
+
+---
+
+(module
+  (EIf
+    condition: (true)
+    consequence: (identifier)))
+
+
+========================
+if else with block
+=======================
+
+if(true) {} else if(false) {} else {}
+
+---
+
+(module
+  (EIf
+    condition: (true)
+    consequence: (EBlock)
+    alternative: (EIf
+      condition: (false)
+      consequence: (EBlock)
+      alternative: (EBlock))))
+
+=====================
+if else without block
+=====================
+
+if(true) some; else if(false) some; else some;
+
+---
+
+(module
+  (EIf
+    condition: (true)
+    consequence: (identifier)
+    alternative: (EIf
+      condition: (false)
+      consequence: (identifier)
+      alternative: (identifier))))

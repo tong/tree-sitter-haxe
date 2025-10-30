@@ -9,11 +9,7 @@ ternop operator
 (module
   (ETernary
     cond: (EBinop
-      left: (EConst
-        (identifier))
-      right: (EConst
-        (null)))
-    if: (EConst
-      (identifier))
-    else: (EConst
-      (Int))))
+      left: (identifier)
+      right: (null))
+    if: (identifier)
+    else: (Int)))

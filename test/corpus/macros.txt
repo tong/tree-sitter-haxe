@@ -7,9 +7,7 @@ macro 42;
 ---
 
 (module
-  (macro
-    (EConst
-      (Int))))
+  (macro (Int)))
 
 ===============================================================================
 macro
@@ -22,10 +20,8 @@ macro 1 + 2;
 (module
   (macro
     (EBinop
-      left: (EConst
-        (Int))
-      right: (EConst
-        (Int)))))
+      left: (Int)
+      right: (Int))))
 
 
 ===============================================================================
@@ -39,8 +35,7 @@ macro $v{someExpr};
 (module
   (macro
     (reification
-      (EConst
-        (identifier)))))
+      (identifier))))
 
 
 ===============================================================================
@@ -62,31 +57,27 @@ macro $v{v} * 2;
     (EBlock
       (ECall
         callee: (identifier)
-        args: (EConst
+        args: 
           (String
-            (fragment))))))
+            (fragment)))))
   (macro
     (reification
-      (EConst
-        (identifier))))
+      (identifier)))
   (macro
     (reification
-      (EConst
-        (Int))
-      (EConst
-        (Int))
-      (EConst
-        (Int))))
+        (Int)
+        (Int)
+        (Int)))
   (macro
     (reification
       (ECall
         callee: (identifier)
-        args: (EConst
-          (Int)))
+        args: 
+          (Int))
       (ECall
         callee: (identifier)
-        args: (EConst
-          (Int)))))
+        args: 
+          (Int))))
   (macro
     (reification
       (identifier)))
@@ -98,7 +89,5 @@ macro $v{v} * 2;
   (macro
     (EBinop
       left: (reification
-        (EConst
-          (identifier)))
-      right: (EConst
-        (Int)))))
+        (identifier))
+      right: (Int))))

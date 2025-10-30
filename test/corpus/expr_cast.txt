@@ -8,8 +8,7 @@ cast a;
 
 (module
   (ECast
-    (EConst
-      (identifier))))
+    (identifier)))
 
 ==================
 cast expression to
@@ -21,8 +20,7 @@ cast(a, String);
 
 (module
   (ECast
-    expr: (EConst
-      (identifier))
+    expr: (identifier)
     type: (ComplexType
       (TypePath
         name: (type_name)))))

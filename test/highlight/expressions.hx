@@ -1,0 +1,2 @@
+untyped a;
+// ^ keyword.debug

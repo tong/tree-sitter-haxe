@@ -8,10 +8,8 @@ false;
 ---
 
 (module
-  (EConst
-    (true))
-  (EConst
-    (false)))
+  (true)
+  (false))
 
 
 ===============================================================================
@@ -28,18 +26,12 @@ int literals
 ---
 
 (module
-  (EConst
-    (Int))
-  (EConst
-    (Int))
-  (EConst
-    (Int))
-  (EConst
-    (Int))
-  (EConst
-    (Int))
-  (EConst
-    (Int)))
+  (Int)
+  (Int)
+  (Int)
+  (Int)
+  (Int)
+  (Int))
 
 ===============================================================================
 float literals 
@@ -53,14 +45,10 @@ float literals
 ---
 
 (module
-  (EConst
-    (Float))
-  (EConst
-    (Float))
-  (EConst
-    (Float))
-  (EConst
-    (Float)))
+  (Float)
+  (Float)
+  (Float)
+  (Float))
 
 ===============
 string literals
@@ -72,12 +60,10 @@ string literals
 ---
 
 (module
-  (EConst
-    (String
-      (fragment)))
-  (EConst
-    (String
-      (fragment))))
+  (String
+    (fragment))
+  (String
+    (fragment)))
 
 ===============================================================================
 strings containing comment-like content literals
@@ -88,11 +74,10 @@ strings containing comment-like content literals
 ---
 
 (module
-  (EConst
-    (String
-      (fragment)
-      (escape_sequence)
-      (fragment))))
+  (String
+    (fragment)
+    (escape_sequence)
+    (fragment)))
 
 ===============================================================================
 string escape sequence
@@ -110,34 +95,26 @@ string escape sequence
 ---
 
 (module
-  (EConst
-    (String))
-  (EConst
-    (String))
-  (EConst
-    (String
-      (escape_sequence)))
-  (EConst
-    (String
-      (fragment)
-      (escape_sequence)
-      (fragment)))
-  (EConst
-    (String
-      (fragment)
-      (escape_sequence)
-      (fragment)))
-  (EConst
-    (String
-      (fragment)))
-  (EConst
-    (String
-      (fragment)))
-  (EConst
-    (String
-      (escape_sequence)
-      (fragment)
-      (escape_sequence))))
+  (String)
+  (String)
+  (String
+    (escape_sequence))
+  (String
+    (fragment)
+    (escape_sequence)
+    (fragment))
+  (String
+    (fragment)
+    (escape_sequence)
+    (fragment))
+  (String
+    (fragment))
+  (String
+    (fragment))
+  (String
+    (escape_sequence)
+    (fragment)
+    (escape_sequence)))
 
 ===============================================================================
 string line continuations literals
@@ -160,18 +137,14 @@ world';
 ---
 
 (module
-  (EConst
-    (String
-      (fragment)))
-  (EConst
-    (String
-      (fragment)))
-  (EConst
-    (String
-      (fragment)))
-  (EConst
-    (String
-      (fragment))))
+  (String
+    (fragment))
+  (String
+    (fragment))
+  (String
+    (fragment))
+  (String
+    (fragment)))
 
 ===============================================================================
 string interpolation literals
@@ -185,36 +158,28 @@ string interpolation literals
 ---
 
 (module
-  (EConst
-    (String
-      (fragment)
-      (interpolation
-        (identifier))
-      (fragment)))
-  (EConst
-    (String
-      (fragment)
-      (interpolation
-        (EField
-          object: (EConst
-            (identifier))
-          name: (identifier)))
-      (fragment)))
-  (EConst
-    (String
-      (fragment)
-      (interpolation
-        (EBinop
-          left: (EConst
-            (Int))
-          right: (EConst
-            (Int))))))
-  (EConst
-    (String
-      (interpolation
-        (EConst
-          (String
-            (fragment)))))))
+  (String
+    (fragment)
+    (interpolation
+      (identifier))
+    (fragment))
+  (String
+    (fragment)
+    (interpolation
+      (EField
+        object: (identifier)
+        name: (identifier)))
+    (fragment))
+  (String
+    (fragment)
+    (interpolation
+      (EBinop
+        left: (Int)
+        right: (Int))))
+  (String
+    (interpolation
+      (String
+        (fragment)))))
 
 ===============================================================================
 regular expression literals
@@ -225,5 +190,4 @@ regular expression literals
 ---
 
 (module
-  (EConst
-  (Regexp)))
+  (Regexp))

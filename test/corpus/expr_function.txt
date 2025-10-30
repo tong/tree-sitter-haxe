@@ -1,0 +1,23 @@
+===================
+function expression
+===================
+
+function() {}
+
+---
+
+(module
+  (EFunction
+    (EBlock)))
+
+===================
+arrow function expression
+===================
+
+() -> {}
+
+---
+
+(module
+  (EArrowFunction
+    (EBlock)))
