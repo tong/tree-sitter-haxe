@@ -70,7 +70,7 @@ export default grammar({
       "class",
       "continue",
       "default",
-      // "do",
+      "do",
       "dynamic",
       "else",
       "enum",
@@ -137,18 +137,26 @@ export default grammar({
     [$.ClassVar, $._conditional_body],
     [$.DefType, $.EnumType, $._conditional_body],
     [$.EBlock, $.EObjectDecl],
+    [$.ECall, $.EFunction, $.ClassMethod],
     [$.ECall],
     [$.EFunction],
     [$.TypePath],
     [$._EConst, $.FunctionArg, $.compile_condition],
     [$._EConst, $.FunctionArg],
+    [$._EConst, $._expr_lhs, $.compile_condition],
+    [$._EConst, $._expr_lhs],
     [$._EConst, $.compile_condition],
+    [$._Expr, $._expr_value],
     [$._block_or_expr, $._comprehension_body],
     [$._block_or_expr],
     [$._class_field, $._conditional_body],
     [$._expr_atom, $.ESwitch],
+    [$._expr_atom, $._expr_value],
+    [$._expr_lhs, $.compile_condition],
     [$._expr_meta, $.ECall],
+    [$._expr_postfix, $._expr_lhs],
     [$._expr_prim, $._block_or_expr],
+    [$._expr_prim, $._expr_value],
     [$._expr_stmt, $.EArrayDecl],
     [$._type_decl, $._class_field, $._conditional_body],
     [$._type_decl, $._conditional_body],
@@ -217,7 +225,7 @@ export default grammar({
 
     _expr_statement: ($) => seq($._Expr, optional($._semicolon)),
 
-    _Expr: ($) => choice($.ETernary, $.EBinop, $.EUnop, $._expr_postfix),
+    _Expr: ($) => choice($.EBinop, $.ETernary, $.EUnop, $._expr_postfix),
     _expr_postfix: ($) => choice($.ECall, $.EField, $.EArray, $._expr_prim),
     _expr_prim: ($) =>
       choice($._expr_atom, $._expr_stmt, $._expr_meta, $.EBlock),
@@ -250,6 +258,15 @@ export default grammar({
         $.type_trace,
         $.wildcard_pattern,
       ),
+    _expr_value: ($) =>
+      choice(
+        $._expr_postfix,
+        $._expr_atom,
+        $.EObjectDecl,
+        $.EArrayDecl,
+        $.ENew,
+      ),
+    _expr_lhs: ($) => choice($.identifier, $.EField, $.EArray),
 
     _block_or_expr: ($) =>
       choice(
@@ -282,8 +299,8 @@ export default grammar({
         PREC.CALL,
         seq(
           field("object", $._Expr),
-          field("operator", choice(".", "?.")),
-          field("name", seq(optional("$"), $.identifier)),
+          choice(".", alias("?.", $.optional)),
+          seq(optional("$"), field("name", $.identifier)),
         ),
       ),
     EArray: ($) =>
@@ -308,15 +325,15 @@ export default grammar({
     ENew: ($) =>
       prec.left(PREC.CALL, seq("new", $.TypePath, "(", commaSep($._Expr), ")")),
     EFunction: ($) =>
-      prec.right(PREC.ASSIGN + 1, seq(optional("inline"), $._function_decl)),
+      prec.right(PREC.CONTROL - 1, seq(optional("inline"), $._function_decl)),
     EArrowFunction: ($) =>
       prec.right(
-        PREC.ASSIGN + 1,
+        PREC.CONTROL - 1,
         seq(
           choice(
             seq("(", ")"),
-            $.identifier,
-            seq($._function_args, optional($._type_annotation)),
+            field("args", $.identifier),
+            seq(field("args", $._function_args), optional($._type_annotation)),
           ),
           "->",
           field("body", $._block_or_expr),
@@ -342,7 +359,6 @@ export default grammar({
       prec.right(
         PREC.TERNARY,
         seq(
-          // field("cond", $._Expr),
           field("cond", choice($._expr_postfix, $.EBinop, $.EUnop)),
           "?",
           field("if", $._Expr),
@@ -406,17 +422,12 @@ export default grammar({
           PREC.UNARY,
           seq(
             field("op", choice("++", "--", "+", "-", "!", "~")),
-            field("operand", $._Expr),
-            // field("operand", $._expr_postfix),
+            field("operand", $._expr_value),
           ),
         ),
         prec.left(
           PREC.POSTFIX,
-          seq(field("operand", $._Expr), field("op", choice("++", "--"))),
-          // seq(
-          //   field("operand", $._expr_postfix),
-          //   field("op", choice("++", "--")),
-          // ),
+          seq(field("operand", $._expr_lhs), field("op", choice("++", "--"))),
         ),
       ),
     EBlock: ($) => prec.dynamic(-1, seq("{", repeat($._expr_statement), "}")),
@@ -429,7 +440,7 @@ export default grammar({
             seq(
               field("name", choice($.identifier, $.String)),
               ":",
-              field("value", $._Expr),
+              field("value", $._expr_value),
             ),
           ),
           "}",
@@ -464,9 +475,9 @@ export default grammar({
       seq(
         "if",
         "(",
-        field("condition", $._Expr),
+        field("cond", $._Expr),
         ")",
-        field("consequence", $._comprehension_body),
+        field("if", $._comprehension_body),
       ),
     _comprehension_body: ($) =>
       choice(
@@ -519,10 +530,10 @@ export default grammar({
         seq(
           "if",
           "(",
-          field("condition", $._Expr),
+          field("cond", $._Expr),
           ")",
-          field("consequence", $._block_or_expr),
-          optional(seq("else", field("alternative", $._block_or_expr))),
+          field("if", $._block_or_expr),
+          optional(seq("else", field("else", $._block_or_expr))),
         ),
       ),
     EWhile: ($) =>
@@ -532,7 +543,7 @@ export default grammar({
           seq(
             "while",
             "(",
-            field("condition", $._Expr),
+            field("cond", $._Expr),
             ")",
             field("body", $._block_or_expr),
           ),
@@ -541,7 +552,7 @@ export default grammar({
             field("body", $._block_or_expr),
             "while",
             "(",
-            field("condition", $._Expr),
+            field("cond", $._Expr),
             ")",
           ),
         ),
