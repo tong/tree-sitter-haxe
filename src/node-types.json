@@ -71,14 +71,6 @@
         {
           "type": "TypeParameter",
           "named": true
-        },
-        {
-          "type": "private",
-          "named": true
-        },
-        {
-          "type": "public",
-          "named": true
         }
       ]
     }
@@ -165,6 +157,10 @@
         {
           "type": "MetaDataEntry",
           "named": true
+        },
+        {
+          "type": "optional",
+          "named": true
         }
       ]
     }
@@ -240,10 +236,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -312,7 +304,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -320,14 +340,30 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
       },
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -381,20 +417,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "private",
-          "named": true
-        },
-        {
-          "type": "public",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -450,14 +472,6 @@
         },
         {
           "type": "TypeParameter",
-          "named": true
-        },
-        {
-          "type": "private",
-          "named": true
-        },
-        {
-          "type": "public",
           "named": true
         }
       ]
@@ -529,10 +543,6 @@
           "named": true
         },
         {
-          "type": "EConst",
-          "named": true
-        },
-        {
           "type": "EContinue",
           "named": true
         },
@@ -601,11 +611,35 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
           "named": true
         },
         {
-          "type": "private",
+          "type": "null",
           "named": true
         },
         {
@@ -613,15 +647,27 @@
           "named": true
         },
         {
-          "type": "public",
-          "named": true
-        },
-        {
           "type": "reification",
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -725,28 +771,6 @@
           }
         ]
       },
-      "params": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "<",
-            "named": false
-          },
-          {
-            "type": ">",
-            "named": false
-          },
-          {
-            "type": "TypeParameter",
-            "named": true
-          }
-        ]
-      },
       "type": {
         "multiple": false,
         "required": true,
@@ -763,11 +787,7 @@
       "required": false,
       "types": [
         {
-          "type": "private",
-          "named": true
-        },
-        {
-          "type": "public",
+          "type": "TypeParameter",
           "named": true
         }
       ]
@@ -826,10 +846,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -898,7 +914,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -906,7 +950,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -960,10 +1020,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -1032,7 +1088,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -1040,7 +1124,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -1089,10 +1189,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -1164,7 +1260,35 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -1172,7 +1296,23 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -1209,6 +1349,10 @@
             "named": false
           },
           {
+            "type": ";",
+            "named": false
+          },
+          {
             "type": "EArray",
             "named": true
           },
@@ -1242,10 +1386,6 @@
           },
           {
             "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
             "named": true
           },
           {
@@ -1317,7 +1457,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -1325,7 +1493,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -1405,10 +1589,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -1477,7 +1657,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -1485,7 +1693,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -1623,6 +1847,10 @@
             "named": false
           },
           {
+            "type": "is",
+            "named": false
+          },
+          {
             "type": "|",
             "named": false
           },
@@ -1682,10 +1910,6 @@
           },
           {
             "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
             "named": true
           },
           {
@@ -1757,7 +1981,39 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "TypePath",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -1765,7 +2021,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -1814,10 +2086,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -1889,7 +2157,35 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -1897,7 +2193,23 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -1965,10 +2277,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -2037,7 +2345,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -2045,7 +2381,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -2099,10 +2451,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -2171,11 +2519,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
           {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -2187,7 +2559,19 @@
             "named": true
           },
           {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -2247,10 +2631,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -2319,7 +2699,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -2327,7 +2735,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -2397,10 +2821,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -2469,7 +2889,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -2477,7 +2925,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -2492,57 +2956,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "EConst",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "Float",
-          "named": true
-        },
-        {
-          "type": "Int",
-          "named": true
-        },
-        {
-          "type": "Regexp",
-          "named": true
-        },
-        {
-          "type": "String",
-          "named": true
-        },
-        {
-          "type": "false",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "null",
-          "named": true
-        },
-        {
-          "type": "super",
-          "named": true
-        },
-        {
-          "type": "this",
-          "named": true
-        },
-        {
-          "type": "true",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2617,10 +3030,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -2689,7 +3098,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -2697,7 +3134,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -2732,6 +3185,10 @@
           },
           {
             "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
             "named": false
           },
           {
@@ -2771,10 +3228,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -2843,7 +3296,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -2851,7 +3332,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -2905,10 +3402,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -2977,7 +3470,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -2985,7 +3506,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -3042,7 +3579,7 @@
       },
       "body": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "(",
@@ -3050,6 +3587,10 @@
           },
           {
             "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
             "named": false
           },
           {
@@ -3086,10 +3627,6 @@
           },
           {
             "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
             "named": true
           },
           {
@@ -3161,7 +3698,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -3169,7 +3734,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -3289,10 +3870,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -3361,7 +3938,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -3369,7 +3974,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -3423,10 +4044,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -3495,7 +4112,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -3503,7 +4148,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -3518,6 +4179,10 @@
           },
           {
             "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
             "named": false
           },
           {
@@ -3557,10 +4222,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -3629,7 +4290,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -3637,7 +4326,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -3697,10 +4402,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -3769,7 +4470,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -3777,7 +4506,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -3836,10 +4581,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -3911,7 +4652,31 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
           "type": "TypePath",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {
@@ -3919,11 +4684,31 @@
           "named": true
         },
         {
+          "type": "null",
+          "named": true
+        },
+        {
           "type": "reification",
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -3996,10 +4781,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -4068,7 +4849,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -4076,7 +4885,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -4125,10 +4950,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -4200,7 +5021,35 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -4208,7 +5057,23 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -4218,472 +5083,22 @@
     "type": "ESwitch",
     "named": true,
     "fields": {
-      "body": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": ";",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          }
-        ]
-      },
-      "case": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "case",
-            "named": false
-          }
-        ]
-      },
       "cases": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": ";",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "case",
-            "named": false
-          },
-          {
-            "type": "default",
-            "named": false
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
+            "type": "cases",
             "named": true
           }
         ]
       },
       "default": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "case",
-            "named": false
-          },
-          {
-            "type": "default",
-            "named": false
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
-          }
-        ]
-      },
-      "patterns": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "EArray",
-            "named": true
-          },
-          {
-            "type": "EArrayDecl",
-            "named": true
-          },
-          {
-            "type": "EArrowFunction",
-            "named": true
-          },
-          {
-            "type": "EBinop",
-            "named": true
-          },
-          {
-            "type": "EBlock",
-            "named": true
-          },
-          {
-            "type": "EBreak",
-            "named": true
-          },
-          {
-            "type": "ECall",
-            "named": true
-          },
-          {
-            "type": "ECast",
-            "named": true
-          },
-          {
-            "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
-            "named": true
-          },
-          {
-            "type": "EContinue",
-            "named": true
-          },
-          {
-            "type": "EField",
-            "named": true
-          },
-          {
-            "type": "EFor",
-            "named": true
-          },
-          {
-            "type": "EFunction",
-            "named": true
-          },
-          {
-            "type": "EIf",
-            "named": true
-          },
-          {
-            "type": "EMeta",
-            "named": true
-          },
-          {
-            "type": "ENew",
-            "named": true
-          },
-          {
-            "type": "EObjectDecl",
-            "named": true
-          },
-          {
-            "type": "EReturn",
-            "named": true
-          },
-          {
-            "type": "ESwitch",
-            "named": true
-          },
-          {
-            "type": "ETernary",
-            "named": true
-          },
-          {
-            "type": "EThrow",
-            "named": true
-          },
-          {
-            "type": "ETry",
-            "named": true
-          },
-          {
-            "type": "EUnop",
-            "named": true
-          },
-          {
-            "type": "EUntyped",
-            "named": true
-          },
-          {
-            "type": "EVars",
-            "named": true
-          },
-          {
-            "type": "EWhile",
-            "named": true
-          },
-          {
-            "type": "macro",
-            "named": true
-          },
-          {
-            "type": "reification",
-            "named": true
-          },
-          {
-            "type": "type_trace",
+            "type": "switch_default",
             "named": true
           }
         ]
@@ -4737,10 +5152,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -4809,7 +5220,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -4817,7 +5256,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -4877,10 +5332,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -4949,7 +5400,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -4957,7 +5436,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -5011,10 +5506,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -5083,7 +5574,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -5091,7 +5610,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -5145,10 +5680,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -5217,7 +5748,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -5225,7 +5784,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -5235,139 +5810,8 @@
   {
     "type": "EThrow",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "EArray",
-          "named": true
-        },
-        {
-          "type": "EArrayDecl",
-          "named": true
-        },
-        {
-          "type": "EArrowFunction",
-          "named": true
-        },
-        {
-          "type": "EBinop",
-          "named": true
-        },
-        {
-          "type": "EBlock",
-          "named": true
-        },
-        {
-          "type": "EBreak",
-          "named": true
-        },
-        {
-          "type": "ECall",
-          "named": true
-        },
-        {
-          "type": "ECast",
-          "named": true
-        },
-        {
-          "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
-          "named": true
-        },
-        {
-          "type": "EContinue",
-          "named": true
-        },
-        {
-          "type": "EField",
-          "named": true
-        },
-        {
-          "type": "EFor",
-          "named": true
-        },
-        {
-          "type": "EFunction",
-          "named": true
-        },
-        {
-          "type": "EIf",
-          "named": true
-        },
-        {
-          "type": "EMeta",
-          "named": true
-        },
-        {
-          "type": "ENew",
-          "named": true
-        },
-        {
-          "type": "EObjectDecl",
-          "named": true
-        },
-        {
-          "type": "EReturn",
-          "named": true
-        },
-        {
-          "type": "ESwitch",
-          "named": true
-        },
-        {
-          "type": "ETernary",
-          "named": true
-        },
-        {
-          "type": "EThrow",
-          "named": true
-        },
-        {
-          "type": "ETry",
-          "named": true
-        },
-        {
-          "type": "EUnop",
-          "named": true
-        },
-        {
-          "type": "EUntyped",
-          "named": true
-        },
-        {
-          "type": "EVars",
-          "named": true
-        },
-        {
-          "type": "EWhile",
-          "named": true
-        },
-        {
-          "type": "macro",
-          "named": true
-        },
-        {
-          "type": "reification",
-          "named": true
-        },
-        {
-          "type": "type_trace",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ETry",
-    "named": true,
     "fields": {
-      "body": {
+      "expr": {
         "multiple": true,
         "required": true,
         "types": [
@@ -5416,7 +5860,187 @@
             "named": true
           },
           {
-            "type": "EConst",
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "ETry",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
             "named": true
           },
           {
@@ -5488,7 +6112,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -5496,7 +6148,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -5553,10 +6221,6 @@
           "named": true
         },
         {
-          "type": "EConst",
-          "named": true
-        },
-        {
           "type": "EContinue",
           "named": true
         },
@@ -5625,6 +6289,26 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -5633,11 +6317,31 @@
           "named": true
         },
         {
+          "type": "null",
+          "named": true
+        },
+        {
           "type": "reification",
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -5647,6 +6351,36 @@
     "type": "EUnop",
     "named": true,
     "fields": {
+      "op": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "!",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "++",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          },
+          {
+            "type": "--",
+            "named": false
+          },
+          {
+            "type": "~",
+            "named": false
+          }
+        ]
+      },
       "operand": {
         "multiple": true,
         "required": true,
@@ -5693,10 +6427,6 @@
           },
           {
             "type": "ECheckType",
-            "named": true
-          },
-          {
-            "type": "EConst",
             "named": true
           },
           {
@@ -5768,7 +6498,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -5776,38 +6534,24 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
             "named": true
-          }
-        ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "!",
-            "named": false
           },
           {
-            "type": "+",
-            "named": false
-          },
-          {
-            "type": "++",
-            "named": false
-          },
-          {
-            "type": "-",
-            "named": false
-          },
-          {
-            "type": "--",
-            "named": false
-          },
-          {
-            "type": "~",
-            "named": false
+            "type": "wildcard_pattern",
+            "named": true
           }
         ]
       }
@@ -5855,10 +6599,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -5930,7 +6670,35 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -5938,7 +6706,23 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -6021,10 +6805,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -6093,7 +6873,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -6101,7 +6909,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -6122,6 +6946,10 @@
           },
           {
             "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
             "named": false
           },
           {
@@ -6161,10 +6989,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -6233,7 +7057,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -6241,7 +7093,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -6295,10 +7163,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -6367,7 +7231,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -6375,7 +7267,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -6391,11 +7299,29 @@
         "required": false,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": ",",
             "named": false
           },
           {
             "type": "FunctionArg",
+            "named": true
+          }
+        ]
+      },
+      "meta": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "MetaDataEntry",
             "named": true
           }
         ]
@@ -6406,22 +7332,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "EnumType",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type_name",
             "named": true
           }
         ]
@@ -6448,6 +7358,22 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "EnumType",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_name",
+            "named": true
+          }
+        ]
+      }
     },
     "children": {
       "multiple": true,
@@ -6458,11 +7384,7 @@
           "named": true
         },
         {
-          "type": "private",
-          "named": true
-        },
-        {
-          "type": "public",
+          "type": "TypeParameter",
           "named": true
         }
       ]
@@ -6560,10 +7482,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -6632,7 +7550,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -6640,7 +7586,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -6652,6 +7614,10 @@
       "types": [
         {
           "type": "MetaDataEntry",
+          "named": true
+        },
+        {
+          "type": "optional",
           "named": true
         }
       ]
@@ -6729,10 +7695,6 @@
             "named": true
           },
           {
-            "type": "EConst",
-            "named": true
-          },
-          {
             "type": "EContinue",
             "named": true
           },
@@ -6801,7 +7763,35 @@
             "named": true
           },
           {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
             "named": true
           },
           {
@@ -6809,7 +7799,23 @@
             "named": true
           },
           {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
             "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
             "named": true
           }
         ]
@@ -6969,6 +7975,21 @@
     }
   },
   {
+    "type": "cases",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "switch_case",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "comment",
     "named": true,
     "extra": true,
@@ -7044,7 +8065,15 @@
           "named": true
         },
         {
+          "type": "ClassMethod",
+          "named": true
+        },
+        {
           "type": "ClassType",
+          "named": true
+        },
+        {
+          "type": "ClassVar",
           "named": true
         },
         {
@@ -7085,10 +8114,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -7164,7 +8189,23 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
           "type": "MetaDataEntry",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
           "named": true
         },
         {
@@ -7188,7 +8229,19 @@
           "named": true
         },
         {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -7196,7 +8249,23 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -7226,7 +8295,15 @@
           "named": true
         },
         {
+          "type": "ClassMethod",
+          "named": true
+        },
+        {
           "type": "ClassType",
+          "named": true
+        },
+        {
+          "type": "ClassVar",
           "named": true
         },
         {
@@ -7267,10 +8344,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -7346,7 +8419,23 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
           "type": "MetaDataEntry",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
           "named": true
         },
         {
@@ -7354,7 +8443,19 @@
           "named": true
         },
         {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -7362,7 +8463,23 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -7392,7 +8509,15 @@
           "named": true
         },
         {
+          "type": "ClassMethod",
+          "named": true
+        },
+        {
           "type": "ClassType",
+          "named": true
+        },
+        {
+          "type": "ClassVar",
           "named": true
         },
         {
@@ -7433,10 +8558,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -7512,7 +8633,23 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
           "type": "MetaDataEntry",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
           "named": true
         },
         {
@@ -7524,7 +8661,19 @@
           "named": true
         },
         {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -7532,7 +8681,23 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -7670,10 +8835,6 @@
           "named": true
         },
         {
-          "type": "EConst",
-          "named": true
-        },
-        {
           "type": "EContinue",
           "named": true
         },
@@ -7742,6 +8903,26 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -7750,11 +8931,31 @@
           "named": true
         },
         {
+          "type": "null",
+          "named": true
+        },
+        {
           "type": "reification",
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -7805,10 +9006,6 @@
           "named": true
         },
         {
-          "type": "EConst",
-          "named": true
-        },
-        {
           "type": "EContinue",
           "named": true
         },
@@ -7877,7 +9074,35 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -7885,7 +9110,23 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
@@ -7957,10 +9198,6 @@
         },
         {
           "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
           "named": true
         },
         {
@@ -8036,11 +9273,39 @@
           "named": true
         },
         {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "import",
           "named": true
         },
         {
           "type": "macro",
+          "named": true
+        },
+        {
+          "type": "null",
           "named": true
         },
         {
@@ -8052,15 +9317,36 @@
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
           "named": true
         },
         {
           "type": "using",
           "named": true
+        },
+        {
+          "type": "wildcard_pattern",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "optional",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "package",
@@ -8076,11 +9362,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "package_name",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "property_access",
@@ -8192,10 +9473,6 @@
           "named": true
         },
         {
-          "type": "EConst",
-          "named": true
-        },
-        {
           "type": "EContinue",
           "named": true
         },
@@ -8261,6 +9538,26 @@
         },
         {
           "type": "EWhile",
+          "named": true
+        },
+        {
+          "type": "Float",
+          "named": true
+        },
+        {
+          "type": "Int",
+          "named": true
+        },
+        {
+          "type": "Regexp",
+          "named": true
+        },
+        {
+          "type": "String",
+          "named": true
+        },
+        {
+          "type": "false",
           "named": true
         },
         {
@@ -8272,150 +9569,760 @@
           "named": true
         },
         {
+          "type": "null",
+          "named": true
+        },
+        {
           "type": "reification",
           "named": true
         },
         {
+          "type": "super",
+          "named": true
+        },
+        {
+          "type": "this",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "wildcard_pattern",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "type_name",
+    "type": "switch_case",
     "named": true,
-    "fields": {}
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      },
+      "patterns": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "switch_default",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "type_trace",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "EArray",
-          "named": true
-        },
-        {
-          "type": "EArrayDecl",
-          "named": true
-        },
-        {
-          "type": "EArrowFunction",
-          "named": true
-        },
-        {
-          "type": "EBinop",
-          "named": true
-        },
-        {
-          "type": "EBlock",
-          "named": true
-        },
-        {
-          "type": "EBreak",
-          "named": true
-        },
-        {
-          "type": "ECall",
-          "named": true
-        },
-        {
-          "type": "ECast",
-          "named": true
-        },
-        {
-          "type": "ECheckType",
-          "named": true
-        },
-        {
-          "type": "EConst",
-          "named": true
-        },
-        {
-          "type": "EContinue",
-          "named": true
-        },
-        {
-          "type": "EField",
-          "named": true
-        },
-        {
-          "type": "EFor",
-          "named": true
-        },
-        {
-          "type": "EFunction",
-          "named": true
-        },
-        {
-          "type": "EIf",
-          "named": true
-        },
-        {
-          "type": "EMeta",
-          "named": true
-        },
-        {
-          "type": "ENew",
-          "named": true
-        },
-        {
-          "type": "EObjectDecl",
-          "named": true
-        },
-        {
-          "type": "EReturn",
-          "named": true
-        },
-        {
-          "type": "ESwitch",
-          "named": true
-        },
-        {
-          "type": "ETernary",
-          "named": true
-        },
-        {
-          "type": "EThrow",
-          "named": true
-        },
-        {
-          "type": "ETry",
-          "named": true
-        },
-        {
-          "type": "EUnop",
-          "named": true
-        },
-        {
-          "type": "EUntyped",
-          "named": true
-        },
-        {
-          "type": "EVars",
-          "named": true
-        },
-        {
-          "type": "EWhile",
-          "named": true
-        },
-        {
-          "type": "macro",
-          "named": true
-        },
-        {
-          "type": "reification",
-          "named": true
-        },
-        {
-          "type": "type_trace",
-          "named": true
-        }
-      ]
+    "fields": {
+      "type": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -8462,6 +10369,10 @@
     "type": "wildcard",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "",
+    "named": false
   },
   {
     "type": "!",
@@ -8844,6 +10755,10 @@
     "named": false
   },
   {
+    "type": "is",
+    "named": false
+  },
+  {
     "type": "line_comment",
     "named": true
   },
@@ -8872,12 +10787,16 @@
     "named": false
   },
   {
-    "type": "private",
+    "type": "package_name",
     "named": true
   },
   {
+    "type": "private",
+    "named": false
+  },
+  {
     "type": "public",
-    "named": true
+    "named": false
   },
   {
     "type": "return",
@@ -8918,6 +10837,10 @@
   {
     "type": "try",
     "named": false
+  },
+  {
+    "type": "type_name",
+    "named": true
   },
   {
     "type": "typedef",
