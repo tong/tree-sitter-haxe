@@ -26,3 +26,20 @@ for(e in b) i++
     iterable: (identifier)
     body: (EUnop
       operand: (identifier))))
+
+==============
+for expression
+==============
+
+for(i in 0...10) j++
+
+---
+
+(module
+  (EFor
+    var: (identifier)
+    iterable: (EBinop
+      left: (Int)
+      right: (Int))
+    body: (EUnop
+      operand: (identifier))))

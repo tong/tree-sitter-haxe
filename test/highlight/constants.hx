@@ -34,6 +34,27 @@
 //          ^ string
 //                ^ variable
 
+~/haxe/gi;
+//^ string.regex
+
+true;
+//^ boolean
+
+false;
+//^ boolean
+
+null;
+//^ constant.builtin
+
+this;
+//^ variable.builtin
+
+super;
+//^ variable.builtin
+
+somevar;
+//^ variable
+
   [1, 2, 3, 4, 5];
 //^ punctuation.bracket
 // ^ number
