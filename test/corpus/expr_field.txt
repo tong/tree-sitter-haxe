@@ -1,0 +1,10 @@
+================
+field expression
+================
+obj.test;
+---
+(module
+  (EField
+    object: (identifier)
+    name: (identifier)))
+

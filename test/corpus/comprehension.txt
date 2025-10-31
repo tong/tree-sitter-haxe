@@ -26,12 +26,12 @@ var a = [
             left: (Int)
             right: (Int))
           body: (EIf
-            condition: (EBinop
+            cond: (EBinop
               left: (EBinop
                 left: (identifier)
                 right: (identifier))
               right: (Int))
-            consequence: (EBinop
+            if: (EBinop
               left: (EBinop
                 left: (identifier)
                 right: (String
@@ -49,7 +49,7 @@ array comprehension: while
 (module
   (EArrayDecl
     (EWhile
-      condition: (EBinop
+      cond: (EBinop
         left: (identifier)
         right: (Int))
       body: (EUnop
@@ -83,10 +83,10 @@ var a = [
             left: (Int)
             right: (Int))
           body: (EIf
-            condition: (EBinop
+            cond: (EBinop
               left: (identifier)
               right: (identifier))
-            consequence: (EBinop
+            if: (EBinop
               left: (identifier)
               right: (identifier))))))))
 
@@ -101,7 +101,7 @@ map comprehension: while
 (module
   (EArrayDecl
     (EWhile
-      condition: (EBinop
+      cond: (EBinop
         left: (identifier)
         right: (Int))
       body: (EBinop

@@ -8,7 +8,7 @@ while(true) i;
 
 (module
   (EWhile
-    condition: (true)
+    cond: (true)
     body: (identifier)))
 
 ================
@@ -21,7 +21,7 @@ while(true) {}
 
 (module
   (EWhile
-    condition: (true)
+    cond: (true)
     body: (EBlock)))
 
 ================
@@ -35,4 +35,4 @@ do {} while(true)
 (module
   (EWhile
     body: (EBlock)
-    condition: (true)))
+    cond: (true)))
