@@ -11,10 +11,10 @@ const PREC = {
   BIT_OR: 6,
   BIT_XOR: 7,
   BIT_AND: 8,
-  EQUALITY: 9,
+  EQUALITY: 10,
   COMPARE: 10,
-  IS: 11,
-  IN: 12,
+  IS: 10,
+  IN: 10,
   SHIFT: 13,
   ADD: 14,
   MULTIPLY: 15,
@@ -161,6 +161,7 @@ export default grammar({
     [$._type_decl, $._conditional_body],
     [$.cases],
     [$.import],
+    [$.EBinop],
   ],
   inline: ($) => [
     $._semicolon,
@@ -369,7 +370,6 @@ export default grammar({
       const BINOPS = [
         {
           ops: [
-            "=>",
             "=",
             "+=",
             "-=",
@@ -387,19 +387,19 @@ export default grammar({
           assoc: "right",
         },
         { ops: ["??"], prec: PREC.NULL_COALESCE, assoc: "right" },
-        { ops: ["||"], prec: PREC.LOGICAL_OR },
-        { ops: ["&&"], prec: PREC.LOGICAL_AND },
-        { ops: ["|"], prec: PREC.BIT_OR },
-        { ops: ["^"], prec: PREC.BIT_XOR },
-        { ops: ["&"], prec: PREC.BIT_AND },
-        { ops: ["==", "!="], prec: PREC.EQUALITY },
-        { ops: [">", ">=", "<", "<="], prec: PREC.COMPARE },
-        { ops: ["is"], prec: PREC.IS, rhs: $.TypePath },
-        { ops: ["in"], prec: PREC.IN },
-        { ops: ["<<", ">>", ">>>"], prec: PREC.SHIFT },
-        { ops: ["+", "-"], prec: PREC.ADD },
-        { ops: ["*", "/", "%"], prec: PREC.MULTIPLY },
-        { ops: ["..."], prec: PREC.RANGE },
+        { ops: ["||"], prec: PREC.LOGICAL_OR, assoc: "left" },
+        { ops: ["&&"], prec: PREC.LOGICAL_AND, assoc: "left" },
+        { ops: ["|"], prec: PREC.BIT_OR, assoc: "left" },
+        { ops: ["^"], prec: PREC.BIT_XOR, assoc: "left" },
+        { ops: ["&"], prec: PREC.BIT_AND, assoc: "left" },
+        { ops: ["==", "!="], prec: PREC.EQUALITY, assoc: "non" },
+        { ops: [">", ">=", "<", "<="], prec: PREC.COMPARE, assoc: "non" },
+        { ops: ["is"], prec: PREC.IS, rhs: $.TypePath, assoc: "non" },
+        { ops: ["in"], prec: PREC.IN, assoc: "non" },
+        { ops: ["<<", ">>", ">>>"], prec: PREC.SHIFT, assoc: "left" },
+        { ops: ["+", "-"], prec: PREC.ADD, assoc: "left" },
+        { ops: ["*", "/", "%"], prec: PREC.MULTIPLY, assoc: "left" },
+        { ops: ["..."], prec: PREC.RANGE, assoc: "non" },
       ];
       return choice(
         ...BINOPS.map(({ ops, prec: level, assoc, rhs }) => {
@@ -409,9 +409,9 @@ export default grammar({
             field("op", op),
             field("right", rhs || $._Expr),
           );
-          return assoc === "right"
-            ? prec.right(level, rule)
-            : prec.left(level, rule);
+          if (assoc === "right") return prec.right(level, rule);
+          if (assoc === "left") return prec.left(level, rule);
+          return prec(level, rule);
         }),
       );
     },
