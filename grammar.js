@@ -155,7 +155,6 @@ export default grammar({
     [$._expr_lhs, $.compile_condition],
     [$._expr_meta, $.ECall],
     [$._expr_postfix, $._expr_lhs],
-    [$._expr_prim, $._block_or_expr],
     [$._expr_prim, $._expr_value],
     [$._expr_stmt, $.EArrayDecl],
     [$._type_decl, $._class_field, $._conditional_body],
@@ -270,7 +269,7 @@ export default grammar({
 
     _block_or_expr: ($) =>
       choice(
-        prec.dynamic(1, $.EBlock),
+        prec(1, $.EBlock),
         prec.dynamic(-1, seq($._Expr, optional($._semicolon))),
       ),
 
@@ -283,7 +282,7 @@ export default grammar({
             "callee",
             choice(
               $._EParenthesis,
-              $.ECall, //TODO: should not be required
+              // $.ECall, //TODO: should not be required
               $.EField,
               $.identifier,
               $.super,
@@ -875,7 +874,6 @@ export default grammar({
         ),
         $._function_args,
         optional(field("ret", $._type_annotation)),
-        //choice(field("body", $._expr_or_block), $._semicolon),
         choice(field("body", $._block_or_expr), $._semicolon),
       ),
 
@@ -915,7 +913,7 @@ export default grammar({
           '"',
           repeat(
             choice(
-              alias(token.immediate(prec(1, /[^"\\$]+/)), $.fragment),
+              alias(token.immediate(prec(1, /[^"\\]+/)), $.fragment),
               $.escape_sequence,
             ),
           ),
