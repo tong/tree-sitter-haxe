@@ -575,6 +575,7 @@ export default grammar({
         seq(
           "case",
           field("patterns", commaSep1($._Expr)),
+          optional(seq("if", "(", field("guard", $._Expr), ")")),
           ":",
           field("body", repeat(seq($._Expr, optional($._semicolon)))),
         ),
