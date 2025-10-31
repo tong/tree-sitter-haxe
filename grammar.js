@@ -19,7 +19,7 @@ const PREC = {
   ADD: 14,
   MULTIPLY: 15,
   RANGE: 16,
-  UNARY: 17,
+  UNARY: 21,
   POSTFIX: 18,
   PRIMARY: 19,
   CALL: 20,
@@ -136,6 +136,7 @@ export default grammar({
     [$.ClassVar, $.ClassMethod],
     [$.ClassVar, $._conditional_body],
     [$.DefType, $.EnumType, $._conditional_body],
+    [$.EBinop],
     [$.EBlock, $.EObjectDecl],
     [$.ECall, $.EFunction, $.ClassMethod],
     [$.ECall],
@@ -146,7 +147,7 @@ export default grammar({
     [$._EConst, $._expr_lhs, $.compile_condition],
     [$._EConst, $._expr_lhs],
     [$._EConst, $.compile_condition],
-    [$._Expr, $._expr_value],
+    [$._Expr, $._expr_lhs],
     [$._block_or_expr, $._comprehension_body],
     [$._block_or_expr],
     [$._class_field, $._conditional_body],
@@ -154,21 +155,15 @@ export default grammar({
     [$._expr_atom, $._expr_value],
     [$._expr_lhs, $.compile_condition],
     [$._expr_meta, $.ECall],
-    [$._expr_postfix, $._expr_lhs],
     [$._expr_prim, $._expr_value],
-    [$._expr_stmt, $.EArrayDecl],
+    [$._expr_value, $._Expr],
+    [$._expr_value, $._expr_lhs],
     [$._type_decl, $._class_field, $._conditional_body],
     [$._type_decl, $._conditional_body],
     [$.cases],
     [$.import],
-    [$.EBinop],
   ],
-  inline: ($) => [
-    $._semicolon,
-    $.visibility,
-    $.rest,
-    //
-  ],
+  inline: ($) => [$._semicolon, $.visibility, $.rest, $._expr_postfix],
   word: ($) => $.identifier,
   rules: {
     module: ($) =>
@@ -299,8 +294,9 @@ export default grammar({
         PREC.CALL,
         seq(
           field("object", $._Expr),
-          choice(".", alias("?.", $.optional)),
-          seq(optional("$"), field("name", $.identifier)),
+          field("op", choice(".", "?.")),
+          optional("$"),
+          field("name", $.identifier),
         ),
       ),
     EArray: ($) =>
@@ -348,9 +344,7 @@ export default grammar({
             seq(
               field("name", $.identifier),
               optional(field("type", $._type_annotation)),
-              optional(
-                seq("=", field("value", prec(PREC.ASSIGN + 1, $._Expr))),
-              ),
+              optional(seq("=", field("value", $._Expr))),
             ),
           ),
         ),
@@ -359,7 +353,7 @@ export default grammar({
       prec.right(
         PREC.TERNARY,
         seq(
-          field("cond", choice($._expr_postfix, $.EBinop, $.EUnop)),
+          field("cond", $._Expr),
           "?",
           field("if", $._Expr),
           ":",
@@ -370,6 +364,7 @@ export default grammar({
       const BINOPS = [
         {
           ops: [
+            "=>",
             "=",
             "+=",
             "-=",
@@ -446,16 +441,19 @@ export default grammar({
         ),
       ),
     EArrayDecl: ($) =>
-      seq(
-        "[",
-        optional(
-          choice(
-            commaSep($._Expr),
-            alias($._comprehension_for, $.EFor),
-            $.EWhile,
+      prec(
+        1,
+        seq(
+          "[",
+          optional(
+            choice(
+              commaSep($._Expr),
+              alias($._comprehension_for, $.EFor),
+              $.EWhile,
+            ),
           ),
+          "]",
         ),
-        "]",
       ),
     _comprehension_for: ($) =>
       seq(
@@ -689,15 +687,10 @@ export default grammar({
         repeat($.MetaDataEntry),
         choice(
           seq(
-            optional($.optional),
+            optional(choice("var", "final", $.optional)),
             field("name", $.identifier),
             ":",
             field("type", $.ComplexType),
-          ),
-          seq(
-            optional(choice("var", "final")),
-            field("name", $.identifier),
-            $._type_annotation,
           ),
           seq(
             "function",
@@ -914,7 +907,7 @@ export default grammar({
           '"',
           repeat(
             choice(
-              alias(token.immediate(prec(1, /[^"\\]+/)), $.fragment),
+              alias(token.immediate(prec(1, /[^"\\$]+/)), $.fragment),
               $.escape_sequence,
             ),
           ),

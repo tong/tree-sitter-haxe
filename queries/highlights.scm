@@ -62,7 +62,7 @@
   "macro"
 ] @keyword.modifier
 
-"macro" @macro
+; "macro" @macro
 
 (Int) @number
 (Float) @number.float
@@ -176,6 +176,11 @@
 (EVars
   "final" @keyword
   name: (identifier) @variable)
+
+; macro reification -----------------------------------------------------------
+
+"macro" @macro
+(macro (reification)) @macro
 
 ; Metadata --------------------------------------------------------------------
 
