@@ -166,7 +166,8 @@ export default grammar({
     [$._type_decl, $._class_field, $._conditional_body],
     [$._type_decl, $._conditional_body],
     [$.cases],
-    [$.import],
+    [$.import, $._dot_path],
+    [$._dot_path],
   ],
   inline: ($) => [$._semicolon, $.visibility, $.rest, $._expr_postfix],
   word: ($) => $.identifier,
@@ -180,14 +181,15 @@ export default grammar({
 
     //////////////////////////////////////////////////////////////////////////
 
-    package: ($) => seq("package", dotSep($.package_name), $._semicolon),
+    package: ($) =>
+      seq("package", optional(field("path", $._dot_path)), $._semicolon),
 
     import: ($) =>
       seq(
         "import",
         choice(
           seq(
-            field("path", repeat(seq($.package_name, "."))),
+            optional(field("path", seq($._dot_path, "."))),
             field("module", $.type_name),
             optional(field("sub", repeat1(seq(".", $.identifier)))),
             optional(
@@ -215,7 +217,7 @@ export default grammar({
     using: ($) =>
       seq(
         "using",
-        field("path", optional(seq(dotSep($.package_name), "."))),
+        optional(field("path", seq($._dot_path, "."))),
         repeat(seq($.type_name, ".")),
         field("type", $.type_name),
         $._semicolon,
@@ -228,11 +230,8 @@ export default grammar({
     _Expr: ($) => choice($.EBinop, $.ETernary, $.EUnop, $._expr_postfix),
     _expr_postfix: ($) => choice($.ECall, $.EField, $.EArray, $._expr_prim),
     _expr_prim: ($) =>
-      choice($._expr_atom, $._expr_stmt, $._expr_meta, $.EBlock),
-    _expr_atom: ($) =>
-      choice($._EConst, $._EParenthesis, $.EObjectDecl, $.EArrayDecl, $.ENew),
-    _expr_stmt: ($) =>
       choice(
+        $._expr_atom,
         $.EBreak,
         $.EContinue,
         $.EFor,
@@ -243,7 +242,11 @@ export default grammar({
         $.ETry,
         $.EVars,
         $.EWhile,
+        $._expr_meta,
+        $.EBlock,
       ),
+    _expr_atom: ($) =>
+      choice($._EConst, $._EParenthesis, $.EObjectDecl, $.EArrayDecl, $.ENew),
     _expr_meta: ($) =>
       choice(
         $.EArrowFunction,
@@ -920,6 +923,8 @@ export default grammar({
     rest: (_) => "...",
 
     // ------------------------------------------------------------------------
+
+    _dot_path: ($) => dotSep1($.package_name),
 
     _type_annotation: ($) =>
       prec(PREC.TYPE_ANNOTATION, seq(":", field("type", $.ComplexType))),
