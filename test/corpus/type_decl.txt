@@ -191,7 +191,7 @@ typedef A = {
           name: (type_name))
         extends: (TypePath
           name: (type_name))
-        (AnonymousField
+        (Field
           name: (identifier)
           type: (ComplexType
             (TypePath
@@ -213,12 +213,12 @@ typedef A = {
     name: (type_name)
     type: (ComplexType
       (TAnonymous
-        (AnonymousField
+        (ClassVar
           name: (identifier)
           type: (ComplexType
             (TypePath
               name: (type_name))))
-        (AnonymousField
+        (ClassVar
           name: (identifier)
           type: (ComplexType
             (TypePath
@@ -240,12 +240,12 @@ typedef A = {
     name: (type_name)
     type: (ComplexType
       (TAnonymous
-        (AnonymousField
+        (Field
           name: (identifier)
           type: (ComplexType
             (TypePath
               name: (type_name))))
-        (AnonymousField
+        (Field
           name: (identifier)
           type: (ComplexType
             (TypePath

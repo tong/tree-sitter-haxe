@@ -157,7 +157,6 @@ export default grammar({
     [$._block_or_expr, $._comprehension_body],
     [$._block_or_expr],
     [$._class_field, $._conditional_body],
-    [$._expr_atom, $.ESwitch],
     [$._expr_atom, $._expr_value],
     [$._expr_lhs, $.compile_condition],
     [$._expr_meta, $.ECall],
@@ -565,7 +564,7 @@ export default grammar({
         PREC.CONTROL,
         seq(
           "switch",
-          field("subject", choice($._EParenthesis, $._Expr)),
+          field("subject", $._Expr),
           "{",
           optional(field("cases", $.cases)),
           optional(field("default", $.switch_default)),
@@ -677,35 +676,21 @@ export default grammar({
 
     TAnonymous: ($) =>
       prec.right(
+        PREC.OBJECT_DECL,
         seq(
           "{",
-          sep(
-            choice(",", $._semicolon),
-            choice($.AnonymousField, seq(">", field("extends", $.TypePath))),
-          ),
-          optional(choice(",", $._semicolon)),
+          optional(repeat1(seq(">", field("extends", $.TypePath), ","))),
+          choice(seq(commaSep($.Field), optional(",")), repeat($._class_field)),
           "}",
           optional($._semicolon),
         ),
       ),
-    AnonymousField: ($) =>
+    Field: ($) =>
       seq(
-        repeat($.MetaDataEntry),
-        choice(
-          seq(
-            optional(choice("var", "final", $.optional)),
-            field("name", $.identifier),
-            ":",
-            field("type", $.ComplexType),
-          ),
-          seq(
-            "function",
-            field("name", $.identifier),
-            optional(field("params", $._type_params)),
-            $._function_args,
-            optional(field("ret", $._type_annotation)),
-          ),
-        ),
+        optional($.optional),
+        field("name", $.identifier),
+        ":",
+        field("type", $.ComplexType),
       ),
 
     TypeParameter: ($) =>
