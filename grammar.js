@@ -916,7 +916,7 @@ export default grammar({
       ),
     escape_sequence: () => token.immediate(seq("\\", /./)),
     interpolation: ($) =>
-      choice(seq("${", $._Expr, "}"), seq("$", $.identifier)),
+      seq("$", choice(seq(token.immediate("{"), $._Expr, "}"), $.identifier)),
 
     Regexp: (_) =>
       seq("~/", repeat(choice(/[^/\\\n]/, /\\./)), "/", /[gimsu]*/),
