@@ -61,6 +61,7 @@
   "macro"
   "extern"
 ] @keyword.modifier
+(ClassType "abstract" @keyword.modifier)
 
 ; "macro" @macro
 

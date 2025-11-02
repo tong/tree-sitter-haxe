@@ -88,6 +88,18 @@ extern class A {}
   (ClassType
     name: (type_name)))
 
+==========================
+abstract class declaration
+==========================
+
+abstract class A {}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)))
+
 =============================
 enum declaration field params
 =============================

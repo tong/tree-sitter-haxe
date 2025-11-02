@@ -44,3 +44,10 @@ extern class Main {}
 //           ^ type
 //                ^ punctuation.bracket
 //                 ^ punctuation.bracket
+
+abstract class Main {}
+// <- keyword.modifier
+//       ^ keyword.declaration
+//             ^ type
+//                  ^ punctuation.bracket
+//                   ^ punctuation.bracket
