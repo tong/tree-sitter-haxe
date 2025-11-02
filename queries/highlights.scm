@@ -24,7 +24,6 @@
   "else"
   "enum"
   "extends"
-  "extern"
   "for"
   "if"
   "implements"
@@ -60,6 +59,7 @@
   "static"
   "dynamic"
   "macro"
+  "extern"
 ] @keyword.modifier
 
 ; "macro" @macro

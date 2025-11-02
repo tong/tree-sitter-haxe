@@ -62,6 +62,32 @@ private class A<T> {}
     (TypeParameter
       name: (type_name))))
 
+=======================
+final class declaration
+=======================
+
+final class A<T> {}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (TypeParameter
+      name: (type_name))))
+
+========================
+extern class declaration
+========================
+
+extern class A {}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)))
+
 =============================
 enum declaration field params
 =============================
