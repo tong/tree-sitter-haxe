@@ -59,10 +59,7 @@
   "override"
   "static"
   "dynamic"
-  "macro"
 ] @keyword.modifier
-
-; "macro" @macro
 
 (Int) @number
 (Float) @number.float
@@ -181,6 +178,7 @@
 
 "macro" @macro
 (macro (reification)) @macro
+(ClassMethod "macro" @keyword.modifier)
 
 ; Metadata --------------------------------------------------------------------
 
