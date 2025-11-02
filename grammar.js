@@ -907,7 +907,7 @@ export default grammar({
           '"',
           repeat(
             choice(
-              alias(token.immediate(prec(1, /[^"\\$]+/)), $.fragment),
+              alias(token.immediate(prec(1, /[^"\\]+/)), $.fragment),
               $.escape_sequence,
             ),
           ),

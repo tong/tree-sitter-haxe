@@ -181,6 +181,18 @@ string interpolation literals
       (String
         (fragment)))))
 
+===================================================================
+string double-quoted literals containing interpolation-like content
+===================================================================
+ 
+"$2a$05$bvIG6Nmid91Mu9RcmmWZfO";
+
+---
+
+(module
+  (String
+    (fragment)))
+
 ===============================================================================
 regular expression literals
 ===============================================================================
