@@ -76,96 +76,6 @@
     }
   },
   {
-    "type": "AnonymousField",
-    "named": true,
-    "fields": {
-      "args": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "FunctionArg",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "params": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "<",
-            "named": false
-          },
-          {
-            "type": ">",
-            "named": false
-          },
-          {
-            "type": "TypeParameter",
-            "named": true
-          }
-        ]
-      },
-      "ret": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "ComplexType",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "ComplexType",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "MetaDataEntry",
-          "named": true
-        },
-        {
-          "type": "optional",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "ClassMethod",
     "named": true,
     "fields": {
@@ -7389,6 +7299,42 @@
     }
   },
   {
+    "type": "Field",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ComplexType",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "optional",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "Float",
     "named": true,
     "fields": {}
@@ -7868,7 +7814,19 @@
       "required": false,
       "types": [
         {
-          "type": "AnonymousField",
+          "type": "ClassMethod",
+          "named": true
+        },
+        {
+          "type": "ClassVar",
+          "named": true
+        },
+        {
+          "type": "Field",
+          "named": true
+        },
+        {
+          "type": "MetaDataEntry",
           "named": true
         }
       ]
@@ -10832,11 +10790,11 @@
   },
   {
     "type": "default",
-    "named": false
+    "named": true
   },
   {
     "type": "default",
-    "named": true
+    "named": false
   },
   {
     "type": "do",
@@ -10844,11 +10802,11 @@
   },
   {
     "type": "dynamic",
-    "named": false
+    "named": true
   },
   {
     "type": "dynamic",
-    "named": true
+    "named": false
   },
   {
     "type": "else",

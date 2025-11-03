@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-haxe
-        VERSION "0.4.1"
+        VERSION "0.4.2"
         DESCRIPTION "Haxe grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/tong/tree-sitter-haxe"
         LANGUAGES C)

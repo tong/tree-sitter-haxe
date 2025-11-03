@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-haxe"
 description = "Haxe grammar for tree-sitter"
-version = "0.4.1"
+version = "0.4.2"
 authors = ["tong <tong@disktree.net>"]
 license = "MIT"
 readme = "README.md"
