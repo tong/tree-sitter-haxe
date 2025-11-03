@@ -143,7 +143,7 @@
 (EnumConstructor name: (identifier) @constant)
 
 (TAnonymous) @type.builtin
-(AnonymousField name: (identifier) @variable.member)
+(Field name: (identifier) @variable.member)
 
 ; Expressions -----------------------------------------------------------------
 
