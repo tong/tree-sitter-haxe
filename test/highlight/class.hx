@@ -25,6 +25,15 @@ class Main {
 //                                 ^ punctuation.special
 
 class Main {
+  public static macro function foo() {}
+}
+// ^ keyword.modifier
+//       ^ keyword.modifier
+//              ^ keyword.modifier
+//                    ^ keyword.function
+//                             ^ function.macro
+
+class Main {
   function a(): Int {}
 }
 //           ^ punctuation.bracket

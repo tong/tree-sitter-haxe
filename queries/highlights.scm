@@ -63,8 +63,6 @@
 ] @keyword.modifier
 (ClassType "abstract" @keyword.modifier)
 
-; "macro" @macro
-
 (Int) @number
 (Float) @number.float
 (String (escape_sequence) @string.escape)
@@ -182,6 +180,7 @@
 
 "macro" @macro
 (macro (reification)) @macro
+(ClassMethod "macro" @keyword.modifier)
 
 ; Metadata --------------------------------------------------------------------
 
