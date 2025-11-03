@@ -32,7 +32,10 @@
 //    ^ string.special
 //     ^ variable
 //          ^ string
+//             ^ string.special
+//              ^ punctuation.bracket
 //                ^ variable
+//                     ^ punctuation.bracket
 
 ~/haxe/gi;
 //^ string.regex
