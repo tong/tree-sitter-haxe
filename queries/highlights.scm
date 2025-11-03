@@ -24,7 +24,6 @@
   "else"
   "enum"
   "extends"
-  "extern"
   "for"
   "if"
   "implements"
@@ -59,7 +58,10 @@
   "override"
   "static"
   "dynamic"
+  "macro"
+  "extern"
 ] @keyword.modifier
+(ClassType "abstract" @keyword.modifier)
 
 (Int) @number
 (Float) @number.float
