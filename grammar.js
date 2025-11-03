@@ -126,11 +126,17 @@ export default grammar({
       $.EnumType,
       $._conditional_body,
     ],
+    [$.AbstractType, $.ClassType],
+    [$.AbstractType, $.ClassType, $._conditional_body],
     [$.AbstractType, $.ClassType, $.DefType, $.EnumType],
     [$.AbstractType, $.DefType, $.EnumType, $._conditional_body],
     [$.AbstractType, $.DefType, $.EnumType],
-    [$.AbstractType, $._conditional_body],
     [$.ClassMethod, $._conditional_body],
+    [$.ClassType, $.ClassVar, $.ClassMethod],
+    [$.ClassType, $.ClassVar, $.ClassMethod, $._conditional_body],
+    [$.ClassType, $.DefType, $.EnumType],
+    [$.ClassType, $.DefType, $.EnumType, $._conditional_body],
+    [$.ClassType, $.ClassMethod],
     [$.ClassType, $._conditional_body],
     [$.ClassVar, $.ClassMethod, $._conditional_body],
     [$.ClassVar, $.ClassMethod],
@@ -764,7 +770,7 @@ export default grammar({
 
     ClassType: ($) =>
       seq(
-        optional(repeat1(choice($.visibility))),
+        optional(repeat1(choice($.visibility, "abstract", "extern", "final"))),
         choice("class", "interface"),
         $._type_decl_signature,
         optional(seq("extends", field("extends", $.TypePath))),

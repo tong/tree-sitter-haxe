@@ -24,7 +24,6 @@
   "else"
   "enum"
   "extends"
-  "extern"
   "for"
   "if"
   "implements"
@@ -60,7 +59,9 @@
   "static"
   "dynamic"
   "macro"
+  "extern"
 ] @keyword.modifier
+(ClassType "abstract" @keyword.modifier)
 
 ; "macro" @macro
 

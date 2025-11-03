@@ -30,3 +30,24 @@ class Main {
 //           ^ punctuation.bracket
 //            ^ punctuation.delimiter
 //               ^ type
+
+final class Main {}
+// <- keyword.modifier
+//    ^ keyword.declaration
+//          ^ type
+//               ^ punctuation.bracket
+//                ^ punctuation.bracket
+
+extern class Main {}
+// <- keyword.modifier
+//     ^ keyword.declaration
+//           ^ type
+//                ^ punctuation.bracket
+//                 ^ punctuation.bracket
+
+abstract class Main {}
+// <- keyword.modifier
+//       ^ keyword.declaration
+//             ^ type
+//                  ^ punctuation.bracket
+//                   ^ punctuation.bracket
