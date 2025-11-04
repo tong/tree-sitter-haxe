@@ -629,15 +629,25 @@ export default grammar({
 
     macro: ($) => prec(PREC.MACRO, seq("macro", $._Expr)),
     reification: ($) =>
-      choice(
-        seq("$", $.identifier),
-        seq("${", $._Expr, "}"),
-        seq("$e{", $._Expr, "}"),
-        seq("$a{", commaSep($._Expr), "}"),
-        seq("$b{", repeat(seq($._Expr, optional($._semicolon))), "}"),
-        seq("$i{", $.identifier, "}"),
-        seq("$p{", commaSep($.identifier), "}"),
-        seq("$v{", $._Expr, "}"),
+      prec(
+        PREC.UNARY,
+        seq(
+          "$",
+          choice(
+            token.immediate(/[a-zA-Z_][a-zA-Z0-9_]*/), // identifier
+            seq(token.immediate("{"), $._Expr, "}"),
+            seq(token.immediate("e{"), $._Expr, "}"),
+            seq(token.immediate("a{"), commaSep($._Expr), "}"),
+            seq(
+              token.immediate("b{"),
+              repeat(seq($._Expr, optional($._semicolon))),
+              "}",
+            ),
+            seq(token.immediate("i{"), $.identifier, "}"),
+            seq(token.immediate("p{"), commaSep($.identifier), "}"),
+            seq(token.immediate("v{"), $._Expr, "}"),
+          ),
+        ),
       ),
 
     type_trace: ($) =>
