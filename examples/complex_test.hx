@@ -76,12 +76,8 @@ class AllFeatures<T:Dynamic> implements ITestable implements haxe.extern.IExtern
 			throw "error";
 		} catch (e:String) {
 			trace('Caught $e');
-		} catch (e:Dynamic) {
+		} catch (e) {
 			trace("Unknown error");
-		}
-		finally
-		{
-			trace("done");
 		}
 	}
 
