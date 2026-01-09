@@ -920,7 +920,13 @@ export default grammar({
       ),
     escape_sequence: () => token.immediate(seq("\\", /./)),
     interpolation: ($) =>
-      seq("$", choice(seq(token.immediate("{"), $._Expr, "}"), $.identifier)),
+      seq(
+        "$",
+        choice(
+          seq(token.immediate("{"), $._Expr, "}"),
+          alias(token.immediate(/[a-zA-Z_][a-zA-Z0-9_]*/), $.identifier),
+        ),
+      ),
 
     Regexp: (_) =>
       seq("~/", repeat(choice(/[^/\\\n]/, /\\./)), "/", /[gimsu]*/),
