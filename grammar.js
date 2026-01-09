@@ -1014,6 +1014,8 @@ export default grammar({
     _conditional_body: ($) =>
       choice(
         // ISSUE: adding everything sucks
+        $.import,
+        $.using,
         $._class_field,
         $._expr_statement,
         $._type_decl,
