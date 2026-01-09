@@ -353,6 +353,20 @@
           }
         ]
       },
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "class",
+            "named": false
+          },
+          {
+            "type": "interface",
+            "named": false
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -8193,6 +8207,10 @@
           "named": true
         },
         {
+          "type": "import",
+          "named": true
+        },
+        {
           "type": "macro",
           "named": true
         },
@@ -8218,6 +8236,10 @@
         },
         {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "using",
           "named": true
         },
         {
@@ -8407,6 +8429,10 @@
           "named": true
         },
         {
+          "type": "import",
+          "named": true
+        },
+        {
           "type": "macro",
           "named": true
         },
@@ -8432,6 +8458,10 @@
         },
         {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "using",
           "named": true
         },
         {
@@ -8625,6 +8655,10 @@
           "named": true
         },
         {
+          "type": "import",
+          "named": true
+        },
+        {
           "type": "macro",
           "named": true
         },
@@ -8650,6 +8684,10 @@
         },
         {
           "type": "type_trace",
+          "named": true
+        },
+        {
+          "type": "using",
           "named": true
         },
         {
@@ -9307,16 +9345,21 @@
   {
     "type": "package",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "package_name",
-          "named": true
-        }
-      ]
+    "fields": {
+      "path": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "package_name",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -10537,35 +10580,7 @@
     "named": false
   },
   {
-    "type": "$a{",
-    "named": false
-  },
-  {
-    "type": "$b{",
-    "named": false
-  },
-  {
-    "type": "$e{",
-    "named": false
-  },
-  {
-    "type": "$i{",
-    "named": false
-  },
-  {
-    "type": "$p{",
-    "named": false
-  },
-  {
     "type": "$type",
-    "named": false
-  },
-  {
-    "type": "$v{",
-    "named": false
-  },
-  {
-    "type": "${",
     "named": false
   },
   {
@@ -10757,11 +10772,19 @@
     "named": false
   },
   {
+    "type": "a{",
+    "named": false
+  },
+  {
     "type": "block_comment",
     "named": true
   },
   {
     "type": "break",
+    "named": false
+  },
+  {
+    "type": "b{",
     "named": false
   },
   {
@@ -10790,11 +10813,11 @@
   },
   {
     "type": "default",
-    "named": true
+    "named": false
   },
   {
     "type": "default",
-    "named": false
+    "named": true
   },
   {
     "type": "do",
@@ -10826,6 +10849,10 @@
   },
   {
     "type": "extern",
+    "named": false
+  },
+  {
+    "type": "e{",
     "named": false
   },
   {
@@ -10889,6 +10916,10 @@
     "named": false
   },
   {
+    "type": "i{",
+    "named": false
+  },
+  {
     "type": "line_comment",
     "named": true
   },
@@ -10926,6 +10957,10 @@
   },
   {
     "type": "public",
+    "named": false
+  },
+  {
+    "type": "p{",
     "named": false
   },
   {
@@ -10986,6 +11021,10 @@
   },
   {
     "type": "var",
+    "named": false
+  },
+  {
+    "type": "v{",
     "named": false
   },
   {
