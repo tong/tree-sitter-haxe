@@ -445,6 +445,7 @@ export default grammar({
               field("value", $._expr_value),
             ),
           ),
+          optional(","),
           "}",
         ),
       ),
