@@ -1,0 +1,98 @@
+================
+metadata: reserved keyword names without params
+================
+
+@:default class A {}
+@:final class B {}
+@:enum class C {}
+@:public class D {}
+@:private class E {}
+@:extern class F {}
+@:override class G {}
+@:inline class H {}
+@:static class I {}
+@:dynamic class J {}
+@:abstract class K {}
+
+---
+
+(module
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name))
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name)))
+
+================
+metadata: reserved keyword name with string param on a class field
+================
+
+class A {
+  @:default("x")
+  public var a:String;
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (MetaDataEntry
+      name: (identifier)
+      params: (String (fragment)))
+    (ClassVar
+      name: (identifier)
+      type: (ComplexType
+        (TypePath name: (type_name))))))
+
+================
+metadata: two reserved-name entries on one line
+================
+
+class A {
+  @:optional @:default(0)
+  public var a:Int;
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (MetaDataEntry name: (identifier))
+    (MetaDataEntry
+      name: (identifier)
+      params: (Int))
+    (ClassVar
+      name: (identifier)
+      type: (ComplexType
+        (TypePath name: (type_name))))))
+
+================
+metadata: @:macro regression smoke test
+================
+
+@:macro class A {}
+
+---
+
+(module
+  meta: (MetaDataEntry name: (identifier))
+  (ClassType name: (type_name)))
