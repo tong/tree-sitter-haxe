@@ -111,6 +111,19 @@ export default grammar({
     global: (_) => RESERVED_KEYWORDS,
   },
   conflicts: ($) => [
+    // `extern` is legal both as a TYPE modifier (`extern class Foo`) and as a
+    // FIELD modifier (`extern private static inline var W:Int = 1024;`), so a
+    // leading modifier run is ambiguous between opening a type declaration and
+    // opening one of its members until the next keyword settles it.
+    [$.ClassType, $.ClassVar, $.ClassMethod, $.DefType, $.EnumType],
+    [
+      $.ClassType,
+      $.ClassVar,
+      $.ClassMethod,
+      $.DefType,
+      $.EnumType,
+      $._conditional_body,
+    ],
     [
       $.AbstractType,
       $.ClassMethod,
@@ -792,7 +805,9 @@ export default grammar({
         PREC.ASSIGN,
         seq(
           optional(
-            repeat1(choice($.visibility, "dynamic", "inline", "static")),
+            repeat1(
+              choice($.visibility, "dynamic", "extern", "inline", "static"),
+            ),
           ),
           choice("var", "final"),
           field("name", $.identifier),
@@ -830,6 +845,7 @@ export default grammar({
                 $.visibility,
                 "macro",
                 "dynamic",
+                "extern",
                 "inline",
                 "override",
                 "final",
