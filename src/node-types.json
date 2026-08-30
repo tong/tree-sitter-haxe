@@ -8713,6 +8713,11 @@
     }
   },
   {
+    "type": "false",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "import",
     "named": true,
     "fields": {
@@ -9338,6 +9343,11 @@
     }
   },
   {
+    "type": "null",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "optional",
     "named": true,
     "fields": {}
@@ -9597,6 +9607,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "super",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "switch_case",
@@ -10319,6 +10334,16 @@
     }
   },
   {
+    "type": "this",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "true",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "type_trace",
     "named": true,
     "fields": {
@@ -10857,7 +10882,7 @@
   },
   {
     "type": "false",
-    "named": true
+    "named": false
   },
   {
     "type": "final",
@@ -10937,7 +10962,7 @@
   },
   {
     "type": "null",
-    "named": true
+    "named": false
   },
   {
     "type": "override",
@@ -10977,7 +11002,7 @@
   },
   {
     "type": "super",
-    "named": true
+    "named": false
   },
   {
     "type": "switch",
@@ -10985,7 +11010,7 @@
   },
   {
     "type": "this",
-    "named": true
+    "named": false
   },
   {
     "type": "throw",
@@ -10997,7 +11022,7 @@
   },
   {
     "type": "true",
-    "named": true
+    "named": false
   },
   {
     "type": "try",
