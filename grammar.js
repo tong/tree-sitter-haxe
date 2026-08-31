@@ -440,11 +440,18 @@ export default grammar({
         -1,
         seq(
           "{",
-          commaSep(
+          // A trailing comma after the last field is legal Haxe, and is what
+          // multi-line configuration objects are usually written with.
+          optional(
             seq(
-              field("name", choice($.identifier, $.String)),
-              ":",
-              field("value", $._expr_value),
+              commaSep1(
+                seq(
+                  field("name", choice($.identifier, $.String)),
+                  ":",
+                  field("value", $._Expr),
+                ),
+              ),
+              optional(","),
             ),
           ),
           "}",

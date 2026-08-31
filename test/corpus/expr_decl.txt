@@ -23,3 +23,50 @@ var x = { "a": 0 };
       (String
         (fragment))
       (Int))))
+
+
+
+
+========================================
+object declaration with a trailing comma
+========================================
+
+{ a: 1, b: 2, };
+
+---
+
+(module
+  (EObjectDecl
+    name: (identifier)
+    value: (Int)
+    name: (identifier)
+    value: (Int)))
+
+
+=======================================
+object field value is a full expression
+=======================================
+
+{ delay: d * i, level: m.has(k) ? m.get(k) : 0 };
+
+---
+
+(module
+  (EObjectDecl
+    name: (identifier)
+    value: (EBinop
+      left: (identifier)
+      right: (identifier))
+    name: (identifier)
+    value: (ETernary
+      cond: (ECall
+        callee: (EField
+          object: (identifier)
+          name: (identifier))
+        args: (identifier))
+      if: (ECall
+        callee: (EField
+          object: (identifier)
+          name: (identifier))
+        args: (identifier))
+      else: (Int))))
