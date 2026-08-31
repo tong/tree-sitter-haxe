@@ -203,3 +203,33 @@ regular expression literals
 
 (module
   (Regexp))
+
+
+=================================
+float literals with a leading dot
+=================================
+
+.5;
+.125e3;
+
+---
+
+(module
+  (Float)
+  (Float))
+
+
+=========================================
+float literals with an uppercase exponent
+=========================================
+
+1.0E5;
+2e10;
+1E-3;
+
+---
+
+(module
+  (Float)
+  (Float)
+  (Float))

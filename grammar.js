@@ -896,10 +896,18 @@ export default grammar({
         /\d[\d_]*/,
       ),
 
+    // Three legal Float spellings that did not parse:
+    //   - a leading-dot fraction, `.5`, as in `lineStyle(.5, color)`.
+    //   - an uppercase exponent, `1.0E5`. The marker was written `[ee]`, a
+    //     character class holding the same letter twice, so only lowercase
+    //     `e` was ever accepted.
+    //   - a single digit before a bare exponent, `1e5`. The form required
+    //     `\d[\d_]+`, two or more digits, so `10e5` parsed and `1e5` did not.
     Float: (_) =>
       choice(
-        /\d[\d_]*\.\d[\d_]*([ee][+-]?\d[\d_]*)?/,
-        /\d[\d_]+[ee][+-]?\d[\d_]*/,
+        /\d[\d_]*\.\d[\d_]*([eE][+-]?\d[\d_]*)?/,
+        /\.\d[\d_]*([eE][+-]?\d[\d_]*)?/,
+        /\d[\d_]*[eE][+-]?\d[\d_]*/,
       ),
 
     String: ($) =>
