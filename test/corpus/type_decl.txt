@@ -250,3 +250,27 @@ typedef A = {
           type: (ComplexType
             (TypePath
               name: (type_name))))))))
+
+
+
+
+=======================================
+function type with an optional argument
+=======================================
+
+typedef F = MBitmap->?Object->Void;
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      arg: (TypePath
+        name: (type_name))
+      ret: (ComplexType
+        arg: (TypePath
+          name: (type_name))
+        ret: (ComplexType
+          (TypePath
+            name: (type_name)))))))
