@@ -23,3 +23,21 @@ var x = { "a": 0 };
       (String
         (fragment))
       (Int))))
+
+
+
+
+===================================
+array literal with a trailing comma
+===================================
+
+["a", "b",];
+
+---
+
+(module
+  (EArrayDecl
+    (String
+      (fragment))
+    (String
+      (fragment))))

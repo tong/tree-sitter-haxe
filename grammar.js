@@ -457,7 +457,10 @@ export default grammar({
           "[",
           optional(
             choice(
-              commaSep($._Expr),
+              // Haxe permits a trailing comma after the last element,
+              // `["a", "b",]`, which hand-maintained tables rely on so that
+              // every line can end the same way.
+              seq(commaSep1($._Expr), optional(",")),
               alias($._comprehension_for, $.EFor),
               $.EWhile,
             ),
