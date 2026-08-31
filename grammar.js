@@ -111,6 +111,11 @@ export default grammar({
     global: (_) => RESERVED_KEYWORDS,
   },
   conflicts: ($) => [
+    // A declarator in a var statement is ambiguous with itself: at `=` the
+    // parser can take the initializer, or stop and let the enclosing EVars be
+    // reduced so that `=` becomes an EBinop assignment. GLR has to carry both
+    // or the third and later declarator in `var a = 1, b = 2, c = 3;` is lost.
+    [$._var_declarator],
     [
       $.AbstractType,
       $.ClassMethod,
@@ -350,14 +355,14 @@ export default grammar({
         PREC.ASSIGN,
         seq(
           choice("var", "final"),
-          commaSep1(
-            seq(
-              field("name", $.identifier),
-              optional(field("type", $._type_annotation)),
-              optional(seq("=", field("value", $._Expr))),
-            ),
-          ),
+          commaSep1($._var_declarator),
         ),
+      ),
+    _var_declarator: ($) =>
+      seq(
+        field("name", $.identifier),
+        optional(field("type", $._type_annotation)),
+        optional(seq("=", field("value", $._Expr))),
       ),
     ETernary: ($) =>
       prec.right(

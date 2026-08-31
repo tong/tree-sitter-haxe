@@ -23,3 +23,32 @@ var x = { "a": 0 };
       (String
         (fragment))
       (Int))))
+
+
+
+
+======================================
+var with three initialized declarators
+======================================
+
+var a:Int = 1, b:Int = 2, c:Int = 3;
+
+---
+
+(module
+  (EVars
+    name: (identifier)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))
+    value: (Int)
+    name: (identifier)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))
+    value: (Int)
+    name: (identifier)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))
+    value: (Int)))
