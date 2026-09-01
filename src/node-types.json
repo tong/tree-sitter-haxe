@@ -334,7 +334,7 @@
     "named": true,
     "fields": {
       "extends": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
