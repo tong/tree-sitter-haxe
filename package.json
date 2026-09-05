@@ -51,5 +51,8 @@
     "start": "tree-sitter playground",
     "test": "node --test bindings/node/*_test.js",
     "test-examples": "./test-examples.sh"
+  },
+  "allowScripts": {
+    "tree-sitter-cli@0.27.0": true
   }
 }
