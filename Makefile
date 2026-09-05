@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-haxe
 HOMEPAGE_URL := https://github.com/tong/tree-sitter-haxe
-VERSION := 0.4.7
+VERSION := 0.5.0
 
 # repository
 SRC_DIR := src
