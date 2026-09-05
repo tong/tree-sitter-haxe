@@ -704,10 +704,20 @@ export default grammar({
           1,
           field(
             "TFunction",
-            seq(field("arg", $._base_type), "->", field("ret", $.ComplexType)),
+            seq(
+              // The `?` marks an optional argument, `MBitmap->?Object->Void`.
+              // It is a separate alternative rather than an optional("?") on
+              // the existing one, because without the "?" the two sequences
+              // are identical and the ambiguity cannot be resolved.
+              field("arg", choice($._base_type, $._optional_function_type_arg)),
+              "->",
+              field("ret", $.ComplexType),
+            ),
           ),
         ),
       ),
+
+    _optional_function_type_arg: ($) => seq("?", $._base_type),
 
     _base_type: ($) =>
       choice(

@@ -3398,8 +3398,17 @@
                   "type": "FIELD",
                   "name": "arg",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "_base_type"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_base_type"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_optional_function_type_arg"
+                      }
+                    ]
                   }
                 },
                 {
@@ -3417,6 +3426,19 @@
               ]
             }
           }
+        }
+      ]
+    },
+    "_optional_function_type_arg": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "?"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_base_type"
         }
       ]
     },
