@@ -4613,6 +4613,10 @@
                     },
                     {
                       "type": "STRING",
+                      "value": "extern"
+                    },
+                    {
+                      "type": "STRING",
                       "value": "inline"
                     },
                     {
@@ -4816,6 +4820,10 @@
                     {
                       "type": "STRING",
                       "value": "dynamic"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "extern"
                     },
                     {
                       "type": "STRING",
@@ -6058,6 +6066,21 @@
     }
   ],
   "conflicts": [
+    [
+      "ClassType",
+      "ClassVar",
+      "ClassMethod",
+      "DefType",
+      "EnumType"
+    ],
+    [
+      "ClassType",
+      "ClassVar",
+      "ClassMethod",
+      "DefType",
+      "EnumType",
+      "_conditional_body"
+    ],
     [
       "AbstractType",
       "ClassMethod",
