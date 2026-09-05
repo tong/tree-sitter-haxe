@@ -817,8 +817,20 @@ export default grammar({
         optional(repeat1(choice($.visibility, "abstract", "extern", "final"))),
         field("kind", choice("class", "interface")),
         $._type_decl_signature,
-        optional(seq("extends", field("extends", $.TypePath))),
-        repeat(seq("implements", field("implements", $.TypePath))),
+        // One interleaved repeat, not `extends` followed by `implements`: Haxe
+        // accepts the clauses in either order, and
+        // `class C implements I<Int> extends B<Int>` is legal. Written
+        // sequentially, that order put the implements clause inside an ERROR
+        // node -- the field still existed but was parented to the ERROR rather
+        // than to ClassType, so a consumer reading ClassType's fields silently
+        // saw a class with no interfaces. An interface may also extend several
+        // others, which the repeat covers.
+        repeat(
+          choice(
+            seq("extends", field("extends", $.TypePath)),
+            seq("implements", field("implements", $.TypePath)),
+          ),
+        ),
         "{",
         repeat($._class_field),
         "}",

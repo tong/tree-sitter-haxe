@@ -252,8 +252,6 @@ typedef A = {
               name: (type_name))))))))
 
 
-
-
 =======================================
 function type with an optional argument
 =======================================
@@ -274,3 +272,27 @@ typedef F = MBitmap->?Object->Void;
         ret: (ComplexType
           (TypePath
             name: (type_name)))))))
+
+
+====================================
+class with implements before extends
+====================================
+
+class ArrayOrItemInt implements IArrayOrItem<Int> extends ArrayOrItem<Int> {}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    implements: (TypePath
+      name: (type_name)
+      params: (ComplexType
+        (TypePath
+          name: (type_name))))
+    extends: (TypePath
+      name: (type_name)
+      params: (ComplexType
+        (TypePath
+          name: (type_name))))))
+

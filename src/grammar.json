@@ -4505,46 +4505,43 @@
           "name": "_type_decl_signature"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "extends"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "extends",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "TypePath"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
           "type": "REPEAT",
           "content": {
-            "type": "SEQ",
+            "type": "CHOICE",
             "members": [
               {
-                "type": "STRING",
-                "value": "implements"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "extends"
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "extends",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "TypePath"
+                    }
+                  }
+                ]
               },
               {
-                "type": "FIELD",
-                "name": "implements",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "TypePath"
-                }
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "implements"
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "implements",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "TypePath"
+                    }
+                  }
+                ]
               }
             ]
           }
