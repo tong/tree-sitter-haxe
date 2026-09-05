@@ -52,3 +52,20 @@ var a:Int = 1, b:Int = 2, c:Int = 3;
       (TypePath
         name: (type_name)))
     value: (Int)))
+
+
+===================================
+array literal with a trailing comma
+===================================
+
+["a", "b",];
+
+---
+
+(module
+  (EArrayDecl
+    (String
+      (fragment))
+    (String
+      (fragment))))
+
