@@ -1,0 +1,62 @@
+==========================
+call result is callable
+==========================
+
+a()();
+
+---
+
+(module
+  (ECall
+    callee: (ECall
+      callee: (identifier))))
+
+==========================
+index result is callable
+==========================
+
+callbacks[i](x);
+
+---
+
+(module
+  (ECall
+    callee: (EArray
+      array: (identifier)
+      index: (identifier))
+    args: (identifier)))
+
+==========================
+curried call with args
+==========================
+
+x = f(1)(2);
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (ECall
+      callee: (ECall
+        callee: (identifier)
+        args: (Int))
+      args: (Int))))
+
+==========================
+mixed call chain
+==========================
+
+foo().bar()[0]();
+
+---
+
+(module
+  (ECall
+    callee: (EArray
+      array: (ECall
+        callee: (EField
+          object: (ECall
+            callee: (identifier))
+          name: (identifier)))
+      index: (Int))))

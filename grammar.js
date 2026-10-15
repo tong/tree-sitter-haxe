@@ -296,7 +296,10 @@ export default grammar({
             "callee",
             choice(
               $._EParenthesis,
-              // $.ECall, //TODO: should not be required
+              // A call or index result is callable too: `makeHandler()()`,
+              // `callbacks[i]()`.
+              $.ECall,
+              $.EArray,
               $.EField,
               $.identifier,
               $.super,

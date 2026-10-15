@@ -643,6 +643,14 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "ECall"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "EArray"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "EField"
                 },
                 {
