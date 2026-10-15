@@ -131,3 +131,112 @@ class A {}
     (conditional_end))
   (ClassType
     name: (type_name)))
+
+===================================
+conditional as assignment value
+===================================
+
+x = #if js 1 #else 2 #end;
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (conditional
+      (compile_condition
+        (identifier))
+      (Int)
+      (conditional_else
+        (Int))
+      (conditional_end))))
+
+===================================
+conditional as var initializer
+===================================
+
+var x = #if js "a" #elseif sys "b" #else "c" #end;
+
+---
+
+(module
+  (EVars
+    name: (identifier)
+    value: (conditional
+      (compile_condition
+        (identifier))
+      (String
+        (fragment))
+      (conditional_elseif
+        (compile_condition
+          (identifier))
+        (String
+          (fragment)))
+      (conditional_else
+        (String
+          (fragment)))
+      (conditional_end))))
+
+===================================
+conditional as call argument
+===================================
+
+g(a, #if js b #else c #end);
+
+---
+
+(module
+  (ECall
+    callee: (identifier)
+    args: (identifier)
+    args: (conditional
+      (compile_condition
+        (identifier))
+      (identifier)
+      (conditional_else
+        (identifier))
+      (conditional_end))))
+
+===================================
+conditional as binop operand
+===================================
+
+x = #if js 1 #else 2 #end + 3;
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (EBinop
+      left: (conditional
+        (compile_condition
+          (identifier))
+        (Int)
+        (conditional_else
+          (Int))
+        (conditional_end))
+      right: (Int))))
+
+===================================
+import after module-level conditional
+===================================
+
+#if cpp
+using Main;
+#end
+import sys.io.File;
+
+---
+
+(module
+  (conditional
+    (compile_condition
+      (identifier))
+    (using
+      type: (type_name))
+    (conditional_end))
+  (import
+    path: (package_name)
+    path: (package_name)
+    module: (type_name)))

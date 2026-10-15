@@ -198,8 +198,10 @@ export default grammar({
     module: ($) =>
       seq(
         optional($.package),
-        repeat(choice($.import, $.using)),
-        repeat(choice($._type_decl, $._expr_statement)),
+        // Haxe wants imports before declarations, but a top-level `#if` is
+        // parsed as an expression statement, and imports after its `#end`
+        // must still parse; the compiler reports misplaced imports anyway.
+        repeat(choice($.import, $.using, $._type_decl, $._expr_statement)),
       ),
 
     //////////////////////////////////////////////////////////////////////////
@@ -267,6 +269,7 @@ export default grammar({
         $.EWhile,
         $._expr_meta,
         $.EBlock,
+        alias($._expr_conditional, $.conditional),
       ),
     _expr_atom: ($) =>
       choice($._EConst, $._EParenthesis, $.EObjectDecl, $.EArrayDecl, $.ENew),
@@ -1125,6 +1128,21 @@ export default grammar({
         $.conditional_error,
         repeat1($.MetaDataEntry),
       ),
+    // `#if` used as an expression, `x = #if js 1 #else 2 #end;`. Separate
+    // from `conditional`, which is an extra and can appear anywhere but never
+    // takes an expression's place, so `x =` would be left without a value.
+    _expr_conditional: ($) =>
+      seq(
+        "#if",
+        $.compile_condition,
+        repeat($._conditional_body),
+        repeat(alias($._expr_conditional_elseif, $.conditional_elseif)),
+        optional(alias($._expr_conditional_else, $.conditional_else)),
+        $.conditional_end,
+      ),
+    _expr_conditional_elseif: ($) =>
+      seq("#elseif", $.compile_condition, repeat($._conditional_body)),
+    _expr_conditional_else: ($) => seq("#else", repeat($._conditional_body)),
     conditional_elseif: ($) =>
       seq("#elseif", $.compile_condition, repeat($._conditional_body)),
     conditional_else: ($) => seq("#else", repeat($._conditional_body)),
