@@ -115,7 +115,7 @@ import some.Type as Alias;
   (import
     path: (package_name)
     module: (type_name)
-    alias: (identifier)))
+    alias: (type_name)))
 
 ====================
 import type as field

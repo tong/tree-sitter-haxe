@@ -131,3 +131,17 @@ value ?? "fallback"
     right: 
       (String
         (fragment))))
+
+==================================
+binop null coalescing assignment
+==================================
+
+value ??= "fallback";
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (String
+      (fragment))))

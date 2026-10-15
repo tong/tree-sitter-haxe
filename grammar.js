@@ -177,6 +177,11 @@ export default grammar({
     [$._EConst, $._expr_lhs],
     [$._EConst, $.compile_condition],
     [$._Expr, $._expr_lhs],
+    // `(Int)` is a parenthesised type or the argument list of a Haxe 4
+    // function type; only a following `->` tells them apart.
+    [$._function_type_arg, $._base_type],
+    // `(?Int) -> Void` and `(?a:Int) -> Void` share the `(?` prefix.
+    [$._optional_function_type_arg, $.optional],
     [$._block_or_expr, $._comprehension_body],
     [$._block_or_expr],
     [$._class_field, $._conditional_body],
@@ -387,6 +392,7 @@ export default grammar({
           ops: [
             "=>",
             "=",
+            "??=",
             "+=",
             "-=",
             "*=",
@@ -708,9 +714,43 @@ export default grammar({
             ),
           ),
         ),
+        // Haxe 4 function types: `() -> Void`, `(Int, String) -> Void`,
+        // `(a:Int, ?b:String) -> Void`. A single unnamed argument, `(Int) ->
+        // Void`, also matches the old form with a parenthesised argument; the
+        // dynamic precedence picks this reading.
+        prec.dynamic(
+          1,
+          seq(
+            "(",
+            commaSep(field("arg", $._function_type_arg)),
+            ")",
+            "->",
+            field("ret", $.ComplexType),
+          ),
+        ),
       ),
 
     _optional_function_type_arg: ($) => seq("?", $._base_type),
+
+    _function_type_arg: ($) =>
+      choice($.ComplexType, $._optional_function_type_arg, $.FunctionTypeArg),
+
+    FunctionTypeArg: ($) =>
+      seq(
+        optional($.optional),
+        // After `(` in a type the lexer cannot yet tell an argument name from
+        // a type, and prefers `type_name`/`package_name`; accept all three.
+        field(
+          "name",
+          choice(
+            $.identifier,
+            alias($.package_name, $.identifier),
+            alias($.type_name, $.identifier),
+          ),
+        ),
+        ":",
+        field("type", $.ComplexType),
+      ),
 
     _base_type: ($) =>
       choice(
@@ -1018,8 +1058,8 @@ export default grammar({
     visibility: (_) => choice("public", "private"),
 
     identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    package_name: (_) => /[a-z_][a-zA-Z0-9_]*/,
-    type_name: (_) => /[A-Z][a-zA-Z0-9_]*/,
+    package_name: (_) => token(prec(1, /[a-z_][a-zA-Z0-9_]*/)),
+    type_name: (_) => token(prec(1, /[A-Z][a-zA-Z0-9_]*/)),
 
     optional: (_) => "?",
     wildcard: (_) => "*",

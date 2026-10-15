@@ -1,0 +1,124 @@
+==========================
+function type no args
+==========================
+
+typedef F = () -> Void;
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      ret: (ComplexType
+        (TypePath
+          name: (type_name))))))
+
+==========================
+function type unnamed args
+==========================
+
+typedef F = (Int, String) -> Void;
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      arg: (ComplexType
+        (TypePath
+          name: (type_name)))
+      arg: (ComplexType
+        (TypePath
+          name: (type_name)))
+      ret: (ComplexType
+        (TypePath
+          name: (type_name))))))
+
+==========================
+function type named args
+==========================
+
+typedef F = (a:Int, ?b:String) -> Void;
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      arg: (FunctionTypeArg
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name))))
+      arg: (FunctionTypeArg
+        (optional)
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name))))
+      ret: (ComplexType
+        (TypePath
+          name: (type_name))))))
+
+==============================
+function type single arg
+==============================
+
+typedef F = (Int) -> Void;
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      arg: (ComplexType
+        (TypePath
+          name: (type_name)))
+      ret: (ComplexType
+        (TypePath
+          name: (type_name))))))
+
+==============================
+parenthesised type
+==============================
+
+typedef F = (Int);
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (ComplexType
+        (TypePath
+          name: (type_name))))))
+
+==============================
+function type as argument type
+==============================
+
+function f(cb:(Int) -> Void):Void {}
+
+---
+
+(module
+  (EFunction
+    name: (identifier)
+    args: (FunctionArg
+      name: (identifier)
+      type: (ComplexType
+        arg: (ComplexType
+          (TypePath
+            name: (type_name)))
+        ret: (ComplexType
+          (TypePath
+            name: (type_name)))))
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))
+    body: (EBlock)))
