@@ -558,31 +558,6 @@
         }
       ]
     },
-    "_expr_value": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_expr_postfix"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expr_atom"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "EObjectDecl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "EArrayDecl"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ENew"
-        }
-      ]
-    },
     "_expr_lhs": {
       "type": "CHOICE",
       "members": [
@@ -1816,7 +1791,7 @@
       "members": [
         {
           "type": "PREC_RIGHT",
-          "value": 21,
+          "value": 17,
           "content": {
             "type": "SEQ",
             "members": [
@@ -1858,7 +1833,7 @@
                 "name": "operand",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_expr_value"
+                  "name": "_Expr"
                 }
               }
             ]
@@ -3005,7 +2980,7 @@
     },
     "reification": {
       "type": "PREC",
-      "value": 21,
+      "value": 17,
       "content": {
         "type": "SEQ",
         "members": [
@@ -6244,28 +6219,8 @@
       "_dot_path"
     ],
     [
-      "_expr_atom",
-      "_expr_value"
-    ],
-    [
-      "_expr_lhs",
-      "compile_condition"
-    ],
-    [
       "_expr_meta",
       "ECall"
-    ],
-    [
-      "_expr_prim",
-      "_expr_value"
-    ],
-    [
-      "_expr_value",
-      "_Expr"
-    ],
-    [
-      "_expr_value",
-      "_expr_lhs"
     ],
     [
       "_type_decl",

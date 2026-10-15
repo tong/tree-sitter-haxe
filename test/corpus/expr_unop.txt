@@ -1,0 +1,95 @@
+===================================
+unop prefix binds looser than field
+===================================
+
+x = -a.b;
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (EUnop
+      operand: (EField
+        object: (identifier)
+        name: (identifier)))))
+
+==================================
+unop prefix binds looser than call
+==================================
+
+x = !a.b();
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (EUnop
+      operand: (ECall
+        callee: (EField
+          object: (identifier)
+          name: (identifier))))))
+
+===================================
+unop prefix binds looser than array
+===================================
+
+x = -a[0];
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (EUnop
+      operand: (EArray
+        array: (identifier)
+        index: (Int)))))
+
+=======================================
+unop prefix binds tighter than binop
+=======================================
+
+x = -a * b;
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (EBinop
+      left: (EUnop
+        operand: (identifier))
+      right: (identifier))))
+
+=======================================
+unop prefix binds looser than postfix
+=======================================
+
+x = -x++;
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (EUnop
+      operand: (EUnop
+        operand: (identifier)))))
+
+==================
+unop postfix field
+==================
+
+x = a.b++;
+
+---
+
+(module
+  (EBinop
+    left: (identifier)
+    right: (EUnop
+      operand: (EField
+        object: (identifier)
+        name: (identifier)))))

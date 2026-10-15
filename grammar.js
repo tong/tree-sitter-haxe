@@ -19,7 +19,10 @@ const PREC = {
   ADD: 14,
   MULTIPLY: 15,
   RANGE: 16,
-  UNARY: 21,
+  // Prefix operators bind looser than field access, indexing and calls, so
+  // `-a.b` is `-(a.b)` and `!a.b()` is `!(a.b())`, but tighter than any
+  // binary operator, so `-a * b` is still `(-a) * b`.
+  UNARY: 17,
   POSTFIX: 18,
   PRIMARY: 19,
   CALL: 20,
@@ -178,12 +181,7 @@ export default grammar({
     [$._block_or_expr],
     [$._class_field, $._conditional_body],
     [$._dot_path],
-    [$._expr_atom, $._expr_value],
-    [$._expr_lhs, $.compile_condition],
     [$._expr_meta, $.ECall],
-    [$._expr_prim, $._expr_value],
-    [$._expr_value, $._Expr],
-    [$._expr_value, $._expr_lhs],
     [$._type_decl, $._class_field, $._conditional_body],
     [$._type_decl, $._conditional_body],
     [$.cases],
@@ -280,14 +278,6 @@ export default grammar({
         $.reification,
         $.type_trace,
         $.wildcard_pattern,
-      ),
-    _expr_value: ($) =>
-      choice(
-        $._expr_postfix,
-        $._expr_atom,
-        $.EObjectDecl,
-        $.EArrayDecl,
-        $.ENew,
       ),
     _expr_lhs: ($) => choice($.identifier, $.EField, $.EArray),
 
@@ -444,7 +434,7 @@ export default grammar({
           PREC.UNARY,
           seq(
             field("op", choice("++", "--", "+", "-", "!", "~")),
-            field("operand", $._expr_value),
+            field("operand", $._Expr),
           ),
         ),
         prec.left(
