@@ -116,6 +116,7 @@
 
 (FunctionArg name: (identifier) @variable.parameter)
 (FunctionArg "=" @punctuation.special)
+(FunctionTypeArg name: (identifier) @variable.parameter)
 
 
 (ComplexType "&" @operator)

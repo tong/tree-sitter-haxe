@@ -60,3 +60,12 @@ abstract class Main {}
 //             ^ type
 //                  ^ punctuation.bracket
 //                   ^ punctuation.bracket
+
+typedef Handler = (event:Event, ?Count:Int) -> Void;
+// <- keyword.declaration
+//      ^ type
+//                 ^ variable.parameter
+//                       ^ type
+//                               ^ variable.parameter
+//                                     ^ type
+//                                             ^ type
