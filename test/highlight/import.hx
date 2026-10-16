@@ -1,4 +1,8 @@
 import my.other.Type.field;
 // <- keyword.import
-//     ^ namespace
+//     ^ module
 //                      ^ variable
+
+import haxe.io.Bytes;
+//         ^ punctuation.delimiter
+//                  ^ punctuation.delimiter

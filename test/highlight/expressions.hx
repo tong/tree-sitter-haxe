@@ -2,25 +2,25 @@ funk();
 // <- function.call
 
 new Some();
-// <- keyword
+// <- keyword.operator
 //   ^ type
 
 cast(a,String);
-// ^ keyword
+// ^ keyword.operator
 //   ^ variable
 //     ^ type
 
 for(a in b) {}
-// <- keyword
+// <- keyword.repeat
 //  ^ variable
-//    ^ keyword
+//    ^ keyword.operator
 //       ^ variable
 
 switch([7, 6]) {
     case [a, b] if(b>a): 
 }
-//   ^ keyword.control
-//              ^ keyword
+//   ^ keyword.conditional
+//              ^ keyword.conditional
 //                    ^ punctuation.bracket
 //                     ^ punctuation.delimiter
 
@@ -41,3 +41,15 @@ function(?a:Int=23){}
 untyped a;
 // ^ keyword.debug
 
+
+throw "x";
+// <- keyword.exception
+//    ^ string
+
+#if js
+// <- keyword.directive
+//  ^ constant.macro
+var x = 1;
+//    ^ operator
+#end
+// <- keyword.directive

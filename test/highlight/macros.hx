@@ -1,7 +1,7 @@
 macro 23;
-// <- macro
+// <- keyword
 //     ^ number
 
 macro $v{some};
-// <- macro
-//     ^ macro
+// <- keyword
+//     ^ function.macro

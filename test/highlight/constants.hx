@@ -38,7 +38,7 @@
 //                     ^ punctuation.bracket
 
 ~/haxe/gi;
-//^ string.regex
+//^ string.regexp
 
 true;
 //^ boolean
