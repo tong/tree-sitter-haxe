@@ -230,6 +230,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -551,6 +555,10 @@
           "named": true
         },
         {
+          "type": "conditional",
+          "named": true
+        },
+        {
           "type": "false",
           "named": true
         },
@@ -643,6 +651,10 @@
           },
           {
             "type": "ComplexType",
+            "named": true
+          },
+          {
+            "type": "FunctionTypeArg",
             "named": true
           },
           {
@@ -858,6 +870,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -1032,6 +1048,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -1201,6 +1221,10 @@
         },
         {
           "type": "String",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -1413,6 +1437,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -1603,6 +1631,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -1762,6 +1794,10 @@
           },
           {
             "type": "??",
+            "named": false
+          },
+          {
+            "type": "??=",
             "named": false
           },
           {
@@ -1928,6 +1964,10 @@
           },
           {
             "type": "TypePath",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -2100,6 +2140,10 @@
         },
         {
           "type": "String",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -2291,6 +2335,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -2462,6 +2510,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -2642,6 +2694,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -2832,6 +2888,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -3040,6 +3100,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -3238,6 +3302,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -3409,6 +3477,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -3637,6 +3709,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -3876,6 +3952,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -4051,6 +4131,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -4232,6 +4316,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -4409,6 +4497,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -4595,6 +4687,10 @@
         },
         {
           "type": "TypePath",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -4791,6 +4887,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -4960,6 +5060,10 @@
         },
         {
           "type": "String",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -5162,6 +5266,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -5342,6 +5450,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -5516,6 +5628,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -5687,6 +5803,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -5867,6 +5987,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -6054,6 +6178,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -6228,6 +6356,10 @@
         },
         {
           "type": "String",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -6440,6 +6572,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -6609,6 +6745,10 @@
         },
         {
           "type": "String",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -6815,6 +6955,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -6999,6 +7143,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -7170,6 +7318,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -7528,6 +7680,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -7578,6 +7734,42 @@
           "type": "MetaDataEntry",
           "named": true
         },
+        {
+          "type": "optional",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "FunctionTypeArg",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ComplexType",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
         {
           "type": "optional",
           "named": true
@@ -7741,6 +7933,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -7884,6 +8080,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "MetaDataEntry",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -8187,6 +8393,10 @@
           "named": true
         },
         {
+          "type": "conditional",
+          "named": true
+        },
+        {
           "type": "conditional_else",
           "named": true
         },
@@ -8421,6 +8631,10 @@
           "named": true
         },
         {
+          "type": "conditional",
+          "named": true
+        },
+        {
           "type": "conditional_error",
           "named": true
         },
@@ -8644,6 +8858,10 @@
         },
         {
           "type": "compile_condition",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -8922,6 +9140,10 @@
           "named": true
         },
         {
+          "type": "conditional",
+          "named": true
+        },
+        {
           "type": "false",
           "named": true
         },
@@ -9090,6 +9312,10 @@
         },
         {
           "type": "String",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -9289,6 +9515,10 @@
         },
         {
           "type": "String",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         },
         {
@@ -9570,6 +9800,10 @@
           "named": true
         },
         {
+          "type": "conditional",
+          "named": true
+        },
+        {
           "type": "false",
           "named": true
         },
@@ -9758,6 +9992,10 @@
             "named": true
           },
           {
+            "type": "conditional",
+            "named": true
+          },
+          {
             "type": "false",
             "named": true
           },
@@ -9929,6 +10167,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -10107,6 +10349,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -10291,6 +10537,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -10481,6 +10731,10 @@
           },
           {
             "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
             "named": true
           },
           {
@@ -10773,6 +11027,10 @@
     "named": false
   },
   {
+    "type": "??=",
+    "named": false
+  },
+  {
     "type": "@",
     "named": false
   },
@@ -10966,6 +11224,10 @@
   },
   {
     "type": "null",
+    "named": false
+  },
+  {
+    "type": "overload",
     "named": false
   },
   {
