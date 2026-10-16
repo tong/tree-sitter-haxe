@@ -56,6 +56,7 @@
   "final"
   "inline"
   "override"
+  "overload"
   "static"
   "dynamic"
   "macro"

@@ -296,3 +296,53 @@ class ArrayOrItemInt implements IArrayOrItem<Int> extends ArrayOrItem<Int> {}
         (TypePath
           name: (type_name))))))
 
+
+=================
+overload modifier
+=================
+
+extern class A { overload function f():Void; overload static function g(a:Int):Void; }
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (ClassMethod
+      name: (identifier)
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))
+    (ClassMethod
+      name: (identifier)
+      args: (FunctionArg
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name))))
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))))
+
+===========================
+metadata on type parameters
+===========================
+
+class A<@:const T, @:followWithAbstracts U:Foo> {}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (TypeParameter
+      (MetaDataEntry
+        name: (identifier))
+      name: (type_name))
+    (TypeParameter
+      (MetaDataEntry
+        name: (identifier))
+      name: (type_name)
+      constraint: (ComplexType
+        (TypePath
+          name: (type_name))))))

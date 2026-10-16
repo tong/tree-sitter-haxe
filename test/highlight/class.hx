@@ -69,3 +69,9 @@ typedef Handler = (event:Event, ?Count:Int) -> Void;
 //                               ^ variable.parameter
 //                                     ^ type
 //                                             ^ type
+
+extern class Main {
+  overload function test():Void;
+//^ keyword.modifier
+//         ^ keyword.function
+}

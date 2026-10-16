@@ -333,3 +333,24 @@ switch (e) {
         body: (true)))
     default: (switch_default
       body: (false))))
+
+================================
+switch guard without parentheses
+================================
+
+switch x { case var y if y > 1: a(); }
+
+---
+
+(module
+  (ESwitch
+    subject: (identifier)
+    cases: (cases
+      (switch_case
+        patterns: (EVars
+          name: (identifier))
+        guard: (EBinop
+          left: (identifier)
+          right: (Int))
+        body: (ECall
+          callee: (identifier))))))

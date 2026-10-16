@@ -233,3 +233,44 @@ float literals with an uppercase exponent
   (Float)
   (Float)
   (Float))
+
+=================
+int type suffixes
+=================
+
+3i64; 0xFFu32; 7i32;
+
+---
+
+(module
+  (Int)
+  (Int)
+  (Int))
+
+=================
+float type suffix
+=================
+
+1.5f64; 2f64;
+
+---
+
+(module
+  (Float)
+  (Float))
+
+====================
+string dollar escape
+====================
+
+'cost $$5 and $x';
+
+---
+
+(module
+  (String
+    (fragment)
+    (escape_sequence)
+    (fragment)
+    (interpolation
+      (identifier))))

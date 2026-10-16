@@ -613,7 +613,9 @@ export default grammar({
         seq(
           "case",
           field("patterns", commaSep1($._Expr)),
-          optional(seq("if", "(", field("guard", $._Expr), ")")),
+          // The guard is any expression; `if (x > 0)` is just a
+          // parenthesised one.
+          optional(seq("if", field("guard", $._Expr))),
           ":",
           field("body", repeat(seq($._Expr, optional($._semicolon)))),
         ),
@@ -784,6 +786,7 @@ export default grammar({
 
     TypeParameter: ($) =>
       seq(
+        repeat($.MetaDataEntry),
         field("name", $.type_name),
         choice(
           optional(seq(":", field("constraint", $.ComplexType))),
@@ -921,6 +924,7 @@ export default grammar({
                 "extern",
                 "inline",
                 "override",
+                "overload",
                 "final",
                 "static",
               ),
@@ -977,12 +981,13 @@ export default grammar({
 
     // ------------------------------------------------------------------------
 
+    // Haxe 4.3 type suffixes: `3i64`, `0xFFu32`, `1.5f64`.
     Int: (_) =>
       choice(
-        /0x[a-fA-F\d][a-fA-F\d_]*/,
-        /0b[01][01_]*/,
-        /0o[0-7][0-7_]*/,
-        /\d[\d_]*/,
+        /0x[a-fA-F\d][a-fA-F\d_]*([iu](32|64))?/,
+        /0b[01][01_]*([iu](32|64))?/,
+        /0o[0-7][0-7_]*([iu](32|64))?/,
+        /\d[\d_]*([iu](32|64))?/,
       ),
 
     // Three legal Float spellings that did not parse:
@@ -994,9 +999,10 @@ export default grammar({
     //     `\d[\d_]+`, two or more digits, so `10e5` parsed and `1e5` did not.
     Float: (_) =>
       choice(
-        /\d[\d_]*\.\d[\d_]*([eE][+-]?\d[\d_]*)?/,
-        /\.\d[\d_]*([eE][+-]?\d[\d_]*)?/,
-        /\d[\d_]*[eE][+-]?\d[\d_]*/,
+        /\d[\d_]*\.\d[\d_]*([eE][+-]?\d[\d_]*)?(f64)?/,
+        /\.\d[\d_]*([eE][+-]?\d[\d_]*)?(f64)?/,
+        /\d[\d_]*[eE][+-]?\d[\d_]*(f64)?/,
+        /\d[\d_]*f64/,
       ),
 
     String: ($) =>
@@ -1007,6 +1013,8 @@ export default grammar({
             choice(
               alias(token.immediate(prec(1, /[^'\\$]+/)), $.fragment),
               $.escape_sequence,
+              // `$$` is a literal `$` in an interpolated string.
+              alias(token.immediate("$$"), $.escape_sequence),
               $.interpolation,
             ),
           ),
