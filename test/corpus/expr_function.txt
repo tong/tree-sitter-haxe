@@ -21,3 +21,27 @@ arrow function expression
 (module
   (EArrowFunction
     (EBlock)))
+
+===================
+generic anonymous function
+===================
+
+var f = function<T>(x:T):T {};
+
+---
+
+(module
+  (EVars
+    name: (identifier)
+    value: (EFunction
+      params: (TypeParameter
+        name: (type_name))
+      args: (FunctionArg
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name))))
+      type: (ComplexType
+        (TypePath
+          name: (type_name)))
+      body: (EBlock))))

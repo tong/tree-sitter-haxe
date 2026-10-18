@@ -960,11 +960,10 @@ export default grammar({
       seq(
         "function",
         optional(
-          seq(
-            field("name", choice($.identifier, alias("new", $.identifier))),
-            optional(field("params", $._type_params)),
-          ),
+          field("name", choice($.identifier, alias("new", $.identifier))),
         ),
+        // Anonymous functions take type parameters too, `function<T>(x:T)`
+        optional(field("params", $._type_params)),
         $._function_args,
         optional(field("ret", $._type_annotation)),
         choice(field("body", $._block_or_expr), $._semicolon),
