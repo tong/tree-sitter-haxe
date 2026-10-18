@@ -300,6 +300,8 @@ export default grammar({
               $.EField,
               $.identifier,
               $.super,
+              // `untyped $bget(b, pos)`, a target builtin
+              $.reification,
             ),
           ),
           "(",

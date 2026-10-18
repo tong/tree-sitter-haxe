@@ -60,3 +60,18 @@ foo().bar()[0]();
             callee: (identifier))
           name: (identifier)))
       index: (Int))))
+
+==========================
+dollar identifier callee
+==========================
+
+untyped $bget(b, pos);
+
+---
+
+(module
+  (EUntyped
+    (ECall
+      callee: (reification)
+      args: (identifier)
+      args: (identifier))))
