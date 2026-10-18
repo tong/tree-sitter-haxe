@@ -44,3 +44,30 @@ metadata param
       (fragment)))
   (ClassType
     name: (type_name)))
+
+=====================
+metadata dotted name
+=====================
+
+class C {
+  @:flash.property var x:Int;
+  @a.b.c function f() {}
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (MetaDataEntry
+      name: (identifier))
+    (ClassVar
+      name: (identifier)
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))
+    (MetaDataEntry
+      name: (identifier))
+    (ClassMethod
+      name: (identifier)
+      body: (EBlock))))

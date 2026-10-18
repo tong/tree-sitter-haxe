@@ -799,11 +799,13 @@ export default grammar({
         seq(
           "@",
           optional(token.immediate(":")),
+          // Names may be dotted, `@:flash.property`, and may be keywords,
+          // `@:extern`, so they're lexed as one token rather than identifiers.
           field(
             "name",
-            choice(
+            alias(
+              token.immediate(/[a-zA-Z_][a-zA-Z0-9_]*(\.[a-zA-Z_][a-zA-Z0-9_]*)*/),
               $.identifier,
-              ...RESERVED_KEYWORDS.map((kw) => alias(kw, $.identifier)),
             ),
           ),
           optional(seq("(", field("params", commaSep($._Expr)), ")")),
