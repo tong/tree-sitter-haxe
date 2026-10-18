@@ -118,11 +118,19 @@ export default grammar({
     // FIELD modifier (`extern private static inline var W:Int = 1024;`), so a
     // leading modifier run is ambiguous between opening a type declaration and
     // opening one of its members until the next keyword settles it.
-    [$.ClassType, $.ClassVar, $.ClassMethod, $.DefType, $.EnumType],
     [
+      $.AbstractType,
+      $.ClassMethod,
       $.ClassType,
       $.ClassVar,
+      $.DefType,
+      $.EnumType,
+    ],
+    [
+      $.AbstractType,
       $.ClassMethod,
+      $.ClassType,
+      $.ClassVar,
       $.DefType,
       $.EnumType,
       $._conditional_body,
@@ -132,23 +140,6 @@ export default grammar({
     // reduced so that `=` becomes an EBinop assignment. GLR has to carry both
     // or the third and later declarator in `var a = 1, b = 2, c = 3;` is lost.
     [$._var_declarator],
-    [
-      $.AbstractType,
-      $.ClassMethod,
-      $.ClassType,
-      $.ClassVar,
-      $.DefType,
-      $.EnumType,
-    ],
-    [
-      $.AbstractType,
-      $.ClassMethod,
-      $.ClassType,
-      $.ClassVar,
-      $.DefType,
-      $.EnumType,
-      $._conditional_body,
-    ],
     [$.AbstractType, $.ClassType, $.DefType, $.EnumType],
     [$.AbstractType, $.ClassType, $._conditional_body],
     [$.AbstractType, $.ClassType],
@@ -158,8 +149,6 @@ export default grammar({
     [$.ClassType, $.ClassMethod],
     [$.ClassType, $.ClassVar, $.ClassMethod, $._conditional_body],
     [$.ClassType, $.ClassVar, $.ClassMethod],
-    [$.ClassType, $.DefType, $.EnumType, $._conditional_body],
-    [$.ClassType, $.DefType, $.EnumType],
     [$.ClassType, $._conditional_body],
     [$.ClassVar, $.ClassMethod, $._conditional_body],
     [$.ClassVar, $.ClassMethod],
@@ -836,7 +825,7 @@ export default grammar({
 
     AbstractType: ($) =>
       seq(
-        optional(repeat1(choice($.visibility, "enum"))),
+        optional(repeat1(choice($.visibility, "enum", "extern"))),
         "abstract",
         $._type_decl_signature,
         "(",

@@ -375,3 +375,24 @@ typedef Options = {
           type: (ComplexType
             (TypePath
               name: (type_name))))))))
+
+===========================
+extern abstract declaration
+===========================
+
+extern enum abstract E(Int) {}
+extern abstract A(Int) {}
+
+---
+
+(module
+  (AbstractType
+    name: (type_name)
+    type: (ComplexType
+      (TypePath
+        name: (type_name))))
+  (AbstractType
+    name: (type_name)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))))
