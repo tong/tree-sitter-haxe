@@ -157,6 +157,7 @@ export default grammar({
     [$.EBinop],
     [$.EBlock, $.EObjectDecl],
     [$.ECall, $.EFunction, $.ClassMethod],
+    [$.ECall, $.EFunction, $.ClassMethod, $._conditional_body],
     [$.ECall],
     [$.EFunction],
     [$.TypePath],
@@ -1128,6 +1129,12 @@ export default grammar({
         $._expr_statement,
         $._type_decl,
         $.visibility,
+        // A modifier only some targets get, `#if !hl inline #end`. Least
+        // preferred, so `#if x inline function f() {} #end` stays a method.
+        prec.dynamic(
+          -1,
+          choice("inline", "static", "extern", "override", "dynamic", "overload"),
+        ),
         $.conditional_error,
         repeat1($.MetaDataEntry),
       ),

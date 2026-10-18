@@ -240,3 +240,26 @@ import sys.io.File;
     path: (package_name)
     path: (package_name)
     module: (type_name)))
+
+==================================
+conditional modifier
+==================================
+
+class C {
+  #if !hl inline #end
+  public function f() {}
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (conditional
+      (compile_condition
+        (compile_condition
+          (identifier)))
+      (conditional_end))
+    (ClassMethod
+      name: (identifier)
+      body: (EBlock))))
