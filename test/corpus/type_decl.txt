@@ -438,3 +438,28 @@ abstract P(Int) to(RawPointer<Char>) from Int to Int {}
     to: (ComplexType
       (TypePath
         name: (type_name)))))
+
+=============================
+constant type parameters
+=============================
+
+typedef M = hl.Abstract<"hl_mutex">;
+typedef V = Vector<3>;
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TypePath
+        pack: (package_name)
+        name: (type_name)
+        params: (String
+          (fragment)))))
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)
+        params: (Int)))))

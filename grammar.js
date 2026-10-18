@@ -1051,7 +1051,9 @@ export default grammar({
       prec(PREC.TYPE_ANNOTATION, seq(":", field("type", $.ComplexType))),
 
     _type_params: ($) => seq("<", commaSep1($.TypeParameter), ">"),
-    _type_arguments: ($) => seq("<", commaSep($.ComplexType), ">"),
+    // Constants are allowed too, `hl.Abstract<"hl_mutex">`
+    _type_arguments: ($) =>
+      seq("<", commaSep(choice($.ComplexType, $.String, $.Int, $.Float)), ">"),
 
     _function_args: ($) =>
       seq("(", field("args", commaSep($.FunctionArg)), ")"),
