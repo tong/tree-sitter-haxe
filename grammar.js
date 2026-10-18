@@ -888,6 +888,8 @@ export default grammar({
             ),
           ),
           choice("var", "final"),
+          // `var ?x:Int;` in an anonymous structure
+          optional($.optional),
           field("name", $.identifier),
           optional($.property_accessor),
           optional($._type_annotation),

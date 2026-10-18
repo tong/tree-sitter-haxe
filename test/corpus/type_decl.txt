@@ -346,3 +346,32 @@ class A<@:const T, @:followWithAbstracts U:Foo> {}
       constraint: (ComplexType
         (TypePath
           name: (type_name))))))
+
+=================================
+typedef optional structure fields
+=================================
+
+typedef Options = {
+  var ?port:Int;
+  final ?host:String;
+}
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TAnonymous
+        (ClassVar
+          (optional)
+          name: (identifier)
+          type: (ComplexType
+            (TypePath
+              name: (type_name))))
+        (ClassVar
+          (optional)
+          name: (identifier)
+          type: (ComplexType
+            (TypePath
+              name: (type_name))))))))
