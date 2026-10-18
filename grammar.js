@@ -1065,8 +1065,10 @@ export default grammar({
     visibility: (_) => choice("public", "private"),
 
     identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    package_name: (_) => token(prec(1, /[a-z_][a-zA-Z0-9_]*/)),
-    type_name: (_) => token(prec(1, /[A-Z][a-zA-Z0-9_]*/)),
+    // Like Haxe, case is decided by the first letter after any leading
+    // underscores, so `__Int64` is a type and `_impl` a package.
+    package_name: (_) => token(prec(1, /_*[a-z][a-zA-Z0-9_]*/)),
+    type_name: (_) => token(prec(1, /_*[A-Z][a-zA-Z0-9_]*/)),
 
     optional: (_) => "?",
     wildcard: (_) => "*",

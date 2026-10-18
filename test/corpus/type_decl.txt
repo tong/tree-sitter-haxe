@@ -463,3 +463,29 @@ typedef V = Vector<3>;
       (TypePath
         name: (type_name)
         params: (Int)))))
+
+==================================
+type name with leading underscores
+==================================
+
+private typedef __Int64 = cpp.Int64;
+var x:__Int64 = _impl.f();
+
+---
+
+(module
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TypePath
+        pack: (package_name)
+        name: (type_name))))
+  (EVars
+    name: (identifier)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))
+    value: (ECall
+      callee: (EField
+        object: (identifier)
+        name: (identifier)))))
