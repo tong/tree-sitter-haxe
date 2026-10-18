@@ -93,3 +93,15 @@ x = a.b++;
       operand: (EField
         object: (identifier)
         name: (identifier)))))
+
+=================
+postfix on this
+=================
+
+this++;
+
+---
+
+(module
+  (EUnop
+    operand: (this)))

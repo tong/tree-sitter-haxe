@@ -443,7 +443,10 @@ export default grammar({
         ),
         prec.left(
           PREC.POSTFIX,
-          seq(field("operand", $._expr_lhs), field("op", choice("++", "--"))),
+          seq(
+            field("operand", choice($._expr_lhs, $.this)),
+            field("op", choice("++", "--")),
+          ),
         ),
       ),
     EBlock: ($) => prec.dynamic(-1, seq("{", repeat($._expr_statement), "}")),
@@ -1101,6 +1104,17 @@ export default grammar({
         $.Float,
         $.String,
         seq("(", $.compile_condition, ")"),
+        // `version("1.12.0")`. The `(` must follow the name directly, or
+        // `#if js (a) #end` would read as a call.
+        prec(
+          8,
+          seq(
+            $.identifier,
+            token.immediate("("),
+            commaSep($.compile_condition),
+            ")",
+          ),
+        ),
         prec.left(7, seq($.compile_condition, ".", $.identifier)),
         prec.right(6, seq("!", $.compile_condition)),
         prec.left(

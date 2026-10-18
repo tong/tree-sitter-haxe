@@ -263,3 +263,34 @@ class C {
     (ClassMethod
       name: (identifier)
       body: (EBlock))))
+
+==================================
+conditional with version call
+==================================
+
+#if (hl_ver >= version("1.12.0"))
+f();
+#end
+#if js (a); #end
+
+---
+
+(module
+  (conditional
+    (compile_condition
+      (compile_condition
+        (compile_condition
+          (identifier))
+        (compile_condition
+          (identifier)
+          (compile_condition
+            (String
+              (fragment))))))
+    (ECall
+      callee: (identifier))
+    (conditional_end))
+  (conditional
+    (compile_condition
+      (identifier))
+    (identifier)
+    (conditional_end)))
