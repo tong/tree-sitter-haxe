@@ -828,13 +828,12 @@ export default grammar({
         optional(repeat1(choice($.visibility, "enum", "extern"))),
         "abstract",
         $._type_decl_signature,
-        "(",
-        field("type", $.ComplexType),
-        ")",
+        // `@:coreType abstract Int64 {}` has no underlying type
+        optional(seq("(", field("type", $.ComplexType), ")")),
         repeat(
           choice(
-            field("from", seq("from", $.TypePath)),
-            field("to", seq("to", $.TypePath)),
+            field("from", seq("from", $.ComplexType)),
+            field("to", seq("to", $.ComplexType)),
           ),
         ),
         "{",

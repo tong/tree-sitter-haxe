@@ -396,3 +396,45 @@ extern abstract A(Int) {}
     type: (ComplexType
       (TypePath
         name: (type_name)))))
+
+===================================
+abstract without underlying type
+===================================
+
+@:coreType abstract Int64 {}
+
+---
+
+(module
+  meta: (MetaDataEntry
+    name: (identifier))
+  (AbstractType
+    name: (type_name)))
+
+===================================
+abstract from and to clauses
+===================================
+
+abstract P(Int) to(RawPointer<Char>) from Int to Int {}
+
+---
+
+(module
+  (AbstractType
+    name: (type_name)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)))
+    to: (ComplexType
+      (ComplexType
+        (TypePath
+          name: (type_name)
+          params: (ComplexType
+            (TypePath
+              name: (type_name))))))
+    from: (ComplexType
+      (TypePath
+        name: (type_name)))
+    to: (ComplexType
+      (TypePath
+        name: (type_name)))))
