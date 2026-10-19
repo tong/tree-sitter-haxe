@@ -523,3 +523,26 @@ class C {
       type: (ComplexType
         (TypePath
           name: (type_name))))))
+
+====================================
+class var function without semicolon
+====================================
+
+class C {
+	static final noop = function() {}
+	var f = function() {};
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (ClassVar
+      name: (identifier)
+      (EFunction
+        body: (EBlock)))
+    (ClassVar
+      name: (identifier)
+      (EFunction
+        body: (EBlock)))))

@@ -914,8 +914,12 @@ export default grammar({
           field("name", $.identifier),
           optional($.property_accessor),
           optional($._type_annotation),
-          optional(seq("=", $._Expr)),
-          $._semicolon,
+          choice(
+            seq(optional(seq("=", $._Expr)), $._semicolon),
+            // As in Haxe, `;` may be left out after a closing brace,
+            // `static final noop = function() {}`.
+            prec.dynamic(-1, seq("=", $.EFunction)),
+          ),
         ),
       ),
     property_accessor: ($) =>
