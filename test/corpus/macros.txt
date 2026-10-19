@@ -91,3 +91,113 @@ macro $v{v} * 2;
       left: (reification
         (identifier))
       right: (Int))))
+
+==========
+macro type
+==========
+
+macro :Dynamic;
+macro:Null<$t>;
+
+---
+
+(module
+  (macro
+    (ComplexType
+      (TypePath
+        name: (type_name))))
+  (macro
+    (ComplexType
+      (TypePath
+        name: (type_name)
+        params: (ComplexType
+          (reification))))))
+
+===========
+macro class
+===========
+
+macro class {
+	public var x:Int;
+};
+(macro class Dummy {
+	function f() {}
+}).fields;
+
+---
+
+(module
+  (macro
+    (ClassType
+      (ClassVar
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name))))))
+  (EField
+    object: (macro
+      (ClassType
+        name: (type_name)
+        (ClassMethod
+          name: (identifier)
+          body: (EBlock))))
+    name: (identifier)))
+
+=============
+reified names
+=============
+
+macro class {
+	var $sel:Int = 0;
+	inline function $get_sel() return $i{sel};
+};
+var $name:$t = null;
+
+---
+
+(module
+  (macro
+    (ClassType
+      (ClassVar
+        name: (reification)
+        type: (ComplexType
+          (TypePath
+            name: (type_name)))
+        (Int))
+      (ClassMethod
+        name: (reification)
+        body: (EReturn
+          (reification
+            (identifier))))))
+  (EVars
+    name: (reification)
+    type: (ComplexType
+      (reification))
+    value: (null)))
+
+============================================
+reification with expression names and spaces
+============================================
+
+macro $i{"get_" + name}($e);
+f($i { type }, $v { 1 << n });
+
+---
+
+(module
+  (macro
+    (ECall
+      callee: (reification
+        (EBinop
+          left: (String
+            (fragment))
+          right: (identifier)))
+      args: (reification)))
+  (ECall
+    callee: (identifier)
+    args: (reification
+      (identifier))
+    args: (reification
+      (EBinop
+        left: (Int)
+        right: (identifier)))))

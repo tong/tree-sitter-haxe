@@ -393,7 +393,8 @@ export default grammar({
       ),
     _var_declarator: ($) =>
       seq(
-        field("name", $.identifier),
+        // `var $name = …` in a macro.
+        field("name", choice($.identifier, $.reification)),
         optional(field("type", $._type_annotation)),
         optional(seq("=", field("value", $._Expr))),
       ),
@@ -684,7 +685,28 @@ export default grammar({
         // ),
       ),
 
-    macro: ($) => prec(PREC.MACRO, seq("macro", $._Expr)),
+    macro: ($) =>
+      prec(
+        PREC.MACRO,
+        seq(
+          "macro",
+          choice(
+            $._Expr,
+            // A type, `macro :Array<$t>`.
+            seq(":", $.ComplexType),
+            // A class whose fields are spliced elsewhere; the name is optional.
+            alias($._macro_class, $.ClassType),
+          ),
+        ),
+      ),
+    _macro_class: ($) =>
+      seq(
+        field("kind", "class"),
+        optional($._type_decl_signature),
+        "{",
+        repeat($._class_field),
+        "}",
+      ),
     reification: ($) =>
       prec(
         PREC.UNARY,
@@ -700,9 +722,14 @@ export default grammar({
               repeat(seq($._Expr, optional($._semicolon))),
               "}",
             ),
-            seq(token.immediate("i{"), $.identifier, "}"),
-            seq(token.immediate("p{"), commaSep($.identifier), "}"),
+            // Names and paths are built from any expression,
+            // `$i{"get_" + name}`, `$p{["haxe", "io"]}`.
+            seq(token.immediate("i{"), $._Expr, "}"),
+            seq(token.immediate("p{"), commaSep($._Expr), "}"),
             seq(token.immediate("v{"), $._Expr, "}"),
+            // As in Haxe, these may have a space before the brace,
+            // `$i { type }`. One token, so `$ex` and `$e + 1` stay names.
+            seq(token.immediate(/[abeipv]\s+\{/), $._Expr, "}"),
           ),
         ),
       ),
@@ -786,6 +813,8 @@ export default grammar({
         prec(PREC.PRIMARY, $.TypePath),
         $.TAnonymous,
         seq("(", $.ComplexType, ")"),
+        // In macros, `macro :Null<$t>`.
+        $.reification,
         alias($._type_conditional, $.conditional),
       ),
 
@@ -919,7 +948,7 @@ export default grammar({
           choice("var", "final"),
           // `var ?x:Int;` in an anonymous structure
           optional($.optional),
-          field("name", $.identifier),
+          field("name", choice($.identifier, $.reification)),
           optional($.property_accessor),
           optional($._type_annotation),
           choice(
@@ -1009,7 +1038,10 @@ export default grammar({
       seq(
         "function",
         optional(
-          field("name", choice($.identifier, alias("new", $.identifier))),
+          field(
+            "name",
+            choice($.identifier, alias("new", $.identifier), $.reification),
+          ),
         ),
         // Anonymous functions take type parameters too, `function<T>(x:T)`
         optional(field("params", $._type_params)),
