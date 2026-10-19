@@ -1189,8 +1189,19 @@ export default grammar({
         // preferred, so `#if x inline function f() {} #end` stays a method.
         prec.dynamic(
           -1,
-          choice("inline", "static", "extern", "override", "dynamic", "overload"),
+          choice(
+            "inline",
+            "static",
+            "extern",
+            "override",
+            "dynamic",
+            "overload",
+            "macro",
+          ),
         ),
+        // `class C #if !strict implements Dynamic #end {`
+        seq("extends", field("extends", $.TypePath)),
+        seq("implements", field("implements", $.TypePath)),
         $.conditional_error,
         repeat1($.MetaDataEntry),
       ),

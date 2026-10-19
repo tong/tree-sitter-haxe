@@ -342,3 +342,34 @@ typedef T = Array<#if js A #else B #end>;
                 (TypePath
                   name: (type_name))))
             (conditional_end)))))))
+
+=========================================
+conditional implements and macro modifier
+=========================================
+
+extern class E extends S #if !strict implements Dynamic #end {
+	public static #if !macro macro #end function f() {}
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    extends: (TypePath
+      name: (type_name))
+    (conditional
+      (compile_condition
+        (compile_condition
+          (identifier)))
+      implements: (TypePath
+        name: (type_name))
+      (conditional_end))
+    (ClassMethod
+      (conditional
+        (compile_condition
+          (compile_condition
+            (identifier)))
+        (conditional_end))
+      name: (identifier)
+      body: (EBlock))))
