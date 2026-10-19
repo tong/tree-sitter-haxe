@@ -294,3 +294,51 @@ f();
       (identifier))
     (identifier)
     (conditional_end)))
+
+================
+conditional type
+================
+
+var b:#if js A #elseif hl B #else C #end;
+typedef T = Array<#if js A #else B #end>;
+
+---
+
+(module
+  (EVars
+    name: (identifier)
+    type: (ComplexType
+      (conditional
+        (compile_condition
+          (identifier))
+        (ComplexType
+          (TypePath
+            name: (type_name)))
+        (conditional_elseif
+          (compile_condition
+            (identifier))
+          (ComplexType
+            (TypePath
+              name: (type_name))))
+        (conditional_else
+          (ComplexType
+            (TypePath
+              name: (type_name))))
+        (conditional_end))))
+  (DefType
+    name: (type_name)
+    type: (ComplexType
+      (TypePath
+        name: (type_name)
+        params: (ComplexType
+          (conditional
+            (compile_condition
+              (identifier))
+            (ComplexType
+              (TypePath
+                name: (type_name)))
+            (conditional_else
+              (ComplexType
+                (TypePath
+                  name: (type_name))))
+            (conditional_end)))))))

@@ -779,6 +779,7 @@ export default grammar({
         prec(PREC.PRIMARY, $.TypePath),
         $.TAnonymous,
         seq("(", $.ComplexType, ")"),
+        alias($._type_conditional, $.conditional),
       ),
 
     TAnonymous: ($) =>
@@ -1205,6 +1206,19 @@ export default grammar({
         optional(alias($._expr_conditional_else, $.conditional_else)),
         $.conditional_end,
       ),
+    // `#if` used as a type, `var b:#if js A #else B #end;`.
+    _type_conditional: ($) =>
+      seq(
+        "#if",
+        $.compile_condition,
+        $.ComplexType,
+        repeat(alias($._type_conditional_elseif, $.conditional_elseif)),
+        optional(alias($._type_conditional_else, $.conditional_else)),
+        $.conditional_end,
+      ),
+    _type_conditional_elseif: ($) =>
+      seq("#elseif", $.compile_condition, $.ComplexType),
+    _type_conditional_else: ($) => seq("#else", $.ComplexType),
     _expr_conditional_elseif: ($) =>
       seq("#elseif", $.compile_condition, repeat($._conditional_body)),
     _expr_conditional_else: ($) => seq("#else", repeat($._conditional_body)),
