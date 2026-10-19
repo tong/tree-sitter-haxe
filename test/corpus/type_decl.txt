@@ -489,3 +489,37 @@ var x:__Int64 = _impl.f();
       callee: (EField
         object: (identifier)
         name: (identifier)))))
+
+===============================
+anonymous type before semicolon
+===============================
+
+class C {
+	var h:{};
+	function f():{a:Int};
+	function g():Void;
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (ClassVar
+      name: (identifier)
+      type: (ComplexType
+        (TAnonymous)))
+    (ClassMethod
+      name: (identifier)
+      type: (ComplexType
+        (TAnonymous
+          (Field
+            name: (identifier)
+            type: (ComplexType
+              (TypePath
+                name: (type_name)))))))
+    (ClassMethod
+      name: (identifier)
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))))

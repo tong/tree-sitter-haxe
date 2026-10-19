@@ -768,7 +768,6 @@ export default grammar({
           optional(repeat1(seq(">", field("extends", $.TypePath), ","))),
           choice(seq(commaSep($.Field), optional(",")), repeat($._class_field)),
           "}",
-          optional($._semicolon),
         ),
       ),
     Field: ($) =>
