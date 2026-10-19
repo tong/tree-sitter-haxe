@@ -1199,6 +1199,18 @@ export default grammar({
             "macro",
           ),
         ),
+        // An `if` whose body follows `#end`, `#if c if (x) #end { … }` and
+        // `#if c if (x) a; else #end b;`.
+        prec.dynamic(
+          -1,
+          seq(
+            "if",
+            "(",
+            field("cond", $._Expr),
+            ")",
+            optional(seq(field("if", $._block_or_expr), "else")),
+          ),
+        ),
         // `class C #if !strict implements Dynamic #end {`
         seq("extends", field("extends", $.TypePath)),
         seq("implements", field("implements", $.TypePath)),

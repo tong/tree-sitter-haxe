@@ -373,3 +373,41 @@ extern class E extends S #if !strict implements Dynamic #end {
         (conditional_end))
       name: (identifier)
       body: (EBlock))))
+
+===================
+conditional if head
+===================
+
+#if c
+if (a)
+#end
+{
+	f();
+}
+#if c
+if (b)
+	g();
+else
+#end
+h();
+
+---
+
+(module
+  (conditional
+    (compile_condition
+      (identifier))
+    cond: (identifier)
+    (conditional_end))
+  (EBlock
+    (ECall
+      callee: (identifier)))
+  (conditional
+    (compile_condition
+      (identifier))
+    cond: (identifier)
+    if: (ECall
+      callee: (identifier))
+    (conditional_end))
+  (ECall
+    callee: (identifier)))
