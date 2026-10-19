@@ -456,7 +456,8 @@ export default grammar({
         prec.right(
           PREC.UNARY,
           seq(
-            field("op", choice("++", "--", "+", "-", "!", "~")),
+            // `...` is the spread, `f(...args)`.
+            field("op", choice("++", "--", "+", "-", "!", "~", "...")),
             field("operand", $._Expr),
           ),
         ),

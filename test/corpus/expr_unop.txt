@@ -105,3 +105,24 @@ this++;
 (module
   (EUnop
     operand: (this)))
+
+================
+spread arguments
+================
+
+f(...arr);
+new P(a, ...b);
+
+---
+
+(module
+  (ECall
+    callee: (identifier)
+    args: (EUnop
+      operand: (identifier)))
+  (ENew
+    (TypePath
+      name: (type_name))
+    (identifier)
+    (EUnop
+      operand: (identifier))))
