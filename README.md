@@ -25,6 +25,7 @@ Query files live in [`queries/`](queries) and follow the conventions used by edi
 - `injections.scm` — language injections (e.g. embedded markup/regex-like content)
 - `locals.scm` — scope/local-variable analysis
 - `folds.scm` — code folding
+- `indents.scm` — indentation, using [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)'s `@indent.*` captures and predicates
 - `tags.scm` — symbol outline / "tags" (`nav`, ctags-style)
 
 ## Development
@@ -43,6 +44,11 @@ npm run test-examples
 
 # check highlighting queries against test/highlight/*.hx
 tree-sitter highlight test/highlight/*.hx
+
+# check indentation queries against test/indent/*.hx (needs a built parser
+# and an nvim-treesitter checkout)
+tree-sitter build -o haxe.so
+nvim --clean --headless -l test/indent/run.lua haxe.so path/to/nvim-treesitter
 
 # run the Node.js binding tests
 npm test
