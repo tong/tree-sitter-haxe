@@ -4,7 +4,12 @@
 --
 -- PARSER is a built haxe parser (`tree-sitter build -o haxe.so`) and
 -- NVIM_TREESITTER the nvim-treesitter checkout providing `indentexpr()`.
+---@diagnostic disable: undefined-global
 local parser, nvim_treesitter = arg[1], arg[2]
+if not parser or not nvim_treesitter then
+  io.stderr:write("usage: nvim --clean --headless -l test/indent/run.lua PARSER NVIM_TREESITTER\n")
+  os.exit(2)
+end
 local dir = vim.fs.dirname(vim.fs.abspath(debug.getinfo(1, "S").source:sub(2)))
 local root = vim.fs.dirname(vim.fs.dirname(dir))
 
@@ -12,7 +17,8 @@ nvim_treesitter = vim.fs.normalize(nvim_treesitter)
 vim.opt.runtimepath:prepend(nvim_treesitter)
 -- Defines `kind-eq?`; plugins aren't loaded with --clean.
 vim.cmd.source(nvim_treesitter .. "/plugin/query_predicates.lua")
-vim.treesitter.language.add("haxe", { path = parser })
+-- dlopen() searches the library path for a bare `haxe.so`, not the cwd.
+vim.treesitter.language.add("haxe", { path = vim.fs.abspath(parser) })
 local query = io.open(root .. "/queries/indents.scm"):read("a")
 vim.treesitter.query.set("haxe", "indents", query)
 
