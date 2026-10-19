@@ -1042,6 +1042,8 @@ export default grammar({
               // `$$` is a literal `$` in an interpolated string.
               alias(token.immediate("$$"), $.escape_sequence),
               $.interpolation,
+              // A `$` that starts no interpolation is literal, `'$'.code`.
+              alias("$", $.fragment),
             ),
           ),
           "'",
@@ -1062,8 +1064,12 @@ export default grammar({
       seq(
         "$",
         choice(
-          seq(token.immediate("{"), $._Expr, "}"),
-          alias(token.immediate(/[a-zA-Z_][a-zA-Z0-9_]*/), $.identifier),
+          // Above `fragment`, which may also follow a lone `$`.
+          seq(token.immediate(prec(2, "{")), $._Expr, "}"),
+          alias(
+            token.immediate(prec(2, /[a-zA-Z_][a-zA-Z0-9_]*/)),
+            $.identifier,
+          ),
         ),
       ),
 

@@ -308,3 +308,33 @@ for (i in 0...n) {}
       left: (Int)
       right: (identifier))
     body: (EBlock)))
+
+=====================
+lone dollar in string
+=====================
+
+var a = '$'.code;
+var b = 'bsd$';
+var c = '$ 3 and $x';
+
+---
+
+(module
+  (EVars
+    name: (identifier)
+    value: (EField
+      object: (String
+        (fragment))
+      name: (identifier)))
+  (EVars
+    name: (identifier)
+    value: (String
+      (fragment)
+      (fragment)))
+  (EVars
+    name: (identifier)
+    value: (String
+      (fragment)
+      (fragment)
+      (interpolation
+        (identifier)))))
