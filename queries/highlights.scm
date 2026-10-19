@@ -76,6 +76,7 @@
   "extern"
 ] @keyword.modifier
 (ClassType "abstract" @keyword.modifier)
+(ClassMethod "abstract" @keyword.modifier)
 
 (String) @string
 (String (escape_sequence) @string.escape)

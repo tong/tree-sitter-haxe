@@ -113,3 +113,27 @@ object field value is a full expression
           name: (identifier))
         args: (identifier))
       else: (Int))))
+
+==========
+inline new
+==========
+
+var q = inline new Quat();
+var l = inline new Quat().length();
+
+---
+
+(module
+  (EVars
+    name: (identifier)
+    value: (ENew
+      (TypePath
+        name: (type_name))))
+  (EVars
+    name: (identifier)
+    value: (ECall
+      callee: (EField
+        object: (ENew
+          (TypePath
+            name: (type_name)))
+        name: (identifier)))))

@@ -141,8 +141,9 @@ export default grammar({
     // reduced so that `=` becomes an EBinop assignment. GLR has to carry both
     // or the third and later declarator in `var a = 1, b = 2, c = 3;` is lost.
     [$._var_declarator],
+    [$.AbstractType, $.ClassType, $.ClassMethod],
+    [$.AbstractType, $.ClassType, $.ClassMethod, $._conditional_body],
     [$.AbstractType, $.ClassType, $.DefType, $.EnumType],
-    [$.AbstractType, $.ClassType, $._conditional_body],
     [$.AbstractType, $.ClassType],
     [$.AbstractType, $.DefType, $.EnumType, $._conditional_body],
     [$.AbstractType, $.DefType, $.EnumType],
@@ -360,7 +361,13 @@ export default grammar({
       ),
     _EParenthesis: ($) => prec(PREC.PRIMARY, seq("(", $._Expr, ")")),
     ENew: ($) =>
-      prec.left(PREC.CALL, seq("new", $.TypePath, "(", commaSep($._Expr), ")")),
+      choice(
+        prec.left(PREC.CALL, seq("new", $._new_call)),
+        // `inline new Point()` inlines the constructor; preferred over
+        // reading `inline` as applying to a call on the new object.
+        prec.left(PREC.CALL + 1, seq("inline", "new", $._new_call)),
+      ),
+    _new_call: ($) => seq($.TypePath, "(", commaSep($._Expr), ")"),
     EFunction: ($) =>
       prec.right(PREC.CONTROL - 1, seq(optional("inline"), $._function_decl)),
     EArrowFunction: ($) =>
@@ -953,6 +960,8 @@ export default grammar({
             repeat1(
               choice(
                 $.visibility,
+                // Methods of an abstract class, `abstract function f():T;`.
+                "abstract",
                 "macro",
                 "dynamic",
                 "extern",

@@ -61,6 +61,12 @@ abstract class Main {}
 //                  ^ punctuation.bracket
 //                   ^ punctuation.bracket
 
+abstract class Shape {
+  abstract function area():Float;
+  // <- keyword.modifier
+  //         ^ keyword.function
+}
+
 typedef Handler = (event:Event, ?Count:Int) -> Void;
 // <- keyword.type
 //      ^ type.definition

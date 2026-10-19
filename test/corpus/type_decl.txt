@@ -583,3 +583,34 @@ class C {
       (EObjectDecl
         name: (identifier)
         value: (Int)))))
+
+================
+abstract methods
+================
+
+abstract class Shape {
+	abstract function area():Float;
+	public abstract function name():String;
+	abstract public function draw():Void;
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (ClassMethod
+      name: (identifier)
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))
+    (ClassMethod
+      name: (identifier)
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))
+    (ClassMethod
+      name: (identifier)
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))))
