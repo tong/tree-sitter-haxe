@@ -918,8 +918,12 @@ export default grammar({
           choice(
             seq(optional(seq("=", $._Expr)), $._semicolon),
             // As in Haxe, `;` may be left out after a closing brace,
-            // `static final noop = function() {}`.
-            prec.dynamic(-1, seq("=", $.EFunction)),
+            // `static final noop = function() {}`, and Heaps shaders'
+            // `static var SRC = { … }`.
+            prec.dynamic(
+              -1,
+              seq("=", choice($.EFunction, $.EBlock, $.EObjectDecl)),
+            ),
           ),
         ),
       ),

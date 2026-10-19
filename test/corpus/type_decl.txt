@@ -546,3 +546,40 @@ class C {
       name: (identifier)
       (EFunction
         body: (EBlock)))))
+
+=================================
+class var block without semicolon
+=================================
+
+class C {
+	static var SRC = {
+		@param var color:Vec4;
+		function fragment() {}
+	}
+	static var o = {a: 1}
+}
+
+---
+
+(module
+  (ClassType
+    name: (type_name)
+    (ClassVar
+      name: (identifier)
+      (EBlock
+        (EMeta
+          (MetaDataEntry
+            name: (identifier))
+          expr: (EVars
+            name: (identifier)
+            type: (ComplexType
+              (TypePath
+                name: (type_name)))))
+        (EFunction
+          name: (identifier)
+          body: (EBlock))))
+    (ClassVar
+      name: (identifier)
+      (EObjectDecl
+        name: (identifier)
+        value: (Int)))))
