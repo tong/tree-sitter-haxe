@@ -274,3 +274,37 @@ string dollar escape
     (fragment)
     (interpolation
       (identifier))))
+
+=======================
+float with trailing dot
+=======================
+
+var a = 1000. * x;
+var b = 0./*NaN*/;
+var c = [1., 2.];
+for (i in 0...n) {}
+
+---
+
+(module
+  (EVars
+    name: (identifier)
+    value: (EBinop
+      left: (Float)
+      right: (identifier)))
+  (EVars
+    name: (identifier)
+    value: (Float))
+  (comment
+    (block_comment))
+  (EVars
+    name: (identifier)
+    value: (EArrayDecl
+      (Float)
+      (Float)))
+  (EFor
+    var: (identifier)
+    iterable: (EBinop
+      left: (Int)
+      right: (identifier))
+    body: (EBlock)))

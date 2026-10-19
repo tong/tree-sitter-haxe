@@ -110,6 +110,7 @@ const RESERVED_KEYWORDS = [
 export default grammar({
   name: "haxe",
   extras: ($) => [/\s+/, $.comment, $.conditional],
+  externals: ($) => [$._trailing_dot_float],
   reserved: {
     global: (_) => RESERVED_KEYWORDS,
   },
@@ -1020,12 +1021,14 @@ export default grammar({
     //     `e` was ever accepted.
     //   - a single digit before a bare exponent, `1e5`. The form required
     //     `\d[\d_]+`, two or more digits, so `10e5` parsed and `1e5` did not.
-    Float: (_) =>
+    Float: ($) =>
       choice(
         /\d[\d_]*\.\d[\d_]*([eE][+-]?\d[\d_]*)?(f64)?/,
         /\.\d[\d_]*([eE][+-]?\d[\d_]*)?(f64)?/,
         /\d[\d_]*[eE][+-]?\d[\d_]*(f64)?/,
         /\d[\d_]*f64/,
+        // `1.`, see src/scanner.c
+        $._trailing_dot_float,
       ),
 
     String: ($) =>
