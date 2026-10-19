@@ -45,3 +45,36 @@ var f = function<T>(x:T):T {};
         (TypePath
           name: (type_name)))
       body: (EBlock))))
+
+====================
+underscore arguments
+====================
+
+var f = (_, _) -> 1;
+var g = _ -> 1;
+function h(_:Int) {}
+
+---
+
+(module
+  (EVars
+    name: (identifier)
+    value: (EArrowFunction
+      args: (FunctionArg
+        name: (identifier))
+      args: (FunctionArg
+        name: (identifier))
+      body: (Int)))
+  (EVars
+    name: (identifier)
+    value: (EArrowFunction
+      args: (identifier)
+      body: (Int)))
+  (EFunction
+    name: (identifier)
+    args: (FunctionArg
+      name: (identifier)
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))
+    body: (EBlock)))

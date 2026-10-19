@@ -163,6 +163,7 @@ export default grammar({
     [$.TypePath],
     [$._EConst, $.FunctionArg, $.compile_condition],
     [$._EConst, $.FunctionArg],
+    [$._expr_meta, $.FunctionArg],
     [$._EConst, $._expr_lhs, $.compile_condition],
     [$._EConst, $._expr_lhs],
     [$._EConst, $.compile_condition],
@@ -182,7 +183,13 @@ export default grammar({
     [$.cases],
     [$.import, $._dot_path],
   ],
-  inline: ($) => [$._semicolon, $.visibility, $.rest, $._expr_postfix],
+  inline: ($) => [
+    $._semicolon,
+    $.visibility,
+    $.rest,
+    $._expr_postfix,
+    $._arg_name,
+  ],
   word: ($) => $.identifier,
   rules: {
     module: ($) =>
@@ -361,7 +368,7 @@ export default grammar({
         seq(
           choice(
             seq("(", ")"),
-            field("args", $.identifier),
+            field("args", $._arg_name),
             seq(field("args", $._function_args), optional($._type_annotation)),
           ),
           "->",
@@ -822,6 +829,9 @@ export default grammar({
         ),
       ),
 
+    // `_` is lexed as a wildcard but is an ordinary argument name, `(_, _) -> 0`.
+    _arg_name: ($) =>
+      choice($.identifier, alias($.wildcard_pattern, $.identifier)),
     FunctionArg: ($) =>
       //ISSUE: without dynamic ECast fails
       prec.dynamic(
@@ -830,7 +840,7 @@ export default grammar({
           repeat($.MetaDataEntry),
           optional($.optional),
           optional(field("rest", $.rest)),
-          field("name", $.identifier),
+          field("name", $._arg_name),
           optional(field("type", $._type_annotation)),
           optional(seq("=", field("value", $._Expr))),
         ),
