@@ -282,6 +282,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
           }
         ]
       },
@@ -373,7 +377,7 @@
       },
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "type_name",
@@ -415,6 +419,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "reification",
             "named": true
           }
         ]
@@ -672,6 +680,10 @@
           {
             "type": "conditional",
             "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
           }
         ]
       },
@@ -704,6 +716,10 @@
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "reification",
           "named": true
         }
       ]
@@ -3776,6 +3792,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
           }
         ]
       },
@@ -6820,6 +6840,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "reification",
             "named": true
           }
         ]
@@ -10373,6 +10397,14 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "ClassType",
+          "named": true
+        },
+        {
+          "type": "ComplexType",
+          "named": true
+        },
         {
           "type": "EArray",
           "named": true
