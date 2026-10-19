@@ -162,3 +162,22 @@ import some.Type.any.other.field as alias;
     sub: (identifier)
     sub: (identifier)
     alias: (identifier)))
+
+====================
+import with in alias
+====================
+
+import Date in HaxeDate;
+import python.Syntax.code in py;
+
+---
+
+(module
+  (import
+    module: (type_name)
+    alias: (type_name))
+  (import
+    path: (package_name)
+    module: (type_name)
+    sub: (identifier)
+    alias: (identifier)))

@@ -210,7 +210,11 @@ export default grammar({
             optional(
               choice(
                 seq(".", $.wildcard),
-                seq("as", field("alias", choice($.type_name, $.identifier))),
+                // `in` is the older spelling of `as`.
+                seq(
+                  choice("as", "in"),
+                  field("alias", choice($.type_name, $.identifier)),
+                ),
               ),
             ),
           ),
@@ -219,7 +223,7 @@ export default grammar({
               "path",
               seq(
                 dotSep1($.package_name),
-                "as",
+                choice("as", "in"),
                 field("alias", choice($.type_name, $.identifier)),
               ),
             ),
