@@ -8,3 +8,47 @@ obj.test;
     object: (identifier)
     name: (identifier)))
 
+
+============
+as as a name
+============
+
+import a.B as C;
+class C {
+	var as:String;
+	function as<T>(o:Dynamic):T return Lib.as(o, T);
+}
+
+---
+
+(module
+  (import
+    path: (package_name)
+    module: (type_name)
+    alias: (type_name))
+  (ClassType
+    name: (type_name)
+    (ClassVar
+      name: (identifier)
+      type: (ComplexType
+        (TypePath
+          name: (type_name))))
+    (ClassMethod
+      name: (identifier)
+      params: (TypeParameter
+        name: (type_name))
+      args: (FunctionArg
+        name: (identifier)
+        type: (ComplexType
+          (TypePath
+            name: (type_name))))
+      type: (ComplexType
+        (TypePath
+          name: (type_name)))
+      body: (EReturn
+        (ECall
+          callee: (EField
+            object: (identifier)
+            name: (identifier))
+          args: (identifier)
+          args: (identifier))))))

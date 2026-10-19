@@ -59,9 +59,9 @@ const dotSep1 = (rule) => sep1(".", rule);
 /** @param {Rule} rule @returns {Rule} */
 const dotSep = (rule) => sep(".", rule);
 
+// Not `as`: Haxe only treats it as a keyword in `import a.B as C`.
 const RESERVED_KEYWORDS = [
   "abstract",
-  "as",
   "break",
   "case",
   "cast",
