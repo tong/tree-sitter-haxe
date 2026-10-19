@@ -39,6 +39,9 @@
     if: (EBlock) @indent.dedent))
 
 ; The same for `catch` blocks.
+;
+; Known limitation: in `try f() catch (e) {` on one line, the block's
+; contents get no level at all.
 (ETry) @indent.begin
 
 (ETry

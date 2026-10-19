@@ -50,6 +50,10 @@ class S {
 		} catch (e:Dynamic) {
 			g();
 		}
+		try
+			f()
+		catch (e:Dynamic)
+			g();
 		call(
 			a,
 			b
