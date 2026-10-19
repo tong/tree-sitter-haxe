@@ -317,7 +317,15 @@ export default grammar({
           field("object", $._Expr),
           field("op", choice(".", "?.")),
           optional("$"),
-          field("name", $.identifier),
+          // As in Haxe, these keywords are field names after a dot,
+          // `haxe.macro.Context`.
+          field(
+            "name",
+            choice(
+              $.identifier,
+              alias(choice("macro", "extern", "function"), $.identifier),
+            ),
+          ),
         ),
       ),
     EArray: ($) =>

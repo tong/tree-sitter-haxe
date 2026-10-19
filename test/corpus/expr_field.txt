@@ -52,3 +52,40 @@ class C {
             name: (identifier))
           args: (identifier)
           args: (identifier))))))
+
+=======================
+keywords as field names
+=======================
+
+haxe.macro.Context.error("x", p);
+var r = haxe.extern.Rest.of;
+var f = a.function;
+
+---
+
+(module
+  (ECall
+    callee: (EField
+      object: (EField
+        object: (EField
+          object: (identifier)
+          name: (identifier))
+        name: (identifier))
+      name: (identifier))
+    args: (String
+      (fragment))
+    args: (identifier))
+  (EVars
+    name: (identifier)
+    value: (EField
+      object: (EField
+        object: (EField
+          object: (identifier)
+          name: (identifier))
+        name: (identifier))
+      name: (identifier)))
+  (EVars
+    name: (identifier)
+    value: (EField
+      object: (identifier)
+      name: (identifier))))
