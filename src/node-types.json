@@ -8,7 +8,7 @@
         "required": false,
         "types": [
           {
-            "type": "TypePath",
+            "type": "ComplexType",
             "named": true
           },
           {
@@ -32,7 +32,7 @@
         "required": false,
         "types": [
           {
-            "type": "TypePath",
+            "type": "ComplexType",
             "named": true
           },
           {
@@ -43,7 +43,7 @@
       },
       "type": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "ComplexType",
@@ -575,6 +575,10 @@
           "named": true
         },
         {
+          "type": "optional",
+          "named": true
+        },
+        {
           "type": "property_accessor",
           "named": true
         },
@@ -664,6 +668,10 @@
           {
             "type": "TypePath",
             "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
           }
         ]
       },
@@ -692,6 +700,10 @@
         },
         {
           "type": "TypePath",
+          "named": true
+        },
+        {
+          "type": "conditional",
           "named": true
         }
       ]
@@ -6434,6 +6446,10 @@
             "named": false
           },
           {
+            "type": "...",
+            "named": false
+          },
+          {
             "type": "~",
             "named": false
           }
@@ -8135,6 +8151,18 @@
           {
             "type": "ComplexType",
             "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
           }
         ]
       },
@@ -8225,6 +8253,386 @@
     "named": true,
     "extra": true,
     "fields": {
+      "cond": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      },
+      "extends": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "TypePath",
+            "named": true
+          }
+        ]
+      },
+      "if": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      },
+      "implements": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "TypePath",
+            "named": true
+          }
+        ]
+      },
       "meta": {
         "multiple": true,
         "required": false,
@@ -8254,6 +8662,10 @@
         },
         {
           "type": "ClassVar",
+          "named": true
+        },
+        {
+          "type": "ComplexType",
           "named": true
         },
         {
@@ -8467,6 +8879,386 @@
     "type": "conditional_else",
     "named": true,
     "fields": {
+      "cond": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      },
+      "extends": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "TypePath",
+            "named": true
+          }
+        ]
+      },
+      "if": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      },
+      "implements": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "TypePath",
+            "named": true
+          }
+        ]
+      },
       "meta": {
         "multiple": true,
         "required": false,
@@ -8496,6 +9288,10 @@
         },
         {
           "type": "ClassVar",
+          "named": true
+        },
+        {
+          "type": "ComplexType",
           "named": true
         },
         {
@@ -8693,6 +9489,386 @@
     "type": "conditional_elseif",
     "named": true,
     "fields": {
+      "cond": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      },
+      "extends": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "TypePath",
+            "named": true
+          }
+        ]
+      },
+      "if": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "EArray",
+            "named": true
+          },
+          {
+            "type": "EArrayDecl",
+            "named": true
+          },
+          {
+            "type": "EArrowFunction",
+            "named": true
+          },
+          {
+            "type": "EBinop",
+            "named": true
+          },
+          {
+            "type": "EBlock",
+            "named": true
+          },
+          {
+            "type": "EBreak",
+            "named": true
+          },
+          {
+            "type": "ECall",
+            "named": true
+          },
+          {
+            "type": "ECast",
+            "named": true
+          },
+          {
+            "type": "ECheckType",
+            "named": true
+          },
+          {
+            "type": "EContinue",
+            "named": true
+          },
+          {
+            "type": "EField",
+            "named": true
+          },
+          {
+            "type": "EFor",
+            "named": true
+          },
+          {
+            "type": "EFunction",
+            "named": true
+          },
+          {
+            "type": "EIf",
+            "named": true
+          },
+          {
+            "type": "EMeta",
+            "named": true
+          },
+          {
+            "type": "ENew",
+            "named": true
+          },
+          {
+            "type": "EObjectDecl",
+            "named": true
+          },
+          {
+            "type": "EReturn",
+            "named": true
+          },
+          {
+            "type": "ESwitch",
+            "named": true
+          },
+          {
+            "type": "ETernary",
+            "named": true
+          },
+          {
+            "type": "EThrow",
+            "named": true
+          },
+          {
+            "type": "ETry",
+            "named": true
+          },
+          {
+            "type": "EUnop",
+            "named": true
+          },
+          {
+            "type": "EUntyped",
+            "named": true
+          },
+          {
+            "type": "EVars",
+            "named": true
+          },
+          {
+            "type": "EWhile",
+            "named": true
+          },
+          {
+            "type": "Float",
+            "named": true
+          },
+          {
+            "type": "Int",
+            "named": true
+          },
+          {
+            "type": "Regexp",
+            "named": true
+          },
+          {
+            "type": "String",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "false",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "reification",
+            "named": true
+          },
+          {
+            "type": "super",
+            "named": true
+          },
+          {
+            "type": "this",
+            "named": true
+          },
+          {
+            "type": "true",
+            "named": true
+          },
+          {
+            "type": "type_trace",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      },
+      "implements": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "TypePath",
+            "named": true
+          }
+        ]
+      },
       "meta": {
         "multiple": true,
         "required": false,
@@ -8722,6 +9898,10 @@
         },
         {
           "type": "ClassVar",
+          "named": true
+        },
+        {
+          "type": "ComplexType",
           "named": true
         },
         {
@@ -8935,11 +10115,6 @@
     }
   },
   {
-    "type": "false",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "import",
     "named": true,
     "fields": {
@@ -8977,6 +10152,10 @@
           },
           {
             "type": "as",
+            "named": false
+          },
+          {
+            "type": "in",
             "named": false
           },
           {
@@ -9577,11 +10756,6 @@
     }
   },
   {
-    "type": "null",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "optional",
     "named": true,
     "fields": {}
@@ -9845,11 +11019,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "super",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "switch_case",
@@ -10588,16 +11757,6 @@
     }
   },
   {
-    "type": "this",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "true",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "type_trace",
     "named": true,
     "fields": {
@@ -11144,7 +12303,7 @@
   },
   {
     "type": "false",
-    "named": false
+    "named": true
   },
   {
     "type": "final",
@@ -11224,7 +12383,7 @@
   },
   {
     "type": "null",
-    "named": false
+    "named": true
   },
   {
     "type": "overload",
@@ -11268,7 +12427,7 @@
   },
   {
     "type": "super",
-    "named": false
+    "named": true
   },
   {
     "type": "switch",
@@ -11276,7 +12435,7 @@
   },
   {
     "type": "this",
-    "named": false
+    "named": true
   },
   {
     "type": "throw",
@@ -11288,7 +12447,7 @@
   },
   {
     "type": "true",
-    "named": false
+    "named": true
   },
   {
     "type": "try",
