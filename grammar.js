@@ -803,7 +803,11 @@ export default grammar({
               $.identifier,
             ),
           ),
-          optional(seq("(", field("params", commaSep($._Expr)), ")")),
+          // As in Haxe, arguments must follow the name directly;
+          // `@:privateAccess (cast x : T).f` is metadata on an expression.
+          optional(
+            seq(token.immediate("("), field("params", commaSep($._Expr)), ")"),
+          ),
         ),
       ),
 

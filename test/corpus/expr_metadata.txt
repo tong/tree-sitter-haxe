@@ -71,3 +71,26 @@ class C {
     (ClassMethod
       name: (identifier)
       body: (EBlock))))
+
+========================================
+metadata before parenthesised expression
+========================================
+
+@:privateAccess (cast input : FileInput).f = x;
+
+---
+
+(module
+  (EBinop
+    left: (EMeta
+      (MetaDataEntry
+        name: (identifier))
+      expr: (EField
+        object: (ECheckType
+          expr: (ECast
+            expr: (identifier))
+          type: (ComplexType
+            (TypePath
+              name: (type_name))))
+        name: (identifier)))
+    right: (identifier)))
