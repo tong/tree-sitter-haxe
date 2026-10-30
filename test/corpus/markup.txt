@@ -1,0 +1,28 @@
+================================================================================
+Markup
+================================================================================
+
+var a = html(<div class="x">${a < b}</div>);
+var b = <br/>;
+var c = <ul><li>1</li><ul><li>2</li></ul></ul>;
+var d = a <b;
+
+--------------------------------------------------------------------------------
+
+(module
+  (EVars
+    (identifier)
+    (ECall
+      (identifier)
+      (markup)))
+  (EVars
+    (identifier)
+    (markup))
+  (EVars
+    (identifier)
+    (markup))
+  (EVars
+    (identifier)
+    (EBinop
+      (identifier)
+      (identifier))))

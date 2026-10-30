@@ -529,6 +529,10 @@
         {
           "type": "SYMBOL",
           "name": "ENew"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "markup"
         }
       ]
     },
@@ -6735,6 +6739,14 @@
     {
       "type": "SYMBOL",
       "name": "_trailing_dot_float"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "markup"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_error_sentinel"
     }
   ],
   "inline": [

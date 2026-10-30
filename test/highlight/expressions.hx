@@ -53,3 +53,6 @@ var x = 1;
 //    ^ operator
 #end
 // <- keyword.directive
+
+var view = html(<p>${x}</p>);
+//              ^ string.special

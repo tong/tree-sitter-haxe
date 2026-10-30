@@ -56,8 +56,6 @@ const commaSep1 = (rule) => sep1(",", rule);
 const commaSep = (rule) => sep(",", rule);
 /** @param {Rule} rule @returns {Rule} */
 const dotSep1 = (rule) => sep1(".", rule);
-/** @param {Rule} rule @returns {Rule} */
-const dotSep = (rule) => sep(".", rule);
 
 // Not `as`: Haxe only treats it as a keyword in `import a.B as C`.
 const RESERVED_KEYWORDS = [
@@ -110,7 +108,7 @@ const RESERVED_KEYWORDS = [
 export default grammar({
   name: "haxe",
   extras: ($) => [/\s+/, $.comment, $.conditional],
-  externals: ($) => [$._trailing_dot_float],
+  externals: ($) => [$._trailing_dot_float, $.markup, $._error_sentinel],
   reserved: {
     global: (_) => RESERVED_KEYWORDS,
   },
@@ -275,7 +273,15 @@ export default grammar({
         alias($._expr_conditional, $.conditional),
       ),
     _expr_atom: ($) =>
-      choice($._EConst, $._EParenthesis, $.EObjectDecl, $.EArrayDecl, $.ENew),
+      choice(
+        $._EConst,
+        $._EParenthesis,
+        $.EObjectDecl,
+        $.EArrayDecl,
+        $.ENew,
+        // `<div>…</div>`, see src/scanner.c
+        $.markup,
+      ),
     _expr_meta: ($) =>
       choice(
         $.EArrowFunction,

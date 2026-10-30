@@ -82,6 +82,7 @@
 (String (escape_sequence) @string.escape)
 (String (interpolation) @string.special)
 (Regexp) @string.regexp
+(markup) @string.special
 
 (Int) @number
 (Float) @number.float

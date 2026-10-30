@@ -1,11 +1,14 @@
 ((String
   (fragment) @injection.content)
-  (#match? @injection.content "^[[:space:]]*\\{")
+  (#lua-match? @injection.content "^%s*{")
   (#set! injection.language "json"))
 
 ((String
   (fragment) @injection.content)
-  (#match? @injection.content "<[a-zA-Z]+")
+  (#lua-match? @injection.content "<%a")
+  (#set! injection.language "html"))
+
+((markup) @injection.content
   (#set! injection.language "html"))
 
 ; ((String
